@@ -1,0 +1,42 @@
+---
+name: |-
+  Todo
+
+url: |-
+  /todo/
+
+services:
+- method: |-
+    GET
+
+  description: |-
+    Returns the list of todo items
+
+  preconditions: |-
+
+  input_schema: |-
+    {
+    }
+
+  output_schema: |-
+    [{
+      id          : Integer
+      description : String
+    }]
+
+  error_schema: |-
+    {
+    }
+
+  examples:
+
+    - description: |-
+        when requested
+      params: {}
+      expected:
+        content_type: application/json
+        status: 200
+      assert:
+        - notEmpty
+
+  counterexamples: []

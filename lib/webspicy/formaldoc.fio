@@ -1,0 +1,46 @@
+Method =
+    String( s | s =~ /^(GET|POST|POST_FORM|PUT|DELETE|PATCH)$/ )
+
+Schema =
+    .Finitio::System <fio> String
+      \( s | ::Webspicy.schema(s) )
+      \( s | raise "Unsupported"  )
+
+Resource =
+    .Webspicy::Resource <info> {
+        name: String
+        url: String
+        services: [Service]
+    }
+
+Service =
+    .Webspicy::Resource::Service <info> {
+        method          : Method
+        description     : String
+        preconditions   : String
+        postconditions  :? String
+        input_schema    : Schema
+        output_schema   : Schema
+        error_schema    : Schema
+        blackbox        :? String
+        examples        :? [TestCase]
+        counterexamples :? [TestCase]
+    }
+
+TestCase =
+    .Webspicy::Resource::Service::TestCase <info> {
+        description      : String
+        dress_params     :? Boolean
+        params           : Params
+        headers          :? .Hash
+        seeds            :? String
+        expected: {
+            status       :  Integer
+            content_type :? String
+            error        :? String
+            headers      :? .Hash
+        }
+        assert :? [String]
+    }
+
+Params = .Array|.Hash

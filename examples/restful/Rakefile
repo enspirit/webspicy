@@ -1,0 +1,11 @@
+require 'webspicy'
+require 'rspec'
+
+task :webspicy do
+  config = Webspicy::Configuration.new do |c|
+    c.add_folder Path.dir/"webspicy" 
+  end
+  runner = Webspicy::Runner.new(config)
+  runner.run
+end
+task :default => :webspicy
