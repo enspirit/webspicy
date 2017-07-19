@@ -31,7 +31,7 @@ module Webspicy
     end
 
     def each_counterexamples(service, &bl)
-      service.counterexamples.each(&bl)
+      service.counterexamples.each(&bl) if config.run_counterexamples?
     end
 
     # Parses a Finitio schema based on the data system.
