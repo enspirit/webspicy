@@ -1,5 +1,5 @@
 module Webspicy
-  module Tester
+  class Tester
     class Asserter
 
       NO_ARG = Object.new
@@ -89,6 +89,6 @@ module Webspicy
       end
 
     end # class Asserter
-  end # module Tester
+  end # class Tester
 end # module Webspicy
 

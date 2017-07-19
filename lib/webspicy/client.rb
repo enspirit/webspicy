@@ -10,5 +10,11 @@ module Webspicy
       scope.config
     end
 
+    def before(*args, &bl)
+      config.before_listeners.each do |beach|
+        beach.call(*args, &bl)
+      end
+    end
+
   end
 end

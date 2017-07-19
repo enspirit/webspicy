@@ -3,9 +3,11 @@ module Webspicy
 
     def initialize
       @folders = []
-      @run_counterexamples = (ENV['ROBUST'].nil? || ENV['ROBUST'] != 'no')
-      @file_filter = (ENV['RESOURCE'] ? Regexp.compile(ENV['RESOURCE']) : nil)
-      @service_filter = (ENV['METHOD'] ? ->(s){ s.method.to_s.downcase == ENV['METHOD'].downcase } : nil)
+      @before_listeners = []
+      @rspec_options = default_rspec_options
+      @run_counterexamples = default_run_counterexamples
+      @file_filter = default_file_filter
+      @service_filter = default_service_filter
       @client = HttpClient
       yield(self) if block_given?
     end
@@ -29,6 +31,12 @@ module Webspicy
     def run_counterexamples?
       @run_counterexamples
     end
+
+    # Returns the defaut value for run_counterexamples
+    def default_run_counterexamples
+      ENV['ROBUST'].nil? || ENV['ROBUST'] != 'no'
+    end
+    private :default_run_counterexamples
 
     # Installs a host (resolver).
     #
@@ -66,6 +74,16 @@ module Webspicy
     end
     attr_reader :file_filter
 
+    # Returns the default file filter to use.
+    #
+    # By default no file filter is set, unless a RESOURCE environment variable is
+    # set. In that case, a file filter is set that matches the file name to the
+    # variable value, through a regular expression.
+    def default_file_filter
+      ENV['RESOURCE'] ? Regexp.compile(ENV['RESOURCE']) : nil
+    end
+    private :default_file_filter
+
     # Installs a service filter.
     #
     # A service filter can be added to restrict the scope attention only to the
@@ -81,6 +99,17 @@ module Webspicy
     end
     attr_reader :service_filter
 
+    # Returns the default service filters.
+    #
+    # By default no filter is set unless a METHOD environment variable is set.
+    # In that case, a service filter is returned that filters the services whose
+    # HTTP method match the variable value.
+    def default_service_filter
+      ENV['METHOD'] ? ->(s){ s.method.to_s.downcase == ENV['METHOD'].downcase } : nil
+    end
+    private :default_service_filter
+
+
     # Installs a client class to use to invoke web services for real.
     #
     # This configuration allows defining a subclass of Client to be used for
@@ -94,6 +123,46 @@ module Webspicy
       @client = client
     end
     attr_reader :client
+
+    # Installs a listener that will be called before each web service invocation.
+    #
+    # The `listener` must respond to `call`.
+    def before_each(&listener)
+      raise "Must respond to call" unless listener.respond_to?(:call)
+      @before_listeners << listener
+    end
+
+    # Returns the list of listeners that must be called before each web service
+    # invocation.
+    def before_listeners
+      @before_listeners
+    end
+
+    # Allows setting the options passed at RSpec, which is used by both the runner
+    # and checker classes.
+    #
+    # `options` is supposed to be valid RSpec options, to be passed at
+    # `RSpec::Core::Runner.run`
+    def rspec_options=(options)
+      @rspec_options = options
+    end
+    attr_reader :rspec_options
+
+    # Returns the default rspec options.
+    #
+    # By default rspec colors are enabled and the format set to 'documentation'.
+    # The following environment variables <-> rspec options are supported:
+    #
+    # - FAILFAST <-> --fail-fast
+    #
+    def default_rspec_options
+      options = ["--color", "--format=documentation"]
+      if ENV['FAILFAST']
+        options << (ENV['FAILFAST'] == 'no' ? "--no-fail-fast" : "--fail-fast=#{ENV['FAILFAST']}")
+      end
+      options
+    end
+    private :default_rspec_options
 
   end
 end

@@ -16,7 +16,7 @@ module Webspicy
         end
 
         def seeds
-          @raw[:seeds] || 'test'
+          @raw[:seeds]
         end
 
         def headers
@@ -44,12 +44,24 @@ module Webspicy
           @raw[:expected][:error]
         end
 
+        def has_expected_error?
+          !expected_error.nil?
+        end
+
         def expected_headers
           @raw[:expected][:headers] || {}
         end
 
+        def has_expected_headers?
+          !expected_headers.empty?
+        end
+
         def assert
           @raw[:assert] || []
+        end
+
+        def has_assertions?
+          !assert.empty?
         end
 
         def to_info

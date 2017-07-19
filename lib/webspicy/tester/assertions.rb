@@ -1,5 +1,5 @@
 module Webspicy
-  module Tester
+  class Tester
     module Assertions
 
       class InvalidArgError < StandardError; end
@@ -99,5 +99,5 @@ module Webspicy
       end
 
     end # module Assertions
-  end # module Tester
+  end # class Tester
 end # module Webspicy

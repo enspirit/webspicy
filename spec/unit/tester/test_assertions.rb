@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Webspicy
-  module Tester
+  class Tester
     describe Assertions do
       include Assertions
 
@@ -104,5 +104,5 @@ module Webspicy
       end
 
     end
-  end # module Tester
+  end # class Tester
 end # module Webspicy
