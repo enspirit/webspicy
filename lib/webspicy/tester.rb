@@ -15,12 +15,12 @@ module Webspicy
               scope.each_example(service) do |test_case|
                 describe test_case.description do
 
-                  before(:each) do
+                  before(:all) do
                     client.before(test_case, service, resource)
                   end
 
                   subject do
-                    client.call(test_case, service, resource)
+                    @invocation ||= client.call(test_case, service, resource)
                   end
 
                   it 'can be invoked successfuly' do
@@ -50,12 +50,12 @@ module Webspicy
               scope.each_counterexamples(service) do |test_case|
                 describe test_case.description do
 
-                  before(:each) do
+                  before(:all) do
                     client.before(test_case, service, resource)
                   end
 
                   subject do
-                    client.call(test_case, service, resource)
+                    @invocation ||= client.call(test_case, service, resource)
                   end
 
                   it 'can be invoked successfuly' do
