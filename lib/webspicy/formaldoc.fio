@@ -34,6 +34,7 @@ TestCase =
         params           : Params
         headers          :? .Hash
         seeds            :? String
+        requester        :? String
         expected: {
             status       :  Integer
             content_type :? String
