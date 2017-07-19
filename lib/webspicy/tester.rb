@@ -17,10 +17,11 @@ module Webspicy
 
                   before(:all) do
                     client.before(test_case, service, resource)
+                    @invocation ||= client.call(test_case, service, resource)
                   end
 
                   subject do
-                    @invocation ||= client.call(test_case, service, resource)
+                    @invocation
                   end
 
                   it 'can be invoked successfuly' do
@@ -52,10 +53,11 @@ module Webspicy
 
                   before(:all) do
                     client.before(test_case, service, resource)
+                    @invocation ||= client.call(test_case, service, resource)
                   end
 
                   subject do
-                    @invocation ||= client.call(test_case, service, resource)
+                    @invocation
                   end
 
                   it 'can be invoked successfuly' do
