@@ -13,10 +13,11 @@ module Webspicy
 
   require 'webspicy/configuration'
   require 'webspicy/scope'
-  require 'webspicy/runner'
   require 'webspicy/client'
   require 'webspicy/client/http_client'
   require 'webspicy/resource'
+  require 'webspicy/checker'
+  require 'webspicy/tester'
   require 'webspicy/tester/assertions'
   require 'webspicy/tester/asserter'
 

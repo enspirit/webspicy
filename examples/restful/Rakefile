@@ -1,12 +1,22 @@
 require 'webspicy'
 require 'rspec'
 
-task :webspicy do
+namespace :webspicy do
+
   config = Webspicy::Configuration.new do |c|
     c.host = "http://127.0.0.1:4567"
     c.add_folder Path.dir/"webspicy"
   end
-  runner = Webspicy::Runner.new(config)
-  runner.run
+
+  task :check do
+    Webspicy::Checker.new(config).call
+  end
+
+  task :test do
+    Webspicy::Tester.new(config).call
+  end
+
 end
-task :default => :webspicy
+
+task :test => :"webspicy:test"
+task :default => :test
