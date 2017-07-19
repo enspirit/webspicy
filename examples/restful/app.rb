@@ -19,19 +19,27 @@ TODOLIST = [
 disable :show_exceptions
 enable :raise_errors
 
+set :todolist, TODOLIST.dup
+
+post '/reset' do
+  settings.todolist = TODOLIST.dup
+  status 200
+  ""
+end
+
 get '/todo/' do
   content_type :json
-  TODOLIST.to_json
+  settings.todolist.to_json
 end
 
 post '/todo/' do
   content_type :json
   todo = SCHEMA["Todo"].dress(JSON.load(request.body.read))
-  if TODOLIST.find{|t| t[:id] == todo[:id] }
+  if settings.todolist.find{|t| t[:id] == todo[:id] }
     status 409
     {error: "Identifier already in use"}.to_json
   else
-    TODOLIST << todo
+    settings.todolist << todo
     status 201
     todo.to_json
   end
@@ -39,7 +47,7 @@ end
 
 get '/todo/:id' do |id|
   content_type :json
-  todo = TODOLIST.find{|todo| todo[:id] == Integer(id) }
+  todo = settings.todolist.find{|todo| todo[:id] == Integer(id) }
   if todo.nil?
     status 404
     {error: "No such todo"}.to_json

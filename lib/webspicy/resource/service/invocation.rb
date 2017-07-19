@@ -11,6 +11,16 @@ module Webspicy
 
         attr_reader :service, :test_case, :response
 
+        ### Getters on response
+
+        def response_code
+          code = response.status
+          code = code.code unless code.is_a?(Integer)
+          code
+        end
+
+        ### Query methods
+
         def done?
           !response.nil?
         end
@@ -20,15 +30,15 @@ module Webspicy
         end
 
         def is_success?
-          response.status.code >= 200 && response.status.code < 300
+          response_code >= 200 && response_code < 300
         end
 
         def is_empty_response?
-          response.status.code == 204
+          response_code == 204
         end
 
         def is_redirect?
-          response.status.code >= 300 && response.status.code < 400
+          response_code >= 300 && response_code < 400
         end
 
         ### Check of HTTP status
@@ -47,7 +57,8 @@ module Webspicy
 
         def expected_content_type_unmet
           ect = test_case.expected_content_type
-          got = response.content_type.mime_type.to_s
+          got = response.content_type
+          got = got.mime_type.to_s if got.respond_to?(:mime_type)
           ect == got ? nil : "#{ect} != #{got}"
         end
 

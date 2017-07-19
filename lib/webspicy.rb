@@ -6,6 +6,7 @@ require 'logger'
 require 'ostruct'
 require 'yaml'
 require 'rspec'
+require 'rack/test'
 module Webspicy
 
   ###
@@ -16,6 +17,7 @@ module Webspicy
   require 'webspicy/scope'
   require 'webspicy/client'
   require 'webspicy/client/http_client'
+  require 'webspicy/client/rack_test_client'
   require 'webspicy/resource'
   require 'webspicy/checker'
   require 'webspicy/tester'

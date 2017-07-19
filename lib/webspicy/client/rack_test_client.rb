@@ -1,9 +1,13 @@
 module Webspicy
-  class HttpClient < Client
+  class RackTestClient < Client
 
-    def initialize(scope)
+    def self.for(app)
+      Factory.new(app)
+    end
+
+    def initialize(scope, app)
       super(scope)
-      @api = Api.new
+      @api = Api.new(app)
     end
     attr_reader :api
 
@@ -15,9 +19,6 @@ module Webspicy
       # Instantiate the url and strip parameters
       url, params = resource.instantiate_url(params)
 
-      # Globalize the URL if required
-      url = scope.to_real_url(url)
-
       # Invoke the service now
       api.public_send(service.method.to_s.downcase.to_sym, url, params, headers)
 
@@ -25,14 +26,44 @@ module Webspicy
       Resource::Service::Invocation.new(service, test_case, api.last_response)
     end
 
+    class Factory
+
+      def initialize(app)
+        @app = app
+      end
+      attr_reader :app
+
+      def new(scope)
+        RackTestClient.new(scope, app)
+      end
+
+    end # class Factory
+
+    class RackHandler
+      include Rack::Test::Methods
+
+      def initialize(app)
+        @app = app
+      end
+      attr_reader :app
+
+    end # class RackHandler
+
     class Api
 
       attr_reader :last_response
 
+      def initialize(app)
+        @handler = RackHandler.new(app)
+      end
+      attr_reader :handler
+
       def get(url, params = {}, headers = nil)
         Webspicy.info("GET #{url} -- #{params.inspect}")
 
-        @last_response = HTTP[headers || {}].get(url, params: params)
+        install_headers(headers) if headers
+        handler.get(url, params)
+        @last_response = handler.last_response
 
         Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
         Webspicy.debug("Response: #{@last_response.body}")
@@ -41,7 +72,9 @@ module Webspicy
       def post(url, params = {}, headers = nil)
         Webspicy.info("POST #{url} -- #{params.inspect}")
 
-        @last_response = HTTP[headers || {}].post(url, body: params.to_json)
+        install_headers(headers) if headers
+        handler.post(url, params.to_json, {"CONTENT_TYPE" => "application/json"})
+        @last_response = handler.last_response
 
         Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
         Webspicy.debug("Response: #{@last_response.body}")
@@ -50,13 +83,23 @@ module Webspicy
       def post_form(url, params = {}, headers = nil)
         Webspicy.info("POST #{url} -- #{params.inspect}")
 
-        @last_response = HTTP[headers || {}].post(url, form: params)
+        install_headers(headers) if headers
+        handler.post(url, params)
+        @last_response = handler.last_response
 
         Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
         Webspicy.debug("Response: #{@last_response.body}")
       end
 
-    end
+    private
 
-  end
-end
+      def install_headers(hs)
+        hs.each_pair do |k,v|
+          handler.header(k,v)
+        end
+      end
+
+    end # class Api
+
+  end # class RackTestClient
+end # module Webspicy

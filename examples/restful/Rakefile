@@ -1,21 +1,41 @@
+$LOAD_PATH.unshift File.expand_path("..", __FILE__)
+require 'app'
+require 'sinatra'
 require 'webspicy'
 
 namespace :webspicy do
 
-  config = Webspicy::Configuration.new do |c|
-    c.host = "http://127.0.0.1:4567"
-    c.add_folder Path.dir/"webspicy"
-  end
-
   task :check do
+    config = Webspicy::Configuration.new do |c|
+      c.add_folder Path.dir/"webspicy"
+    end
     Webspicy::Checker.new(config).call
   end
 
-  task :test do
+  task :testrack do
+    config = Webspicy::Configuration.new do |c|
+      c.add_folder Path.dir/"webspicy"
+      c.client = Webspicy::RackTestClient.for(::Sinatra::Application)
+      c.before_each do |_,_,_,client|
+        client.api.post "/reset"
+      end
+    end
+    Webspicy::Tester.new(config).call
+  end
+
+  task :testreal do
+    config = Webspicy::Configuration.new do |c|
+      c.host = "http://127.0.0.1:4567"
+      c.add_folder Path.dir/"webspicy"
+      c.client = Webspicy::HttpClient
+      c.before_each do |_,_,_,client|
+        client.api.post "http://127.0.0.1:4567/reset"
+      end
+    end
     Webspicy::Tester.new(config).call
   end
 
 end
 
-task :test => :"webspicy:test"
+task :test => [:"webspicy:check", :"webspicy:testrack"]
 task :default => :test

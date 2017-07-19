@@ -1,10 +1,11 @@
 PATH
   remote: ../..
   specs:
-    webspicy (0.1.0.pre.rc2)
+    webspicy (0.1.0.pre.rc3)
       finitio (~> 0.5.2)
       http (~> 0.5)
       path (~> 1.3)
+      rack-test (~> 0.7)
       rspec (~> 3.6)
 
 GEM
@@ -33,6 +34,8 @@ GEM
     rack (2.0.3)
     rack-protection (2.0.0)
       rack
+    rack-test (0.7.0)
+      rack (>= 1.0, < 3)
     rake (10.5.0)
     rspec (3.6.0)
       rspec-core (~> 3.6.0)

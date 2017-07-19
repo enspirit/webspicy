@@ -12,6 +12,7 @@ module Webspicy
 
     def before(*args, &bl)
       config.before_listeners.each do |beach|
+        args << self
         beach.call(*args, &bl)
       end
     end
