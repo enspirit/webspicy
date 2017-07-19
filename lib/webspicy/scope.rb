@@ -60,8 +60,10 @@ module Webspicy
 
     # Returns the Data system to use for parsing schemas
     def data_system
-      root = config.folders.find{|f| (f/"schema.fio").file? }
-      root ? Finitio::DEFAULT_SYSTEM.parse((root/"schema.fio").read) : Finitio::DEFAULT_SYSTEM
+      @data_system ||= begin
+        root = config.folders.find{|f| (f/"schema.fio").file? }
+        root ? Finitio::DEFAULT_SYSTEM.parse((root/"schema.fio").read) : Finitio::DEFAULT_SYSTEM
+      end
     end
 
 
