@@ -4,10 +4,9 @@ module Webspicy
     def initialize
       @folders = []
       @run_counterexamples = (ENV['ROBUST'].nil? || ENV['ROBUST'] != 'no')
+      @file_filter = (ENV['RESOURCE'] ? Regexp.compile(ENV['RESOURCE']) : nil)
       yield(self) if block_given?
     end
-    attr_reader   :folders
-    attr_accessor :run_counterexamples
 
     # Adds a folder to the list of folders where test case definitions are
     # to be found.
@@ -16,18 +15,17 @@ module Webspicy
       raise "Folder `#{folder}` does not exists" unless folder.exists? && folder.directory?
       @folders << folder
     end
+    attr_reader :folders
+
+    # Sets whether counter examples have to be ran or not.
+    def run_counterexamples=(run_counterexamples)
+      @run_counterexamples = run_counterexamples
+    end
+    attr_reader :run_counterexamples
 
     # Whether counter examples must be ran or not.
     def run_counterexamples?
       @run_counterexamples
-    end
-
-    # Returns the host (resolver) to use to convert relative URLs to
-    # absolute ones.
-    #
-    # See `host=`
-    def host
-      @host
     end
 
     # Installs a host (resolver).
@@ -47,6 +45,24 @@ module Webspicy
     def host=(host)
       @host = host
     end
+    attr_reader :host
+
+    # Installs a file filter.
+    #
+    # A file filter can be added to restrict the scope attention only to the
+    # files that match the filter installed. Supported values are:
+    #
+    # - Proc: each file (a Path instance) is passed in turn. Only files for
+    #   which a truthly value is returned will be considered by the scope.
+    # - Regexp: the path of each file is matched against the regexp. Only files
+    #   that match are considered by the scope.
+    # - ===: any instance responding to `===` can be used as a matcher, following
+    #   Ruby conventions. The match is done on a Path instance.
+    #
+    def file_filter=(file_filter)
+      @file_filter = file_filter
+    end
+    attr_reader :file_filter
 
   end
 end

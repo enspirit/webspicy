@@ -20,6 +20,14 @@ module Webspicy
   require 'webspicy/tester/asserter'
 
   ###
+  ### About folders
+  ###
+
+  ROOT_FOLDER = Path.backfind('.[Gemfile]')
+
+  EXAMPLES_FOLDER = ROOT_FOLDER/'examples'
+
+  ###
   ### About formal doc and resources defined there
   ###
 

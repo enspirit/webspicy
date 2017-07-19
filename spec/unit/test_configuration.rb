@@ -36,5 +36,27 @@ module Webspicy
       end
     end
 
+    describe 'file_filter' do
+
+      it 'is nil by default' do
+        config = Configuration.new
+        expect(config.file_filter).to be_nil
+      end
+
+      it 'is implements backward compatibility with the RESOURCE env variable' do
+        ENV['RESOURCE'] = 'getTodo.yml'
+        config = Configuration.new
+        expect(config.file_filter).to be_a(Regexp)
+      end
+
+      it 'ignores the environment is set explicitly' do
+        ENV['RESOURCE'] = 'getTodo.yml'
+        config = Configuration.new do |c|
+          c.file_filter = nil
+        end
+        expect(config.file_filter).to be_nil
+      end
+    end
+
   end
 end
