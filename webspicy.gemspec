@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.description = "Webspicy helps testing web services as software operation black boxes"
   s.authors     = ["Bernard Lambeau"]
   s.email       = 'blambeau@gmail.com'
-  s.files       = Dir['Gemfile','Rakefile', '{bin,lib,spec,tasks,examples}/**/*', 'README*', 'LICENSE*'] & `git ls-files -z`.split("\0")
+  s.files       = Dir['LICENSE.md', 'Gemfile','Rakefile', '{bin,lib,spec,tasks,examples}/**/*', 'README*'] & `git ls-files -z`.split("\0")
   s.homepage    = 'http://github.com/enspirit/webspicy'
   s.license     = 'MIT'
 
