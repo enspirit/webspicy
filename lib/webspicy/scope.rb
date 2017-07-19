@@ -42,7 +42,8 @@ module Webspicy
 
     # Returns the Data system to use for parsing schemas
     def data_system
-      Finitio::DEFAULT_SYSTEM
+      root = config.folders.find{|f| (f/"schema.fio").file? }
+      root ? Finitio::DEFAULT_SYSTEM.parse((root/"schema.fio").read) : Finitio::DEFAULT_SYSTEM
     end
 
     # Convert an instantiated URL found in a webservice definition

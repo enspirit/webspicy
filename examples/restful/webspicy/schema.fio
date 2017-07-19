@@ -1,0 +1,4 @@
+Todo = {
+  id          : Integer
+  description : String
+}

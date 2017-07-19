@@ -57,12 +57,21 @@ module Webspicy
   # `schema` later), the scope is put as a thread-local variable...
   #
   def with_scope_for(config)
-    thread = Thread.current
-    thread[:webspicy_scope] = Scope.new(config)
-    yield thread[:webspicy_scope]
-    thread[:webspicy_scope] = nil
+    scope = set_current_scope(Scope.new(config))
+    yield scope
+    set_current_scope(nil)
   end
   module_function :with_scope_for
+
+  #
+  # Sets the current scope.
+  #
+  # See `with_scope_for`
+  #
+  def set_current_scope(scope)
+    Thread.current[:webspicy_scope] = scope
+  end
+  module_function :set_current_scope
 
   #
   # Parses a webservice schema (typically input or output) in the context

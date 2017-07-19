@@ -4,7 +4,7 @@ require 'rspec'
 task :webspicy do
   config = Webspicy::Configuration.new do |c|
     c.host = "http://127.0.0.1:4567"
-    c.add_folder Path.dir/"webspicy" 
+    c.add_folder Path.dir/"webspicy"
   end
   runner = Webspicy::Runner.new(config)
   runner.run

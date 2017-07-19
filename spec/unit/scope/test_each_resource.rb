@@ -2,7 +2,7 @@ require 'spec_helper'
 module Webspicy
   describe Scope, 'each_resource' do
 
-    RESTFUL_FOLDER = EXAMPLES_FOLDER/'restful'
+    with_scope_management
 
     let(:scope) {
       Scope.new(configuration)
@@ -16,12 +16,12 @@ module Webspicy
 
       let(:configuration) {
         Configuration.new{|c|
-          c.add_folder RESTFUL_FOLDER
+          c.add_folder restful_folder
         }
       }
 
       it 'returns all files' do
-        expect(subject.size).to eql(RESTFUL_FOLDER.glob('**/*.yml').size)
+        expect(subject.size).to eql(restful_folder.glob('**/*.yml').size)
       end
     end
 
@@ -29,7 +29,7 @@ module Webspicy
 
       let(:configuration) {
         Configuration.new{|c|
-          c.add_folder RESTFUL_FOLDER
+          c.add_folder restful_folder
           c.file_filter = ->(f) {
             f.basename.to_s == "getTodo.yml"
           }
@@ -45,7 +45,7 @@ module Webspicy
 
       let(:configuration) {
         Configuration.new{|c|
-          c.add_folder RESTFUL_FOLDER
+          c.add_folder restful_folder
           c.file_filter = /getTodo.yml/
         }
       }
