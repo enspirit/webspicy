@@ -1,5 +1,9 @@
 require 'sinatra'
 require 'json'
+require 'path'
+require 'finitio'
+
+SCHEMA = Finitio::DEFAULT_SYSTEM.parse (Path.dir/'webspicy/schema.fio').read
 
 TODOLIST = [
   {
@@ -18,6 +22,19 @@ enable :raise_errors
 get '/todo/' do
   content_type :json
   TODOLIST.to_json
+end
+
+post '/todo/' do
+  content_type :json
+  todo = SCHEMA["Todo"].dress(JSON.load(request.body.read))
+  if TODOLIST.find{|t| t[:id] == todo[:id] }
+    status 409
+    {error: "Identifier already in use"}.to_json
+  else
+    TODOLIST << todo
+    status 201
+    todo.to_json
+  end
 end
 
 get '/todo/:id' do |id|

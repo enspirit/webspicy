@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    webspicy (0.0.1)
+    webspicy (0.1.0.pre.rc2)
       finitio (~> 0.5.2)
       http (~> 0.5)
       path (~> 1.3)
@@ -61,6 +61,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  finitio (~> 0.5.2)
+  path (~> 1.3)
   rake (~> 10)
   sinatra (~> 2.0)
   webspicy!
