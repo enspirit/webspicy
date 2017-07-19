@@ -15,8 +15,8 @@ module Webspicy
                 describe test_case.description do
 
                   before(:all) do
-                    @api = Webspicy::RestClient.new
-                    @invocation = service.invoke_on(@api, resource, test_case)
+                    @api = Webspicy::RestClient.new(scope)
+                    @invocation = service.invoke_on(@api, resource, test_case, scope)
                   end
 
                   let(:invocation) {
@@ -39,8 +39,8 @@ module Webspicy
                 describe test_case.description do
 
                   before(:all) do
-                    @api = Webspicy::RestClient.new
-                    @invocation = service.invoke_on(@api, resource, test_case)
+                    @api = Webspicy::RestClient.new(scope)
+                    @invocation = service.invoke_on(@api, resource, test_case, scope)
                   end
 
                   let(:invocation) {

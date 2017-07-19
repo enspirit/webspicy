@@ -44,5 +44,20 @@ module Webspicy
       Finitio::DEFAULT_SYSTEM
     end
 
+    # Convert an instantiated URL found in a webservice definition
+    # to a real URL, using the configuration host
+    def to_real_url(url)
+
+      case config.host
+      when Proc
+        config.host.call(url)
+      when String
+        url =~ /^http/ ? url : "#{config.host}#{url}"
+      else
+        return url if url =~ /^http/
+        raise "Unable to resolve `#{url}` : no host resolver provided\nSee `Configuration#host="
+      end
+    end
+
   end
 end

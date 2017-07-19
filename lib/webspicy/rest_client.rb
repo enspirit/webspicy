@@ -1,12 +1,10 @@
 module Webspicy
   class RestClient
 
-    attr_reader :token    
     attr_reader :last_response
 
-    def initialize(host = "http://127.0.0.1:4567")
-      @host = host
-      @token = nil
+    def initialize(scope)
+      @scope = scope
       @last_response = nil
     end
 
@@ -47,7 +45,6 @@ module Webspicy
 
     def headers_and_url_for(url, params, headers)
       headers = headers || {}
-      url = url =~ /^http/ ? url : "#{@host}#{url}"
       [ headers, url ]
     end
 
