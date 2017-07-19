@@ -1,5 +1,4 @@
 require 'webspicy'
-require 'rspec'
 
 namespace :webspicy do
 

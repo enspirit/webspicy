@@ -5,6 +5,7 @@ require 'finitio'
 require 'logger'
 require 'ostruct'
 require 'yaml'
+require 'rspec'
 module Webspicy
 
   ###
