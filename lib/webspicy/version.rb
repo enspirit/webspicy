@@ -1,6 +1,6 @@
 module Webspicy
   module Version
-    TINY  = "0-rc2"
+    TINY  = "0-rc3"
     MINOR = 1
     MAJOR = 0
   end
