@@ -6,6 +6,7 @@ module Webspicy
       @run_counterexamples = (ENV['ROBUST'].nil? || ENV['ROBUST'] != 'no')
       @file_filter = (ENV['RESOURCE'] ? Regexp.compile(ENV['RESOURCE']) : nil)
       @service_filter = (ENV['METHOD'] ? ->(s){ s.method.to_s.downcase == ENV['METHOD'].downcase } : nil)
+      @client = HttpClient
       yield(self) if block_given?
     end
 
@@ -79,6 +80,20 @@ module Webspicy
       @service_filter = service_filter
     end
     attr_reader :service_filter
+
+    # Installs a client class to use to invoke web services for real.
+    #
+    # This configuration allows defining a subclass of Client to be used for
+    # actually invoking web services. Options are:
+    #
+    # - HttpClient: Uses the HTTP library to make real HTTP call to a web server.
+    #
+    # Note that this configuration variable expected a client *class*, not an
+    # instance
+    def client=(client)
+      @client = client
+    end
+    attr_reader :client
 
   end
 end

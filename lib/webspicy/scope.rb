@@ -6,6 +6,10 @@ module Webspicy
     end
     attr_reader :config
 
+    ###
+    ### Eachers -- Allow navigating the web service definitions
+    ###
+
     # Yields each resource in the current scope in turn.
     def each_resource(&bl)
       return enum_for(:each_resource) unless block_given?
@@ -35,6 +39,12 @@ module Webspicy
       service.counterexamples.each(&bl) if config.run_counterexamples?
     end
 
+
+    ###
+    ### Schemas -- For parsing input and output data schemas found in
+    ### web service definitions
+    ###
+
     # Parses a Finitio schema based on the data system.
     def parse_schema(fio)
       data_system.parse(fio)
@@ -44,6 +54,17 @@ module Webspicy
     def data_system
       root = config.folders.find{|f| (f/"schema.fio").file? }
       root ? Finitio::DEFAULT_SYSTEM.parse((root/"schema.fio").read) : Finitio::DEFAULT_SYSTEM
+    end
+
+
+    ###
+    ### Service invocation: abstract the configuration about what client is
+    ### used and how to instantiate it
+    ###
+
+    # Returns an instance of the client to use to invoke web services
+    def get_client
+      config.client.new(self)
     end
 
     # Convert an instantiated URL found in a webservice definition
@@ -61,6 +82,9 @@ module Webspicy
     end
 
     ###
+    ### Private methods
+    ###
+
     private
 
       # Returns a proc that implements file_filter strategy according to the
