@@ -58,5 +58,27 @@ module Webspicy
       end
     end
 
+    describe 'service_filter' do
+
+      it 'is nil by default' do
+        config = Configuration.new
+        expect(config.service_filter).to be_nil
+      end
+
+      it 'is implements backward compatibility with the RESOURCE env variable' do
+        ENV['METHOD'] = 'GET'
+        config = Configuration.new
+        expect(config.service_filter).to be_a(Proc)
+      end
+
+      it 'ignores the environment is set explicitly' do
+        ENV['METHOD'] = 'POST'
+        config = Configuration.new do |c|
+          c.service_filter = nil
+        end
+        expect(config.service_filter).to be_nil
+      end
+    end
+
   end
 end

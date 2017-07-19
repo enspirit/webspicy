@@ -5,6 +5,7 @@ module Webspicy
       @folders = []
       @run_counterexamples = (ENV['ROBUST'].nil? || ENV['ROBUST'] != 'no')
       @file_filter = (ENV['RESOURCE'] ? Regexp.compile(ENV['RESOURCE']) : nil)
+      @service_filter = (ENV['METHOD'] ? ->(s){ s.method.to_s.downcase == ENV['METHOD'].downcase } : nil)
       yield(self) if block_given?
     end
 
@@ -53,7 +54,7 @@ module Webspicy
     # files that match the filter installed. Supported values are:
     #
     # - Proc: each file (a Path instance) is passed in turn. Only files for
-    #   which a truthly value is returned will be considered by the scope.
+    #   which a truthy value is returned will be considered by the scope.
     # - Regexp: the path of each file is matched against the regexp. Only files
     #   that match are considered by the scope.
     # - ===: any instance responding to `===` can be used as a matcher, following
@@ -63,6 +64,21 @@ module Webspicy
       @file_filter = file_filter
     end
     attr_reader :file_filter
+
+    # Installs a service filter.
+    #
+    # A service filter can be added to restrict the scope attention only to the
+    # services that match the filter installed. Supported values are:
+    #
+    # - Proc: each service is passed in turn. Only services for which a truthy value
+    #   is returned will be considered by the scope.
+    # - ===: any instance responding to `===` can be used as a matcher, following
+    #   Ruby conventions. The match is done on a Service instance.
+    #
+    def service_filter=(service_filter)
+      @service_filter = service_filter
+    end
+    attr_reader :service_filter
 
   end
 end

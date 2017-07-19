@@ -17,14 +17,14 @@ module Webspicy
     # Recursive implementation of `each_resource` for each
     # folder in the configuration.
     def _each_resource(folder)
-      folder.glob("**/*.yml").select(&file_filter_proc).each do |file|
+      folder.glob("**/*.yml").select(&to_filter_proc(config.file_filter)).each do |file|
         yield Webspicy.resource(file.load, file)
       end
     end
     private :_each_resource
 
     def each_service(resource, &bl)
-      resource.services.each(&bl)
+      resource.services.select(&to_filter_proc(config.service_filter)).each(&bl)
     end
 
     def each_example(service, &bl)
@@ -48,7 +48,6 @@ module Webspicy
     # Convert an instantiated URL found in a webservice definition
     # to a real URL, using the configuration host
     def to_real_url(url)
-
       case config.host
       when Proc
         config.host.call(url)
@@ -61,11 +60,12 @@ module Webspicy
     end
 
     ###
+    private
 
       # Returns a proc that implements file_filter strategy according to the
       # type of filter installed
-      def file_filter_proc
-        case ff = config.file_filter
+      def to_filter_proc(filter)
+        case ff = filter
         when NilClass then ->(f){ true }
         when Proc     then ff
         when Regexp   then ->(f){ ff =~ f.to_s }
@@ -73,7 +73,6 @@ module Webspicy
           ->(f){ ff === f }
         end
       end
-      private :file_filter_proc
 
   end
 end
