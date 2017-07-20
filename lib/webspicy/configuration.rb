@@ -19,7 +19,8 @@ module Webspicy
       raise "Folder `#{folder}` does not exists" unless folder.exists? && folder.directory?
       @folders << folder
     end
-    attr_reader :folders
+    attr_accessor :folders
+    protected :folders=
 
     # Sets whether counter examples have to be ran or not.
     def run_counterexamples=(run_counterexamples)
@@ -137,6 +138,8 @@ module Webspicy
     def before_listeners
       @before_listeners
     end
+    attr_writer :before_listeners
+    protected :before_listeners=
 
     # Allows setting the options passed at RSpec, which is used by both the runner
     # and checker classes.
@@ -146,7 +149,8 @@ module Webspicy
     def rspec_options=(options)
       @rspec_options = options
     end
-    attr_reader :rspec_options
+    attr_accessor :rspec_options
+    protected :rspec_options=
 
     # Returns the default rspec options.
     #
@@ -163,6 +167,21 @@ module Webspicy
       options
     end
     private :default_rspec_options
+
+    # Duplicates this configuration and yields the block with the new one,
+    # if a block is given.
+    #
+    # The cloned configuration has all same values as the original but shares
+    # nothing with it. Therefore, affecting the new one has no effect on the
+    # original.
+    def dup(&bl)
+      super.tap do |d|
+        d.folders = self.folders.dup
+        d.rspec_options = self.rspec_options.dup
+        d.before_listeners = self.before_listeners.dup
+        yield d if block_given?
+      end
+    end
 
   end
 end

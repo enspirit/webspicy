@@ -80,5 +80,39 @@ module Webspicy
       end
     end
 
+    describe 'dup' do
+
+      let(:original) do
+        Configuration.new do |c|
+          c.add_folder Path.dir/'resource'
+          c.host = "http://127.0.0.1"
+        end
+      end
+
+      it 'lets duplicate a configuration' do
+        duped = original.dup do |d|
+          d.host = "http://127.0.0.1:4567"
+        end
+        expect(duped.host).to eql("http://127.0.0.1:4567")
+        expect(original.host).to eql("http://127.0.0.1")
+      end
+
+      it 'duplicates the internal arrays to' do
+        duped = original.dup do |d|
+          d.add_folder Path.dir/'scope'
+          d.rspec_options << "--hello"
+          d.before_each do end
+        end
+        expect(duped.folders.size).to eql(2)
+        expect(original.folders.size).to eql(1)
+
+        expect(duped.rspec_options.last).to eq("--hello")
+        expect(original.rspec_options.last).not_to eq("--hello")
+
+        expect(duped.before_listeners.size).to eq(1)
+        expect(original.before_listeners.size).to eq(0)
+      end
+    end
+
   end
 end
