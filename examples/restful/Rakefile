@@ -1,6 +1,5 @@
 $LOAD_PATH.unshift File.expand_path("..", __FILE__)
 require 'app'
-require 'sinatra'
 require 'webspicy'
 
 namespace :webspicy do

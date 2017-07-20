@@ -15,7 +15,9 @@ namespace :test do
     test_name = file.basename.to_s.to_sym
     desc "Runs the integration tests on the #{file.basename} example"
     task(test_name) do
-      system("cd #{file} && rake")
+      Bundler.with_original_env do
+        system("cd #{file} && rake")
+      end
     end
     tests << test_name
   end
