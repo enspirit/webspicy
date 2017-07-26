@@ -2,16 +2,17 @@ $LOAD_PATH.unshift File.expand_path("..", __FILE__)
 require 'app'
 require 'webspicy'
 
-namespace :webspicy do
-
-  task :check do
-    config = Webspicy::Configuration.new do |c|
-      c.add_folder Path.dir/"webspicy"
-    end
-    Webspicy::Checker.new(config).call
+desc "Checks all .yml definition files"
+task :check do
+  config = Webspicy::Configuration.new do |c|
+    c.add_folder Path.dir/"webspicy"
   end
+  Webspicy::Checker.new(config).call
+end
 
-  task :testrack do
+namespace :test do
+  desc "Run all tests directly on Sinatra application using rack/test"
+  task :rack do
     config = Webspicy::Configuration.new do |c|
       c.add_folder Path.dir/"webspicy"
       c.client = Webspicy::RackTestClient.for(::Sinatra::Application)
@@ -22,7 +23,8 @@ namespace :webspicy do
     Webspicy::Tester.new(config).call
   end
 
-  task :testreal do
+  desc "Runs all tests on the real web server (must be launched previously)"
+  task :real do
     config = Webspicy::Configuration.new do |c|
       c.host = "http://127.0.0.1:4567"
       c.add_folder Path.dir/"webspicy"
@@ -33,8 +35,10 @@ namespace :webspicy do
     end
     Webspicy::Tester.new(config).call
   end
-
 end
 
-task :test => [:"webspicy:check", :"webspicy:testrack"]
+desc "Runs all checks and tests"
+task :test => :check
+task :test => :"test:rack"
+
 task :default => :test
