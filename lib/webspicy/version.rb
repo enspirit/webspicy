@@ -1,8 +1,8 @@
 module Webspicy
   module Version
-    TINY  = 0
-    MINOR = 2
     MAJOR = 0
+    MINOR = 2
+    TINY  = 1
   end
   VERSION = "#{Version::MAJOR}.#{Version::MINOR}.#{Version::TINY}"
 end
