@@ -37,7 +37,7 @@ TestCase =
         requester        :? String
         expected: {
             status       :  Integer
-            content_type :? String
+            content_type :? String|Nil
             error        :? String
             headers      :? .Hash
         }

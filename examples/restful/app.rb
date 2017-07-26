@@ -55,3 +55,16 @@ get '/todo/:id' do |id|
     todo.to_json
   end
 end
+
+delete '/todo/:id' do |id|
+  content_type :json
+  todo = settings.todolist.find{|todo| todo[:id] == Integer(id) }
+  if todo.nil?
+    status 404
+    {error: "No such todo"}.to_json
+  else
+    settings.todolist = settings.todolist.reject{|todo| todo[:id] == Integer(id) }
+    status 204
+    content_type "text/plain"
+  end
+end

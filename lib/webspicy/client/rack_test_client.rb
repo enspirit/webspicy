@@ -91,6 +91,17 @@ module Webspicy
         Webspicy.debug("Response: #{@last_response.body}")
       end
 
+      def delete(url, params = {}, headers = nil)
+        Webspicy.info("DELETE #{url} -- #{params.inspect}")
+
+        install_headers(headers) if headers
+        handler.delete(url, params.to_json, {"CONTENT_TYPE" => "application/json"})
+        @last_response = handler.last_response
+
+        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
+        Webspicy.debug("Response: #{@last_response.body}")
+      end
+
     private
 
       def install_headers(hs)

@@ -56,6 +56,15 @@ module Webspicy
         Webspicy.debug("Response: #{@last_response.body}")
       end
 
+      def delete(url, params = {}, headers = nil)
+        Webspicy.info("DELETE #{url} -- #{params.inspect}")
+
+        @last_response = HTTP[headers || {}].delete(url, body: params.to_json)
+
+        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
+        Webspicy.debug("Response: #{@last_response.body}")
+      end
+
     end
 
   end

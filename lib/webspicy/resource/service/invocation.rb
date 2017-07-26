@@ -58,8 +58,12 @@ module Webspicy
         def expected_content_type_unmet
           ect = test_case.expected_content_type
           got = response.content_type
-          got = got.mime_type.to_s if got.respond_to?(:mime_type)
-          ect == got ? nil : "#{ect} != #{got}"
+          got = got.mime_type if got.respond_to?(:mime_type)
+          if ect.nil?
+            got.nil? ? nil : "#{ect} != #{got}"
+          else
+            ect.to_s == got.to_s ? nil : "#{ect} != #{got}"
+          end
         end
 
         def meets_expected_content_type?
