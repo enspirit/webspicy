@@ -54,14 +54,14 @@ module Webspicy
       attr_reader :last_response
 
       def initialize(app)
-        @handler = RackHandler.new(app)
+        @app = app
       end
-      attr_reader :handler
 
       def get(url, params = {}, headers = nil)
-        Webspicy.info("GET #{url} -- #{params.inspect}")
+        handler = get_handler(headers)
 
-        install_headers(headers) if headers
+        Webspicy.info("GET #{url} -- #{params.inspect} -- #{headers.inspect}")
+
         handler.get(url, params)
         @last_response = handler.last_response
 
@@ -70,9 +70,10 @@ module Webspicy
       end
 
       def post(url, params = {}, headers = nil)
-        Webspicy.info("POST #{url} -- #{params.inspect}")
+        handler = get_handler(headers)
 
-        install_headers(headers) if headers
+        Webspicy.info("POST #{url} -- #{params.inspect} -- #{headers.inspect}")
+
         handler.post(url, params.to_json, {"CONTENT_TYPE" => "application/json"})
         @last_response = handler.last_response
 
@@ -81,9 +82,10 @@ module Webspicy
       end
 
       def post_form(url, params = {}, headers = nil)
-        Webspicy.info("POST #{url} -- #{params.inspect}")
+        handler = get_handler(headers)
 
-        install_headers(headers) if headers
+        Webspicy.info("POST #{url} -- #{params.inspect} -- #{headers.inspect}")
+
         handler.post(url, params)
         @last_response = handler.last_response
 
@@ -92,9 +94,10 @@ module Webspicy
       end
 
       def delete(url, params = {}, headers = nil)
-        Webspicy.info("DELETE #{url} -- #{params.inspect}")
+        handler = get_handler(headers)
 
-        install_headers(headers) if headers
+        Webspicy.info("DELETE #{url} -- #{params.inspect} -- #{headers.inspect}")
+
         handler.delete(url, params.to_json, {"CONTENT_TYPE" => "application/json"})
         @last_response = handler.last_response
 
@@ -104,10 +107,12 @@ module Webspicy
 
     private
 
-      def install_headers(hs)
+      def get_handler(hs)
+        handler = RackHandler.new(@app)
         hs.each_pair do |k,v|
           handler.header(k,v)
-        end
+        end if hs
+        handler
       end
 
     end # class Api
