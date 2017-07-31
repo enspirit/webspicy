@@ -7,7 +7,7 @@ module Webspicy
     attr_reader :config
 
     def call
-      Webspicy.with_scope_for(config) do |scope|
+      config.each_scope do |scope|
         client = scope.get_client
         scope.each_resource do |resource|
           scope.each_service(resource) do |service|

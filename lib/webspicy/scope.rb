@@ -13,13 +13,7 @@ module Webspicy
     # Yields each resource file in the current scope
     def each_resource_file(&bl)
       return enum_for(:each_resource_file) unless block_given?
-      if config.has_children?
-        config.children.each do |child|
-          _each_resource_file(child, &bl)
-        end
-      else
-        _each_resource_file(config, &bl)
-      end
+      _each_resource_file(config, &bl)
     end
 
     # Recursive implementation of `each_resource_file` for each
@@ -65,10 +59,7 @@ module Webspicy
 
     # Returns the Data system to use for parsing schemas
     def data_system
-      @data_system ||= begin
-        schema = config.folder/"schema.fio"
-        schema.file? ? Finitio::DEFAULT_SYSTEM.parse(schema.read) : Finitio::DEFAULT_SYSTEM
-      end
+      @data_system ||= config.data_system
     end
 
 

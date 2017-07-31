@@ -1,8 +1,9 @@
 module Webspicy
   class Configuration
 
-    def initialize(folder = Path.pwd)
+    def initialize(folder = Path.pwd, parent = nil)
       @folder = folder
+      @parent = parent
       @children = []
       @before_listeners = []
       @rspec_options = default_rspec_options
@@ -15,6 +16,20 @@ module Webspicy
     attr_accessor :folder
     protected :folder=
 
+    attr_accessor :parent
+    protected :parent=
+
+    def each_scope(&bl)
+      return enum_for(:each_scope) unless block_given?
+      if has_children?
+        children.each do |config|
+          config.each_scope(&bl)
+        end
+      else
+        Webspicy.with_scope_for(self, &bl)
+      end
+    end
+
     # Adds a folder to the list of folders where test case definitions are
     # to be found.
     def folder(folder = nil, &bl)
@@ -25,6 +40,7 @@ module Webspicy
         raise "Folder `#{folder}` does not exists" unless folder.exists? && folder.directory?
         raise "Folder must be a descendant" unless folder.inside?(@folder)
         child = dup do |c|
+          c.parent = self
           c.folder = folder
         end
         yield(child) if block_given?
@@ -185,6 +201,24 @@ module Webspicy
       options
     end
     private :default_rspec_options
+
+    # Returns the Data system to use for parsing schemas
+    #
+    # The data system associated with a configuration is build when the
+    # configuration folder contains a `schema.fio` finitio file. When no
+    # such file can be found, the parent config is checked (if any). When
+    # no `schema.fio` file can be found, the method ends up returning the
+    # default Finition system.
+    def data_system
+      schema = self.folder/"schema.fio"
+      if schema.file?
+        Finitio::DEFAULT_SYSTEM.parse(schema.read)
+      elsif not(self.parent.nil?)
+        self.parent.data_system
+      else
+        Finitio::DEFAULT_SYSTEM
+      end
+    end
 
     # Duplicates this configuration and yields the block with the new one,
     # if a block is given.
