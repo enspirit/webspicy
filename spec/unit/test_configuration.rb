@@ -10,6 +10,33 @@ module Webspicy
       expect(seen).to be_a(Configuration)
     end
 
+    describe 'folder' do
+
+      it 'returns the main folder without arg' do
+        config = Configuration.new(Path.dir)
+        expect(config.folder).to eql(Path.dir)
+      end
+
+      it 'creates a child when adding a folder' do
+        Configuration.new(Path.dir) do |c|
+          child = c.folder 'resource'
+          expect(child).to be_a(Configuration)
+          expect(child.folder).to eql(Path.dir/'resource')
+        end
+      end
+
+      it 'yield the child to the block if any given' do
+        Configuration.new(Path.dir) do |c|
+          seen = nil
+          c.folder 'resource' do |child|
+            seen = child
+          end
+          expect(seen).to be_a(Configuration)
+          expect(seen.folder).to eql(Path.dir/'resource')
+        end
+      end
+    end
+
     describe 'run_counterexamples' do
 
       it 'is true by default' do
@@ -83,8 +110,7 @@ module Webspicy
     describe 'dup' do
 
       let(:original) do
-        Configuration.new do |c|
-          c.add_folder Path.dir/'resource'
+        Configuration.new(Path.dir/'resource') do |c|
           c.host = "http://127.0.0.1"
         end
       end
@@ -93,19 +119,16 @@ module Webspicy
         duped = original.dup do |d|
           d.host = "http://127.0.0.1:4567"
         end
+        expect(duped.folder).to eql(Path.dir/'resource')
         expect(duped.host).to eql("http://127.0.0.1:4567")
         expect(original.host).to eql("http://127.0.0.1")
       end
 
       it 'duplicates the internal arrays to' do
         duped = original.dup do |d|
-          d.add_folder Path.dir/'scope'
           d.rspec_options << "--hello"
           d.before_each do end
         end
-        expect(duped.folders.size).to eql(2)
-        expect(original.folders.size).to eql(1)
-
         expect(duped.rspec_options.last).to eq("--hello")
         expect(original.rspec_options.last).not_to eq("--hello")
 

@@ -15,9 +15,7 @@ module Webspicy
     context 'without any filter' do
 
       let(:configuration) {
-        Configuration.new{|c|
-          c.add_folder restful_folder
-        }
+        Configuration.new(restful_folder)
       }
 
       it 'returns all files' do
@@ -28,8 +26,7 @@ module Webspicy
     context 'with a file filter as a proc' do
 
       let(:configuration) {
-        Configuration.new{|c|
-          c.add_folder restful_folder
+        Configuration.new(restful_folder){|c|
           c.file_filter = ->(f) {
             f.basename.to_s == "getTodo.yml"
           }
@@ -44,14 +41,26 @@ module Webspicy
     context 'with a file filter as a Regex' do
 
       let(:configuration) {
-        Configuration.new{|c|
-          c.add_folder restful_folder
+        Configuration.new(restful_folder){|c|
           c.file_filter = /getTodo.yml/
         }
       }
 
       it 'returns only that file' do
         expect(subject.size).to eql(1)
+      end
+    end
+
+    context 'when having children folders' do
+
+      let(:configuration) {
+        Configuration.new(restful_folder) do |c|
+          c.folder 'todo'
+        end
+      }
+
+      it 'returns all files' do
+        expect(subject.size).to eql(restful_folder.glob('**/*.yml').size)
       end
     end
 

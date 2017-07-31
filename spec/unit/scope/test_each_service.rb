@@ -19,8 +19,7 @@ module Webspicy
     context 'without any filter' do
 
       let(:configuration) {
-        Configuration.new{|c|
-          c.add_folder restful_folder
+        Configuration.new(restful_folder){|c|
           c.file_filter = /getTodo.yml/
         }
       }
@@ -33,8 +32,7 @@ module Webspicy
     context 'with a service filter as a proc' do
 
       let(:configuration) {
-        Configuration.new{|c|
-          c.add_folder restful_folder
+        Configuration.new(restful_folder){|c|
           c.file_filter = /getTodo.yml/
           c.service_filter = ->(s) {
             s.method == "POST"

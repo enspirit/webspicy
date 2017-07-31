@@ -3,8 +3,12 @@ require 'webspicy'
 
 module SpecHelper
 
+  def examples_folder
+    Webspicy::EXAMPLES_FOLDER
+  end
+
   def restful_folder
-    Webspicy::EXAMPLES_FOLDER/'restful/webspicy'
+    examples_folder/'restful/webspicy'
   end
 
 end

@@ -1,8 +1,9 @@
 module Webspicy
   class Configuration
 
-    def initialize
-      @folders = []
+    def initialize(folder = Path.pwd)
+      @folder = folder
+      @children = []
       @before_listeners = []
       @rspec_options = default_rspec_options
       @run_counterexamples = default_run_counterexamples
@@ -11,16 +12,33 @@ module Webspicy
       @client = HttpClient
       yield(self) if block_given?
     end
+    attr_accessor :folder
+    protected :folder=
 
     # Adds a folder to the list of folders where test case definitions are
     # to be found.
-    def add_folder(folder)
-      folder = Path(folder)
-      raise "Folder `#{folder}` does not exists" unless folder.exists? && folder.directory?
-      @folders << folder
+    def folder(folder = nil, &bl)
+      if folder.nil?
+        @folder
+      else
+        folder = folder.is_a?(String) ? @folder/folder : Path(folder)
+        raise "Folder `#{folder}` does not exists" unless folder.exists? && folder.directory?
+        raise "Folder must be a descendant" unless folder.inside?(@folder)
+        child = dup do |c|
+          c.folder = folder
+        end
+        yield(child) if block_given?
+        @children << child
+        child
+      end
     end
-    attr_accessor :folders
-    protected :folders=
+    attr_accessor :children
+    protected :children=
+
+    # Returns whether this configuration has children configurations or not
+    def has_children?
+      !children.empty?
+    end
 
     # Sets whether counter examples have to be ran or not.
     def run_counterexamples=(run_counterexamples)
@@ -35,7 +53,7 @@ module Webspicy
 
     # Returns the defaut value for run_counterexamples
     def default_run_counterexamples
-      ENV['ROBUST'].nil? || ENV['ROBUST'] != 'no'
+      ENV['ROBUST'].nil? || (ENV['ROBUST'] != 'no')
     end
     private :default_run_counterexamples
 
@@ -176,7 +194,7 @@ module Webspicy
     # original.
     def dup(&bl)
       super.tap do |d|
-        d.folders = self.folders.dup
+        d.children = self.children.dup
         d.rspec_options = self.rspec_options.dup
         d.before_listeners = self.before_listeners.dup
         yield d if block_given?

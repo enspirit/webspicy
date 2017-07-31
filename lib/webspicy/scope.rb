@@ -13,14 +13,19 @@ module Webspicy
     # Yields each resource file in the current scope
     def each_resource_file(&bl)
       return enum_for(:each_resource_file) unless block_given?
-      config.folders.each do |folder|
-        _each_resource_file(folder, &bl)
+      if config.has_children?
+        config.children.each do |child|
+          _each_resource_file(child, &bl)
+        end
+      else
+        _each_resource_file(config, &bl)
       end
     end
 
     # Recursive implementation of `each_resource_file` for each
     # folder in the configuration.
-    def _each_resource_file(folder)
+    def _each_resource_file(config)
+      folder = config.folder
       folder.glob("**/*.yml").select(&to_filter_proc(config.file_filter)).each do |file|
         yield file, folder
       end
@@ -61,8 +66,8 @@ module Webspicy
     # Returns the Data system to use for parsing schemas
     def data_system
       @data_system ||= begin
-        root = config.folders.find{|f| (f/"schema.fio").file? }
-        root ? Finitio::DEFAULT_SYSTEM.parse((root/"schema.fio").read) : Finitio::DEFAULT_SYSTEM
+        schema = config.folder/"schema.fio"
+        schema.file? ? Finitio::DEFAULT_SYSTEM.parse(schema.read) : Finitio::DEFAULT_SYSTEM
       end
     end
 
