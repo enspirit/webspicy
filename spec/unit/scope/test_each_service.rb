@@ -2,8 +2,6 @@ require 'spec_helper'
 module Webspicy
   describe Scope, 'each_service' do
 
-    with_scope_management
-
     let(:scope) {
       Scope.new(configuration)
     }

@@ -112,6 +112,7 @@ module Webspicy
       let(:original) do
         Configuration.new(Path.dir/'resource') do |c|
           c.host = "http://127.0.0.1"
+          c.folder 'service'
         end
       end
 
@@ -134,6 +135,11 @@ module Webspicy
 
         expect(duped.before_listeners.size).to eq(1)
         expect(original.before_listeners.size).to eq(0)
+      end
+
+      it 'empties the children' do
+        duped = original.dup
+        expect(duped.children).to be_empty
       end
     end
 

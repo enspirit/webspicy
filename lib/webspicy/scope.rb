@@ -30,7 +30,7 @@ module Webspicy
     def each_resource(&bl)
       return enum_for(:each_resource) unless block_given?
       each_resource_file do |file, folder|
-        yield Webspicy.resource(file.load, file)
+        yield Webspicy.resource(file.load, file, self)
       end
     end
 

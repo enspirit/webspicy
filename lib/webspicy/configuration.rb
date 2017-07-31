@@ -26,7 +26,7 @@ module Webspicy
           config.each_scope(&bl)
         end
       else
-        Webspicy.with_scope_for(self, &bl)
+        yield Scope.new(self)
       end
     end
 
@@ -228,7 +228,7 @@ module Webspicy
     # original.
     def dup(&bl)
       super.tap do |d|
-        d.children = self.children.dup
+        d.children = []
         d.rspec_options = self.rspec_options.dup
         d.before_listeners = self.before_listeners.dup
         yield d if block_given?

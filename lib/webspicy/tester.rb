@@ -90,8 +90,8 @@ module Webspicy
             end
           end
         end
-        RSpec::Core::Runner.run config.rspec_options
       end
+      RSpec::Core::Runner.run config.rspec_options
     end
 
   end # class Tester

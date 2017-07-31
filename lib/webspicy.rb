@@ -38,40 +38,57 @@ module Webspicy
 
   FORMALDOC = Finitio::DEFAULT_SYSTEM.parse (Path.dir/"webspicy/formaldoc.fio").read
 
-  def resource(raw, file = nil)
-    FORMALDOC["Resource"].dress(raw)
+  # Returns a default scope instance.
+  def default_scope
+    Scope.new(Configuration.new)
+  end
+  module_function :default_scope
+
+  def resource(raw, file = nil, scope = default_scope)
+    with_scope(scope) do
+      FORMALDOC["Resource"].dress(raw)
+    end
   end
   module_function :resource
 
-  def service(raw)
-    FORMALDOC["Service"].dress(raw)
+  def service(raw, scope = default_scope)
+    with_scope(scope) do
+      FORMALDOC["Service"].dress(raw)
+    end
   end
   module_function :service
 
-  def test_case(raw)
-    FORMALDOC["TestCase"].dress(raw)
+  def test_case(raw, scope = default_scope)
+    with_scope(scope) do
+      FORMALDOC["TestCase"].dress(raw)
+    end
   end
   module_function :test_case
 
   #
-  # Yields a Scope instance for the configuration passed as parameter.
+  # Yields the block after having installed `scope` globally.
   #
   # This method makes sure that the scope will also be accessible for
   # Finitio world schema parsing/dressing. Given that some global state
   # is required (see "Schema" ADT, the dresser in particular, which calls
   # `schema` later), the scope is put as a thread-local variable...
   #
-  def with_scope_for(config)
-    scope = set_current_scope(Scope.new(config))
-    yield scope
+  # This method is considered private and should not be used outside of
+  # Webspicy itself.
+  #
+  def with_scope(scope)
+    scope = set_current_scope(scope)
+    result = yield scope
     set_current_scope(nil)
+    result
   end
-  module_function :with_scope_for
+  module_function :with_scope
 
   #
   # Sets the current scope.
   #
-  # See `with_scope_for`
+  # This method is considered private and should not be used outside of
+  # Webspicy itself.
   #
   def set_current_scope(scope)
     Thread.current[:webspicy_scope] = scope
@@ -80,7 +97,7 @@ module Webspicy
 
   #
   # Parses a webservice schema (typically input or output) in the context
-  # of the current scope previously installed using `with_scope_for`.
+  # of the current scope previously installed using `with_scope`.
   #
   # If no scope has previously been installed, Finitio's default system
   # is used instead of another schema.

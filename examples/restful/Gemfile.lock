@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    webspicy (0.3.0.pre.rc1)
+    webspicy (0.3.0.pre.rc2)
       finitio (~> 0.5.2)
       http (~> 2)
       path (~> 1.3)

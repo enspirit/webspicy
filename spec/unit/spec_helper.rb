@@ -13,20 +13,6 @@ module SpecHelper
 
 end
 
-module ScopeManagement
-
-  def with_scope_management
-    before(:each) {
-      Webspicy.set_current_scope(scope)
-    }
-    after(:each) {
-      Webspicy.set_current_scope(nil)
-    }
-  end
-
-end
-
 RSpec.configure do |c|
   c.include SpecHelper
-  c.extend  ScopeManagement
 end

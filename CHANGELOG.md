@@ -16,3 +16,6 @@
     end
   end
   ```
+
+* Webspicy.resource, Webspicy.service and Webspicy.test_case now take an optional
+  scope as last argument, scope that is installed and used for Finitio resolving.
