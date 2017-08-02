@@ -4,32 +4,18 @@ require 'webspicy'
 
 desc "Checks all .yml definition files"
 task :check do
-  config = Webspicy::Configuration.new(Path.dir/"webspicy")
-  Webspicy::Checker.new(config).call
+  Webspicy::Checker.new(Path.dir/'webspicy').call
 end
 
 namespace :test do
   desc "Run all tests directly on Sinatra application using rack/test"
   task :rack do
-    config = Webspicy::Configuration.new(Path.dir/"webspicy") do |c|
-      c.client = Webspicy::RackTestClient.for(::Sinatra::Application)
-      c.before_each do |_,_,_,client|
-        client.api.post "/reset"
-      end
-    end
-    Webspicy::Tester.new(config).call
+    Webspicy::Tester.new(Path.dir/'webspicy/rack.rb').call
   end
 
   desc "Runs all tests on the real web server (must be launched previously)"
   task :real do
-    config = Webspicy::Configuration.new(Path.dir/"webspicy") do |c|
-      c.host = "http://127.0.0.1:4567"
-      c.client = Webspicy::HttpClient
-      c.before_each do |_,_,_,client|
-        client.api.post "http://127.0.0.1:4567/reset"
-      end
-    end
-    Webspicy::Tester.new(config).call
+    Webspicy::Tester.new(Path.dir/'webspicy/real.rb').call
   end
 end
 

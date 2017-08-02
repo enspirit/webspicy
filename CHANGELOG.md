@@ -1,5 +1,10 @@
 # 0.4.0
 
+* Webspicy::Tester and Webspicy::Checker now support being constructed using a Path
+  instance, and will load the configuration from a `config.rb` file found under that
+  path. Note that the folder must unfortunately be passed as well in config.rb, e.g.
+  `Configuration.new(Path.dir)`.
+
 * Preconditions and postconditions are now optional in definition files. An array
   of Strings is supported in addition to a single String.
 

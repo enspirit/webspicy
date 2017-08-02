@@ -13,10 +13,29 @@ module Webspicy
       @file_filter = default_file_filter
       @service_filter = default_service_filter
       @client = HttpClient
+      Path.require_tree(folder/'support') if (folder/'support').exists?
       yield(self) if block_given?
     end
     attr_accessor :folder
     protected :folder=
+
+    def self.dress(arg, &bl)
+      return arg if arg.is_a?(Configuration)
+      arg = Path(arg)
+      if arg.file?
+        c = Kernel.instance_eval arg.read, arg.to_s
+        yield(c) if block_given?
+        c
+      elsif (arg/'config.rb').file?
+        dress(arg/'config.rb', &bl)
+      else
+        raise ArgumentError, "Missing config.rb file"
+      end
+    end
+
+    def self.inherits(*args, &bl)
+      dress(*args, &bl)
+    end
 
     attr_accessor :parent
     protected :parent=

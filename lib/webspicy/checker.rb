@@ -2,7 +2,7 @@ module Webspicy
   class Checker
 
     def initialize(config)
-      @config = config
+      @config = Configuration.dress(config)
     end
     attr_reader :config
 

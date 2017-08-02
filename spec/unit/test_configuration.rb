@@ -10,6 +10,43 @@ module Webspicy
       expect(seen).to be_a(Configuration)
     end
 
+    describe '.dress' do
+
+      it 'is idempotent' do
+        c = Configuration.new
+        expect(Configuration.dress(c)).to be(c)
+      end
+
+      it 'supports a config.rb file' do
+        c = Configuration.dress(Path.dir/'configuration/config.rb')
+        expect(c).to be_a(Configuration)
+        expect(c.folder).to eq(Path.dir/'configuration')
+        expect(c.preconditions.size).to eq(1)
+      end
+
+      it 'supports a folder having a config.rb file' do
+        c = Configuration.dress(Path.dir/'configuration')
+        expect(c).to be_a(Configuration)
+        expect(c.folder).to eq(Path.dir/'configuration')
+        expect(c.preconditions.size).to eq(1)
+      end
+
+      it 'yields the block with the configuration, if given' do
+        seen = nil
+        Configuration.dress(Path.dir/'configuration'){|c|
+          seen = c
+        }
+        expect(seen).to be_a(Configuration)
+      end
+
+      it 'raises if the folder has no config.rb file' do
+        expect(->{
+          Configuration.dress(Path.dir)
+        }).to raise_error(/Missing config.rb file/)
+      end
+
+    end
+
     describe 'folder' do
 
       it 'returns the main folder without arg' do
