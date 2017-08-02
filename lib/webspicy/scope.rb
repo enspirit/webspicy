@@ -54,14 +54,16 @@ module Webspicy
       service.counterexamples.each{|s| yield(s, true) } if config.run_counterexamples?
     end
 
-    def each_generated_counterexamples(service, resource, &bl)
-      service.generated_counterexamples(resource, self).each{|s| yield(s, true) } if config.run_counterexamples?
+    def each_generated_counterexamples(service, &bl)
+      Webspicy.with_scope(self) do
+        service.generated_counterexamples.each{|s| yield(s, true) }
+      end if config.run_counterexamples?
     end
 
-    def each_testcase(service, resource, &bl)
+    def each_testcase(service, &bl)
       each_example(service, &bl)
       each_counterexamples(service, &bl)
-      each_generated_counterexamples(service, resource, &bl)
+      each_generated_counterexamples(service, &bl)
     end
 
     ###

@@ -1,5 +1,9 @@
 # 0.4.0
 
+* BREAKING CHANGE: before handlers only take two arguments (test_case, client) instead
+  of 4. The service and resource can be obtained through the test_case itself, which now
+  exposes the `#service` and `#resource` methods.
+
 * Webspicy::Tester and Webspicy::Checker now support being constructed using a Path
   instance, and will load the configuration from a `config.rb` file found under that
   path. Note that the folder must unfortunately be passed as well in config.rb, e.g.

@@ -3,6 +3,7 @@ module Webspicy
 
     def initialize(raw)
       @raw = raw
+      bind_services
     end
 
     def self.info(raw)
@@ -36,6 +37,14 @@ module Webspicy
 
     def to_info
       @raw
+    end
+
+  private
+
+    def bind_services
+      (@raw[:services] ||= []).each do |s|
+        s.resource = self
+      end
     end
 
   end

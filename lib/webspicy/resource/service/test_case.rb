@@ -6,6 +6,11 @@ module Webspicy
         def initialize(raw)
           @raw = raw
         end
+        attr_accessor :service
+
+        def resource
+          service.resource
+        end
 
         def self.info(raw)
           new(raw)
@@ -66,6 +71,12 @@ module Webspicy
 
         def to_info
           @raw
+        end
+
+        def instrument
+          service.preconditions.each do |pre|
+            pre.ensure(self)
+          end
         end
 
         def to_s

@@ -13,7 +13,9 @@ module Webspicy
     attr_reader :api
     attr_reader :domain
 
-    def call(test_case, service, resource)
+    def call(test_case)
+      service, resource = test_case.service, test_case.resource
+
       # Instantiate the parameters
       headers = test_case.headers.dup
       params = test_case.dress_params? ? service.dress_params(test_case.params) : test_case.params

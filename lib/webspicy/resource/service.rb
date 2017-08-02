@@ -4,9 +4,12 @@ module Webspicy
 
       def initialize(raw)
         @raw = raw
+        bind_examples
+        bind_counterexamples
         @preconditions = compile_preconditions
         @postconditions = compile_postconditions
       end
+      attr_accessor :resource
 
       def self.info(raw)
         new(raw)
@@ -33,17 +36,19 @@ module Webspicy
       end
 
       def examples
-        @raw[:examples] ||= []
+        @raw[:examples]
       end
 
       def counterexamples
-        @raw[:counterexamples] ||= []
+        @raw[:counterexamples]
       end
 
-      def generated_counterexamples(resource, scope)
+      def generated_counterexamples
         preconditions.map{|pre|
-          pre.counterexamples(self, resource).map{|tc|
-            Webspicy.test_case(tc, scope)
+          pre.counterexamples(self).map{|tc|
+            tc = Webspicy.test_case(tc, Webspicy.current_scope)
+            tc.service = self
+            tc
           }
         }.flatten
       end
@@ -68,12 +73,8 @@ module Webspicy
         @raw
       end
 
-      ###
-
-      def instrument(test_case, service, resource)
-        preconditions.each do |pre|
-          pre.ensure(test_case, service, resource)
-        end
+      def to_s
+        "#{method} #{resource.url}"
       end
 
     private
@@ -98,6 +99,18 @@ module Webspicy
             conditions.map{|c| c.match(self, descr) }.compact
           }
           .flatten
+      end
+
+      def bind_examples
+        (@raw[:examples] ||= []).each do |ex|
+          ex.service = self
+        end
+      end
+
+      def bind_counterexamples
+        (@raw[:counterexamples] ||= []).each do |ex|
+          ex.service = self
+        end
       end
 
     end # class Service
