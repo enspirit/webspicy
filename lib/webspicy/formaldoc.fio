@@ -15,13 +15,13 @@ Resource =
 
 Service =
     .Webspicy::Resource::Service <info> {
-        method          : Method
-        description     : String
-        preconditions   : String
-        postconditions  :? String
-        input_schema    : Schema
-        output_schema   : Schema
-        error_schema    : Schema
+        method          :  Method
+        description     :  String
+        preconditions   :? [String]|String
+        postconditions  :? [String]|String
+        input_schema    :  Schema
+        output_schema   :  Schema
+        error_schema    :  Schema
         blackbox        :? String
         examples        :? [TestCase]
         counterexamples :? [TestCase]

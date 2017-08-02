@@ -85,6 +85,15 @@ module Webspicy
   module_function :with_scope
 
   #
+  # Returns the current scope or a default one is none has been
+  # previously installed using `set_current_scope` or `with_scope`
+  #
+  def current_scope
+    Thread.current[:webspicy_scope] || default_scope
+  end
+  module_function :current_scope
+
+  #
   # Sets the current scope.
   #
   # This method is considered private and should not be used outside of

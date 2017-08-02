@@ -1,5 +1,15 @@
 # 0.4.0
 
+* Preconditions and postconditions are now optional in definition files. An array
+  of Strings is supported in addition to a single String.
+
+* Precondition handlers can be provided. Such handlers can both instrument existing
+  test cases to meet preconditions, or generate additional counterexample test cases
+  that violate preconditions on intent.
+
+* Postcondition handlers can be provided too. Such handlers can check an invocation
+  and assert specific conditions are met.
+
 * RackTestClient now supports an explicit domain, to avoid having example.org
   as used by rack-test by default. E.g.,
 

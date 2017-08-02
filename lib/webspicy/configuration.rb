@@ -5,6 +5,8 @@ module Webspicy
       @folder = folder
       @parent = parent
       @children = []
+      @preconditions = []
+      @postconditions = []
       @before_listeners = []
       @rspec_options = default_rspec_options
       @run_counterexamples = default_run_counterexamples
@@ -50,6 +52,20 @@ module Webspicy
     end
     attr_accessor :children
     protected :children=
+
+    # Registers a precondition matcher
+    def precondition(clazz)
+      preconditions << clazz
+    end
+    attr_accessor :preconditions
+    protected :preconditions=
+
+    # Registers a postcondition matcher
+    def postcondition(clazz)
+      postconditions << clazz
+    end
+    attr_accessor :postconditions
+    protected :postconditions=
 
     # Returns whether this configuration has children configurations or not
     def has_children?
@@ -229,6 +245,8 @@ module Webspicy
     def dup(&bl)
       super.tap do |d|
         d.children = []
+        d.preconditions = self.preconditions.dup
+        d.postconditions = self.postconditions.dup
         d.rspec_options = self.rspec_options.dup
         d.before_listeners = self.before_listeners.dup
         yield d if block_given?

@@ -129,12 +129,18 @@ module Webspicy
         duped = original.dup do |d|
           d.rspec_options << "--hello"
           d.before_each do end
+          d.precondition Class.new
+          d.postcondition Class.new
         end
         expect(duped.rspec_options.last).to eq("--hello")
         expect(original.rspec_options.last).not_to eq("--hello")
+        expect(duped.preconditions.size).to eq(1)
+        expect(duped.postconditions.size).to eq(1)
 
         expect(duped.before_listeners.size).to eq(1)
         expect(original.before_listeners.size).to eq(0)
+        expect(original.preconditions.size).to eq(0)
+        expect(original.postconditions.size).to eq(0)
       end
 
       it 'empties the children' do

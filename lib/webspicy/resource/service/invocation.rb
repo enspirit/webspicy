@@ -141,6 +141,15 @@ module Webspicy
           unmet.empty? ? nil : unmet.join("\n")
         end
 
+        ### Check of postconditions
+
+        def postconditions_unmet
+          failures = service.postconditions.map{|post|
+            post.check(self)
+          }.compact
+          failures.empty? ? nil : failures.join("\n")
+        end
+
       private
 
         def loaded_body

@@ -6,6 +6,14 @@ module Webspicy
     end
     attr_reader :config
 
+    def preconditions
+      config.preconditions
+    end
+
+    def postconditions
+      config.postconditions
+    end
+
     ###
     ### Eachers -- Allow navigating the web service definitions
     ###
@@ -38,14 +46,23 @@ module Webspicy
       resource.services.select(&to_filter_proc(config.service_filter)).each(&bl)
     end
 
-    def each_example(service, &bl)
-      service.examples.each(&bl)
+    def each_example(service)
+      service.examples.each{|s| yield(s, false) }
     end
 
     def each_counterexamples(service, &bl)
-      service.counterexamples.each(&bl) if config.run_counterexamples?
+      service.counterexamples.each{|s| yield(s, true) } if config.run_counterexamples?
     end
 
+    def each_generated_counterexamples(service, resource, &bl)
+      service.generated_counterexamples(resource, self).each{|s| yield(s, true) } if config.run_counterexamples?
+    end
+
+    def each_testcase(service, resource, &bl)
+      each_example(service, &bl)
+      each_counterexamples(service, &bl)
+      each_generated_counterexamples(service, resource, &bl)
+    end
 
     ###
     ### Schemas -- For parsing input and output data schemas found in

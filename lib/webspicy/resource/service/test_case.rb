@@ -20,7 +20,7 @@ module Webspicy
         end
 
         def headers
-          @raw[:headers] || {}
+          @raw[:headers] ||= {}
         end
 
         def dress_params
@@ -66,6 +66,10 @@ module Webspicy
 
         def to_info
           @raw
+        end
+
+        def to_s
+          description
         end
 
       end # class TestCase
