@@ -5,19 +5,22 @@ module Webspicy
       Factory.new(app)
     end
 
-    def initialize(scope, app)
+    def initialize(scope, app, domain)
       super(scope)
       @api = Api.new(app)
+      @domain = domain
     end
     attr_reader :api
+    attr_reader :domain
 
     def call(test_case, service, resource)
       # Instantiate the parameters
-      headers = test_case.headers
+      headers = test_case.headers.dup
       params = test_case.dress_params? ? service.dress_params(test_case.params) : test_case.params
 
       # Instantiate the url and strip parameters
       url, params = resource.instantiate_url(params)
+      url = "http://#{domain}#{url}" if domain
 
       # Invoke the service now
       api.public_send(service.method.to_s.downcase.to_sym, url, params, headers)
@@ -32,9 +35,15 @@ module Webspicy
         @app = app
       end
       attr_reader :app
+      attr_reader :domain
+
+      def on(domain)
+        @domain = domain
+        self
+      end
 
       def new(scope)
-        RackTestClient.new(scope, app)
+        RackTestClient.new(scope, app, domain)
       end
 
     end # class Factory

@@ -1,3 +1,15 @@
+# 0.4.0
+
+* RackTestClient now supports an explicit domain, to avoid having example.org
+  as used by rack-test by default. E.g.,
+
+  ```
+  RackTestClient.for(Sinatra::Application).on("www.mywebapp.com")
+  ```
+
+  When setting a domain, rack-test is fed with absolute URLs instead of relative
+  ones.
+
 # 0.3.0
 
 * The Configuration constructor now takes a required main folder as argument
