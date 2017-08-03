@@ -93,8 +93,12 @@ module Webspicy
     end
 
     # Convert an instantiated URL found in a webservice definition
-    # to a real URL, using the configuration host
-    def to_real_url(url)
+    # to a real URL, using the configuration host.
+    #
+    # When no host resolved on the configuration and the url is not
+    # already an absolute URL, yields the block if given, or raise
+    # an exception.
+    def to_real_url(url, &bl)
       case config.host
       when Proc
         config.host.call(url)
@@ -102,6 +106,7 @@ module Webspicy
         url =~ /^http/ ? url : "#{config.host}#{url}"
       else
         return url if url =~ /^http/
+        return yield(url) if block_given?
         raise "Unable to resolve `#{url}` : no host resolver provided\nSee `Configuration#host="
       end
     end

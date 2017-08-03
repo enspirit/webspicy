@@ -1,3 +1,26 @@
+# 0.5.0
+
+* BREAKING CHANGE: `RackTestClient#on` is removed. RackTestClient supports the standard
+  host resolver mechanism instead. E.g., instead of:
+
+  ```
+  Configuration.new do |c|
+    c.client = RackTestClient.for(Sinatra::Application).on("www.mywebapp.com")
+  end
+  ```
+
+  Do:
+
+  ```
+  Configuration.new do |c|
+    c.client = RackTestClient.for(Sinatra::Application)
+    c.host = "http://www.mywebapp.com"
+  end
+  ```
+
+  This allows having only mechanism instead of two, and lets you decide whether to use
+  http or https.
+
 # 0.4.0
 
 * BREAKING CHANGE: before handlers only take two arguments (test_case, client) instead

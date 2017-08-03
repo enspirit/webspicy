@@ -18,7 +18,12 @@ module Webspicy
         expect(got).to eql(url)
       end
 
-      it 'fails on relative URLs' do
+      it 'yields the block relative URLs' do
+        got = scope.to_real_url("/todo"){ "hello" }
+        expect(got).to eql("hello")
+      end
+
+      it 'fails on relative URLs and no block is given' do
         expect(->(){
           scope.to_real_url("/todo")
         }).to raise_error(/Unable to resolve `\/todo`/)
