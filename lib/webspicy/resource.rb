@@ -25,8 +25,9 @@ module Webspicy
     def instantiate_url(params)
       url, rest = self.url, params.dup
       url_placeholders.each do |placeholder|
-        if (params.has_key?(placeholder))
-          url = url.gsub("{#{placeholder}}", params[placeholder].to_s)
+        key = [placeholder, placeholder.to_s].find{|x| params.has_key?(x) }
+        if key
+          url = url.gsub("{#{placeholder}}", params[key].to_s)
           rest.delete(placeholder)
         else
           raise "Missing URL parameter `#{placeholder}`\n\t(#{params.inspect})"
