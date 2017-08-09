@@ -3,13 +3,14 @@ module Webspicy
     class Service
       class Invocation
 
-        def initialize(service, test_case, response)
+        def initialize(service, test_case, response, client)
           @service = service
           @test_case = test_case
           @response = response
+          @client = client
         end
 
-        attr_reader :service, :test_case, :response
+        attr_reader :service, :test_case, :response, :client
 
         ### Getters on response
 

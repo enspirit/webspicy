@@ -26,7 +26,7 @@ module Webspicy
       api.public_send(service.method.to_s.downcase.to_sym, url, params, headers)
 
       # Return the result
-      Resource::Service::Invocation.new(service, test_case, api.last_response)
+      Resource::Service::Invocation.new(service, test_case, api.last_response, self)
     end
 
     class Factory
@@ -70,6 +70,8 @@ module Webspicy
 
         Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
         Webspicy.debug("Response: #{@last_response.body}")
+
+        @last_response
       end
 
       def post(url, params = {}, headers = nil)
@@ -82,6 +84,8 @@ module Webspicy
 
         Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
         Webspicy.debug("Response: #{@last_response.body}")
+
+        @last_response
       end
 
       def post_form(url, params = {}, headers = nil)
@@ -94,6 +98,8 @@ module Webspicy
 
         Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
         Webspicy.debug("Response: #{@last_response.body}")
+
+        @last_response
       end
 
       def delete(url, params = {}, headers = nil)
@@ -106,6 +112,8 @@ module Webspicy
 
         Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
         Webspicy.debug("Response: #{@last_response.body}")
+
+        @last_response
       end
 
     private
