@@ -75,7 +75,7 @@ module Webspicy
 
         def instrument
           service.preconditions.each do |pre|
-            pre.ensure(self)
+            pre.instrument(self)
           end
         end
 
