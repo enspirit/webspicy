@@ -1,3 +1,8 @@
+# 0.4.1
+
+* Fix a bug when with url placeholder replacement when dressParams is set to false
+  while the URL contains placeholders.
+
 # 0.4.0
 
 * BREAKING CHANGE: before handlers only take two arguments (test_case, client) instead
