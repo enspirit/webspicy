@@ -21,6 +21,10 @@
   This allows having only mechanism instead of two, and lets you decide whether to use
   http or https.
 
+# 0.4.2
+
+* Fix a bug with path extraction on arrays, e.g. notEmpty('0/foo/1/bar')
+
 # 0.4.1
 
 * Fix a bug when with url placeholder replacement when dressParams is set to false
