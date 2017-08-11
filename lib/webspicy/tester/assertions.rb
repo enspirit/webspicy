@@ -72,7 +72,7 @@ module Webspicy
 
       def extract_path(target, path = NO_ARG)
         return target if path.nil? or path==NO_ARG or path.empty?
-        return nil unless target.is_a?(Hash)
+        return nil unless target.respond_to?(:[])
         path.split('/').inject(target) do |memo,key|
           memo && (memo.is_a?(Array) ? memo[key.to_i] : memo[key.to_sym])
         end
