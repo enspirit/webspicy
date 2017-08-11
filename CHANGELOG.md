@@ -21,6 +21,8 @@
   This allows having only mechanism instead of two, and lets you decide whether to use
   http or https.
 
+* BREAKING CHANGE: Preconditions#ensure is renamed as Precondition#instrument.
+
 # 0.4.2
 
 * Fix a bug with path extraction on arrays, e.g. notEmpty('0/foo/1/bar')
