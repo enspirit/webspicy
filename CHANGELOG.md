@@ -1,5 +1,7 @@
 # 0.5.0
 
+* The PATCH http method is now supported by webspicy.
+
 * BREAKING CHANGE: `RackTestClient#on` is removed. RackTestClient supports the standard
   host resolver mechanism instead. E.g., instead of:
 

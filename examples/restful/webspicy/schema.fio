@@ -2,3 +2,12 @@ Todo = {
   id          : Integer
   description : String
 }
+
+TodoPatch = {
+  id          :? Integer
+  description :? String
+}
+
+ErrorSchema = {
+  error: String
+}

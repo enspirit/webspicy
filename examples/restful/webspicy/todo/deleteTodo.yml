@@ -23,9 +23,7 @@ services:
     .
 
   error_schema: |-
-    {
-      error: String
-    }
+    ErrorSchema
 
   examples:
 

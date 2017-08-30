@@ -88,6 +88,20 @@ module Webspicy
         @last_response
       end
 
+      def patch(url, params = {}, headers = nil)
+        handler = get_handler(headers)
+
+        Webspicy.info("PATCH #{url} -- #{params.inspect} -- #{headers.inspect}")
+
+        handler.patch(url, params.to_json, {"CONTENT_TYPE" => "application/json"})
+        @last_response = handler.last_response
+
+        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
+        Webspicy.debug("Response: #{@last_response.body}")
+
+        @last_response
+      end
+
       def post_form(url, params = {}, headers = nil)
         handler = get_handler(headers)
 

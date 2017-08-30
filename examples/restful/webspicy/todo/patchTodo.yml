@@ -7,17 +7,15 @@ url: |-
 
 services:
 - method: |-
-    GET
+    PATCH
 
   description: |-
-    Returns a single todo item
+    Patches a single Todo item
 
   preconditions: |-
 
   input_schema: |-
-    {
-      id: Integer
-    }
+    TodoPatch
 
   output_schema: |-
     Todo
@@ -31,11 +29,12 @@ services:
         when requested on an existing TODO
       params:
         id: 1
+        description: 'hello world'
       expected:
         content_type: application/json
         status: 200
       assert:
-        - "pathFD('', id: 1)"
+        - "pathFD('', description: 'hello world')"
 
   counterexamples:
 
@@ -48,3 +47,14 @@ services:
         status: 404
       assert:
         - "pathFD('', error: 'No such todo')"
+
+    - description: |-
+        when violating the Patch data type
+      params:
+        id: 1
+        nosuchone: 'foobar'
+      dress_params:
+        false
+      expected:
+        content_type: application/json
+        status: 400

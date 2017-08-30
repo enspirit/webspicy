@@ -21,9 +21,7 @@ services:
     Todo
 
   error_schema: |-
-    {
-      error: String
-    }
+    ErrorSchema
 
   examples:
 

@@ -53,6 +53,17 @@ module Webspicy
         @last_response
       end
 
+      def patch(url, params = {}, headers = nil)
+        Webspicy.info("PATCH #{url} -- #{params.inspect}")
+
+        @last_response = HTTP[headers || {}].patch(url, body: params.to_json)
+
+        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
+        Webspicy.debug("Response: #{@last_response.body}")
+
+        @last_response
+      end
+
       def post_form(url, params = {}, headers = nil)
         Webspicy.info("POST #{url} -- #{params.inspect}")
 
