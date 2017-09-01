@@ -3,6 +3,7 @@ require 'json'
 require 'path'
 require 'finitio'
 require 'rack/robustness'
+require 'csv'
 
 SCHEMA = Finitio::DEFAULT_SYSTEM.parse (Path.dir/'webspicy/schema.fio').read
 
@@ -44,14 +45,25 @@ end
 
 post '/todo/' do
   content_type :json
-  todo = SCHEMA["Todo"].dress(JSON.load(request.body.read))
-  if settings.todolist.find{|t| t[:id] == todo[:id] }
-    status 409
-    {error: "Identifier already in use"}.to_json
-  else
-    settings.todolist << todo
+  case todos = loaded_body
+  when Array
+    n = 0
+    todos.each do |todo|
+      settings.todolist << todo
+      n += 1
+    end
     status 201
-    todo.to_json
+    { count: n }.to_json
+  when Hash
+    todo = SCHEMA["Todo"].dress(todos)
+    if settings.todolist.find{|t| t[:id] == todo[:id] }
+      status 409
+      {error: "Identifier already in use"}.to_json
+    else
+      settings.todolist << todo
+      status 201
+      todo.to_json
+    end
   end
 end
 
@@ -73,7 +85,7 @@ patch '/todo/:id' do |id|
     status 404
     {error: "No such todo"}.to_json
   else
-    patch = SCHEMA["TodoPatch"].dress(JSON.load(request.body.read))
+    patch = SCHEMA["TodoPatch"].dress(loaded_body)
     patched = todo.merge(patch)
     settings.todolist = settings.todolist.reject{|todo| todo[:id] == Integer(id) }
     settings.todolist << patched
@@ -91,5 +103,19 @@ delete '/todo/:id' do |id|
     settings.todolist = settings.todolist.reject{|todo| todo[:id] == Integer(id) }
     status 204
     content_type "text/plain"
+  end
+end
+
+###
+
+def loaded_body
+  case ctype = request.content_type
+  when /json/
+    JSON.load(request.body.read)
+  when /csv/
+    csv = ::CSV.new(request.body.read, :headers => true, :header_converters => :symbol)
+    csv.map {|row| row.to_hash }
+  else
+    halt [415,{},["Unsupported content type"]]
   end
 end

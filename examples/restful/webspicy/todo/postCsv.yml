@@ -1,0 +1,42 @@
+---
+name: |-
+  Todo
+
+url: |-
+  /todo/
+
+services:
+- method: |-
+    POST
+
+  description: |-
+    Creates new todo items through a CSV import
+
+  preconditions: |-
+
+  input_schema: |-
+    {}
+
+  output_schema: |-
+    { count: Integer }
+
+  error_schema: |-
+    ErrorSchema
+
+  examples:
+
+    - description: |-
+        when requested with a valid CSV
+      params: {}
+      headers:
+        Content-Type: text/csv
+      body: |-
+        id,description
+        10,Write documentation
+        11,Create website
+        12,Add smart tools
+      expected:
+        content_type: application/json
+        status: 201
+      assert:
+        - "pathFD('', count: 3)"

@@ -17,13 +17,14 @@ module Webspicy
       # Instantiate the parameters
       headers = test_case.headers.dup
       params = test_case.dress_params? ? service.dress_params(test_case.params) : test_case.params
+      body = test_case.body
 
       # Instantiate the url and strip parameters
       url, params = resource.instantiate_url(params)
       url = scope.to_real_url(url){ url }
 
       # Invoke the service now
-      api.public_send(service.method.to_s.downcase.to_sym, url, params, headers)
+      api.public_send(service.method.to_s.downcase.to_sym, url, params, headers, body)
 
       # Return the result
       Resource::Service::Invocation.new(service, test_case, api.last_response, self)
@@ -60,7 +61,7 @@ module Webspicy
         @app = app
       end
 
-      def get(url, params = {}, headers = nil)
+      def get(url, params = {}, headers = nil, body = nil)
         handler = get_handler(headers)
 
         Webspicy.info("GET #{url} -- #{params.inspect} -- #{headers.inspect}")
@@ -74,12 +75,18 @@ module Webspicy
         @last_response
       end
 
-      def post(url, params = {}, headers = nil)
+      def post(url, params = {}, headers = nil, body = nil)
         handler = get_handler(headers)
+
+        url = url + "?" + Rack::Utils.build_query(params) if body && !params.empty?
 
         Webspicy.info("POST #{url} -- #{params.inspect} -- #{headers.inspect}")
 
-        handler.post(url, params.to_json, {"CONTENT_TYPE" => "application/json"})
+        if body
+          handler.post(url, body)
+        else
+          handler.post(url, params.to_json, {"CONTENT_TYPE" => "application/json"})
+        end
         @last_response = handler.last_response
 
         Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
@@ -88,7 +95,7 @@ module Webspicy
         @last_response
       end
 
-      def patch(url, params = {}, headers = nil)
+      def patch(url, params = {}, headers = nil, body = nil)
         handler = get_handler(headers)
 
         Webspicy.info("PATCH #{url} -- #{params.inspect} -- #{headers.inspect}")
@@ -102,7 +109,7 @@ module Webspicy
         @last_response
       end
 
-      def post_form(url, params = {}, headers = nil)
+      def post_form(url, params = {}, headers = nil, body = nil)
         handler = get_handler(headers)
 
         Webspicy.info("POST #{url} -- #{params.inspect} -- #{headers.inspect}")
@@ -116,7 +123,7 @@ module Webspicy
         @last_response
       end
 
-      def delete(url, params = {}, headers = nil)
+      def delete(url, params = {}, headers = nil, body = nil)
         handler = get_handler(headers)
 
         Webspicy.info("DELETE #{url} -- #{params.inspect} -- #{headers.inspect}")

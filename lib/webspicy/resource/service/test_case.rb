@@ -37,6 +37,10 @@ module Webspicy
           @raw[:params]
         end
 
+        def body
+          @raw[:body]
+        end
+
         def expected_content_type
           @raw[:expected].fetch(:content_type){ 'application/json' }
         end

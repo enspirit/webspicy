@@ -1,3 +1,7 @@
+# 0.6.0
+
+* Added support for an explicit `body` (yml entry) on POST requests.
+
 # 0.5.0
 
 * The PATCH http method is now supported by webspicy.

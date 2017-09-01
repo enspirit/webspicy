@@ -33,6 +33,7 @@ TestCase =
         dress_params     :? Boolean
         params           : Params
         headers          :? .Hash
+        body             :? String
         seeds            :? String
         requester        :? String
         expected: {
