@@ -1,3 +1,12 @@
+# 0.7.0
+
+* BREAKING CHANGE: Precondition#instrument now takes the client as
+  first argument. That allows preconditions to make external API calls as part of
+  the instrumentation.
+
+* BREAKING CHANGE: Preconditions instrumentation is now called after the before
+  handlers, not after them.
+
 # 0.6.0
 
 * Added support for an explicit `body` (yml entry) on POST requests.

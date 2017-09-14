@@ -35,8 +35,8 @@ module Webspicy
 
         before(:all) do
           @invocation ||= begin
-            test_case.instrument
             client.before(test_case)
+            test_case.instrument(client)
             client.call(test_case)
           end
         end

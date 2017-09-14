@@ -77,9 +77,9 @@ module Webspicy
           @raw
         end
 
-        def instrument
+        def instrument(client)
           service.preconditions.each do |pre|
-            pre.instrument(self)
+            pre.instrument(self, client)
           end
         end
 
