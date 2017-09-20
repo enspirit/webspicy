@@ -56,7 +56,7 @@ module Webspicy
 
       let(:configuration) {
         Configuration.new do |c|
-          c.host = ->(url) {
+          c.host = ->(url, tc) {
             "http://127.0.0.1:4568#{url}"
           }
         end

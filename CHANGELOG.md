@@ -1,3 +1,10 @@
+# 0.8.0
+
+* BREAKING CHANGE: The Proc used as host resolver in the configuration now takes
+  two arguments instead of one: the url to resolve, and the current test case under
+  execution. This allows the configuration to dynamically adjust the host to use
+  on a test-case basis.
+
 # 0.7.0
 
 * BREAKING CHANGE: Precondition#instrument now takes the client as

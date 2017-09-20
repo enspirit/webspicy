@@ -21,7 +21,7 @@ module Webspicy
 
       # Instantiate the url and strip parameters
       url, params = resource.instantiate_url(params)
-      url = scope.to_real_url(url){ url }
+      url = scope.to_real_url(url, test_case){|u,_| u }
 
       # Invoke the service now
       api.public_send(service.method.to_s.downcase.to_sym, url, params, headers, body)

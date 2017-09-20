@@ -98,10 +98,10 @@ module Webspicy
     # When no host resolved on the configuration and the url is not
     # already an absolute URL, yields the block if given, or raise
     # an exception.
-    def to_real_url(url, &bl)
+    def to_real_url(url, test_case = nil, &bl)
       case config.host
       when Proc
-        config.host.call(url)
+        config.host.call(url, test_case)
       when String
         url =~ /^http/ ? url : "#{config.host}#{url}"
       else
