@@ -1,3 +1,7 @@
+# 0.8.1
+
+* Fix HttpClient failing with a `NoSuchMethodError "to_real_url"`
+
 # 0.8.0
 
 * BREAKING CHANGE: The Proc used as host resolver in the configuration now takes

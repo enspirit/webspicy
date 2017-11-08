@@ -18,7 +18,7 @@ module Webspicy
       url, params = resource.instantiate_url(params)
 
       # Globalize the URL if required
-      url = scope.to_real_url(url, to_real_url)
+      url = scope.to_real_url(url, test_case)
 
       # Invoke the service now
       api.public_send(service.method.to_s.downcase.to_sym, url, params, headers, test_case.body)
