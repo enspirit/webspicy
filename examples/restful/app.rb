@@ -5,7 +5,7 @@ require 'finitio'
 require 'rack/robustness'
 require 'csv'
 
-SCHEMA = Finitio::DEFAULT_SYSTEM.parse (Path.dir/'webspicy/schema.fio').read
+SCHEMA = Finitio::DEFAULT_SYSTEM.parse (Path.dir/('webspicy/schema.fio')).read
 
 TODOLIST = [
   {

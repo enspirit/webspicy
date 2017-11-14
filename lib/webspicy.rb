@@ -30,13 +30,13 @@ module Webspicy
 
   ROOT_FOLDER = Path.backfind('.[Gemfile]')
 
-  EXAMPLES_FOLDER = ROOT_FOLDER/'examples'
+  EXAMPLES_FOLDER = ROOT_FOLDER/('examples')
 
   ###
   ### About formal doc and resources defined there
   ###
 
-  FORMALDOC = Finitio::DEFAULT_SYSTEM.parse (Path.dir/"webspicy/formaldoc.fio").read
+  FORMALDOC = Finitio::DEFAULT_SYSTEM.parse (Path.dir/("webspicy/formaldoc.fio")).read
 
   # Returns a default scope instance.
   def default_scope
