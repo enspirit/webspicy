@@ -1,3 +1,7 @@
+# 0.8.2
+
+* Add support for OPTIONS verb in rack and http clients
+
 # 0.8.1
 
 * Fix HttpClient failing with a `NoSuchMethodError "to_real_url"`

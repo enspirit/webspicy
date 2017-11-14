@@ -31,6 +31,17 @@ module Webspicy
 
       attr_reader :last_response
 
+      def options(url, params = {}, headers = nil, body = nil)
+        Webspicy.info("OPTIONS #{url} -- #{params.inspect}")
+
+        @last_response = HTTP[headers || {}].options(url, params: params)
+
+        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
+        Webspicy.debug("Response: #{@last_response.body}")
+
+        @last_response
+      end
+
       def get(url, params = {}, headers = nil, body = nil)
         Webspicy.info("GET #{url} -- #{params.inspect}")
 

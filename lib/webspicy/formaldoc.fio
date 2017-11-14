@@ -1,5 +1,5 @@
 Method =
-    String( s | s =~ /^(GET|POST|POST_FORM|PUT|DELETE|PATCH)$/ )
+    String( s | s =~ /^(GET|POST|POST_FORM|PUT|DELETE|PATCH|OPTIONS)$/ )
 
 Schema =
     .Finitio::System <fio> String

@@ -31,6 +31,10 @@ use Rack::Robustness do |g|
   g.on(Finitio::TypeError)
 end
 
+options '*' do
+  status 204
+  ""
+end
 
 post '/reset' do
   settings.todolist = TODOLIST.dup

@@ -1,0 +1,34 @@
+---
+name: |-
+  Todo
+
+url: |-
+  /todo/
+
+services:
+- method: |-
+    OPTIONS
+
+  description: |-
+    Returns options about the web service
+
+  preconditions: |-
+
+  input_schema: |-
+    {
+    }
+
+  output_schema: |-
+    .
+
+  error_schema: |-
+    ErrorSchema
+
+  examples:
+
+    - description: |-
+        when requested on an existing TODO
+      params: {}
+      expected:
+        content_type: ~
+        status: 204

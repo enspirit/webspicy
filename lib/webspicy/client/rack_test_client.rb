@@ -61,6 +61,20 @@ module Webspicy
         @app = app
       end
 
+      def options(url, params = {}, headers = nil, body = nil)
+        handler = get_handler(headers)
+
+        Webspicy.info("OPTIONS #{url} -- #{params.inspect} -- #{headers.inspect}")
+
+        handler.options(url, params)
+        @last_response = handler.last_response
+
+        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
+        Webspicy.debug("Response: #{@last_response.body}")
+
+        @last_response
+      end
+
       def get(url, params = {}, headers = nil, body = nil)
         handler = get_handler(headers)
 
