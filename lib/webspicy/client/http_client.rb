@@ -1,6 +1,17 @@
 module Webspicy
   class HttpClient < Client
 
+    class ::HTTP::Request
+
+      # We monkey patch the URI normalization on Http because
+      # we don't want it to interfere with URIs that are encoded
+      # in tests, especially security tests.
+      def normalize_uri(uri)
+        uri
+      end
+
+    end # class ::HTTP::Request
+
     def initialize(scope)
       super(scope)
       @api = Api.new

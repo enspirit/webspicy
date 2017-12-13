@@ -1,3 +1,9 @@
+# 0.8.3
+
+* Make sure real HTTP requests are not made on normalized URLs, because it makes
+  security tests checking that URL hacks are done impossible to write. In particular,
+  this means that URLs containing '..' are sent as such to the server.
+
 # 0.8.2
 
 * Add support for OPTIONS verb in rack and http clients
