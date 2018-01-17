@@ -3,12 +3,23 @@ module Webspicy
 
     def initialize(config)
       @config = Configuration.dress(config)
+      @test_suite = load
     end
     attr_reader :config
 
-    def call
-      rspec_config!
+    def call(err=$stderr, out=$stdout)
+      $_rspec_core_load_started_at = nil
+      options = RSpec::Core::ConfigurationOptions.new(config.rspec_options)
+      conf = RSpec::Core::Configuration.new
+      RSpec::Core::Runner.new(options, conf).run(err, out)
+    end
+
+  # protected
+
+    def load
       tester = self
+      RSpec.reset
+      rspec_config!
       RSpec.describe "Webspicy test suite" do
         before(:all) do
           tester.config.listeners(:before_all).each do |l|
@@ -29,7 +40,7 @@ module Webspicy
           end
         end
       end
-      RSpec::Core::Runner.run config.rspec_options
+      self
     end
 
     def rspec_service!(on, service, client, scope)
@@ -43,7 +54,6 @@ module Webspicy
     end
 
     def rspec_config!
-      return if @rspec_config
       RSpec.shared_examples "a successful test case invocation" do |client, test_case, counterexample|
 
         before(:all) do
@@ -82,7 +92,6 @@ module Webspicy
           expect(@invocation.expected_error_unmet).to(be_nil)
         end if test_case.has_expected_error?
       end
-      @rspec_config = true
     end
 
   end # class Tester
