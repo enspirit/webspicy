@@ -1,3 +1,14 @@
+# 0.9.0
+
+* Added `Configuration#after_each` for executing code after each test case execution.
+
+* Added `Configuration#before_all` and `Configuration#after_all` to execute blocks of
+  code before and after the whole test suite, respectively
+
+* BREAKING CHANGE (should have no impact, however): `Configuration#before_listeners`
+  and `Configuration#after_listeners` are removed. Use `Configuration#listeners`
+  instead with the kind of listeners you need.
+
 # 0.8.6
 
 * Weakened finitio version requirement to prevent conflicts on projects using

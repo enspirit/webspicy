@@ -8,19 +8,32 @@ module Webspicy
 
     def call
       rspec_config!
-      config.each_scope do |scope|
-        client = scope.get_client
-        scope.each_resource do |resource|
-          scope.each_service(resource) do |service|
-            rspec_service!(service, client, scope)
+      tester = self
+      RSpec.describe "Webspicy test suite" do
+        before(:all) do
+          tester.config.listeners(:before_all).each do |l|
+            l.call(tester.config)
+          end
+        end
+        after(:all) do
+          tester.config.listeners(:after_all).each do |l|
+            l.call(tester.config)
+          end
+        end
+        tester.config.each_scope do |scope|
+          client = scope.get_client
+          scope.each_resource do |resource|
+            scope.each_service(resource) do |service|
+              tester.rspec_service!(self, service, client, scope)
+            end
           end
         end
       end
       RSpec::Core::Runner.run config.rspec_options
     end
 
-    def rspec_service!(service, client, scope)
-      RSpec.describe service do
+    def rspec_service!(on, service, client, scope)
+      on.describe service do
         scope.each_testcase(service) do |test_case, counterexample|
           describe test_case do
             include_examples 'a successful test case invocation', client, test_case, counterexample
@@ -39,6 +52,10 @@ module Webspicy
             test_case.instrument(client)
             client.call(test_case)
           end
+        end
+
+        after(:all) do
+          client.after(test_case)
         end
 
         let(:invocation) do

@@ -1,13 +1,15 @@
 module Webspicy
   class Configuration
 
+    LISTENER_KINDS = [ :before_all, :before_each, :after_all, :after_each ]
+
     def initialize(folder = Path.pwd, parent = nil)
       @folder = folder
       @parent = parent
       @children = []
       @preconditions = []
       @postconditions = []
-      @before_listeners = []
+      @listeners = Hash.new{|h,k| h[k] = [] }
       @rspec_options = default_rspec_options
       @run_counterexamples = default_run_counterexamples
       @file_filter = default_file_filter
@@ -194,21 +196,49 @@ module Webspicy
     end
     attr_reader :client
 
+    # Registers a listener under a given kind.
+    def register_listener(kind, listener)
+      raise "Must respond to call" unless listener.respond_to?(:call)
+      @listeners[kind] << listener
+    end
+    private :register_listener
+
+    # Returns the listeners of a specific kind.
+    #
+    # Recognized kinds are `before_each`, `after_each`, `before_all` and `after_all`
+    def listeners(kind)
+      @listeners[kind]
+    end
+    attr_writer :listeners
+    protected :listeners=
+
+    # Installs a listener that will be called before all tests
+    #
+    # The `listener` must respond to `call`.
+    def before_all(&listener)
+      register_listener(:before_all, listener)
+    end
+
     # Installs a listener that will be called before each web service invocation.
     #
     # The `listener` must respond to `call`.
     def before_each(&listener)
-      raise "Must respond to call" unless listener.respond_to?(:call)
-      @before_listeners << listener
+      register_listener(:before_each, listener)
     end
 
-    # Returns the list of listeners that must be called before each web service
-    # invocation.
-    def before_listeners
-      @before_listeners
+    # Installs a listener that will be called after all tests
+    #
+    # The `listener` must respond to `call`.
+    def after_all(&listener)
+      register_listener(:after_all, listener)
     end
-    attr_writer :before_listeners
-    protected :before_listeners=
+
+    # Installs a listener that will be called after each web service invocation.
+    #
+    # The `listener` must respond to `call`.
+    def after_each(&listener)
+      register_listener(:after_each, listener)
+    end
 
     # Allows setting the options passed at RSpec, which is used by both the runner
     # and checker classes.
@@ -267,7 +297,9 @@ module Webspicy
         d.preconditions = self.preconditions.dup
         d.postconditions = self.postconditions.dup
         d.rspec_options = self.rspec_options.dup
-        d.before_listeners = self.before_listeners.dup
+        d.listeners = LISTENER_KINDS.inject({}){|ls,kind|
+          ls.merge(kind => self.listeners(kind).dup)
+        }
         yield d if block_given?
       end
     end
