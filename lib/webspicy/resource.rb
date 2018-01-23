@@ -19,19 +19,14 @@ module Webspicy
     end
 
     def url_placeholders
-      url.scan(/\{([a-zA-Z]+)\}/).map{|x| x.first.to_sym }
+      url.scan(/\{([a-zA-Z]+(\.[a-zA-Z]+)*)\}/).map{|x| x.first }
     end
 
     def instantiate_url(params)
       url, rest = self.url, params.dup
       url_placeholders.each do |placeholder|
-        key = [placeholder, placeholder.to_s].find{|x| params.has_key?(x) }
-        if key
-          url = url.gsub("{#{placeholder}}", params[key].to_s)
-          rest.delete(placeholder)
-        else
-          raise "Missing URL parameter `#{placeholder}`\n\t(#{params.inspect})"
-        end
+        value, rest = extract_placeholder_value(params, placeholder)
+        url = url.gsub("{#{placeholder}}", value.to_s)
       end
       [ url, rest ]
     end
@@ -41,6 +36,20 @@ module Webspicy
     end
 
   private
+
+    def extract_placeholder_value(params, placeholder, split = nil)
+      return extract_placeholder_value(params, placeholder, placeholder.split(".")) unless split
+
+      key = [ split.first, split.first.to_sym ].find{|k| params.has_key?(k) }
+      raise "Missing URL parameter `#{placeholder}`" unless key
+
+      if split.size == 1
+        [ params[key], params.dup.delete_if{|k| k == key } ]
+      else
+        value, rest = extract_placeholder_value(params[key], placeholder, split[1..-1])
+        [ value, params.merge(key => rest) ]
+      end
+    end
 
     def bind_services
       (@raw[:services] ||= []).each do |s|

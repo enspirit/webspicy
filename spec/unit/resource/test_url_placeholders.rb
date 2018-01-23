@@ -9,7 +9,12 @@ module Webspicy
 
     it 'returns all placeholders' do
       r = Resource.new(url: "/test/{foo}/url/{bar}")
-      expect(r.url_placeholders).to eq([:foo, :bar])
+      expect(r.url_placeholders).to eq(["foo", "bar"])
+    end
+
+    it 'returns all placeholders expr' do
+      r = Resource.new(url: "/test/{foo.id}/url/{bar}")
+      expect(r.url_placeholders).to eq(["foo.id", "bar"])
     end
 
   end

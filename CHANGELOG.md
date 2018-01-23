@@ -1,3 +1,8 @@
+# 0.8.4
+
+* Authorize URL parameters to be dotted expression, e.g. `/customers/{customer.id}`,
+  that are properly extracted from the input data.
+
 # 0.8.3
 
 * Make sure real HTTP requests are not made on normalized URLs, because it makes

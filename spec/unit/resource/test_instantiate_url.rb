@@ -16,5 +16,12 @@ module Webspicy
       expect(params).to eq(baz: "coz")
     end
 
+    it 'supports placeholders corresponding to subentities' do
+      r = Resource.new(url: "/test/{foo.id}/url")
+      url, params = r.instantiate_url(foo: {id: "bar"}, baz: "coz")
+      expect(url).to eq("/test/bar/url")
+      expect(params).to eq(foo: {}, baz: "coz")
+    end
+
   end
 end
