@@ -74,6 +74,20 @@ module Webspicy
         end
       end
 
+      def match(path, expected = NO_ARG)
+        path, expected = '', path if expected == NO_ARG
+        unless @assertions.match(@target, path, expected)
+          _! "Expected #{_s(@target)} to match #{expected.inspect}"
+        end
+      end
+
+      def notMatch(path, expected = NO_ARG)
+        path, expected = '', path if expected == NO_ARG
+        unless @assertions.notMatch(@target, path, expected)
+          _! "Expected #{_s(@target)} not to match #{expected.inspect}"
+        end
+      end
+
     private
 
       def DateTime(str)

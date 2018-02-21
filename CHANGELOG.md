@@ -1,3 +1,7 @@
+# 0.8.5
+
+* Add match and notMatch assertions
+
 # 0.8.4
 
 * Authorize URL parameters to be dotted expression, e.g. `/customers/{customer.id}`,

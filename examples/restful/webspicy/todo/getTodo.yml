@@ -36,6 +36,8 @@ services:
         status: 200
       assert:
         - "pathFD('', id: 1)"
+        - "match('description', /Refactor/)"
+        - "notMatch('description', /Foo/)"
 
   counterexamples:
 

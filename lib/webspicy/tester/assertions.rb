@@ -68,6 +68,15 @@ module Webspicy
         }
       end
 
+      def match(target, path, rx)
+        target = extract_path(target, path)
+        !(target.to_s =~ rx).nil?
+      end
+
+      def notMatch(target, path, rx)
+        !match(target, path, rx)
+      end
+
     private
 
       def extract_path(target, path = NO_ARG)

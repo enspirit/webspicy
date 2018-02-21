@@ -103,6 +103,18 @@ module Webspicy
         expect(pathFD(target, 'foo', boz: "biz")).to be(false)
       end
 
+      it 'has a match assertion' do
+        target = "hello world"
+        expect(match(target, '', /world/)).to be(true)
+        expect(match(target, '', /foobar/)).to be(false)
+      end
+
+      it 'has a notMatch assertion' do
+        target = "hello world"
+        expect(notMatch(target, '', /world/)).to be(false)
+        expect(notMatch(target, '', /foobar/)).to be(true)
+      end
+
     end
   end # class Tester
 end # module Webspicy
