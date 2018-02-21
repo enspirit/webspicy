@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    webspicy (0.8.3)
+    webspicy (0.8.4)
       finitio (~> 0.5.2)
       http (~> 2)
       path (~> 1.3)
@@ -31,7 +31,7 @@ GEM
     http_parser.rb (0.6.0)
     mustermann (1.0.0)
     path (1.3.3)
-    public_suffix (3.0.0)
+    public_suffix (3.0.2)
     rack (2.0.3)
     rack-protection (2.0.0)
       rack
@@ -43,7 +43,7 @@ GEM
       rspec-core (~> 3.7.0)
       rspec-expectations (~> 3.7.0)
       rspec-mocks (~> 3.7.0)
-    rspec-core (3.7.0)
+    rspec-core (3.7.1)
       rspec-support (~> 3.7.0)
     rspec-expectations (3.7.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -51,7 +51,7 @@ GEM
     rspec-mocks (3.7.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
-    rspec-support (3.7.0)
+    rspec-support (3.7.1)
     sinatra (2.0.0)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -60,7 +60,7 @@ GEM
     tilt (2.0.7)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.4)
+    unf_ext (0.0.7.5)
 
 PLATFORMS
   ruby
@@ -74,4 +74,4 @@ DEPENDENCIES
   webspicy!
 
 BUNDLED WITH
-   1.14.6
+   1.16.0
