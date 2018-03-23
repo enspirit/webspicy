@@ -1,3 +1,8 @@
+# 0.8.6
+
+* Weakened finitio version requirement to prevent conflicts on projects using
+  Finitio themselves.
+
 # 0.8.5
 
 * Add match and notMatch assertions
