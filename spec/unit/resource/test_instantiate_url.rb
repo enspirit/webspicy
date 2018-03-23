@@ -16,6 +16,13 @@ module Webspicy
       expect(params).to eq(baz: "coz")
     end
 
+    it 'instantiates placeholders and strips corresponding params even when multiple' do
+      r = Resource.new(url: "/test/{foo}/url/{bar}")
+      url, params = r.instantiate_url(foo: "bar", bar: "baz", baz: "coz")
+      expect(url).to eq("/test/bar/url/baz")
+      expect(params).to eq(baz: "coz")
+    end
+
     it 'supports placeholders corresponding to subentities' do
       r = Resource.new(url: "/test/{foo.id}/url")
       url, params = r.instantiate_url(foo: {id: "bar"}, baz: "coz")

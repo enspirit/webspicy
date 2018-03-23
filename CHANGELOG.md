@@ -9,6 +9,9 @@
   and `Configuration#after_listeners` are removed. Use `Configuration#listeners`
   instead with the kind of listeners you need.
 
+* Fixed URL instantitation procedure: all URL parameters are now correctly removed
+  from sent body.
+
 # 0.8.6
 
 * Weakened finitio version requirement to prevent conflicts on projects using

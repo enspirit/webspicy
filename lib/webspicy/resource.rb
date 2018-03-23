@@ -25,7 +25,7 @@ module Webspicy
     def instantiate_url(params)
       url, rest = self.url, params.dup
       url_placeholders.each do |placeholder|
-        value, rest = extract_placeholder_value(params, placeholder)
+        value, rest = extract_placeholder_value(rest, placeholder)
         url = url.gsub("{#{placeholder}}", value.to_s)
       end
       [ url, rest ]
