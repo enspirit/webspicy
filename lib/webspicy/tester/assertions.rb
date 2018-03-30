@@ -77,7 +77,7 @@ module Webspicy
         !match(target, path, rx)
       end
 
-    private
+    public
 
       def extract_path(target, path = NO_ARG)
         return target if path.nil? or path==NO_ARG or path.empty?
@@ -86,6 +86,8 @@ module Webspicy
           memo && (memo.is_a?(Array) ? memo[key.to_i] : memo[key.to_sym])
         end
       end
+
+    private
 
       def respond_to!(target, method)
         unless target.respond_to?(method)
