@@ -11,9 +11,16 @@ module Webspicy
     end
 
     def before(*args, &bl)
-      config.before_listeners.each do |beach|
+      config.listeners(:before_each).each do |beach|
         args << self
         beach.call(*args, &bl)
+      end
+    end
+
+    def after(*args, &bl)
+      config.listeners(:after_each).each do |aeach|
+        args << self
+        aeach.call(*args, &bl)
       end
     end
 

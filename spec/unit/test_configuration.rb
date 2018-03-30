@@ -144,6 +144,30 @@ module Webspicy
       end
     end
 
+    describe 'before/after/listeners' do
+
+      let(:before_eacher) { ->(){} }
+      let(:after_eacher) { ->(){} }
+      let(:before_aller) { ->(){} }
+      let(:after_aller) { ->(){} }
+      let(:config) do
+        Configuration.new(Path.dir/'resource') do |c|
+          c.before_all(&before_aller)
+          c.before_each(&before_eacher)
+          c.after_each(&after_eacher)
+          c.after_all(&after_aller)
+        end
+      end
+
+      it 'correctly classifies and returns them on listeners' do
+        expect(config.listeners(:before_each)).to eql([before_eacher])
+        expect(config.listeners(:after_each)).to eql([after_eacher])
+        expect(config.listeners(:before_all)).to eql([before_aller])
+        expect(config.listeners(:after_all)).to eql([after_aller])
+      end
+
+    end
+
     describe 'dup' do
 
       let(:original) do
@@ -166,6 +190,7 @@ module Webspicy
         duped = original.dup do |d|
           d.rspec_options << "--hello"
           d.before_each do end
+          d.after_each do end
           d.precondition Class.new
           d.postcondition Class.new
         end
@@ -174,8 +199,9 @@ module Webspicy
         expect(duped.preconditions.size).to eq(1)
         expect(duped.postconditions.size).to eq(1)
 
-        expect(duped.before_listeners.size).to eq(1)
-        expect(original.before_listeners.size).to eq(0)
+        expect(duped.listeners(:before_each).size).to eq(1)
+        expect(original.listeners(:before_each).size).to eq(0)
+
         expect(original.preconditions.size).to eq(0)
         expect(original.postconditions.size).to eq(0)
       end
