@@ -1,6 +1,10 @@
 # 0.9.0
 
+* Added `Configuration#before_each` for executing code before each test case execution.
+
 * Added `Configuration#after_each` for executing code after each test case execution.
+
+* Added `Configuration#around_each` to execute a block around each test case execution.
 
 * Added `Configuration#before_all` and `Configuration#after_all` to execute blocks of
   code before and after the whole test suite, respectively
@@ -8,6 +12,11 @@
 * BREAKING CHANGE (should have no impact, however): `Configuration#before_listeners`
   and `Configuration#after_listeners` are removed. Use `Configuration#listeners`
   instead with the kind of listeners you need.
+
+* BREAKING CHANGE (should have no impact, however): We only keep ONE RSpec `it` block
+  for an entire test case, instead of splitting the various post conditions. This was
+  necessary for `around_each` to work fine with our test case definition. It also
+  yields a correct number of examples = number of test cases.
 
 * Fixed URL instantitation procedure: all URL parameters are now correctly removed
   from sent body.

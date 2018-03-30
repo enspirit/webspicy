@@ -56,41 +56,30 @@ module Webspicy
     def rspec_config!
       RSpec.shared_examples "a successful test case invocation" do |client, test_case, counterexample|
 
-        before(:all) do
-          @invocation ||= begin
+        around(:each) do |example|
+          client.around(test_case) do
             client.before(test_case)
             test_case.instrument(client)
-            client.call(test_case)
+            @invocation = client.call(test_case)
+            example.run
+            client.after(test_case)
           end
-        end
-
-        after(:all) do
-          client.after(test_case)
         end
 
         let(:invocation) do
           @invocation
         end
 
-        it 'meets the HTTP specification' do
+        it 'meets its specification' do
           expect(invocation.done?).to eq(true)
           expect(invocation.expected_status_unmet).to(be_nil)
           expect(invocation.expected_content_type_unmet).to(be_nil)
           expect(invocation.expected_headers_unmet).to(be_nil) if test_case.has_expected_headers?
           expect(invocation.expected_schema_unmet).to(be_nil)
+          expect(invocation.assertions_unmet).to(be_nil) if test_case.has_assertions?
+          expect(invocation.postconditions_unmet).to(be_nil) if test_case.service.has_postconditions? and not(counterexample)
+          expect(invocation.expected_error_unmet).to(be_nil) if test_case.has_expected_error?
         end
-
-        it 'meets all specific assertions' do
-          expect(invocation.assertions_unmet).to(be_nil)
-        end if test_case.has_assertions?
-
-        it 'meets declarative postconditions' do
-          expect(invocation.postconditions_unmet).to(be_nil)
-        end if test_case.service.has_postconditions? and not(counterexample)
-
-        it 'meets the specific error messages, if any (backward compatibility)' do
-          expect(@invocation.expected_error_unmet).to(be_nil)
-        end if test_case.has_expected_error?
       end
     end
 

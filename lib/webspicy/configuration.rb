@@ -1,7 +1,7 @@
 module Webspicy
   class Configuration
 
-    LISTENER_KINDS = [ :before_all, :before_each, :after_all, :after_each ]
+    LISTENER_KINDS = [ :before_all, :before_each, :after_all, :after_each, :around_each ]
 
     def initialize(folder = Path.pwd, parent = nil)
       @folder = folder
@@ -238,6 +238,13 @@ module Webspicy
     # The `listener` must respond to `call`.
     def after_each(&listener)
       register_listener(:after_each, listener)
+    end
+
+    # Installs a listener that will be called around each web service invocation.
+    #
+    # The `listener` must respond to `call`.
+    def around_each(&listener)
+      register_listener(:around_each, listener)
     end
 
     # Allows setting the options passed at RSpec, which is used by both the runner
