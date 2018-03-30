@@ -6,6 +6,16 @@ module Webspicy
 
       NO_ARG = Object.new
 
+      def includes(target, path, expected = NO_ARG)
+        path, expected = '', path if expected == NO_ARG
+        target = extract_path(target, path)
+        an_array(target).include?(expected)
+      end
+
+      def notIncludes(target, path, expected = NO_ARG)
+        not self.includes(target, path, expected)
+      end
+
       def exists(target, path = NO_ARG)
         target = extract_path(target, path)
         not target.nil?

@@ -13,6 +13,20 @@ module Webspicy
         @assertions = AssertionsClass.new
       end
 
+      def includes(path, expected = NO_ARG)
+        path, expected = '', path if expected == NO_ARG
+        unless @assertions.includes(@target, path, expected)
+          _! "Expected #{_s(@target, path)} to include #{expected}"
+        end
+      end
+
+      def notIncludes(path, expected = NO_ARG)
+        path, expected = '', path if expected == NO_ARG
+        unless @assertions.notIncludes(@target, path, expected)
+          _! "Expected #{_s(@target, path)} not to include #{expected}"
+        end
+      end
+
       def exists(path = '')
         unless @assertions.exists(@target, path)
           _! "Expected #{_s(@target, path)} to exists"

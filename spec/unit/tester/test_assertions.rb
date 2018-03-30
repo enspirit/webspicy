@@ -18,6 +18,16 @@ module Webspicy
         expect(extract_path(target, 'baz/0/foo')).to eql("world")
       end
 
+      it 'has an includes() assertion' do
+        expect(includes [], 1).to be(false)
+        expect(includes [5, 1], 1).to be(true)
+      end
+
+      it 'has an notIcludes() assertion' do
+        expect(notIncludes [], 1).to be(true)
+        expect(notIncludes [5, 1], 1).to be(false)
+      end
+
       it 'has an exists() assertion' do
         expect(exists nil).to be(false)
         expect(exists []).to be(true)

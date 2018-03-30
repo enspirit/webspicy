@@ -3,6 +3,8 @@
 * Fixed assertion messages when an assertion fails. Now the extracted value is shown
   instead of the general web service invocation result.
 
+* Added `includes` and `notIncludes` assertions.
+
 # 0.9.0
 
 * Added `Configuration#before_each` for executing code before each test case execution.
