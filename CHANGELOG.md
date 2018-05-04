@@ -1,3 +1,7 @@
+# 0.10.0
+
+* Add support for file upload based on multi-part for data and a single parameter.
+
 # 0.9.1
 
 * Fixed assertion messages when an assertion fails. Now the extracted value is shown

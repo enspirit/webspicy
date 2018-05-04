@@ -1,0 +1,37 @@
+---
+name: |-
+  Todo
+
+url: |-
+  /todo/
+
+services:
+- method: |-
+    POST
+
+  description: |-
+    Creates new todo items through a CSV file upload
+
+  preconditions: |-
+
+  input_schema: |-
+    .
+
+  output_schema: |-
+    { count: Integer }
+
+  error_schema: |-
+    ErrorSchema
+
+  examples:
+
+    - description: |-
+        when requested with a valid CSV file
+      file_upload:
+        path: ./todos.csv
+        content_type: "text/csv"
+      expected:
+        content_type: application/json
+        status: 201
+      assert:
+        - "pathFD('', count: 3)"

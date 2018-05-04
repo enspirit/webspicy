@@ -6,6 +6,13 @@ Schema =
       \( s | ::Webspicy.schema(s) )
       \( s | raise "Unsupported"  )
 
+FileUpload =
+    .Webspicy::FileUpload <info> {
+        path         :  String
+        content_type :  String
+        param_name   :? String
+    }
+
 Resource =
     .Webspicy::Resource <info> {
         name: String
@@ -31,9 +38,10 @@ TestCase =
     .Webspicy::Resource::Service::TestCase <info> {
         description      : String
         dress_params     :? Boolean
-        params           : Params
+        params           :? Params
         headers          :? .Hash
         body             :? String
+        file_upload      :? FileUpload
         seeds            :? String
         requester        :? String
         expected: {

@@ -23,7 +23,8 @@ module Webspicy
 
       # Instantiate the parameters
       headers = test_case.headers
-      params = test_case.dress_params? ? service.dress_params(test_case.params) : test_case.params
+      params  = test_case.dress_params? ? service.dress_params(test_case.params) : test_case.params
+      body    = test_case.body || test_case.located_file_upload
 
       # Instantiate the url and strip parameters
       url, params = resource.instantiate_url(params)
@@ -32,7 +33,7 @@ module Webspicy
       url = scope.to_real_url(url, test_case)
 
       # Invoke the service now
-      api.public_send(service.method.to_s.downcase.to_sym, url, params, headers, test_case.body)
+      api.public_send(service.method.to_s.downcase.to_sym, url, params, headers, body)
 
       # Return the result
       Resource::Service::Invocation.new(service, test_case, api.last_response, self)
@@ -70,12 +71,18 @@ module Webspicy
         url = url + "?" + Rack::Utils.build_query(params) if body && !params.empty?
 
         headers ||= {}
-        headers['Content-Type'] ||= 'application/json'
 
-        if body
-          @last_response = HTTP[headers].post(url, body: body)
-        else
+        case body
+        when NilClass
+          headers['Content-Type'] ||= 'application/json'
           @last_response = HTTP[headers].post(url, body: params.to_json)
+        when FileUpload
+          @last_response = HTTP[headers].post(url, form: {
+            body.param_name.to_sym => HTTP::FormData::File.new(body.path, content_type: body.content_type)
+          })
+        else
+          headers['Content-Type'] ||= 'application/json'
+          @last_response = HTTP[headers].post(url, body: body)
         end
 
         Webspicy.debug("Headers: #{@last_response.headers.to_hash}")

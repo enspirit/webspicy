@@ -119,7 +119,22 @@ def loaded_body
   when /csv/
     csv = ::CSV.new(request.body.read, :headers => true, :header_converters => :symbol)
     csv.map {|row| row.to_hash }
+  when /multipart\/form-data/
+    file_body params[:file]
   else
-    halt [415,{},["Unsupported content type"]]
+    halt [415,{},["Unsupported content type: `#{ctype}`"]]
+  end
+end
+
+def file_body(file)
+  ctype = Path(file[:filename] || file["filename"]).extname
+  ctype = (file[:type] || file["type"]) if ctype.nil? or ctype.empty?
+  case ctype
+  when /csv/
+    str = file[:tempfile].read
+    csv = ::CSV.new(str, :headers => true, :header_converters => :symbol)
+    csv.map {|row| row.to_hash }
+  else
+    halt [415,{},["Unsupported content type: `#{ctype}`\n#{file.inspect}"]]
   end
 end

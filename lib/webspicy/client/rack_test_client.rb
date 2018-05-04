@@ -16,8 +16,8 @@ module Webspicy
 
       # Instantiate the parameters
       headers = test_case.headers.dup
-      params = test_case.dress_params? ? service.dress_params(test_case.params) : test_case.params
-      body = test_case.body
+      params  = test_case.dress_params? ? service.dress_params(test_case.params) : test_case.params
+      body    = test_case.body || test_case.located_file_upload
 
       # Instantiate the url and strip parameters
       url, params = resource.instantiate_url(params)
@@ -94,12 +94,17 @@ module Webspicy
 
         url = url + "?" + Rack::Utils.build_query(params) if body && !params.empty?
 
-        Webspicy.info("POST #{url} -- #{params.inspect} -- #{headers.inspect}")
-
-        if body
-          handler.post(url, body)
-        else
+        case body
+        when NilClass
+          Webspicy.info("POST #{url} -- #{params.inspect} -- #{headers.inspect}")
           handler.post(url, params.to_json, {"CONTENT_TYPE" => "application/json"})
+        when FileUpload
+          file = Rack::Test::UploadedFile.new(body.path, body.content_type)
+          Webspicy.info("POST #{url} -- #{params.inspect} -- #{body}")
+          handler.post(url, body.param_name.to_sym => file)
+        else
+          Webspicy.info("POST #{url} -- #{params.inspect} -- #{body.inspect[0..25]}")
+          handler.post(url, body)
         end
         @last_response = handler.last_response
 

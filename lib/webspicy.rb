@@ -14,6 +14,7 @@ module Webspicy
   ###
 
   require 'webspicy/configuration'
+  require 'webspicy/file_upload'
   require 'webspicy/scope'
   require 'webspicy/client'
   require 'webspicy/client/http_client'
@@ -46,7 +47,9 @@ module Webspicy
 
   def resource(raw, file = nil, scope = default_scope)
     with_scope(scope) do
-      FORMALDOC["Resource"].dress(raw)
+      r = FORMALDOC["Resource"].dress(raw)
+      r.located_at!(file) if file
+      r
     end
   end
   module_function :resource

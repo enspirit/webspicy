@@ -1,13 +1,24 @@
 module Webspicy
   class Resource
 
-    def initialize(raw)
+    def initialize(raw, location = nil)
       @raw = raw
+      @location = location
       bind_services
     end
 
     def self.info(raw)
       new(raw)
+    end
+
+    def located_at!(location)
+      @location = Path(location)
+    end
+
+    def locate(relative_path)
+      file = @location.parent/relative_path
+      raise "File not found: #{file}" unless file.exists?
+      file
     end
 
     def url

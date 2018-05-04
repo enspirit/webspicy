@@ -34,11 +34,19 @@ module Webspicy
         alias :dress_params? :dress_params
 
         def params
-          @raw[:params]
+          @raw[:params] || {}
         end
 
         def body
           @raw[:body]
+        end
+
+        def file_upload
+          @raw[:file_upload]
+        end
+
+        def located_file_upload
+          file_upload ? file_upload.locate(resource) : nil
         end
 
         def expected_content_type
