@@ -1,10 +1,11 @@
 $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
 require 'webspicy/version'
+require 'date'
 
 Gem::Specification.new do |s|
   s.name        = 'webspicy'
   s.version     = Webspicy::VERSION
-  s.date        = '2016-07-19'
+  s.date        = Date.today.to_s
   s.summary     = "Webspicy helps testing web services as software operation black boxes!"
   s.description = "Webspicy helps testing web services as software operation black boxes"
   s.authors     = ["Bernard Lambeau"]

@@ -1,3 +1,7 @@
+# 0.10.2
+
+* Fixed gem publish date.
+
 # 0.10.1
 
 * Postconditions can optionally instrument a test case before execution too. This
