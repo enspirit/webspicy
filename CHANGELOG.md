@@ -1,3 +1,8 @@
+# 0.10.1
+
+* Postconditions can optionally instrument a test case before execution too. This
+  is handy to clean stuff before running a test case.
+
 # 0.10.0
 
 * Add support for file upload based on multi-part for data and a single parameter.

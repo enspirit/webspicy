@@ -89,6 +89,9 @@ module Webspicy
           service.preconditions.each do |pre|
             pre.instrument(self, client)
           end
+          service.postconditions.each do |post|
+            post.instrument(self, client) if post.respond_to?(:instrument)
+          end
         end
 
         def to_s
