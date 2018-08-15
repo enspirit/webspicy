@@ -1,3 +1,9 @@
+# 0.11.0
+
+* Webspicy now comes with Precondition and Postcondition modules. They aim at
+  being included by actual classes to meet the expected contracts easily.
+  Default implementations do nothing.
+
 # 0.10.2
 
 * Fixed gem publish date.

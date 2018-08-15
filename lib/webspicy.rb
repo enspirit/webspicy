@@ -20,6 +20,8 @@ module Webspicy
   require 'webspicy/client/http_client'
   require 'webspicy/client/rack_test_client'
   require 'webspicy/resource'
+  require 'webspicy/precondition'
+  require 'webspicy/postcondition'
   require 'webspicy/checker'
   require 'webspicy/tester'
   require 'webspicy/tester/assertions'
