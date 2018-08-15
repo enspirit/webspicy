@@ -28,6 +28,10 @@ module Webspicy
           @raw[:headers] ||= {}
         end
 
+        def metadata
+          @raw[:metadata] ||= {}
+        end
+
         def dress_params
           @raw.fetch(:dress_params){ true }
         end

@@ -44,6 +44,7 @@ TestCase =
         file_upload      :? FileUpload
         seeds            :? String
         requester        :? String
+        metadata         :? { ...: .Object }
         expected: {
             status       :  Integer
             content_type :? String|Nil
