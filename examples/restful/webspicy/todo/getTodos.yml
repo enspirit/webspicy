@@ -12,8 +12,6 @@ services:
   description: |-
     Returns the list of todo items
 
-  preconditions: |-
-
   input_schema: |-
     {
     }

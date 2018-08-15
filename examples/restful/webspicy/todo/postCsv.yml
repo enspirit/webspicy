@@ -12,7 +12,8 @@ services:
   description: |-
     Creates new todo items through a CSV import
 
-  preconditions: |-
+  preconditions:
+    - Must be authenticated
 
   input_schema: |-
     {}

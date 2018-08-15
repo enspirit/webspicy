@@ -12,8 +12,6 @@ services:
   description: |-
     Returns options about the web service
 
-  preconditions: |-
-
   input_schema: |-
     {
     }

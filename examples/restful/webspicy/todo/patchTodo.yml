@@ -12,7 +12,8 @@ services:
   description: |-
     Patches a single Todo item
 
-  preconditions: |-
+  preconditions:
+    - Must be authenticated
 
   input_schema: |-
     TodoPatch

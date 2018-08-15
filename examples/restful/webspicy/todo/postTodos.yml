@@ -12,7 +12,8 @@ services:
   description: |-
     Creates a new todo item
 
-  preconditions: |-
+  preconditions:
+    - Must be authenticated
 
   input_schema: |-
     Todo

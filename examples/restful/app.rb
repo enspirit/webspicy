@@ -23,6 +23,28 @@ enable :raise_errors
 
 set :todolist, TODOLIST.dup
 
+set(:auth) do |role|
+  condition do
+    token = env['HTTP_AUTHORIZATION']
+    case token
+    when NilClass
+      halt [
+        401,
+        {'Content-Type' => 'application/json'},
+        [{ error: "Please log in first" }.to_json]
+      ]
+    when "Bearer #{role}"
+      true
+    else
+      halt [
+        401,
+        {'Content-Type' => 'application/json'},
+        [{ error: "#{role.capitalize} required" }.to_json]
+      ]
+    end
+  end
+end
+
 use Rack::Robustness do |g|
   g.no_catch_all
   g.status 400
@@ -47,7 +69,7 @@ get '/todo/' do
   settings.todolist.to_json
 end
 
-post '/todo/' do
+post '/todo/', :auth => :user do
   content_type :json
   case todos = loaded_body
   when Array
@@ -82,7 +104,7 @@ get '/todo/:id' do |id|
   end
 end
 
-patch '/todo/:id' do |id|
+patch '/todo/:id', :auth => :user do |id|
   content_type :json
   todo = settings.todolist.find{|todo| todo[:id] == Integer(id) }
   if todo.nil?
@@ -97,7 +119,7 @@ patch '/todo/:id' do |id|
   end
 end
 
-delete '/todo/:id' do |id|
+delete '/todo/:id', :auth => :admin do |id|
   content_type :json
   todo = settings.todolist.find{|todo| todo[:id] == Integer(id) }
   if todo.nil?

@@ -12,7 +12,8 @@ services:
   description: |-
     Deletes a single todo item
 
-  preconditions: |-
+  preconditions:
+    - Must be an admin
 
   input_schema: |-
     {
