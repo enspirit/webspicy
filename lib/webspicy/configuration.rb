@@ -247,6 +247,12 @@ module Webspicy
       register_listener(:around_each, listener)
     end
 
+    # Installs a listener that will be called right after all precondition
+    # instrumentations.
+    def instrument(&instrumentor)
+      register_listener(:instrument, instrumentor)
+    end
+
     # Allows setting the options passed at RSpec, which is used by both the runner
     # and checker classes.
     #

@@ -33,6 +33,13 @@ module Webspicy
     end
     private :_around
 
+    def instrument(*args, &bl)
+      args << self
+      config.listeners(:instrument).each do |i|
+        i.call(*args, &bl)
+      end
+    end
+
     def before(*args, &bl)
       args << self
       config.listeners(:before_each).each do |beach|

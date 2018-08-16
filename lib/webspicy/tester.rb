@@ -60,6 +60,7 @@ module Webspicy
           client.around(test_case) do
             client.before(test_case)
             test_case.instrument(client)
+            client.instrument(test_case)
             @invocation = client.call(test_case)
             example.run
             client.after(test_case)

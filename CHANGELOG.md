@@ -4,8 +4,12 @@
   being included by actual classes to meet the expected contracts easily.
   Default implementations do nothing.
 
+* Config now supports an `instrument` method, taking an instrumentation block.
+  Those blocks are called after before_each and after all pre/post condition
+  instrumentations.
+
 * Test cases now support a `metadata` YAML entry, to track domain specific tags
-  (typically used in PRE/POST conditions or Config#before_each).
+  (typically used in PRE/POST conditions or Config#instrument).
 
 # 0.10.2
 
