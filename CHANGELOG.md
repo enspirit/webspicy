@@ -1,3 +1,12 @@
+# 0.11.2 - 2018/08/16
+
+* Fixed a `NoSuchMethodError each` on NilClass related to :instrument listeners
+  on Config.
+
+# 0.11.1 - 2018/08/16
+
+* Fixed dependency requirements to avoid rubygems warnings.
+
 # 0.11.0 - 2018/08/16
 
 * Webspicy now comes with Precondition and Postcondition modules. They aim at

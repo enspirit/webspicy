@@ -205,9 +205,10 @@ module Webspicy
 
     # Returns the listeners of a specific kind.
     #
-    # Recognized kinds are `before_each`, `after_each`, `before_all` and `after_all`
+    # Recognized kinds are `before_each`, `after_each`, `before_all`, `after_all`
+    # and `instrument`.
     def listeners(kind)
-      @listeners[kind]
+      @listeners[kind] || []
     end
     attr_writer :listeners
     protected :listeners=
