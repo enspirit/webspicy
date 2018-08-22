@@ -24,6 +24,11 @@ services:
   error_schema: |-
     ErrorSchema
 
+  default_example:
+    expected:
+      content_type: application/json
+      status: 200
+
   examples:
 
     - description: |-
@@ -31,9 +36,6 @@ services:
       params:
         id: 1
         description: 'hello world'
-      expected:
-        content_type: application/json
-        status: 200
       assert:
         - "pathFD('', description: 'hello world')"
 

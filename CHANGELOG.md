@@ -1,3 +1,12 @@
+# 0.12.0 - 2018/08/22
+
+* A service can now define a `default_example` with shared attributes of all
+  examples, counterexamples and generated counter exampled. The default example
+  is merged with each example before execution (even before instrumentation,
+  to be precise). The merge strategy is a deep recursive merge on all hashes
+  and a concatenation on arrays. This allows the example/counterexample to
+  easily override the default example on specific attributes.
+
 # 0.11.2 - 2018/08/16
 
 * Fixed a `NoSuchMethodError each` on NilClass related to :instrument listeners

@@ -30,13 +30,14 @@ Service =
         output_schema   :  Schema
         error_schema    :  Schema
         blackbox        :? String
+        default_example :? TestCase
         examples        :? [TestCase]
         counterexamples :? [TestCase]
     }
 
 TestCase =
     .Webspicy::Resource::Service::TestCase <info> {
-        description      : String
+        description      :? String
         dress_params     :? Boolean
         params           :? Params
         headers          :? .Hash
@@ -45,13 +46,13 @@ TestCase =
         seeds            :? String
         requester        :? String
         metadata         :? { ...: .Object }
-        expected: {
-            status       :  Integer
+        expected         :? {
+            status       :? Integer
             content_type :? String|Nil
             error        :? String
             headers      :? .Hash
         }
-        assert :? [String]
+        assert           :? [String]
     }
 
 Params = .Array|.Hash

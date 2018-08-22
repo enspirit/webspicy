@@ -53,16 +53,20 @@ module Webspicy
           file_upload ? file_upload.locate(resource) : nil
         end
 
+        def expected
+          @raw[:expected] || {}
+        end
+
         def expected_content_type
-          @raw[:expected].fetch(:content_type){ 'application/json' }
+          expected.fetch(:content_type){ 'application/json' }
         end
 
         def expected_status
-          @raw[:expected][:status]
+          expected[:status]
         end
 
         def expected_error
-          @raw[:expected][:error]
+          expected[:error]
         end
 
         def has_expected_error?
@@ -70,7 +74,7 @@ module Webspicy
         end
 
         def expected_headers
-          @raw[:expected][:headers] || {}
+          expected[:headers] || {}
         end
 
         def has_expected_headers?

@@ -35,6 +35,10 @@ module Webspicy
         !postconditions.empty?
       end
 
+      def default_example
+        @raw[:default_example]
+      end
+
       def examples
         @raw[:examples]
       end

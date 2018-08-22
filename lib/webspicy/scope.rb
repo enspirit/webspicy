@@ -47,16 +47,22 @@ module Webspicy
     end
 
     def each_example(service)
-      service.examples.each{|s| yield(s, false) }
+      service.examples.each{|e|
+        yield(expand_example(service, e), false)
+      }
     end
 
     def each_counterexamples(service, &bl)
-      service.counterexamples.each{|s| yield(s, true) } if config.run_counterexamples?
+      service.counterexamples.each{|e|
+        yield(expand_example(service, e), true)
+      } if config.run_counterexamples?
     end
 
     def each_generated_counterexamples(service, &bl)
       Webspicy.with_scope(self) do
-        service.generated_counterexamples.each{|s| yield(s, true) }
+        service.generated_counterexamples.each{|e|
+          yield(expand_example(service, e), true)
+        }
       end if config.run_counterexamples?
     end
 
@@ -116,6 +122,25 @@ module Webspicy
     ###
 
     private
+
+      def expand_example(service, example)
+        return example unless service.default_example
+        h1 = service.default_example.to_info
+        h2 = example.to_info
+        ex = Resource::Service::TestCase.new(merge_maps(h1, h2))
+        ex.service = service
+        ex
+      end
+
+      def merge_maps(h1, h2)
+        h1.merge(h2) do |k,v1,v2|
+          case v1
+          when Hash  then merge_maps(v1, v2)
+          when Array then v1 + v2
+          else v2
+          end
+        end
+      end
 
       # Returns a proc that implements file_filter strategy according to the
       # type of filter installed
