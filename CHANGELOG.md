@@ -1,3 +1,8 @@
+# 0.12.1 - 2018/10/12
+
+* HttpClient now correctly sends the file name to the tested backend when
+  using file uploads.
+
 # 0.12.0 - 2018/08/22
 
 * A service can now define a `default_example` with shared attributes of all
