@@ -1,4 +1,4 @@
-# 0.12.2
+# 0.12.2 - 2019/01/25
 
 * Expose Resource#location, to let hooks make decisions depending on the
   file in which test cases currently executed are defined.
