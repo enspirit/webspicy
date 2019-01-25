@@ -6,6 +6,7 @@ module Webspicy
       @location = location
       bind_services
     end
+    attr_reader :location
 
     def self.info(raw)
       new(raw)

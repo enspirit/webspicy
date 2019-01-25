@@ -1,3 +1,8 @@
+# 0.12.2
+
+* Expose Resource#location, to let hooks make decisions depending on the
+  file in which test cases currently executed are defined.
+
 # 0.12.1 - 2018/10/12
 
 * HttpClient now correctly sends the file name to the tested backend when
