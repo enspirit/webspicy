@@ -1,3 +1,8 @@
+# 0.12.3 - 2019/02/27
+
+* Weaken webspicy dependency constraint, to prevent clients from upgrading
+  to higher versions of finitio.
+
 # 0.12.2 - 2019/01/25
 
 * Expose Resource#location, to let hooks make decisions depending on the
