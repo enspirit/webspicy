@@ -108,6 +108,10 @@ module Webspicy
         DateTime.parse(str)
       end
 
+      def Date(str)
+        Date.parse(str)
+      end
+
       def _s(target, path)
         result = @assertions.extract_path(target, path)
         result = result.to_json

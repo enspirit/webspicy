@@ -1,3 +1,7 @@
+# 0.12.4 - 2019/05/31
+
+* Add Date coercer/asserter
+
 # 0.12.3 - 2019/02/27
 
 * Weaken webspicy dependency constraint, to prevent clients from upgrading
