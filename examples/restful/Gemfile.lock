@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    webspicy (0.12.3)
+    webspicy (0.12.5)
       finitio (>= 0.6.1)
       http (~> 2)
       path (~> 1.3)
@@ -16,9 +16,9 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     citrus (3.0.2)
     diff-lcs (1.3)
-    domain_name (0.5.20180417)
+    domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    finitio (0.6.1)
+    finitio (0.7.0)
       citrus (>= 2.4, < 4.0)
     http (2.2.2)
       addressable (~> 2.3)
@@ -29,11 +29,11 @@ GEM
       domain_name (~> 0.5)
     http-form_data (1.0.3)
     http_parser.rb (0.6.0)
-    mustermann (1.0.2)
+    mustermann (1.0.3)
     path (1.3.3)
-    public_suffix (3.0.3)
-    rack (2.0.3)
-    rack-protection (2.0.3)
+    public_suffix (3.1.1)
+    rack (2.0.7)
+    rack-protection (2.0.5)
       rack
     rack-robustness (1.1.0)
     rack-test (0.6.3)
@@ -43,24 +43,24 @@ GEM
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
       rspec-mocks (~> 3.8.0)
-    rspec-core (3.8.0)
+    rspec-core (3.8.2)
       rspec-support (~> 3.8.0)
-    rspec-expectations (3.8.2)
+    rspec-expectations (3.8.4)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
-    rspec-mocks (3.8.0)
+    rspec-mocks (3.8.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
-    rspec-support (3.8.0)
-    sinatra (2.0.3)
+    rspec-support (3.8.2)
+    sinatra (2.0.5)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.3)
+      rack-protection (= 2.0.5)
       tilt (~> 2.0)
-    tilt (2.0.8)
+    tilt (2.0.9)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.5)
+    unf_ext (0.0.7.6)
 
 PLATFORMS
   ruby
@@ -71,4 +71,4 @@ DEPENDENCIES
   webspicy!
 
 BUNDLED WITH
-   1.16.0
+   2.0.1
