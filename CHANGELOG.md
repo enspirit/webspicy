@@ -1,3 +1,9 @@
+# 0.12.5 - 2019/07/17
+
+* RackTestClient now converts nil parameters to '' on GET requests. Before
+  ruby 2.5.0, nil.dup raises an error and sinatra tries to duplicate param
+  values on dispatch!.
+
 # 0.12.4 - 2019/05/31
 
 * Add Date coercer/asserter

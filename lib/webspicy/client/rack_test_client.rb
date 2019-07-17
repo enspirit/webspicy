@@ -78,6 +78,7 @@ module Webspicy
       def get(url, params = {}, headers = nil, body = nil)
         handler = get_handler(headers)
 
+        params = Hash[params.map{|k,v| [k, v.nil? ? "" : v] }]
         Webspicy.info("GET #{url} -- #{params.inspect} -- #{headers.inspect}")
 
         handler.get(url, params)
