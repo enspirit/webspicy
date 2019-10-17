@@ -1,3 +1,8 @@
+# 0.13.0
+
+* Adds an experimental Mocker abstraction that allows running a real API
+  mock based on webspicy files.
+
 # 0.12.5 - 2019/07/17
 
 * RackTestClient now converts nil parameters to '' on GET requests. Before

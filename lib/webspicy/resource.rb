@@ -26,6 +26,10 @@ module Webspicy
       @raw[:url]
     end
 
+    def url_pattern
+      @url_pattern ||= Mustermann.new(url, type: :template)
+    end
+
     def services
       @raw[:services]
     end

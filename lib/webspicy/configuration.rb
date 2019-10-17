@@ -299,6 +299,13 @@ module Webspicy
       end
     end
 
+    # Returns the data generator to use, for generating random data when
+    # needed.
+    def generator
+      @generator
+    end
+    attr_writer :generator
+
     # Duplicates this configuration and yields the block with the new one,
     # if a block is given.
     #

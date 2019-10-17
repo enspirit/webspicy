@@ -7,6 +7,7 @@ require 'ostruct'
 require 'yaml'
 require 'rspec'
 require 'rack/test'
+require "mustermann"
 module Webspicy
 
   ###
