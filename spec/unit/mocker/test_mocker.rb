@@ -15,6 +15,12 @@ module Webspicy
       expect(last_response.body).not_to be_empty
     end
 
+    it 'supports CORS on OPTIONS' do
+      options '/todo/'
+      expect(last_response.status).to eql(204)
+      expect(last_response.body).to be_empty
+    end
+
     it 'returns the correct status code, taken from first example' do
       delete '/todo/1'
       expect(last_response.status).to eql(204)

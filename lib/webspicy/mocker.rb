@@ -13,7 +13,9 @@ module Webspicy
       req = Rack::Request.new(env)
       path = req.path
       meth = req.request_method
-      if service = find_service(meth, path)
+      if meth == "OPTIONS" && has_service?(path)
+        [204, {}, []]
+      elsif service = find_service(meth, path)
         status = best_status_code(service)
         body = status == 204 ? "" : random_body(service, req)
         headers = generate_headers(service)
@@ -24,6 +26,16 @@ module Webspicy
     end
 
   private
+
+    def has_service?(path)
+      config.each_scope do |scope|
+        scope.each_resource do |resource|
+          next unless url_matches?(resource, path)
+          return true
+        end
+      end
+      return false
+    end
 
     def find_service(method, path)
       config.each_scope do |scope|
