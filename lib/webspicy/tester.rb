@@ -20,7 +20,7 @@ module Webspicy
       tester = self
       RSpec.reset
       rspec_config!
-      RSpec.describe "Webspicy test suite" do
+      RSpec.describe "" do
         before(:all) do
           tester.config.listeners(:before_all).each do |l|
             l.call(tester.config)
@@ -71,15 +71,22 @@ module Webspicy
           @invocation
         end
 
-        it 'meets its specification' do
-          expect(invocation.done?).to eq(true)
-          expect(invocation.expected_status_unmet).to(be_nil)
-          expect(invocation.expected_content_type_unmet).to(be_nil)
-          expect(invocation.expected_headers_unmet).to(be_nil) if test_case.has_expected_headers?
-          expect(invocation.expected_schema_unmet).to(be_nil)
-          expect(invocation.assertions_unmet).to(be_nil) if test_case.has_assertions?
-          expect(invocation.postconditions_unmet).to(be_nil) if test_case.service.has_postconditions? and not(counterexample)
-          expect(invocation.expected_error_unmet).to(be_nil) if test_case.has_expected_error?
+        it 'works' do
+          raise "Test not ran" unless invocation.done?
+          fails = [
+            [:expected_status_unmet, true],
+            [:expected_content_type_unmet, true],
+            [:expected_headers_unmet, test_case.has_expected_headers?],
+            [:expected_schema_unmet, true],
+            [:assertions_unmet, test_case.has_assertions?],
+            [:postconditions_unmet, test_case.service.has_postconditions? && !counterexample],
+            [:expected_error_unmet, test_case.has_expected_error?]
+          ].map do |(expectation,only_if)|
+            next unless only_if
+            invocation.send(expectation)
+          end
+          fails = fails.compact
+          raise "\n* " + fails.join("\n* ") + "\n" unless fails.empty?
         end
       end
     end
