@@ -2,6 +2,9 @@
 
 * Show response status code in DEBUG log level.
 
+* Catch fatal errors when collecting test expectations, to prevent all errors
+  from being properly shown in test results.
+
 # 0.13.0
 
 * Adds an experimental Mocker abstraction that allows running a real API

@@ -83,7 +83,11 @@ module Webspicy
             [:expected_error_unmet, test_case.has_expected_error?]
           ].map do |(expectation,only_if)|
             next unless only_if
-            invocation.send(expectation)
+            begin
+              invocation.send(expectation)
+            rescue => ex
+              ex.message
+            end
           end
           fails = fails.compact
           raise "\n* " + fails.join("\n* ") + "\n" unless fails.empty?
