@@ -1,3 +1,7 @@
+# 0.13.1
+
+* Show response status code in DEBUG log level.
+
 # 0.13.0
 
 * Adds an experimental Mocker abstraction that allows running a real API

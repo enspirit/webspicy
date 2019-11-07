@@ -49,7 +49,7 @@ module Webspicy
         @last_response = HTTP[headers || {}].options(url, params: params)
 
         Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response: #{@last_response.body}")
+        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
 
         @last_response
       end
@@ -60,7 +60,7 @@ module Webspicy
         @last_response = HTTP[headers || {}].get(url, params: params)
 
         Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response: #{@last_response.body}")
+        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
 
         @last_response
       end
@@ -88,7 +88,7 @@ module Webspicy
         end
 
         Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response: #{@last_response.body}")
+        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
 
         @last_response
       end
@@ -101,7 +101,7 @@ module Webspicy
         @last_response = HTTP[headers].patch(url, body: params.to_json)
 
         Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response: #{@last_response.body}")
+        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
 
         @last_response
       end
@@ -112,7 +112,7 @@ module Webspicy
         @last_response = HTTP[headers || {}].post(url, form: params)
 
         Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response: #{@last_response.body}")
+        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
 
         @last_response
       end
@@ -123,7 +123,7 @@ module Webspicy
         @last_response = HTTP[headers || {}].delete(url, body: params.to_json)
 
         Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response: #{@last_response.body}")
+        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
 
         @last_response
       end
