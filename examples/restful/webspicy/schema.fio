@@ -6,7 +6,7 @@ Todo = {
 }
 
 TodoPatch = {
-  id          :? Integer
+  id          :  Integer
   description :? String
 }
 

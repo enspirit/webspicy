@@ -20,6 +20,7 @@ bundle-update:
 bundle-install:
 	bundle install
 	cd examples/restful && bundle install
+bundle: bundle-install
 
 release:
 	bundle exec rake

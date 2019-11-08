@@ -19,6 +19,10 @@ module Webspicy
         @raw[:method]
       end
 
+      def description
+        @raw[:description]
+      end
+
       def preconditions
         @preconditions
       end

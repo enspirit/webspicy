@@ -111,7 +111,7 @@ patch '/todo/:id', :auth => :user do |id|
     status 404
     {error: "No such todo"}.to_json
   else
-    patch = SCHEMA["TodoPatch"].dress(loaded_body)
+    patch = SCHEMA["TodoPatch"].dress(loaded_body.merge("id" => Integer(id)))
     patched = todo.merge(patch)
     settings.todolist = settings.todolist.reject{|todo| todo[:id] == Integer(id) }
     settings.todolist << patched

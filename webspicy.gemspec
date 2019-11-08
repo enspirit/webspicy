@@ -30,4 +30,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "mustermann", "~> 1.0"
   s.add_runtime_dependency "mustermann-contrib"
   s.add_runtime_dependency "colorize", "~> 0.8.1"
+  s.add_runtime_dependency "openapi3_parser", "~> 0.8.2"
 end

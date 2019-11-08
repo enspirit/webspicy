@@ -36,6 +36,9 @@ services:
       params:
         id: 1
         description: 'hello world'
+      expected:
+        content_type: application/json
+        status: 200
       assert:
         - "pathFD('', description: 'hello world')"
 

@@ -22,6 +22,10 @@ module Webspicy
       file
     end
 
+    def name
+      @raw[:name]
+    end
+
     def url
       @raw[:url]
     end
