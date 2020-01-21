@@ -1,15 +1,11 @@
-# 0.14.0
+# 0.13.0
 
 * Add junit xml output by default.
-
-# 0.13.1
 
 * Show response status code in DEBUG log level.
 
 * Catch fatal errors when collecting test expectations, to prevent all errors
   from being properly shown in test results.
-
-# 0.13.0
 
 * Adds an experimental Mocker abstraction that allows running a real API
   mock based on webspicy files.
