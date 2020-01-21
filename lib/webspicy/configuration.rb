@@ -273,7 +273,8 @@ module Webspicy
     # - FAILFAST <-> --fail-fast
     #
     def default_rspec_options
-      options = ["--color", "--format=documentation"]
+      dest_folder = (self.folder/'rspec.xml').to_s
+      options = %w{--color --format=documentation --format RspecJunitFormatter --out} << dest_folder
       if ENV['FAILFAST']
         options << (ENV['FAILFAST'] == 'no' ? "--no-fail-fast" : "--fail-fast=#{ENV['FAILFAST']}")
       end

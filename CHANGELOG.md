@@ -1,3 +1,7 @@
+# 0.14.0
+
+* Add junit xml output by default.
+
 # 0.13.1
 
 * Show response status code in DEBUG log level.

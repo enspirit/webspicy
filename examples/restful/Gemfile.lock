@@ -10,6 +10,7 @@ PATH
       rack-robustness (~> 1.1, >= 1.1.0)
       rack-test (~> 0.6.3)
       rspec (~> 3.7)
+      rspec_junit_formatter (~> 0.4.1)
 
 GEM
   remote: https://rubygems.org/
@@ -37,7 +38,7 @@ GEM
       hansi (~> 0.2.0)
       mustermann (= 1.0.3)
     path (1.3.3)
-    public_suffix (4.0.1)
+    public_suffix (4.0.3)
     rack (2.0.7)
     rack-protection (2.0.7)
       rack
@@ -49,15 +50,17 @@ GEM
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
       rspec-mocks (~> 3.9.0)
-    rspec-core (3.9.0)
-      rspec-support (~> 3.9.0)
+    rspec-core (3.9.1)
+      rspec-support (~> 3.9.1)
     rspec-expectations (3.9.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
-    rspec-mocks (3.9.0)
+    rspec-mocks (3.9.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
-    rspec-support (3.9.0)
+    rspec-support (3.9.2)
+    rspec_junit_formatter (0.4.1)
+      rspec-core (>= 2, < 4, != 2.12.0)
     sinatra (2.0.7)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -77,4 +80,4 @@ DEPENDENCIES
   webspicy!
 
 BUNDLED WITH
-   2.0.2
+   2.1.0.pre.1

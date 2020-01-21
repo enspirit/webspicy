@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'sinatra', '~> 2.0', '>= 2.0.2'
 
   s.add_runtime_dependency "rspec", "~> 3.7"
+  s.add_runtime_dependency 'rspec_junit_formatter', '~> 0.4.1'
   s.add_runtime_dependency "rack-test", "~> 0.6.3"
   s.add_runtime_dependency 'finitio', '>= 0.8.0'
   s.add_runtime_dependency "http", "~> 2"

@@ -3,3 +3,4 @@ pkg/*
 .bundle
 /vendor
 /examples/restful/vendor
+rspec.xml
