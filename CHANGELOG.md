@@ -1,5 +1,9 @@
 # 0.14.0 - 2020/02/02
 
+* Allow negative RESOURCE filtering, by prefixing the resource match
+  by a !. E.g. RESOURCE=!get will execute all resources in files not
+  having a 'get' in their name.
+
 * Add TAG filtering: a TAG environment variable can specify a comma separated
   list of tags (e.g. foo,bar) or no-tags (e.g. !foo,!bar) to filter the tests
   to run and/or excluded, respectively. Tags and no-tags can be mixed, in

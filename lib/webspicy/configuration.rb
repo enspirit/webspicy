@@ -153,7 +153,10 @@ module Webspicy
     # set. In that case, a file filter is set that matches the file name to the
     # variable value, through a regular expression.
     def default_file_filter
-      ENV['RESOURCE'] ? Regexp.compile(ENV['RESOURCE']) : nil
+      return nil unless res = ENV['RESOURCE']
+      negated = res =~ /^!/
+      rx = Regexp.compile(negated ? "#{res[1..-1]}" : res)
+      negated ? ->(f){ !(f.to_s =~ rx) } : rx
     end
     private :default_file_filter
 

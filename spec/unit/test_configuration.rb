@@ -111,9 +111,19 @@ module Webspicy
         ENV['RESOURCE'] = 'getTodo.yml'
         config = Configuration.new
         expect(config.file_filter).to be_a(Regexp)
+        expect(config.file_filter).to match("foo/bar/getTodo.yml")
+        expect(config.file_filter).not_to match("foo/bar/getTodos.yml")
       end
 
-      it 'ignores the environment is set explicitly' do
+      it 'allows expressing a no match' do
+        ENV['RESOURCE'] = '!getTodo.yml'
+        config = Configuration.new
+        expect(config.file_filter).to be_a(Proc)
+        expect(config.file_filter.call("foo/bar/getTodos.yml")).to eq(true)
+        expect(config.file_filter.call("foo/bar/getTodo.yml")).to eq(false)
+      end
+
+      it 'ignores the environment if set explicitly' do
         ENV['RESOURCE'] = 'getTodo.yml'
         config = Configuration.new do |c|
           c.file_filter = nil
