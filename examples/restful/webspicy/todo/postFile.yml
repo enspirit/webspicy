@@ -28,6 +28,8 @@ services:
 
     - description: |-
         when requested with a valid CSV file
+      tags:
+        - upload
       file_upload:
         path: ./todos.csv
         content_type: "text/csv"

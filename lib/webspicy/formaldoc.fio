@@ -1,6 +1,8 @@
 Method =
     String( s | s =~ /^(GET|POST|POST_FORM|PUT|DELETE|PATCH|OPTIONS)$/ )
 
+Tag = String( s | s.length > 0 )
+
 Schema =
     .Finitio::System <fio> String
       \( s | ::Webspicy.schema(s) )
@@ -53,6 +55,7 @@ TestCase =
             headers      :? .Hash
         }
         assert           :? [String]
+        tags             :? [Tag]
     }
 
 Params = .Array|.Hash

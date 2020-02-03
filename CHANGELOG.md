@@ -1,4 +1,15 @@
-# 0.13.0
+# 0.14.0 - 2020/02/02
+
+* Add TAG filtering: a TAG environment variable can specify a comma separated
+  list of tags (e.g. foo,bar) or no-tags (e.g. !foo,!bar) to filter the tests
+  to run and/or excluded, respectively. Tags and no-tags can be mixed, in
+  which case the semantics is a simple conjunction of positive (resp. negated)
+  clauses. A new `tags` entry  in YAML allows tagging test cases themselves.
+
+  The feature can for instance be used to implement the 'only' feature that
+  many frameworks have.
+
+# 0.13.0 - 2020/01/21
 
 * Add junit xml output by default.
 

@@ -32,6 +32,10 @@ module Webspicy
           @raw[:metadata] ||= {}
         end
 
+        def tags
+          @raw[:tags] ||= []
+        end
+
         def dress_params
           @raw.fetch(:dress_params){ true }
         end

@@ -47,20 +47,20 @@ module Webspicy
     end
 
     def each_example(service)
-      service.examples.each{|e|
+      service.examples.select(&to_filter_proc(config.test_case_filter)).each{|e|
         yield(expand_example(service, e), false)
       }
     end
 
     def each_counterexamples(service, &bl)
-      service.counterexamples.each{|e|
+      service.counterexamples.select(&to_filter_proc(config.test_case_filter)).each{|e|
         yield(expand_example(service, e), true)
       } if config.run_counterexamples?
     end
 
     def each_generated_counterexamples(service, &bl)
       Webspicy.with_scope(self) do
-        service.generated_counterexamples.each{|e|
+        service.generated_counterexamples.select(&to_filter_proc(config.test_case_filter)).each{|e|
           yield(expand_example(service, e), true)
         }
       end if config.run_counterexamples?

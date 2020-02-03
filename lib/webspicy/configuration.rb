@@ -14,6 +14,7 @@ module Webspicy
       @run_counterexamples = default_run_counterexamples
       @file_filter = default_file_filter
       @service_filter = default_service_filter
+      @test_case_filter = default_test_case_filter
       @client = HttpClient
       Path.require_tree(folder/'support') if (folder/'support').exists?
       yield(self) if block_given?
@@ -171,7 +172,7 @@ module Webspicy
     end
     attr_reader :service_filter
 
-    # Returns the default service filters.
+    # Returns the default service filter.
     #
     # By default no filter is set unless a METHOD environment variable is set.
     # In that case, a service filter is returned that filters the services whose
@@ -181,6 +182,35 @@ module Webspicy
     end
     private :default_service_filter
 
+    # Installs a test case filter.
+    #
+    # A test case filter can be added to restrict the scope attention only to
+    # the test cases that match the service installed. Supported values are:
+    #
+    # - Proc: each test case is passed in turn. Only test cases for which a
+    # truthy value is returned will be considered by the scope.
+    # - ===: any instance responding to `===` can be used as a matcher, following
+    #   Ruby conventions. The match is done on a Service instance.
+    def test_case_filter=(tag_filter)
+      @test_case_filter = test_case_filter
+    end
+    attr_reader :test_case_filter
+
+    # Returns the default test case filter.
+    #
+    # By default no filter is set unless a TAG environment variable is set.
+    # In that case, a test case filter is returned that filters the test cases
+    # whose tags map the specified value.
+    def default_test_case_filter
+      return nil unless tags = ENV['TAG']
+      no, yes = tags.split(/\s*,\s*/).partition{|t| t =~ /^!/ }
+      no, yes = no.map{|t| t[1..-1 ]}, yes
+      ->(tc){
+        (yes.empty? || !(yes & tc.tags).empty?) \
+        && \
+        (no.empty? || (no & tc.tags).empty?)
+      }
+    end
 
     # Installs a client class to use to invoke web services for real.
     #

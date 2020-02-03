@@ -144,6 +144,68 @@ module Webspicy
       end
     end
 
+    describe 'test_case_filter' do
+
+      let(:tc){ OpenStruct.new(tags: ["foo", "bar"]) }
+
+      subject {
+        Configuration.new.test_case_filter
+      }
+
+      it 'is nil by default' do
+        expect(subject).to be_nil
+      end
+
+      it 'allows setting a single tag' do
+        ENV['TAG'] = 'foo'
+        expect(subject).to be_a(Proc)
+        expect(subject.call(tc)).to eql(true)
+      end
+
+      it 'allows no matching a single tag' do
+        ENV['TAG'] = 'baz'
+        expect(subject).to be_a(Proc)
+        expect(subject.call(tc)).to eql(false)
+      end
+
+      it 'allows setting multiple tags' do
+        ENV['TAG'] = 'foo,baz'
+        expect(subject).to be_a(Proc)
+        expect(subject.call(tc)).to eql(true)
+      end
+
+      it 'allows no matching any of multiple tags' do
+        ENV['TAG'] = 'foi,baz'
+        expect(subject).to be_a(Proc)
+        expect(subject.call(tc)).to eql(false)
+      end
+
+      it 'allows setting a single negative tag' do
+        ENV['TAG'] = '!foo'
+        expect(subject).to be_a(Proc)
+        expect(subject.call(tc)).to eql(false)
+      end
+
+      it 'allows not matching a single negative tag' do
+        ENV['TAG'] = '!baz'
+        expect(subject).to be_a(Proc)
+        expect(subject.call(tc)).to eql(true)
+      end
+
+      it 'allows mixing positive & negative tags and have a match' do
+        ENV['TAG'] = 'foo,!baz'
+        expect(subject).to be_a(Proc)
+        expect(subject.call(tc)).to eql(true)
+      end
+
+      it 'allows mixing positive & negative tags and have no match' do
+        ENV['TAG'] = 'foo,!bar'
+        expect(subject).to be_a(Proc)
+        expect(subject.call(tc)).to eql(false)
+      end
+
+    end
+
     describe 'before/after/listeners' do
 
       let(:before_eacher) { ->(){} }
