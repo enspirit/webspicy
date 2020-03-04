@@ -54,6 +54,7 @@ module Webspicy
     end # class RackHandler
 
     class Api
+      include Client::Support
 
       attr_reader :last_response
 
@@ -64,13 +65,12 @@ module Webspicy
       def options(url, params = {}, headers = nil, body = nil)
         handler = get_handler(headers)
 
-        Webspicy.info("OPTIONS #{url} -- #{params.inspect} -- #{headers.inspect}")
+        info_request("OPTIONS", url, params, headers, body)
 
         handler.options(url, params)
         @last_response = handler.last_response
 
-        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
+        debug_response(@last_response)
 
         @last_response
       end
@@ -79,13 +79,12 @@ module Webspicy
         handler = get_handler(headers)
 
         params = Hash[params.map{|k,v| [k, v.nil? ? "" : v] }]
-        Webspicy.info("GET #{url} -- #{params.inspect} -- #{headers.inspect}")
+        info_request("GET", url, params, headers, body)
 
         handler.get(url, params)
         @last_response = handler.last_response
 
-        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
+        debug_response(@last_response)
 
         @last_response
       end
@@ -97,20 +96,19 @@ module Webspicy
 
         case body
         when NilClass
-          Webspicy.info("POST #{url} -- #{params.inspect} -- #{headers.inspect}")
+          info_request("POST", url, params, headers, body)
           handler.post(url, params.to_json, {"CONTENT_TYPE" => "application/json"})
         when FileUpload
           file = Rack::Test::UploadedFile.new(body.path, body.content_type)
-          Webspicy.info("POST #{url} -- #{params.inspect} -- #{body}")
+          info_request("POST", url, params, headers, body)
           handler.post(url, body.param_name.to_sym => file)
         else
-          Webspicy.info("POST #{url} -- #{params.inspect} -- #{body.inspect[0..25]}")
+          info_request("POST", url, params, headers, body)
           handler.post(url, body)
         end
         @last_response = handler.last_response
 
-        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
+        debug_response(@last_response)
 
         @last_response
       end
@@ -118,13 +116,12 @@ module Webspicy
       def patch(url, params = {}, headers = nil, body = nil)
         handler = get_handler(headers)
 
-        Webspicy.info("PATCH #{url} -- #{params.inspect} -- #{headers.inspect}")
+        info_request("PATCH", url, params, headers, body)
 
         handler.patch(url, params.to_json, {"CONTENT_TYPE" => "application/json"})
         @last_response = handler.last_response
 
-        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
+        debug_response(@last_response)
 
         @last_response
       end
@@ -132,13 +129,12 @@ module Webspicy
       def post_form(url, params = {}, headers = nil, body = nil)
         handler = get_handler(headers)
 
-        Webspicy.info("POST #{url} -- #{params.inspect} -- #{headers.inspect}")
+        info_request("POST", url, params, headers, body)
 
         handler.post(url, params)
         @last_response = handler.last_response
 
-        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
+        debug_response(@last_response)
 
         @last_response
       end
@@ -146,13 +142,12 @@ module Webspicy
       def delete(url, params = {}, headers = nil, body = nil)
         handler = get_handler(headers)
 
-        Webspicy.info("DELETE #{url} -- #{params.inspect} -- #{headers.inspect}")
+        info_request("DELETE", url, params, headers, body)
 
         handler.delete(url, params.to_json, {"CONTENT_TYPE" => "application/json"})
         @last_response = handler.last_response
 
-        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
+        debug_response(@last_response)
 
         @last_response
       end

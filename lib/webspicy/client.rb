@@ -56,3 +56,6 @@ module Webspicy
 
   end
 end
+require_relative 'client/support'
+require_relative 'client/http_client'
+require_relative 'client/rack_test_client'

@@ -18,8 +18,6 @@ module Webspicy
   require 'webspicy/file_upload'
   require 'webspicy/scope'
   require 'webspicy/client'
-  require 'webspicy/client/http_client'
-  require 'webspicy/client/rack_test_client'
   require 'webspicy/resource'
   require 'webspicy/precondition'
   require 'webspicy/postcondition'
@@ -132,6 +130,9 @@ module Webspicy
 
   LOGGER = ::Logger.new(STDOUT)
   LOGGER.level = Logger.const_get(ENV['LOG_LEVEL'] || 'WARN')
+  LOGGER.formatter = proc { |severity, datetime, progname, msg|
+    "      " + msg + "\n"
+  }
 
   def info(*args, &bl)
     LOGGER && LOGGER.info(*args, &bl)

@@ -40,33 +40,32 @@ module Webspicy
     end
 
     class Api
+      include Client::Support
 
       attr_reader :last_response
 
       def options(url, params = {}, headers = nil, body = nil)
-        Webspicy.info("OPTIONS #{url} -- #{params.inspect}")
+        info_request("OPTIONS", url, params, headers, body)
 
         @last_response = HTTP[headers || {}].options(url, params: params)
 
-        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
+        debug_response(@last_response)
 
         @last_response
       end
 
       def get(url, params = {}, headers = nil, body = nil)
-        Webspicy.info("GET #{url} -- #{params.inspect}")
+        info_request("GET", url, params, headers, body)
 
         @last_response = HTTP[headers || {}].get(url, params: params)
 
-        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
+        debug_response(@last_response)
 
         @last_response
       end
 
       def post(url, params = {}, headers = nil, body = nil)
-        Webspicy.info("POST #{url} -- #{params.inspect}")
+        info_request("POST", url, params, headers, body)
 
         url = url + "?" + Rack::Utils.build_query(params) if body && !params.empty?
 
@@ -87,43 +86,39 @@ module Webspicy
           @last_response = HTTP[headers].post(url, body: body)
         end
 
-        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
+        debug_response(@last_response)
 
         @last_response
       end
 
       def patch(url, params = {}, headers = nil, body = nil)
-        Webspicy.info("PATCH #{url} -- #{params.inspect}")
+        info_request("PATCH", url, params, headers, body)
 
         headers ||= {}
         headers['Content-Type'] ||= 'application/json'
         @last_response = HTTP[headers].patch(url, body: params.to_json)
 
-        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
+        debug_response(@last_response)
 
         @last_response
       end
 
       def post_form(url, params = {}, headers = nil, body = nil)
-        Webspicy.info("POST #{url} -- #{params.inspect}")
+        info_request("POST", url, params, headers, body)
 
         @last_response = HTTP[headers || {}].post(url, form: params)
 
-        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
+        debug_response(@last_response)
 
         @last_response
       end
 
       def delete(url, params = {}, headers = nil, body = nil)
-        Webspicy.info("DELETE #{url} -- #{params.inspect}")
+        info_request("DELETE", url, params, headers, body)
 
         @last_response = HTTP[headers || {}].delete(url, body: params.to_json)
 
-        Webspicy.debug("Headers: #{@last_response.headers.to_hash}")
-        Webspicy.debug("Response (#{@last_response.status}):  #{@last_response.body}")
+        debug_response(@last_response)
 
         @last_response
       end
