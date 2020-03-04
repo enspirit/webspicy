@@ -1,3 +1,7 @@
+# 0.15.0
+
+* Enhance LOG_LEVEL=DEBUG with pretty printing and better logging format
+
 # 0.14.0 - 2020/02/02
 
 * Allow negative RESOURCE filtering, by prefixing the resource match
