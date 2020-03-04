@@ -80,8 +80,11 @@ module Webspicy
           elsif is_redirect?
           else
             case dressed_body
-            when Finitio::TypeError then dressed_body.root_cause.message
-            when StandardError      then dressed_body.message
+            when Finitio::TypeError
+              rc = dressed_body.root_cause
+              "#{rc.message} (#{rc.location ? rc.location : 'unknown location'})"
+            when StandardError
+              dressed_body.message
             else nil
             end
           end

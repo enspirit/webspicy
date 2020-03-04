@@ -2,6 +2,9 @@
 
 * Enhance LOG_LEVEL=DEBUG with pretty printing and better logging format
 
+* Provide Finitio location when available on a "Missing / Expected attribute"
+  errors.
+
 # 0.14.0 - 2020/02/02
 
 * Allow negative RESOURCE filtering, by prefixing the resource match
