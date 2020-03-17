@@ -4,3 +4,5 @@ pkg/*
 /vendor
 /examples/restful/vendor
 rspec.xml
+Dockerfile.built
+Dockerfile.log
