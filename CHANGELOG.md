@@ -5,6 +5,8 @@
 * Provide Finitio location when available on a "Missing / Expected attribute"
   errors.
 
+* Add a basic `webspicy` commandline that runs the tester using the same environment variables recognized as with existing rake tasks used here and there.
+
 # 0.14.0 - 2020/02/02
 
 * Allow negative RESOURCE filtering, by prefixing the resource match

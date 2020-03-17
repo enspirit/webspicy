@@ -12,7 +12,11 @@ box software operations.
 
 * Black box testing: Webspicy focuses on web services seen as blackboxes. It has
   no knowledge of the implementation, and focuses on HTTP and input/output data
-  instead. Investing in such testing makes those tests stables and your API better.
+  instead. Investing in such testing makes those tests more stable and your API
+  better.
+
+* Test instrumentation and generation, based on declarative PRE & POST
+  conditions.
 
 * Extra goodness for Rubyists: being written in ruby, Webspicy also supports
   testing Rack applications directly (through rack/test)

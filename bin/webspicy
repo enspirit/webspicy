@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+#/ Document and test RESTful webservices
+#/ (c) Enspirit SPRL. Distributed under MIT licence.
+#/ Usage: webspicy [options] path/to/config.rb
+#/
+#/ Recognized env vars:
+#/ - ROBUST=no                    do not execute counterexamples
+#/ - LOG_LEVEL=INFO|DEBUG|...     set log level to the appropriate level
+#/ - RESOURCE=...                 restrict to .yml test files matching the pattern
+#/ - METHOD=GET|POST|DELETE...    execute only tests matching the verb
+#/ - TAG=...                      execute only tests matching the given tag
+#/ - FAILFAST=yes|no              stop executing tests on first failure
+require 'webspicy'
+require 'webspicy/tester'
+require 'optparse'
+
+def showhelp
+  file = __FILE__
+  exec "grep ^#/<'#{file}'|cut -c4-"
+end
+
+ARGV.options do |opts|
+  opts.on_tail("-h", "--help"){ showhelp }
+  opts.parse!
+end
+
+if ARGV.size != 1
+  showhelp
+  exit(-1)
+elsif (p = Path(ARGV.first)).exists?
+  config = Webspicy::Configuration.dress(p)
+  Webspicy::Tester.new(config).call
+else
+  puts "No such file or directory `#{ARGV.first}`"
+  showhelp
+  exit(-1)
+end
