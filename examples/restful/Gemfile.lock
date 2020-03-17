@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    webspicy (0.15.0.pre.rc2)
+    webspicy (0.15.0.pre.rc3)
       finitio (>= 0.8.0)
       http (~> 2)
       mustermann (~> 1.0)
@@ -53,7 +53,7 @@ GEM
       rspec-mocks (~> 3.9.0)
     rspec-core (3.9.1)
       rspec-support (~> 3.9.1)
-    rspec-expectations (3.9.0)
+    rspec-expectations (3.9.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-mocks (3.9.1)
