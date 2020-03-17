@@ -38,7 +38,7 @@ module Webspicy
   ### About formal doc and resources defined there
   ###
 
-  FORMALDOC = Finitio::DEFAULT_SYSTEM.parse (Path.dir/("webspicy/formaldoc.fio")).read
+  FORMALDOC = Finitio.system(Path.dir/("webspicy/formaldoc.fio"))
 
   # Returns a default scope instance.
   def default_scope
@@ -119,7 +119,7 @@ module Webspicy
     if scope = Thread.current[:webspicy_scope]
       scope.parse_schema(fio)
     else
-      Finitio::DEFAULT_SYSTEM.parse(fio)
+      Finitio.system(fio)
     end
   end
   module_function :schema

@@ -1,11 +1,16 @@
 # 0.15.0
 
+* BREAKING: schema.fio now have to `@import finitio/data` explicitly.
+  The Finitio default system is no longer started from by default.
+
 * Enhance LOG_LEVEL=DEBUG with pretty printing and better logging format
 
 * Provide Finitio location when available on a "Missing / Expected attribute"
   errors.
 
-* Add a basic `webspicy` commandline that runs the tester using the same environment variables recognized as with existing rake tasks used here and there.
+* Add a basic `webspicy` commandline that runs the tester using the same
+  environment variables recognized as with existing rake tasks used here and
+  there.
 
 # 0.14.0 - 2020/02/02
 

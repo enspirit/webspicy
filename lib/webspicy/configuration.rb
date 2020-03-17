@@ -325,7 +325,7 @@ module Webspicy
     def data_system
       schema = self.folder/"schema.fio"
       if schema.file?
-        Finitio::DEFAULT_SYSTEM.parse(schema.read)
+        Finitio.system(schema)
       elsif not(self.parent.nil?)
         self.parent.data_system
       else
