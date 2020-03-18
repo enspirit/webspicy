@@ -6,7 +6,7 @@ PATH
       http (>= 2)
       mustermann (~> 1.0)
       mustermann-contrib
-      path (~> 1.3)
+      path (>= 1.3)
       rack-robustness (~> 1.1, >= 1.1.0)
       rack-test (~> 0.6.3)
       rspec (~> 3.7)
