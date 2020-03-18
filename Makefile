@@ -7,7 +7,6 @@ SHELL=/bin/bash -o pipefail
 ### Config variables
 ###
 
-DOCKER_REGISTRY := $(or ${DOCKER_REGISTRY},${DOCKER_REGISTRY},hub.docker.com)
 DOCKER_TAG := $(or ${DOCKER_TAG},${DOCKER_TAG},latest)
 
 ################################################################################
@@ -18,7 +17,7 @@ bumped:
 	bundle install
 	cd examples/restful
 	bundle install
-	bundle exec rake	
+	bundle exec rake
 
 release:
 	bundle exec rake gem
@@ -33,8 +32,8 @@ Dockerfile.built: Dockerfile $(shell find . -type f | grep -v "\/tmp\|\.idea\|\.
 	touch Dockerfile.built
 
 Dockerfile.pushed: Dockerfile.built
-	docker tag wespicy $(DOCKER_REGISTRY)/enspirit/webspicy:$(DOCKER_TAG)
-	docker push $(DOCKER_REGISTRY)/enspirit/webspicy:$(DOCKER_TAG) | tee -a Dockerfile.log
+	docker tag enspirit/webspicy enspirit/webspicy:$(DOCKER_TAG)
+	docker push enspirit/webspicy:$(DOCKER_TAG) | tee -a Dockerfile.log
 	touch Dockerfile.pushed
 
 image: Dockerfile.built
