@@ -3,7 +3,7 @@ PATH
   specs:
     webspicy (0.15.0.pre.rc6)
       finitio (>= 0.8.0)
-      http (~> 2)
+      http (>= 2)
       mustermann (~> 1.0)
       mustermann-contrib
       path (~> 1.3)
