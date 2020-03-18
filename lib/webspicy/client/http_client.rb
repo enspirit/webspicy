@@ -76,11 +76,13 @@ module Webspicy
           headers['Content-Type'] ||= 'application/json'
           @last_response = HTTP[headers].post(url, body: params.to_json)
         when FileUpload
-          file = HTTP::FormData::File.new(body.path, {
+          file = HTTP::FormData::File.new(body.path.to_s, {
             content_type: body.content_type,
             filename: body.path.basename.to_s
           })
-          @last_response = HTTP[headers].post(url, form: { body.param_name.to_sym => file })
+          @last_response = HTTP[headers].post(url, form: {
+            body.param_name.to_sym => file
+          })
         else
           headers['Content-Type'] ||= 'application/json'
           @last_response = HTTP[headers].post(url, body: body)

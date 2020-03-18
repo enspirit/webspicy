@@ -3,6 +3,13 @@
 * BREAKING: schema.fio now have to `@import finitio/data` explicitly.
   The Finitio default system is no longer started from by default.
 
+* Possibly BREAKING: `path` and `http` dependencies have been weakened to allow
+  ruby projects using `webspicy` as gem dependency to use any version without
+  having version clashes. At the time of release, this means that those gems
+  will probably get as high as 2.0.x and 4.3.x, while 1.3.x and 2.x where
+  previously constrained. This might break a few tests unless your own ruby
+  project constraint the gems explicitly.
+
 * Enhance LOG_LEVEL=DEBUG with pretty printing and better logging format
 
 * Provide Finitio location when available on a "Missing / Expected attribute"
