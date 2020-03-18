@@ -1,4 +1,4 @@
-# 0.15.0
+# 0.15.0 - 2020/03/18
 
 * BREAKING: schema.fio now have to `@import finitio/data` explicitly.
   The Finitio default system is no longer started from by default.
@@ -18,6 +18,10 @@
 * Add a basic `webspicy` commandline that runs the tester using the same
   environment variables recognized as with existing rake tasks used here and
   there.
+
+* A `enspirit/webspicy` docker image has been pushed to docker hub, that
+  expected some tests and config.rb file mounted as a volume in /home/app.
+  The image executes the tests by default.
 
 # 0.14.0 - 2020/02/02
 

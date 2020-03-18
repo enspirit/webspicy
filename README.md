@@ -26,3 +26,21 @@ box software operations.
 Please have a look at the example first. It contains a simple Sinatra application
 with GET and POST restful services tested with the framework. The Rakefile contains
 the necessary tasks to run those tests.
+
+## Executing the tests using the command line
+
+Please have a look at the examples first. Then:
+
+```
+webspicy --help
+webspicy path/to/your/config.rb
+```
+
+## Using the docker image
+
+A docker image running your tests is provided. It expects a volume with the
+tests to run put in `/home/app`.
+
+```
+docker run enspirit/webspicy -v path/to/tests:/home/app
+```
