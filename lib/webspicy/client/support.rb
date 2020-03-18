@@ -6,7 +6,7 @@ module Webspicy
         Webspicy.info("#{kind} #{url}")
         debug("Req params", JSON.pretty_generate(params)) if params
         debug("Req headers", JSON.pretty_generate(headers)) if headers
-        debug("Req body", JSON.pretty_generate(body)) if body
+        debug("Req body", request_body_to_s(body)) if body
         Webspicy.debug("")
       end
 
@@ -19,6 +19,11 @@ module Webspicy
 
       def debug(what, value)
         Webspicy.debug("  #{what}: " + value_to_s(value))
+      end
+
+      def request_body_to_s(body)
+        body = body.to_info if body.is_a?(Webspicy::FileUpload)
+        JSON.pretty_generate(body)
       end
 
       def response_body_to_s(response)
