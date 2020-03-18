@@ -2,7 +2,7 @@ module Webspicy
   module Version
     MAJOR = 0
     MINOR = 15
-    TINY  = "0-rc8"
+    TINY  = "0-rc9"
   end
   VERSION = "#{Version::MAJOR}.#{Version::MINOR}.#{Version::TINY}"
 end
