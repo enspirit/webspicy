@@ -75,9 +75,9 @@ module Webspicy
           raise "Test not ran" unless invocation.done?
           fails = [
             [:expected_status_unmet, true],
-            [:expected_content_type_unmet, true],
+            [:expected_content_type_unmet, !test_case.is_expected_status?(204)],
             [:expected_headers_unmet, test_case.has_expected_headers?],
-            [:expected_schema_unmet, true],
+            [:expected_schema_unmet, !test_case.is_expected_status?(204)],
             [:assertions_unmet, test_case.has_assertions?],
             [:postconditions_unmet, test_case.service.has_postconditions? && !counterexample],
             [:expected_error_unmet, test_case.has_expected_error?]

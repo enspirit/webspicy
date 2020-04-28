@@ -1,3 +1,9 @@
+# 0.15.2 - 2020/04/28
+
+* Webspicy no longer checks expected headers and schema when the response
+  is expected to be empty (e.g. 204). This yields too many false positive
+  since different web servers do not react exactly the same on 204.
+
 # 0.15.1 - 2020/04/28
 
 * Params sent in GET and OPTIONS are correctly converted to String before

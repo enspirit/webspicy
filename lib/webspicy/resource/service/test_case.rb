@@ -69,6 +69,10 @@ module Webspicy
           expected[:status]
         end
 
+        def is_expected_status?(status)
+          expected_status == status
+        end
+
         def expected_error
           expected[:error]
         end
