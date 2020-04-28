@@ -47,6 +47,7 @@ module Webspicy
       def options(url, params = {}, headers = nil, body = nil)
         info_request("OPTIONS", url, params, headers, body)
 
+        params = querystring_params(params)
         @last_response = HTTP[headers || {}].options(url, params: params)
 
         debug_response(@last_response)
@@ -57,6 +58,7 @@ module Webspicy
       def get(url, params = {}, headers = nil, body = nil)
         info_request("GET", url, params, headers, body)
 
+        params = querystring_params(params)
         @last_response = HTTP[headers || {}].get(url, params: params)
 
         debug_response(@last_response)

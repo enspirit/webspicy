@@ -1,3 +1,8 @@
+# 0.15.1 - 2020/04/28
+
+* Params sent in GET and OPTIONS are correctly converted to String before
+  being used. An error is otherwise raised by HTTP#get.
+
 # 0.15.0 - 2020/03/18
 
 * BREAKING: schema.fio now have to `@import finitio/data` explicitly.

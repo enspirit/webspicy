@@ -2,6 +2,10 @@ module Webspicy
   class Client
     module Support
 
+      def querystring_params(params)
+        Hash[params.each_pair.map{|k,v| [k.to_s,v.to_s] }]
+      end
+
       def info_request(kind, url, params, headers, body)
         Webspicy.info("#{kind} #{url}")
         debug("Req params", JSON.pretty_generate(params)) if params
