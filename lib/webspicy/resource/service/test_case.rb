@@ -5,8 +5,20 @@ module Webspicy
 
         def initialize(raw)
           @raw = raw
+          @counterexample = nil
         end
-        attr_accessor :service
+        attr_reader :service
+        attr_reader :counterexample
+
+        def bind(service, counterexample)
+          @service = service
+          @counterexample = counterexample
+          self
+        end
+
+        def counterexample?
+          !!@counterexample
+        end
 
         def resource
           service.resource

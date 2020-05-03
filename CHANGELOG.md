@@ -1,3 +1,8 @@
+# 0.15.3
+
+* Test case now expose a `counterexample?` method with the obvious
+  semantics.
+
 # 0.15.2 - 2020/04/28
 
 * Webspicy no longer checks expected headers and schema when the response

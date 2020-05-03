@@ -128,8 +128,7 @@ module Webspicy
         h1 = service.default_example.to_info
         h2 = example.to_info
         ex = Resource::Service::TestCase.new(merge_maps(h1, h2))
-        ex.service = service
-        ex
+        ex.bind(service, example.counterexample?)
       end
 
       def merge_maps(h1, h2)

@@ -51,8 +51,7 @@ module Webspicy
         preconditions.map{|pre|
           pre.counterexamples(self).map{|tc|
             tc = Webspicy.test_case(tc, Webspicy.current_scope)
-            tc.service = self
-            tc
+            tc.bind(self, true)
           }
         }.flatten
       end
@@ -107,13 +106,13 @@ module Webspicy
 
       def bind_examples
         (@raw[:examples] ||= []).each do |ex|
-          ex.service = self
+          ex.bind(self, false)
         end
       end
 
       def bind_counterexamples
         (@raw[:counterexamples] ||= []).each do |ex|
-          ex.service = self
+          ex.bind(self, true)
         end
       end
 
