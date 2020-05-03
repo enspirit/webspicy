@@ -3,6 +3,10 @@
 * Test case now expose a `counterexample?` method with the obvious
   semantics.
 
+* `after_each` now takes the invocation as second block argument.
+
+* The block called in `around_each` now returns the invocation.
+
 # 0.15.2 - 2020/04/28
 
 * Webspicy no longer checks expected headers and schema when the response
