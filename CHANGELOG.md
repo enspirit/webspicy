@@ -10,6 +10,10 @@
 * Invocation now exposes the list of assertion errors in `errors` and
   provides as `has_error?` helper.
 
+* `Configuration` allows hooks to be provided as objects:
+
+      c.after_each(any_instance_responding_to_call)
+
 # 0.15.2 - 2020/04/28
 
 * Webspicy no longer checks expected headers and schema when the response

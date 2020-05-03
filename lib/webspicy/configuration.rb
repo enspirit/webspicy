@@ -249,36 +249,36 @@ module Webspicy
     # Installs a listener that will be called before all tests
     #
     # The `listener` must respond to `call`.
-    def before_all(&listener)
-      register_listener(:before_all, listener)
+    def before_all(l = nil, &listener)
+      register_listener(:before_all, l || listener)
     end
 
     # Installs a listener that will be called before each web service invocation.
     #
     # The `listener` must respond to `call`.
-    def before_each(&listener)
-      register_listener(:before_each, listener)
+    def before_each(l = nil, &listener)
+      register_listener(:before_each, l || listener)
     end
 
     # Installs a listener that will be called after all tests
     #
     # The `listener` must respond to `call`.
-    def after_all(&listener)
-      register_listener(:after_all, listener)
+    def after_all(l = nil, &listener)
+      register_listener(:after_all, l || listener)
     end
 
     # Installs a listener that will be called after each web service invocation.
     #
     # The `listener` must respond to `call`.
-    def after_each(&listener)
-      register_listener(:after_each, listener)
+    def after_each(l = nil, &listener)
+      register_listener(:after_each, l || listener)
     end
 
     # Installs a listener that will be called around each web service invocation.
     #
     # The `listener` must respond to `call`.
-    def around_each(&listener)
-      register_listener(:around_each, listener)
+    def around_each(l = nil, &listener)
+      register_listener(:around_each, l || listener)
     end
 
     # Installs a listener that will be called right after all precondition
