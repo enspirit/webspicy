@@ -45,16 +45,16 @@ module Webspicy
 
     def rspec_service!(on, service, client, scope)
       on.describe service do
-        scope.each_testcase(service) do |test_case, counterexample|
+        scope.each_testcase(service) do |test_case|
           describe test_case do
-            include_examples 'a successful test case invocation', client, test_case, counterexample
+            include_examples 'a successful test case invocation', client, test_case
           end
         end
       end
     end
 
     def rspec_config!
-      RSpec.shared_examples "a successful test case invocation" do |client, test_case, counterexample|
+      RSpec.shared_examples "a successful test case invocation" do |client, test_case|
 
         around(:each) do |example|
           client.around(test_case) do
@@ -74,24 +74,8 @@ module Webspicy
 
         it 'works' do
           raise "Test not ran" unless invocation.done?
-          fails = [
-            [:expected_status_unmet, true],
-            [:expected_content_type_unmet, !test_case.is_expected_status?(204)],
-            [:expected_headers_unmet, test_case.has_expected_headers?],
-            [:expected_schema_unmet, !test_case.is_expected_status?(204)],
-            [:assertions_unmet, test_case.has_assertions?],
-            [:postconditions_unmet, test_case.service.has_postconditions? && !counterexample],
-            [:expected_error_unmet, test_case.has_expected_error?]
-          ].map do |(expectation,only_if)|
-            next unless only_if
-            begin
-              invocation.send(expectation)
-            rescue => ex
-              ex.message
-            end
-          end
-          fails = fails.compact
-          raise "\n* " + fails.join("\n* ") + "\n" unless fails.empty?
+          errors = invocation.errors
+          raise "\n* " + errors.join("\n* ") + "\n" unless errors.empty?
         end
       end
     end

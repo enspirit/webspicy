@@ -12,6 +12,32 @@ module Webspicy
 
         attr_reader :service, :test_case, :response, :client
 
+        def errors
+          @errors ||= begin
+            errs = [
+              [:expected_status_unmet, true],
+              [:expected_content_type_unmet, !test_case.is_expected_status?(204)],
+              [:expected_headers_unmet, test_case.has_expected_headers?],
+              [:expected_schema_unmet, !test_case.is_expected_status?(204)],
+              [:assertions_unmet, test_case.has_assertions?],
+              [:postconditions_unmet, test_case.service.has_postconditions? && !test_case.counterexample?],
+              [:expected_error_unmet, test_case.has_expected_error?]
+            ].map do |(expectation,only_if)|
+              next unless only_if
+              begin
+                self.send(expectation)
+              rescue => ex
+                ex.message
+              end
+            end
+            errs.compact
+          end
+        end
+
+        def has_error?
+          !errors.empty?
+        end
+
         ### Getters on response
 
         def response_code

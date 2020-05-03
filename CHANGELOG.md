@@ -7,6 +7,9 @@
 
 * The block called in `around_each` now returns the invocation.
 
+* Invocation now exposes the list of assertion errors in `errors` and
+  provides as `has_error?` helper.
+
 # 0.15.2 - 2020/04/28
 
 * Webspicy no longer checks expected headers and schema when the response
