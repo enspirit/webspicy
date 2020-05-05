@@ -1,4 +1,4 @@
-# 0.15.3
+# 0.15.3 - 2020/04/05
 
 * Test case now expose a `counterexample?` method with the obvious
   semantics.
