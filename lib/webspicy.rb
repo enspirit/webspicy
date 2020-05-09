@@ -14,6 +14,7 @@ module Webspicy
   ### Load library
   ###
 
+  require 'webspicy/support'
   require 'webspicy/configuration'
   require 'webspicy/file_upload'
   require 'webspicy/scope'

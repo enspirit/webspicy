@@ -57,7 +57,7 @@ module Webspicy
 
     def best_status_code(service)
       if ex = service.examples.first
-        ex.expected_status || 200
+        (ex.expected_status && ex.expected_status.to_i) || 200
       else
         200
       end

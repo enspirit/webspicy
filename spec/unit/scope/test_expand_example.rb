@@ -53,7 +53,7 @@ module Webspicy
         expect(subject).to be_a(Resource::Service::TestCase)
         expect(subject.description).to eql("Hello world")
         expect(subject.expected).to eql({
-          status: 200,
+          status: Support::StatusRange.int(200),
           content_type: "application/json"
         })
       end

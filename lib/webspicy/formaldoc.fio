@@ -51,7 +51,7 @@ TestCase =
         requester        :? String
         metadata         :? { ...: .Object }
         expected         :? {
-            status       :? Integer
+            status       :? StatusRange
             content_type :? String|Nil
             error        :? String
             headers      :? .Hash
@@ -61,3 +61,7 @@ TestCase =
     }
 
 Params = .Array|.Hash
+
+StatusRange = .Webspicy::Support::StatusRange
+  <int> Integer
+  <str> String(s | s =~ /^\dxx$/ )
