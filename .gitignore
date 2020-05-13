@@ -1,3 +1,4 @@
+.env
 Gemfile.lock
 pkg/*
 .bundle
@@ -6,3 +7,4 @@ pkg/*
 rspec.xml
 Dockerfile.built
 Dockerfile.log
+Dockerfile.pushed
