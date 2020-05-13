@@ -10,6 +10,10 @@
   allows servers to specify an explicit charset without the test failing
   if the expectation does not care about it.
 
+* Added ROBUST=only option to run counterexamples only. This helps
+  spliting test executions in two: all examples first, all counterexamples
+  too.
+
 # 0.15.3 - 2020/05/05
 
 * Test case now expose a `counterexample?` method with the obvious

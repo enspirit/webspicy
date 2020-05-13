@@ -49,7 +49,7 @@ module Webspicy
     def each_example(service)
       service.examples.select(&to_filter_proc(config.test_case_filter)).each{|e|
         yield(expand_example(service, e))
-      }
+      } if config.run_examples?
     end
 
     def each_counterexamples(service, &bl)

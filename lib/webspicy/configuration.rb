@@ -11,6 +11,7 @@ module Webspicy
       @postconditions = []
       @listeners = Hash.new{|h,k| h[k] = [] }
       @rspec_options = default_rspec_options
+      @run_examples = default_run_examples
       @run_counterexamples = default_run_counterexamples
       @file_filter = default_file_filter
       @service_filter = default_service_filter
@@ -93,6 +94,23 @@ module Webspicy
     def has_children?
       !children.empty?
     end
+
+    # Sets whether examples have to be ran or not.
+    def run_examples=(run_examples)
+      @run_examples = run_examples
+    end
+    attr_reader :run_examples
+
+    # Whether counter examples must be ran or not.
+    def run_examples?
+      @run_examples
+    end
+
+    # Returns the defaut value for run_examples
+    def default_run_examples
+      ENV['ROBUST'].nil? || (ENV['ROBUST'] != 'only')
+    end
+    private :default_run_examples
 
     # Sets whether counter examples have to be ran or not.
     def run_counterexamples=(run_counterexamples)
