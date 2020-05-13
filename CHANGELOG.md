@@ -5,6 +5,11 @@
   prevents over constraining assertions for web services returning codes
   200 vs. 201, or 301 vs. 302.
 
+* Weaken content_type expectations. The actual response content type
+  must start with the expected content type, but may be longer. That
+  allows servers to specify an explicit charset without the test failing
+  if the expectation does not care about it.
+
 # 0.15.3 - 2020/05/05
 
 * Test case now expose a `counterexample?` method with the obvious

@@ -89,7 +89,7 @@ module Webspicy
           if ect.nil?
             got.nil? ? nil : "#{ect} != #{got}"
           else
-            ect.to_s == got.to_s ? nil : "#{ect} != #{got}"
+            got.to_s.start_with?(ect.to_s) ? nil : "#{ect} != #{got}"
           end
         end
 
