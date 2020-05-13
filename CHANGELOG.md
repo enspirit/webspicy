@@ -1,4 +1,11 @@
-# 0.15.3 - 2020/04/05
+# 0.15.4 - 2020/05/13
+
+* Expected status may now use expresions like "2xx" or "3xx" to indicate
+  that any status within the century range is considered a success. This
+  prevents over constraining assertions for web services returning codes
+  200 vs. 201, or 301 vs. 302.
+
+# 0.15.3 - 2020/05/05
 
 * Test case now expose a `counterexample?` method with the obvious
   semantics.

@@ -82,7 +82,7 @@ module Webspicy
         end
 
         def is_expected_status?(status)
-          expected_status == status
+          expected_status === status
         end
 
         def expected_error
