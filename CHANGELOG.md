@@ -1,3 +1,9 @@
+# 0.15.5 - 2020/05/14
+
+* Fix error message when the status code does not meet the expectation
+
+* Fix TAG=... not working when the tag is part of the default_example.
+
 # 0.15.4 - 2020/05/13
 
 * Expected status may now use expresions like "2xx" or "3xx" to indicate
