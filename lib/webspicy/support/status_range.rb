@@ -41,6 +41,10 @@ module Webspicy
         @range.hash
       end
 
+      def to_s
+        @range.to_s
+      end
+
     end # class StatusRange
   end # module Support
 end # module Webspicy

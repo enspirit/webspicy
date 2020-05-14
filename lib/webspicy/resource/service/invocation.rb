@@ -73,7 +73,7 @@ module Webspicy
         def expected_status_unmet
           expected = test_case.expected_status
           got = response.status
-          expected === got ? nil : "#{expected} != #{got}"
+          expected === got ? nil : "#{expected} !== #{got}"
         end
 
         def meets_expected_status?
