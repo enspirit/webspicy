@@ -29,7 +29,8 @@ if ARGV.size != 1
   exit(-1)
 elsif (p = Path(ARGV.first)).exists?
   config = Webspicy::Configuration.dress(p)
-  Webspicy::Tester.new(config).call
+  res = Webspicy::Tester.new(config).call
+  abort("Some tests failed") unless res == 0
 else
   puts "No such file or directory `#{ARGV.first}`"
   showhelp
