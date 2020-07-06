@@ -126,6 +126,19 @@ module Webspicy
         @last_response
       end
 
+      def put(url, params = {}, headers = nil, body = nil)
+        handler = get_handler(headers)
+
+        info_request("PUT", url, params, headers, body)
+
+        handler.put(url, params.to_json, {"CONTENT_TYPE" => "application/json"})
+        @last_response = handler.last_response
+
+        debug_response(@last_response)
+
+        @last_response
+      end
+
       def post_form(url, params = {}, headers = nil, body = nil)
         handler = get_handler(headers)
 
