@@ -119,6 +119,21 @@ patch '/todo/:id', :auth => :user do |id|
   end
 end
 
+put '/todo/:id', :auth => :user do |id|
+  content_type :json
+  todo = settings.todolist.find{|todo| todo[:id] == Integer(id) }
+  if todo.nil?
+    status 404
+    {error: "No such todo"}.to_json
+  else
+    put = SCHEMA["TodoPut"].dress(loaded_body)
+    updated = todo.merge(put)
+    settings.todolist = settings.todolist.reject{|todo| todo[:id] == Integer(id) }
+    settings.todolist << updated
+    updated.to_json
+  end
+end
+
 delete '/todo/:id', :auth => :admin do |id|
   content_type :json
   todo = settings.todolist.find{|todo| todo[:id] == Integer(id) }

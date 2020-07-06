@@ -1,7 +1,7 @@
 @import finitio/data
 
 Method =
-    String( s | s =~ /^(GET|POST|POST_FORM|PUT|DELETE|PATCH|OPTIONS)$/ )
+    String( s | s =~ /^(GET|POST|POST_FORM|PUT|DELETE|PATCH|PUT|OPTIONS)$/ )
 
 Tag = String( s | s.length > 0 )
 

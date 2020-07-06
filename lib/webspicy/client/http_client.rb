@@ -107,6 +107,18 @@ module Webspicy
         @last_response
       end
 
+      def put(url, params = {}, headers = nil, body = nil)
+        info_request("PUT", url, params, headers, body)
+
+        headers ||= {}
+        headers['Content-Type'] ||= 'application/json'
+        @last_response = HTTP[headers].put(url, body: params.to_json)
+
+        debug_response(@last_response)
+
+        @last_response
+      end
+
       def post_form(url, params = {}, headers = nil, body = nil)
         info_request("POST", url, params, headers, body)
 

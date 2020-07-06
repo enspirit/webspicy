@@ -1,0 +1,63 @@
+---
+name: |-
+  Todo
+
+url: |-
+  /todo/{id}
+
+services:
+- method: |-
+    PUT
+
+  description: |-
+    Update a single Todo item
+
+  preconditions:
+    - Must be authenticated
+
+  input_schema: |-
+    TodoPut
+
+  output_schema: |-
+    Todo
+
+  error_schema: |-
+    ErrorSchema
+
+  default_example:
+    expected:
+      content_type: application/json
+      status: 200
+
+  examples:
+
+    - description: |-
+        when requested on an existing TODO
+      params:
+        id: 1
+        description: 'hello world'
+      assert:
+        - "pathFD('', description: 'hello world')"
+
+  counterexamples:
+
+    - description: |-
+        when requested on an unexisting TODO
+      params:
+        id: 999254654
+      expected:
+        content_type: application/json
+        status: 404
+      assert:
+        - "pathFD('', error: 'No such todo')"
+
+    - description: |-
+        when violating the Put data type
+      params:
+        id: 1
+        nosuchone: 'foobar'
+      dress_params:
+        false
+      expected:
+        content_type: application/json
+        status: 400
