@@ -1,3 +1,11 @@
+# 0.15.7 - 2020/06/07
+
+* Add support for HTTP PUT verb, in both real and rack clients.
+
+# 0.15.6 - 2020/06/05
+
+* Fix return code of the webspicy commandline tool.
+
 # 0.15.5 - 2020/05/14
 
 * Fix error message when the status code does not meet the expectation
