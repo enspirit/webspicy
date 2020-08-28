@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.executables = (Dir["bin/*"]).collect{|f| File.basename(f)}
 
   s.add_development_dependency "rake", "~> 12"
-  s.add_development_dependency 'sinatra', '~> 2.0', '>= 2.0.2'
+  s.add_development_dependency 'sinatra', '~> 2'
 
   s.add_runtime_dependency "rspec", "~> 3.7"
   s.add_runtime_dependency 'rspec_junit_formatter', '~> 0.4.1'
