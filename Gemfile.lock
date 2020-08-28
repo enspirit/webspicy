@@ -1,5 +1,5 @@
 PATH
-  remote: ../..
+  remote: .
   specs:
     webspicy (0.15.8)
       finitio (>= 0.8.0)
