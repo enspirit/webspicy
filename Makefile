@@ -13,13 +13,16 @@ DOCKER_TAG := $(or ${DOCKER_TAG},${DOCKER_TAG},latest)
 # Release helpers
 #
 
-bumped:
+bundle-update:
+	bundle update
+	cd examples/restful && bundle update
+
+bundle-install:
 	bundle install
-	cd examples/restful
-	bundle install
-	bundle exec rake
+	cd examples/restful && bundle install
 
 release:
+	bundle exec rake
 	bundle exec rake gem
 	gem push `ls -Art pkg/*.gem | tail -n 1`
 
