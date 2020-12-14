@@ -1,8 +1,12 @@
-FROM ruby:2.7
+FROM ruby:2.7-alpine as builder
 
-WORKDIR /home/app
-VOLUME /home/app
-
+RUN apk add alpine-sdk
 RUN gem install -v 0.15.7 webspicy
 
-CMD webspicy /home/app/config.rb
+FROM ruby:2.7-alpine
+
+WORKDIR /home/app
+
+COPY --from=builder /usr/local/bundle /usr/local/bundle
+
+ENTRYPOINT [ "webspicy" ]
