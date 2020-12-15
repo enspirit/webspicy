@@ -41,4 +41,4 @@ Dockerfile.pushed: Dockerfile.built
 
 image: Dockerfile.built
 
-push: Dockerfile.pushed
+push-image: Dockerfile.pushed
