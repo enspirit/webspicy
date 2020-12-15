@@ -30,7 +30,7 @@ class MustBeAuthenticated
   def counterexample(description, role, expected, status = 401)
     YAML.load <<-YML.gsub(/^\s+[#][ ]/, "")
     # description: |-
-    #   (#{self.class.name}) #{description}
+    #   #{description} (#{self.class.name} PRE)
     # params:
     #   id: 1
     # dress_params:
@@ -41,7 +41,7 @@ class MustBeAuthenticated
     #   content_type: application/json
     #   status: #{status}
     # assert:
-    #   - "pathFD('', error: '#{expected}')" 
+    #   - "pathFD('', error: '#{expected}')"
     YML
   end
 

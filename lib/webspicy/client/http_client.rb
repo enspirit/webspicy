@@ -14,7 +14,7 @@ module Webspicy
 
     def initialize(scope)
       super(scope)
-      @api = Api.new
+      @api = Api.new(scope)
     end
     attr_reader :api
 
@@ -43,6 +43,14 @@ module Webspicy
       include Client::Support
 
       attr_reader :last_response
+
+      def initialize(scope)
+        @scope = scope
+      end
+
+      def config
+        @scope.config
+      end
 
       def options(url, params = {}, headers = nil, body = nil)
         info_request("OPTIONS", url, params, headers, body)

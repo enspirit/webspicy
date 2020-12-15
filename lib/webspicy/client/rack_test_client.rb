@@ -7,7 +7,7 @@ module Webspicy
 
     def initialize(scope, app)
       super(scope)
-      @api = Api.new(app)
+      @api = Api.new(scope, app)
     end
     attr_reader :api
 
@@ -58,8 +58,13 @@ module Webspicy
 
       attr_reader :last_response
 
-      def initialize(app)
+      def initialize(scope, app)
+        @scope = scope
         @app = app
+      end
+
+      def config
+        @scope.config
       end
 
       def options(url, params = {}, headers = nil, body = nil)
