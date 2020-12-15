@@ -84,7 +84,7 @@ module Webspicy
 
       def pathFD(path, expected)
         unless @assertions.pathFD(@target, path, expected)
-          _! "Expected #{_s(@target, path)} to meet FD #{expected.inspect}"
+          _! "#{expected.inspect} vs. #{_s(@target.inspect, path)}"
         end
       end
 
