@@ -73,7 +73,7 @@ module Webspicy
         def expected_status_unmet
           expected = test_case.expected_status
           got = response.status
-          expected === got ? nil : "#{expected} !== #{got}"
+          expected === got ? nil : "[status] #{expected} !== #{got}"
         end
 
         def meets_expected_status?
@@ -87,9 +87,9 @@ module Webspicy
           got = response.content_type
           got = got.mime_type if got.respond_to?(:mime_type)
           if ect.nil?
-            got.nil? ? nil : "#{ect} != #{got}"
+            got.nil? ? nil : "[content type] #{ect} != #{got}"
           else
-            got.to_s.start_with?(ect.to_s) ? nil : "#{ect} != #{got}"
+            got.to_s.start_with?(ect.to_s) ? nil : "[content type] #{ect} != #{got}"
           end
         end
 
@@ -102,7 +102,7 @@ module Webspicy
         def expected_schema_unmet
           if is_empty_response?
             body = response.body.to_s.strip
-            body.empty? ? nil : "Expected empty body, got #{body}"
+            body.empty? ? nil : "[body] empty vs. #{body}"
           elsif is_redirect?
           else
             case dressed_body
@@ -153,9 +153,9 @@ module Webspicy
           case test_case.expected_content_type
           when %r{json}
             got = meets_expected_schema? ? dressed_body[:description] : response.body
-            expected == got ? nil : "`#{expected}` vs. `#{got}`"
+            expected == got ? nil : "[error message] `#{expected}` vs. `#{got}`"
           else
-            dressed_body.include?(expected) ? nil : "#{expected} not found" unless expected.nil?
+            dressed_body.include?(expected) ? nil : "[error message] `#{expected}` not found" unless expected.nil?
           end
         end
 
@@ -166,7 +166,7 @@ module Webspicy
           expected = test_case.expected_headers
           expected.each_pair do |k,v|
             got = response.headers[k]
-            unmet << "#{v} expected for #{k}, got #{got}" unless (got == v)
+            unmet << "[headers] #{v} expected for #{k}, got #{got}" unless (got == v)
           end
           unmet.empty? ? nil : unmet.join("\n")
         end
