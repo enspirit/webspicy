@@ -7,7 +7,8 @@ require 'ostruct'
 require 'yaml'
 require 'rspec'
 require 'rack/test'
-require "mustermann"
+require 'mustermann'
+require 'colorized_string'
 module Webspicy
 
   ###
@@ -132,7 +133,7 @@ module Webspicy
   LOGGER = ::Logger.new(STDOUT)
   LOGGER.level = Logger.const_get(ENV['LOG_LEVEL'] || 'WARN')
   LOGGER.formatter = proc { |severity, datetime, progname, msg|
-    "      " + msg + "\n"
+    "  " + msg + "\n"
   }
 
   def info(*args, &bl)

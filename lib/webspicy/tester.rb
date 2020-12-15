@@ -1,5 +1,6 @@
 module Webspicy
   class Tester
+    include Webspicy::Support::Colorize
 
     def initialize(config)
       @config = Configuration.dress(config)
@@ -44,11 +45,11 @@ module Webspicy
     end
 
     def rspec_service!(on, service, client, scope)
-      on.describe service do
-        scope.each_testcase(service) do |test_case|
-          describe test_case do
-            include_examples 'a successful test case invocation', client, test_case
-          end
+      scope.each_testcase(service) do |test_case|
+        str = "#{service} #{test_case}"
+        str = colorize_highlight(str)
+        on.describe(str) do
+          include_examples 'a successful test case invocation', client, test_case
         end
       end
     end
@@ -72,7 +73,7 @@ module Webspicy
           @invocation
         end
 
-        it 'works' do
+        it "meets its specification" do
           raise "Test not ran" unless invocation.done?
           errors = invocation.errors
           raise "\n* " + errors.join("\n* ") + "\n" unless errors.empty?

@@ -16,12 +16,19 @@ module Webspicy
       @file_filter = default_file_filter
       @service_filter = default_service_filter
       @test_case_filter = default_test_case_filter
+      @colors = {
+        :highlight => :cyan,
+        :error => :red,
+        :success => :green
+      }
       @client = HttpClient
       Path.require_tree(folder/'support') if (folder/'support').exists?
       yield(self) if block_given?
     end
     attr_accessor :folder
     protected :folder=
+
+    attr_accessor :colors
 
     def self.dress(arg, &bl)
       return arg if arg.is_a?(Configuration)
