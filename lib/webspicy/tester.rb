@@ -75,7 +75,7 @@ module Webspicy
         it 'works' do
           raise "Test not ran" unless invocation.done?
           errors = invocation.errors
-          raise "\n* " + errors.join("\n* ") + "\n" unless errors.empty?
+          raise "\n  (expected vs. got)\n\n* " + errors.join("\n* ") + "\n" unless errors.empty?
         end
       end
     end
