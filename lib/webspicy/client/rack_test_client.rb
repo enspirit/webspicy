@@ -26,8 +26,8 @@ module Webspicy
       # Invoke the service now
       api.public_send(service.method.to_s.downcase.to_sym, url, params, headers, body)
 
-      # Return the result
-      Resource::Service::Invocation.new(service, test_case, api.last_response, self)
+      # Return the last response
+      api.last_response
     end
 
     class Factory

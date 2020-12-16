@@ -124,4 +124,3 @@ module Webspicy
   end # class Resource
 end # module Webspicy
 require_relative 'service/test_case'
-require_relative 'service/invocation'

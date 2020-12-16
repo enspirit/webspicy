@@ -62,7 +62,8 @@ module Webspicy
             client.before(test_case)
             test_case.instrument(client)
             client.instrument(test_case)
-            @invocation = client.call(test_case)
+            @response = client.call(test_case)
+            @invocation = Tester::Invocation.new(test_case, @response, client)
             example.run
             client.after(test_case, @invocation)
             @invocation
@@ -83,3 +84,6 @@ module Webspicy
 
   end # class Tester
 end # module Webspicy
+require_relative 'tester/invocation'
+require_relative 'tester/assertions'
+require_relative 'tester/asserter'

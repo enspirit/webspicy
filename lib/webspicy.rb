@@ -25,8 +25,6 @@ module Webspicy
   require 'webspicy/postcondition'
   require 'webspicy/checker'
   require 'webspicy/tester'
-  require 'webspicy/tester/assertions'
-  require 'webspicy/tester/asserter'
 
   ###
   ### About folders
