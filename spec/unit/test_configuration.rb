@@ -31,6 +31,14 @@ module Webspicy
         expect(c.preconditions.size).to eq(1)
       end
 
+      it 'supports an URL and returns a specific configuration instance' do
+        c = Configuration.dress("http://google.com/")
+        expect(c).to be_a(Configuration)
+        expect(c.folder).to eq(Path.pwd)
+        expect(c.each_scope.to_a.size).to eql(1)
+        expect(c.each_scope.to_a.first.each_specification.to_a.size).to eql(1)
+      end
+
       it 'yields the block with the configuration, if given' do
         seen = nil
         Configuration.dress(Path.dir/'configuration'){|c|

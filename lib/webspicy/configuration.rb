@@ -31,16 +31,24 @@ module Webspicy
     attr_accessor :colors
 
     def self.dress(arg, &bl)
-      return arg if arg.is_a?(Configuration)
-      arg = Path(arg)
-      if arg.file?
-        c = Kernel.instance_eval arg.read, arg.to_s
-        yield(c) if block_given?
-        c
-      elsif (arg/'config.rb').file?
-        dress(arg/'config.rb', &bl)
+      case arg
+      when Configuration
+        arg
+      when /^https?:\/\//
+        Configuration::SingleUrl.new(arg)
+      when ->(f){ Path(f).exists? }
+        arg = Path(arg)
+        if arg.file?
+          c = Kernel.instance_eval arg.read, arg.to_s
+          yield(c) if block_given?
+          c
+        elsif (arg/'config.rb').file?
+          dress(arg/'config.rb', &bl)
+        else
+          raise ArgumentError, "Missing config.rb file"
+        end
       else
-        raise ArgumentError, "Missing config.rb file"
+        raise ArgumentError, "Unable to turn `#{arg}` to a configuration"
       end
     end
 
@@ -58,8 +66,12 @@ module Webspicy
           config.each_scope(&bl)
         end
       else
-        yield Scope.new(self)
+        yield factor_scope
       end
+    end
+
+    def factor_scope
+      Scope.new(self)
     end
 
     # Adds a folder to the list of folders where test case definitions are
@@ -387,3 +399,4 @@ module Webspicy
   end
 end
 require_relative 'configuration/scope'
+require_relative 'configuration/single_url'

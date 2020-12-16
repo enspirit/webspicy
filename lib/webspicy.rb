@@ -54,6 +54,7 @@ module Webspicy
   module_function :default_scope
 
   def specification(raw, file = nil, scope = default_scope)
+    raw = YAML.load(raw) if raw.is_a?(String)
     with_scope(scope) do
       r = FORMALDOC["Specification"].dress(raw)
       r.located_at!(file) if file

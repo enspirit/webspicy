@@ -1,15 +1,23 @@
 #!/usr/bin/env ruby
-#/ Document and test RESTful webservices
-#/ (c) Enspirit SPRL. Distributed under MIT licence.
+#/
+#/ Document & test web services as black-box operations.
+#/ (c) Enspirit SRL. Distributed under MIT licence.
+#/
+#/ Usage: webspicy URL
 #/ Usage: webspicy [options] path/to/config.rb
 #/
+#/ Options:
+#/ -h, --help       Show this help message
+#/ -v, --version    Show webspicy version
+#/
 #/ Recognized env vars:
-#/ - ROBUST=no                    do not execute counterexamples
+#/ - ROBUST=no|only               execute no counterexamples (or only them)
 #/ - LOG_LEVEL=INFO|DEBUG|...     set log level to the appropriate level
 #/ - RESOURCE=...                 restrict to .yml test files matching the pattern
-#/ - METHOD=GET|POST|DELETE...    execute only tests matching the verb
+#/ - METHOD=GET|POST|DELETE...    execute only tests matching the HTTP verb
 #/ - TAG=...                      execute only tests matching the given tag
 #/ - FAILFAST=yes|no              stop executing tests on first failure
+#/
 require 'webspicy'
 require 'webspicy/tester'
 require 'optparse'
@@ -20,19 +28,21 @@ def showhelp
 end
 
 ARGV.options do |opts|
-  opts.on_tail("-h", "--help"){ showhelp }
+  opts.on_tail("-h", "--help"){
+    showhelp
+  }
+  opts.on("-v", "--version"){
+    puts "webspicy v#{Webspicy::VERSION}, (c) Enspirit SRL"
+    exit(0)
+  }
   opts.parse!
 end
 
 if ARGV.size != 1
   showhelp
   exit(-1)
-elsif (p = Path(ARGV.first)).exists?
-  config = Webspicy::Configuration.dress(p)
-  res = Webspicy::Tester.new(config).call
-  abort("Some tests failed") unless res == 0
-else
-  puts "No such file or directory `#{ARGV.first}`"
-  showhelp
-  exit(-1)
 end
+
+config = Webspicy::Configuration.dress(ARGV[0])
+res = Webspicy::Tester.new(config).call
+abort("Some tests failed") unless res == 0
