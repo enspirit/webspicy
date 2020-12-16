@@ -19,12 +19,18 @@ module Webspicy
   require 'webspicy/configuration'
   require 'webspicy/file_upload'
   require 'webspicy/scope'
-  require 'webspicy/client'
   require 'webspicy/resource'
   require 'webspicy/precondition'
   require 'webspicy/postcondition'
   require 'webspicy/checker'
   require 'webspicy/tester'
+
+  ###
+  ### Backward compatibility
+  ###
+  Client = Tester::Client
+  HttpClient = Tester::HttpClient
+  RackTestClient = Tester::RackTestClient
 
   ###
   ### About folders

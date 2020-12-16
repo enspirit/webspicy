@@ -21,7 +21,7 @@ module Webspicy
         :error => :red,
         :success => :green
       }
-      @client = HttpClient
+      @client = Tester::HttpClient
       Path.require_tree(folder/'support') if (folder/'support').exists?
       yield(self) if block_given?
     end
