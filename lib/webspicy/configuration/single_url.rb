@@ -1,6 +1,6 @@
 module Webspicy
   class Configuration
-    class SingleUrl < Configuration
+    class SingleUrl
 
       class SingleUrlScope < Scope
 
@@ -34,7 +34,6 @@ module Webspicy
                   it returns a 200
                 params: {}
                 expected:
-                  content_type: text/html
                   status: 200
           YML
         end
@@ -42,12 +41,11 @@ module Webspicy
       end # class SingleUrlScope
 
       def initialize(url)
-        super()
         @url = url
       end
 
-      def factor_scope
-        SingleUrlScope.new(self, @url)
+      def call(config)
+        SingleUrlScope.new(config, @url)
       end
 
     end # class SingleUrl

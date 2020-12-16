@@ -21,6 +21,7 @@ module Webspicy
         :error => :red,
         :success => :green
       }
+      @scope_factory = ->(config){ Scope.new(config) }
       @client = Tester::HttpClient
       Path.require_tree(folder/'support') if (folder/'support').exists?
       yield(self) if block_given?
@@ -35,7 +36,9 @@ module Webspicy
       when Configuration
         arg
       when /^https?:\/\//
-        Configuration::SingleUrl.new(arg)
+        Configuration.new{|c|
+          c.scope_factory = SingleUrl.new(arg)
+        }
       when ->(f){ Path(f).exists? }
         arg = Path(arg)
         if arg.file? && arg.ext == ".rb"
@@ -43,7 +46,16 @@ module Webspicy
           yield(c) if block_given?
           c
         elsif arg.file? && arg.ext == '.yml'
-          Configuration::SingleYmlFile.new(arg)
+          folder = arg.backfind("[config.rb]")
+          if folder && folder.exists?
+            dress(folder/"config.rb"){|c|
+              c.scope_factory = SingleYmlFile.new(arg)
+            }
+          else
+            Configuration.new{|c|
+              c.scope_factory = SingleYmlFile.new(arg)
+            }
+          end
         elsif arg.directory? and (arg/'config.rb').file?
           dress(arg/'config.rb', &bl)
         else
@@ -72,8 +84,10 @@ module Webspicy
       end
     end
 
+    attr_accessor :scope_factory
+
     def factor_scope
-      Scope.new(self)
+      @scope_factory.call(self)
     end
 
     # Adds a folder to the list of folders where test case definitions are

@@ -1,6 +1,6 @@
 module Webspicy
   class Configuration
-    class SingleYmlFile < Configuration
+    class SingleYmlFile
 
       class SingleYmlFileScope < Scope
 
@@ -18,13 +18,11 @@ module Webspicy
       end # class SingleYmlFileScope
 
       def initialize(file)
-        folder = file.backfind("[config.rb]")
-        super(folder || Path.pwd)
         @file = file
       end
 
-      def factor_scope
-        SingleYmlFileScope.new(self, @file)
+      def call(config)
+        SingleYmlFileScope.new(config, @file)
       end
 
     end # class SingleYmlFile
