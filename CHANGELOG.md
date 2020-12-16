@@ -1,3 +1,13 @@
+# 0.16.0
+
+* Improve output when LOG_LEVEL is set to DEBUG
+
+This release may introduce integration issues since runtime
+dependencies have been bumped.
+
+* Bump `path` to `2.0` runtime dependency
+* Bump `finitio` to `0.9` runtime dependency
+
 # 0.15.7 - 2020/06/07
 
 * Add support for HTTP PUT verb, in both real and rack clients.
