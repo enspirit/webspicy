@@ -1,6 +1,7 @@
 # 0.16.0
 
 * Improve output when LOG_LEVEL is set to DEBUG
+* Improve the commandline a little bit, to be able to test a single url
 
 This release may introduce integration issues since runtime
 dependencies have been bumped.
