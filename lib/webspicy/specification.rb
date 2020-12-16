@@ -1,5 +1,5 @@
 module Webspicy
-  class Resource
+  class Specification
 
     def initialize(raw, location = nil)
       @raw = raw
@@ -77,6 +77,10 @@ module Webspicy
       end
     end
 
-  end
-end
-require_relative 'resource/service'
+  end # class Specification
+end # module Webspicy
+require_relative 'specification/service'
+require_relative 'specification/precondition'
+require_relative 'specification/postcondition'
+require_relative 'specification/test_case'
+require_relative 'specification/file_upload'

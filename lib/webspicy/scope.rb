@@ -130,7 +130,7 @@ module Webspicy
         return example unless service.default_example
         h1 = service.default_example.to_info
         h2 = example.to_info
-        ex = Resource::Service::TestCase.new(merge_maps(h1, h2))
+        ex = Specification::TestCase.new(merge_maps(h1, h2))
         ex.bind(service, example.counterexample?)
       end
 

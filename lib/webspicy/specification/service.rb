@@ -1,5 +1,5 @@
 module Webspicy
-  class Resource
+  class Specification
     class Service
 
       def initialize(raw)
@@ -121,6 +121,5 @@ module Webspicy
       end
 
     end # class Service
-  end # class Resource
+  end # class Specification
 end # module Webspicy
-require_relative 'service/test_case'

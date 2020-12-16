@@ -50,7 +50,7 @@ module Webspicy
       }
 
       it 'deep merges the default example and the example as expected' do
-        expect(subject).to be_a(Resource::Service::TestCase)
+        expect(subject).to be_a(Specification::TestCase)
         expect(subject.description).to eql("Hello world")
         expect(subject.expected).to eql({
           status: Support::StatusRange.int(200),

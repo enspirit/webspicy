@@ -56,20 +56,20 @@ module Webspicy
 
       it 'creates a child when adding a folder' do
         Configuration.new(Path.dir) do |c|
-          child = c.folder 'resource'
+          child = c.folder 'specification'
           expect(child).to be_a(Configuration)
-          expect(child.folder).to eql(Path.dir/'resource')
+          expect(child.folder).to eql(Path.dir/'specification')
         end
       end
 
       it 'yield the child to the block if any given' do
         Configuration.new(Path.dir) do |c|
           seen = nil
-          c.folder 'resource' do |child|
+          c.folder 'specification' do |child|
             seen = child
           end
           expect(seen).to be_a(Configuration)
-          expect(seen.folder).to eql(Path.dir/'resource')
+          expect(seen.folder).to eql(Path.dir/'specification')
         end
       end
     end
@@ -243,7 +243,7 @@ module Webspicy
     describe 'dup' do
 
       let(:original) do
-        Configuration.new(Path.dir/'resource') do |c|
+        Configuration.new(Path.dir/'specification') do |c|
           c.host = "http://127.0.0.1"
           c.folder 'service'
         end
@@ -253,7 +253,7 @@ module Webspicy
         duped = original.dup do |d|
           d.host = "http://127.0.0.1:4567"
         end
-        expect(duped.folder).to eql(Path.dir/'resource')
+        expect(duped.folder).to eql(Path.dir/'specification')
         expect(duped.host).to eql("http://127.0.0.1:4567")
         expect(original.host).to eql("http://127.0.0.1")
       end

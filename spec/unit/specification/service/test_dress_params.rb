@@ -1,6 +1,6 @@
 require 'spec_helper'
 module Webspicy
-  class Resource
+  class Specification
     describe Service, "dress_params" do
 
       it 'symbolizes keys' do
@@ -30,5 +30,5 @@ module Webspicy
       end
 
     end
-  end # class Resource
+  end # class Specification
 end # module Webspicy

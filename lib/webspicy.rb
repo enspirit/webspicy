@@ -16,12 +16,9 @@ module Webspicy
   ###
 
   require 'webspicy/support'
+  require 'webspicy/specification'
   require 'webspicy/configuration'
-  require 'webspicy/file_upload'
   require 'webspicy/scope'
-  require 'webspicy/resource'
-  require 'webspicy/precondition'
-  require 'webspicy/postcondition'
   require 'webspicy/checker'
   require 'webspicy/tester'
 
@@ -31,6 +28,10 @@ module Webspicy
   Client = Tester::Client
   HttpClient = Tester::HttpClient
   RackTestClient = Tester::RackTestClient
+  Resource = Specification
+  Precondition = Specification::Precondition
+  Postcondition = Specification::Postcondition
+  FileUpload = Specification::FileUpload
 
   ###
   ### About folders
@@ -54,7 +55,7 @@ module Webspicy
 
   def resource(raw, file = nil, scope = default_scope)
     with_scope(scope) do
-      r = FORMALDOC["Resource"].dress(raw)
+      r = FORMALDOC["Specification"].dress(raw)
       r.located_at!(file) if file
       r
     end
