@@ -11,7 +11,9 @@ namespace :test do
   tests << :unit
 
   require 'path'
-  Path.dir.parent.glob("examples/*").select{|f| f.directory? }.each do |file|
+  Path.dir.parent.glob("examples/*").select{|f|
+    f.directory? && (f/"Rakefile").exists?
+  }.each do |file|
     test_name = file.basename.to_s.to_sym
     desc "Runs the integration tests on the #{file.basename} example"
     task(test_name) do
