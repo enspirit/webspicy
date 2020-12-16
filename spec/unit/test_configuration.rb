@@ -39,6 +39,15 @@ module Webspicy
         expect(c.each_scope.to_a.first.each_specification.to_a.size).to eql(1)
       end
 
+      it 'supports a single .yml file and returns a specific configuration instance' do
+        file = restful_folder/"todo/getTodo.yml"
+        c = Configuration.dress(file)
+        expect(c).to be_a(Configuration)
+        expect(c.folder).to eq(restful_folder)
+        expect(c.each_scope.to_a.size).to eql(1)
+        expect(c.each_scope.to_a.first.each_specification.to_a.size).to eql(1)
+      end
+
       it 'yields the block with the configuration, if given' do
         seen = nil
         Configuration.dress(Path.dir/'configuration'){|c|

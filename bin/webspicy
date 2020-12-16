@@ -3,8 +3,9 @@
 #/ Document & test web services as black-box operations.
 #/ (c) Enspirit SRL. Distributed under MIT licence.
 #/
-#/ Usage: webspicy URL
-#/ Usage: webspicy [options] path/to/config.rb
+#/ Usage: webspicy [options] URL                 # run default test againt url
+#/ Usage: webspicy [options] path/to/config.rb   # run whole test suite
+#/ Usage: webspicy [options] path/to/spec.yml    # run a single test
 #/
 #/ Options:
 #/ -h, --help       Show this help message

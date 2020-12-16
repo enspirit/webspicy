@@ -38,11 +38,13 @@ module Webspicy
         Configuration::SingleUrl.new(arg)
       when ->(f){ Path(f).exists? }
         arg = Path(arg)
-        if arg.file?
+        if arg.file? && arg.ext == ".rb"
           c = Kernel.instance_eval arg.read, arg.to_s
           yield(c) if block_given?
           c
-        elsif (arg/'config.rb').file?
+        elsif arg.file? && arg.ext == '.yml'
+          Configuration::SingleYmlFile.new(arg)
+        elsif arg.directory? and (arg/'config.rb').file?
           dress(arg/'config.rb', &bl)
         else
           raise ArgumentError, "Missing config.rb file"
@@ -400,3 +402,4 @@ module Webspicy
 end
 require_relative 'configuration/scope'
 require_relative 'configuration/single_url'
+require_relative 'configuration/single_yml_file'
