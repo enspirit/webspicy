@@ -9,7 +9,7 @@ module Webspicy
         @preconditions = compile_preconditions
         @postconditions = compile_postconditions
       end
-      attr_accessor :resource
+      attr_accessor :specification
 
       def self.info(raw)
         new(raw)
@@ -81,7 +81,7 @@ module Webspicy
       end
 
       def to_s
-        "#{method} #{resource.url}"
+        "#{method} #{specification.url}"
       end
 
     private

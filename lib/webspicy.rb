@@ -42,7 +42,7 @@ module Webspicy
   EXAMPLES_FOLDER = ROOT_FOLDER/('examples')
 
   ###
-  ### About formal doc and resources defined there
+  ### About formal doc and specifications defined there
   ###
 
   FORMALDOC = Finitio.system(Path.dir/("webspicy/formaldoc.fio"))
@@ -53,14 +53,14 @@ module Webspicy
   end
   module_function :default_scope
 
-  def resource(raw, file = nil, scope = default_scope)
+  def specification(raw, file = nil, scope = default_scope)
     with_scope(scope) do
       r = FORMALDOC["Specification"].dress(raw)
       r.located_at!(file) if file
       r
     end
   end
-  module_function :resource
+  module_function :specification
 
   def service(raw, scope = default_scope)
     with_scope(scope) do

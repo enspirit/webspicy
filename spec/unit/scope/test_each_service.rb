@@ -6,12 +6,12 @@ module Webspicy
       Scope.new(configuration)
     }
 
-    let(:resource) {
-      scope.each_resource.first
+    let(:specification) {
+      scope.each_specification.first
     }
 
     subject {
-      scope.each_service(resource).to_a
+      scope.each_service(specification).to_a
     }
 
     context 'without any filter' do

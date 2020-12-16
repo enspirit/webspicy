@@ -14,9 +14,9 @@ module Webspicy
         new(raw)
       end
 
-      def locate(resource)
+      def locate(specification)
         FileUpload.new({
-          path: resource.locate(path),
+          path: specification.locate(path),
           content_type: content_type
         })
       end

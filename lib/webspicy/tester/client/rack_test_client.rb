@@ -13,7 +13,7 @@ module Webspicy
       attr_reader :api
 
       def call(test_case)
-        service, resource = test_case.service, test_case.resource
+        service, specification = test_case.service, test_case.specification
 
         # Instantiate the parameters
         headers = test_case.headers.dup
@@ -21,7 +21,7 @@ module Webspicy
         body    = test_case.body || test_case.located_file_upload
 
         # Instantiate the url and strip parameters
-        url, params = resource.instantiate_url(params)
+        url, params = specification.instantiate_url(params)
         url = scope.to_real_url(url, test_case){|u,_| u }
 
         # Invoke the service now

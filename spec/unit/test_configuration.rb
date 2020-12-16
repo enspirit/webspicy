@@ -223,7 +223,7 @@ module Webspicy
       let(:before_aller) { ->(){} }
       let(:after_aller) { ->(){} }
       let(:config) do
-        Configuration.new(Path.dir/'resource') do |c|
+        Configuration.new(Path.dir/'specification') do |c|
           c.before_all(&before_aller)
           c.before_each(&before_eacher)
           c.after_each(&after_eacher)

@@ -18,32 +18,32 @@ module Webspicy
     ### Eachers -- Allow navigating the web service definitions
     ###
 
-    # Yields each resource file in the current scope
-    def each_resource_file(&bl)
-      return enum_for(:each_resource_file) unless block_given?
-      _each_resource_file(config, &bl)
+    # Yields each specification file in the current scope
+    def each_specification_file(&bl)
+      return enum_for(:each_specification_file) unless block_given?
+      _each_specification_file(config, &bl)
     end
 
-    # Recursive implementation of `each_resource_file` for each
+    # Recursive implementation of `each_specification_file` for each
     # folder in the configuration.
-    def _each_resource_file(config)
+    def _each_specification_file(config)
       folder = config.folder
       folder.glob("**/*.yml").select(&to_filter_proc(config.file_filter)).each do |file|
         yield file, folder
       end
     end
-    private :_each_resource_file
+    private :_each_specification_file
 
-    # Yields each resource in the current scope in turn.
-    def each_resource(&bl)
-      return enum_for(:each_resource) unless block_given?
-      each_resource_file do |file, folder|
-        yield Webspicy.resource(file.load, file, self)
+    # Yields each specification in the current scope in turn.
+    def each_specification(&bl)
+      return enum_for(:each_specification) unless block_given?
+      each_specification_file do |file, folder|
+        yield Webspicy.specification(file.load, file, self)
       end
     end
 
-    def each_service(resource, &bl)
-      resource.services.select(&to_filter_proc(config.service_filter)).each(&bl)
+    def each_service(specification, &bl)
+      specification.services.select(&to_filter_proc(config.service_filter)).each(&bl)
     end
 
     def each_example(service, &bl)

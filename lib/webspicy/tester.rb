@@ -34,8 +34,8 @@ module Webspicy
         end
         tester.config.each_scope do |scope|
           client = scope.get_client
-          scope.each_resource do |resource|
-            scope.each_service(resource) do |service|
+          scope.each_specification do |specification|
+            scope.each_service(specification) do |service|
               tester.rspec_service!(self, service, client, scope)
             end
           end

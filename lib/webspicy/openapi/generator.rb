@@ -25,24 +25,24 @@ module Webspicy
 
       def paths
         config.each_scope.inject({}) do |paths,scope|
-          scope.each_resource.inject(paths) do |paths,resource|
-            paths.merge(path_for(resource)){|k,ps,qs|
+          scope.each_specification.inject(paths) do |paths,specification|
+            paths.merge(path_for(specification)){|k,ps,qs|
               ps.merge(qs)
             }
           end
         end
       end
 
-      def path_for(resource)
+      def path_for(specification)
         {
-          resource.url => {
-            summary: resource.name
-          }.merge(verbs_for(resource))
+          specification.url => {
+            summary: specification.name
+          }.merge(verbs_for(specification))
         }
       end
 
-      def verbs_for(resource)
-        resource.services.inject({}) do |verbs,service|
+      def verbs_for(specification)
+        specification.services.inject({}) do |verbs,service|
           verb = service.method.downcase
           verb_defn = {
             description: service.description,

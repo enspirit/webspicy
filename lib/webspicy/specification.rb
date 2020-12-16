@@ -73,7 +73,7 @@ module Webspicy
 
     def bind_services
       (@raw[:services] ||= []).each do |s|
-        s.resource = self
+        s.specification = self
       end
     end
 

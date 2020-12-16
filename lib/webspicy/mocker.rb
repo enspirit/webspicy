@@ -29,8 +29,8 @@ module Webspicy
 
     def has_service?(path)
       config.each_scope do |scope|
-        scope.each_resource do |resource|
-          next unless url_matches?(resource, path)
+        scope.each_specification do |specification|
+          next unless url_matches?(specification, path)
           return true
         end
       end
@@ -39,9 +39,9 @@ module Webspicy
 
     def find_service(method, path)
       config.each_scope do |scope|
-        scope.each_resource do |resource|
-          next unless url_matches?(resource, path)
-          scope.each_service(resource) do |service|
+        scope.each_specification do |specification|
+          next unless url_matches?(specification, path)
+          scope.each_service(specification) do |service|
             return service if service.method == method
           end
         end
@@ -71,8 +71,8 @@ module Webspicy
       end
     end
 
-    def url_matches?(resource, path)
-      resource.url_pattern.match(path)
+    def url_matches?(specification, path)
+      specification.url_pattern.match(path)
     end
 
     def random_body(service, request)

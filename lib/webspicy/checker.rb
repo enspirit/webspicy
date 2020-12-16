@@ -8,11 +8,11 @@ module Webspicy
 
     def call
       config.each_scope do |scope|
-        scope.each_resource_file do |file, folder|
+        scope.each_specification_file do |file, folder|
           RSpec.describe file.relative_to(folder).to_s do
 
             it 'meets the formal doc data schema' do
-              Webspicy.resource(file.load, file, scope)
+              Webspicy.specification(file.load, file, scope)
             end
 
           end

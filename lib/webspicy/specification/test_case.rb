@@ -19,8 +19,8 @@ module Webspicy
         !!@counterexample
       end
 
-      def resource
-        service.resource
+      def specification
+        service.specification
       end
 
       def self.info(raw)
@@ -65,7 +65,7 @@ module Webspicy
       end
 
       def located_file_upload
-        file_upload ? file_upload.locate(resource) : nil
+        file_upload ? file_upload.locate(specification) : nil
       end
 
       def expected

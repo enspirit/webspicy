@@ -1,13 +1,13 @@
 require 'spec_helper'
 module Webspicy
-  describe Scope, 'each_resource' do
+  describe Scope, 'each_specification' do
 
     let(:scope) {
       Scope.new(configuration)
     }
 
     subject {
-      scope.each_resource.to_a
+      scope.each_specification.to_a
     }
 
     context 'without any filter' do
