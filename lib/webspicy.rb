@@ -18,7 +18,6 @@ module Webspicy
   require 'webspicy/support'
   require 'webspicy/specification'
   require 'webspicy/configuration'
-  require 'webspicy/scope'
   require 'webspicy/checker'
   require 'webspicy/tester'
 
@@ -32,6 +31,7 @@ module Webspicy
   Precondition = Specification::Precondition
   Postcondition = Specification::Postcondition
   FileUpload = Specification::FileUpload
+  Scope = Configuration::Scope
 
   ###
   ### About folders
@@ -49,7 +49,7 @@ module Webspicy
 
   # Returns a default scope instance.
   def default_scope
-    Scope.new(Configuration.new)
+    Configuration::Scope.new(Configuration.new)
   end
   module_function :default_scope
 

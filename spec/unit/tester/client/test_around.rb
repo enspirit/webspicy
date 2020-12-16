@@ -9,7 +9,7 @@ module Webspicy
         seen = false
         block = ->(){ seen = true }
 
-        scope = Scope.new(config)
+        scope = Configuration::Scope.new(config)
         Client.new(scope).around(1, 2, 3, &block)
         expect(seen).to be(true)
       end
@@ -24,7 +24,7 @@ module Webspicy
           bl.call
         end
 
-        scope = Scope.new(config)
+        scope = Configuration::Scope.new(config)
         block = ->(){ seen = true }
         Client.new(scope).around(1, 2, 3, &block)
 
@@ -47,7 +47,7 @@ module Webspicy
           bl.call
         end
 
-        scope = Scope.new(config)
+        scope = Configuration::Scope.new(config)
         block = ->(){ seen = true }
         Client.new(scope).around(1, 2, 3, &block)
 

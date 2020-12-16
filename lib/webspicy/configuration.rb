@@ -386,3 +386,4 @@ module Webspicy
 
   end
 end
+require_relative 'configuration/scope'
