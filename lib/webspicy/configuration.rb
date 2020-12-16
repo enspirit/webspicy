@@ -382,7 +382,7 @@ module Webspicy
       elsif not(self.parent.nil?)
         self.parent.data_system
       else
-        Finitio::DEFAULT_SYSTEM
+        Webspicy::DEFAULT_SYSTEM
       end
     end
 

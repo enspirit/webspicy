@@ -45,6 +45,10 @@ module Webspicy
   ### About formal doc and specifications defined there
   ###
 
+  Finitio.stdlib_path(Path.dir/"finitio")
+  DEFAULT_SYSTEM = Finitio.system(<<~FIO)
+    @import webspicy/scalars
+  FIO
   FORMALDOC = Finitio.system(Path.dir/("webspicy/formaldoc.fio"))
 
   # Returns a default scope instance.
@@ -141,7 +145,7 @@ module Webspicy
     if scope = Thread.current[:webspicy_scope]
       scope.parse_schema(fio)
     else
-      Finitio.system(fio)
+      DEFAULT_SYSTEM.system(fio)
     end
   end
   module_function :schema

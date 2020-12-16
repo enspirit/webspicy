@@ -12,23 +12,26 @@ module Webspicy
 
         def each_specification(&bl)
           return enum_for(:each_specification) unless block_given?
-          yield Webspicy.specification(<<~YML, nil, self)
+          spec = <<~YML
           ---
           name: |-
             Default specification
           url: |-
             #{url}
+
           services:
           - method: |-
               GET
             description: |-
               Getting #{url}
+
             input_schema: |-
-              .
+              Any
             output_schema: |-
-              .
+              Any
             error_schema: |-
-              .
+              Any
+
             examples:
               - description: |-
                   it returns a 200
@@ -36,6 +39,8 @@ module Webspicy
                 expected:
                   status: 200
           YML
+          Webspicy.debug(spec)
+          yield Webspicy.specification(spec, nil, self)
         end
 
       end # class SingleUrlScope

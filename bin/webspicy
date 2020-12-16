@@ -10,6 +10,7 @@
 #/ Options:
 #/ -h, --help       Show this help message
 #/ -v, --version    Show webspicy version
+#/     --debug      Same as LOG_LEVEL=DEBUG, takes precedence
 #/
 #/ Recognized env vars:
 #/ - ROBUST=no|only               execute no counterexamples (or only them)
@@ -35,6 +36,10 @@ ARGV.options do |opts|
   opts.on("-v", "--version"){
     puts "webspicy v#{Webspicy::VERSION}, (c) Enspirit SRL"
     exit(0)
+  }
+  opts.on("--debug") {
+    ENV['LOG_LEVEL'] = 'DEBUG'
+    Webspicy::LOGGER.level = Logger.const_get(ENV['LOG_LEVEL'])
   }
   opts.parse!
 end
