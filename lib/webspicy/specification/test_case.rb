@@ -73,7 +73,7 @@ module Webspicy
       end
 
       def expected_content_type
-        expected.fetch(:content_type){ 'application/json' }
+        expected[:content_type]
       end
 
       def expected_status

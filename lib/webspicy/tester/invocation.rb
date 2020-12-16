@@ -86,6 +86,7 @@ module Webspicy
 
       def expected_content_type_unmet
         ect = test_case.expected_content_type
+        return nil unless ect
         got = response.content_type
         got = got.mime_type if got.respond_to?(:mime_type)
         if ect.nil?
