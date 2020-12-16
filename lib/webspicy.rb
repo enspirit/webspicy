@@ -60,6 +60,8 @@ module Webspicy
       r.located_at!(file) if file
       r
     end
+  rescue Finitio::Error => ex
+    handle_finitio_error(ex, scope)
   end
   module_function :specification
 
@@ -67,6 +69,8 @@ module Webspicy
     with_scope(scope) do
       FORMALDOC["Service"].dress(raw)
     end
+  rescue Finitio::Error => ex
+    handle_finitio_error(ex)
   end
   module_function :service
 
@@ -74,8 +78,18 @@ module Webspicy
     with_scope(scope) do
       FORMALDOC["TestCase"].dress(raw)
     end
+  rescue Finitio::Error => ex
+    handle_finitio_error(ex)
   end
   module_function :test_case
+
+  def handle_finitio_error(ex, scope)
+    msg = "#{ex.message}:\n    #{ex.root_cause.message}"
+    msg = Support::Colorize.colorize_error(msg, scope.config)
+    fatal(msg)
+    exit(-1)
+  end
+  module_function :handle_finitio_error
 
   #
   # Yields the block after having installed `scope` globally.
@@ -151,5 +165,10 @@ module Webspicy
     LOGGER && LOGGER.debug(*args, &bl)
   end
   module_function :debug
+
+  def fatal(*args, &bl)
+    LOGGER && LOGGER.fatal(*args, &bl)
+  end
+  module_function :fatal
 
 end
