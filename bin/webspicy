@@ -13,7 +13,7 @@
 #/     --debug      Same as LOG_LEVEL=DEBUG, takes precedence
 #/
 #/ Recognized env vars:
-#/ - ROBUST=no|only               execute no counterexamples (or only them)
+#/ - ROBUST=no|only|generated     execute no counterexamples (only them, only generated ones)
 #/ - LOG_LEVEL=INFO|DEBUG|...     set log level to the appropriate level
 #/ - RESOURCE=...                 restrict to .yml test files matching the pattern
 #/ - METHOD=GET|POST|DELETE...    execute only tests matching the HTTP verb

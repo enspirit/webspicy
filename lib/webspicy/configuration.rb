@@ -13,6 +13,7 @@ module Webspicy
       @rspec_options = default_rspec_options
       @run_examples = default_run_examples
       @run_counterexamples = default_run_counterexamples
+      @run_generated_counterexamples = default_run_generated_counterexamples
       @file_filter = default_file_filter
       @service_filter = default_service_filter
       @test_case_filter = default_test_case_filter
@@ -143,7 +144,7 @@ module Webspicy
 
     # Returns the defaut value for run_examples
     def default_run_examples
-      ENV['ROBUST'].nil? || (ENV['ROBUST'] != 'only')
+      ENV['ROBUST'].nil? || (ENV['ROBUST'] != 'only' && ENV['ROBUST'] != 'generated')
     end
     private :default_run_examples
 
@@ -160,9 +161,26 @@ module Webspicy
 
     # Returns the defaut value for run_counterexamples
     def default_run_counterexamples
-      ENV['ROBUST'].nil? || (ENV['ROBUST'] != 'no')
+      ENV['ROBUST'].nil? || (ENV['ROBUST'] != 'no' && ENV['ROBUST'] != 'generated')
     end
     private :default_run_counterexamples
+
+    # Sets whether generated counter examples have to be ran or not.
+    def run_generated_counterexamples=(run_generated_counterexamples)
+      @run_generated_counterexamples = run_generated_counterexamples
+    end
+    attr_reader :run_generated_counterexamples
+
+    # Whether generated counter examples must be ran or not.
+    def run_generated_counterexamples?
+      @run_generated_counterexamples
+    end
+
+    # Returns the defaut value for run_generated_counterexamples
+    def default_run_generated_counterexamples
+      ENV['ROBUST'].nil? || (ENV['ROBUST'] != 'no')
+    end
+    private :default_run_generated_counterexamples
 
     # Installs a host (resolver).
     #

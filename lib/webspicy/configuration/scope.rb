@@ -66,8 +66,8 @@ module Webspicy
           service.generated_counterexamples
             .map{|e| expand_example(service, e) }
             .select(&to_filter_proc(config.test_case_filter))
-            .each(&bl) if config.run_counterexamples?
-        end if config.run_counterexamples?
+            .each(&bl) if config.run_generated_counterexamples?
+        end if config.run_generated_counterexamples?
       end
 
       def each_testcase(service, &bl)
