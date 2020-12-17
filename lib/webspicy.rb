@@ -15,6 +15,7 @@ module Webspicy
   ### Load library
   ###
 
+  require 'webspicy/version'
   require 'webspicy/support'
   require 'webspicy/specification'
   require 'webspicy/configuration'
