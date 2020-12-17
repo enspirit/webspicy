@@ -44,7 +44,6 @@ module Webspicy
   ###
   ### About formal doc and specifications defined there
   ###
-
   Finitio.stdlib_path(Path.dir/"finitio")
   DEFAULT_SYSTEM = Finitio.system(<<~FIO)
     @import webspicy/scalars

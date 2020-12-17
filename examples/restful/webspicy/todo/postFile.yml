@@ -16,7 +16,7 @@ services:
     - Must be authenticated
 
   input_schema: |-
-    .
+    Any
 
   output_schema: |-
     { count: Integer }

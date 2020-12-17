@@ -17,7 +17,7 @@ services:
     }
 
   output_schema: |-
-    .
+    Any
 
   error_schema: |-
     ErrorSchema

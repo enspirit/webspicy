@@ -1,4 +1,4 @@
-@import finitio/data
+@import webspicy/scalars
 
 Todo = {
   id          : Integer

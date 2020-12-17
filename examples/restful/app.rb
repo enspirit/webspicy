@@ -1,3 +1,4 @@
+require 'webspicy'
 require 'sinatra'
 require 'json'
 require 'path'

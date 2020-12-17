@@ -1,6 +1,5 @@
 $LOAD_PATH.unshift File.expand_path("..", __FILE__)
 require 'app'
-require 'webspicy'
 
 desc "Checks all .yml definition files"
 task :check do
