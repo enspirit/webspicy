@@ -1,0 +1,34 @@
+---
+name: |-
+  Your backend is broken website
+
+url: |-
+  http://yourbackendisbroken.dev
+
+services:
+- method: |-
+    GET
+
+  description: |-
+    Redirects to the https version
+
+  input_schema: |-
+    Any
+
+  output_schema: |-
+    Any
+
+  error_schema: |-
+    Any
+
+  examples:
+
+    - description: |-
+        it works
+      params:
+        id: 1
+      expected:
+        content_type: text/html
+        status: 3xx
+        headers:
+          Location: https://yourbackendisbroken.dev/?id=1

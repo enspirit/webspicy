@@ -1,0 +1,2 @@
+Webspicy::Configuration.new{|c|
+}
