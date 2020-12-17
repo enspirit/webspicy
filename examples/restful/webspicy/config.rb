@@ -8,6 +8,8 @@ def webspicy_config(&bl)
       'Accept' => 'application/json'
     }){|service| service.method == "GET" }
 
+    c.precondition Webspicy::Specification::Precondition::RobustToInvalidInput.new
+
     c.instrument do |tc, client|
       role = tc.metadata[:role]
       tc.headers['Authorization'] = "Bearer #{role}" if role

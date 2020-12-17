@@ -9,6 +9,9 @@ module Webspicy
       attr_reader :service
       attr_reader :counterexample
 
+      attr_accessor :raw
+      protected :raw, :raw=
+
       def bind(service, counterexample)
         @service = service
         @counterexample = counterexample
@@ -119,6 +122,12 @@ module Webspicy
         service.postconditions.each do |post|
           post.instrument(self, client) if post.respond_to?(:instrument)
         end
+      end
+
+      def mutate(override)
+        m = self.dup
+        m.raw = self.raw.merge(override)
+        m
       end
 
       def to_s

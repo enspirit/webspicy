@@ -16,3 +16,4 @@ module Webspicy
   end # class Specification
 end # module Webspicy
 require_relative 'precondition/global_request_headers'
+require_relative 'precondition/robust_to_invalid_input'

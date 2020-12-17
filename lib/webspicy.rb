@@ -9,6 +9,7 @@ require 'rspec'
 require 'rack/test'
 require 'mustermann'
 require 'colorized_string'
+require 'securerandom'
 module Webspicy
 
   ###
