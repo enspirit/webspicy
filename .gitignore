@@ -1,3 +1,4 @@
+.DS_Store
 .env
 pkg/*
 .bundle
@@ -7,3 +8,6 @@ rspec.xml
 Dockerfile.built
 Dockerfile.log
 Dockerfile.pushed
+Dockerfile.tester.built
+Dockerfile.tester.log
+Dockerfile.tester.pushed

@@ -1,0 +1,4 @@
+FROM enspirit/webspicy:latest
+
+ENTRYPOINT []
+CMD cd /formalspec/ && webspicy .

@@ -35,11 +35,20 @@ Dockerfile.built: Dockerfile $(shell find . -type f | grep -v "\/tmp\|\.idea\|\.
 	docker build -t enspirit/webspicy . | tee Dockerfile.log
 	touch Dockerfile.built
 
+Dockerfile.tester.built: Dockerfile.built
+	docker build -t enspirit/webspicy-tester --file Dockerfile.tester . | tee Dockerfile.tester.log
+	touch Dockerfile.tester.built
+
 Dockerfile.pushed: Dockerfile.built
 	docker tag enspirit/webspicy enspirit/webspicy:$(DOCKER_TAG)
 	docker push enspirit/webspicy:$(DOCKER_TAG) | tee -a Dockerfile.log
 	touch Dockerfile.pushed
 
-image: Dockerfile.built
+Dockerfile.tester.pushed: Dockerfile.tester.built
+	docker tag enspirit/webspicy-tester enspirit/webspicy-tester:$(DOCKER_TAG)
+	docker push enspirit/webspicy-tester:$(DOCKER_TAG) | tee -a Dockerfile.tester.log
+	touch Dockerfile.tester.pushed
 
-push-image: Dockerfile.pushed
+images: Dockerfile.built Dockerfile.tester.built
+
+push-images: Dockerfile.pushed Dockerfile.tester.pushed
