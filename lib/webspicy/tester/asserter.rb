@@ -54,7 +54,8 @@ module Webspicy
       def size(path, expected = NO_ARG)
         path, expected = '', path if expected == NO_ARG
         unless @assertions.size(@target, path, expected)
-          _! "Expected #{_s(@target, path)} to have a size of #{expected}"
+          actual = @assertions.actual_size(@target, path)
+          _! "Expected #{_s(@target, path)} to have a size of #{expected}, actual size is: #{actual}"
         end
       end
 
