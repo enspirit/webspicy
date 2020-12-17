@@ -76,8 +76,7 @@ module Webspicy
 
         it "meets its specification" do
           raise "Test not ran" unless invocation.done?
-          errors = invocation.errors
-          raise "\n  (expected vs. got)\n\n* " + errors.join("\n* ") + "\n" unless errors.empty?
+          invocation.rspec_assert!(self)
         end
       end
     end

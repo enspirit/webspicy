@@ -14,6 +14,10 @@ module Webspicy
         test_case.service
       end
 
+      def rspec_assert!(rspec)
+        RSpecAsserter.new(rspec, self).assert!
+      end
+
       def errors
         @errors ||= begin
           errs = [
@@ -183,8 +187,6 @@ module Webspicy
         failures.empty? ? nil : failures.join("\n")
       end
 
-    private
-
       def loaded_body
         case test_case.expected_content_type
         when %r{json}
@@ -212,3 +214,5 @@ module Webspicy
     end # class Invocation
   end # class Tester
 end # module Webspicy
+require_relative 'rspec_matchers'
+require_relative 'rspec_asserter'
