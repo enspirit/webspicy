@@ -4,6 +4,10 @@ def webspicy_config(&bl)
     c.precondition MustBeAuthenticated
     c.precondition MustBeAnAdmin
 
+    c.precondition Webspicy::Specification::Precondition::GlobalRequestHeaders.new({
+      'Accept' => 'application/json'
+    }){|service| service.method == "GET" }
+
     c.instrument do |tc, client|
       role = tc.metadata[:role]
       tc.headers['Authorization'] = "Bearer #{role}" if role

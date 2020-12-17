@@ -101,6 +101,9 @@ module Webspicy
       end
 
       def compile_conditions(descriptions, conditions)
+        # Because we want pre & post to be able to match in all cases
+        # we need at least one condition
+        descriptions = ["all"] if descriptions.empty?
         descriptions
           .map{|descr|
             conditions.map{|c| c.match(self, descr) }.compact

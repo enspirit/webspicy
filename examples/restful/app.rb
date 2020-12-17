@@ -66,6 +66,7 @@ post '/reset' do
 end
 
 get '/todo/' do
+  raise unless request.env['HTTP_ACCEPT'] == 'application/json'
   content_type :json
   settings.todolist.to_json
 end
@@ -95,6 +96,7 @@ post '/todo/', :auth => :user do
 end
 
 get '/todo/:id' do |id|
+  raise unless request.env['HTTP_ACCEPT'] == 'application/json'
   content_type :json
   todo = settings.todolist.find{|todo| todo[:id] == Integer(id) }
   if todo.nil?

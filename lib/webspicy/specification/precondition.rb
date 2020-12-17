@@ -15,3 +15,4 @@ module Webspicy
     end # module Precondition
   end # class Specification
 end # module Webspicy
+require_relative 'precondition/global_request_headers'
