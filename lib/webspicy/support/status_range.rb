@@ -42,8 +42,13 @@ module Webspicy
       end
 
       def to_s
-        @range.to_s
+        if @range.first == @range.last
+          @range.first.to_s
+        else
+          @range.to_s
+        end
       end
+      alias :inspect :to_s
 
     end # class StatusRange
   end # module Support
