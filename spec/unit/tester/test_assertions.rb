@@ -23,7 +23,7 @@ module Webspicy
         expect(includes [5, 1], 1).to be(true)
       end
 
-      it 'has an notIcludes() assertion' do
+      it 'has a notIncludes() assertion' do
         expect(notIncludes [], 1).to be(true)
         expect(notIncludes [5, 1], 1).to be(false)
       end
@@ -37,7 +37,7 @@ module Webspicy
         expect(exists({ foo: {} }, 'foo/bar')).to be(false)
       end
 
-      it 'has an notExists() assertion' do
+      it 'has a notExists() assertion' do
         expect(notExists nil).to be(true)
         expect(notExists []).to be(false)
         expect(notExists [1]).to be(false)
@@ -60,7 +60,7 @@ module Webspicy
         expect(notEmpty({ foo: [1] }, 'foo')).to be(true)
       end
 
-      it 'has an size() assertion' do
+      it 'has a size() assertion' do
         expect(size [], 0).to be(true)
         expect(size [], 1).to be(false)
         expect(size [12], 1).to be(true)
@@ -106,7 +106,7 @@ module Webspicy
         expect(idFD(target, 'foo', 1, baz: "boz")).to be(false)
       end
 
-      it 'has an pathFD assertion' do
+      it 'has a pathFD assertion' do
         target = { foo: { bar: "baz"} }
         expect(pathFD(target, 'foo', bar: "baz")).to be(true)
         expect(pathFD(target, 'foo', bar: "boz")).to be(false)

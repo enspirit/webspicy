@@ -37,8 +37,12 @@ module Webspicy
 
       def size(target, path, expected = NO_ARG)
         path, expected = '', path if expected == NO_ARG
+        actual_size(target, path) == expected
+      end
+
+      def actual_size(target, path) 
         target = extract_path(target, path)
-        respond_to!(target, :size).size == expected
+        respond_to!(target, :size).size
       end
 
       def idIn(target, path, expected = NO_ARG)
