@@ -32,6 +32,8 @@ services:
 
     - description: |-
         when requested on an existing TODO
+      headers:
+        Accept: application/json
       params:
         id: 1
       expected:
@@ -46,6 +48,8 @@ services:
 
     - description: |-
         when requested on an unexisting TODO
+      headers:
+        Accept: application/json
       params:
         id: 999254654
       expected:
