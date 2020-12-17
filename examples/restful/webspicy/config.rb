@@ -10,6 +10,8 @@ def webspicy_config(&bl)
 
     c.precondition Webspicy::Specification::Precondition::RobustToInvalidInput.new
 
+    c.postcondition TodoRemoved
+
     c.instrument do |tc, client|
       role = tc.metadata[:role]
       tc.headers['Authorization'] = "Bearer #{role}" if role

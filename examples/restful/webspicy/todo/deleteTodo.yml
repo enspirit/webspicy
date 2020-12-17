@@ -15,6 +15,9 @@ services:
   preconditions:
     - Must be an admin
 
+  postconditions:
+    - The todo has been removed
+
   input_schema: |-
     {
       id: Integer
