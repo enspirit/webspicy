@@ -1,46 +1,62 @@
 # Webspicy
 
-A description, specification and test framework for web services seen as black
-box software operations.
+A specification and test framework for web services seen as black-box software
+operations. Because too many backends seem broken.
 
 ## Features
 
-* Declarative description of RESTful web-services + their tests
+* Declarative specification of HTTP web services + their tests
 
-* Framework/language agnostic: Webspicy is written in Ruby, but can be used to
-  test web services in any language / framework.
+* Framework/language agnostic: `webspicy` is written in Ruby, but can be used
+  to test web services for backends written in any language / framework.
 
-* Black box testing: Webspicy focuses on web services seen as blackboxes. It has
-  no knowledge of the implementation, and focuses on HTTP and input/output data
-  instead. Investing in such testing makes those tests more stable and your API
-  better.
+* Black box testing: `webspicy` focuses on web services seen as blackboxes. It
+  has no knowledge of the implementation, and focuses on HTTP and input/output
+  data instead. Investing in such testing makes those tests more stable and
+  your API design better.
 
 * Test instrumentation and generation, based on declarative PRE & POST
-  conditions.
+  contracts.
 
-* Extra goodness for Rubyists: being written in ruby, Webspicy also supports
-  testing Rack applications directly (through rack/test)
+* Extra goodness for Rubyists: being written in ruby, `webspicy` also supports
+  testing Rack applications directly (through rack/test), which boosts the
+  test suite.
 
-## Getting started
+* Extra goodies: when a specification is written, it can also be used for
+  mocking the API, generating an openapi file, etc.
 
-Please have a look at the example first. It contains a simple Sinatra application
-with GET and POST restful services tested with the framework. The Rakefile contains
-the necessary tasks to run those tests.
+## Getting started with the commandline
 
-## Executing the tests using the command line
+The easiest way to learn webspicy basics is the tutorial hosted at
+https://yourbackendisbroken.dev.
 
-Please have a look at the examples first. Then:
+To install webspicy on your developer computer, install ruby then:
+
+```
+gem install webspicy
+```
+
+Then execute webspicy help to see the options.
 
 ```
 webspicy --help
-webspicy path/to/your/config.rb
 ```
 
-## Using the docker image
+## Using the docker image(s)
 
-A docker image running your tests is provided. It expects a volume with the
-tests to run put in `/home/app`.
+If you just want to play with the commandline tool without having to
+install ruby & webspicy, you can use the docker image we provide for
+the commandline:
 
 ```
-docker run enspirit/webspicy -v path/to/tests:/home/app
+docker run enspirit/webspicy --help
+```
+
+If you have a specification & test suite somewhere, an easy way to run the
+whole suite (or integrate it in your continuous integration pipeline) is
+to use our `-tester` docker image. Just mount your test suite as a volume
+in `/home/app` and you are good to go:
+
+```
+docker run -v path/to/tests:/home/app enspirit/webspicy:tester
 ```
