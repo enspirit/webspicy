@@ -45,7 +45,42 @@ module Webspicy
           end
         end
       end
+
+      describe '#pathFD' do
+        let(:target) { {
+          bla: "bla",
+          content: [{
+            bli: "bli",
+            content: {
+              blo: "blo",
+              content: {
+                blu: "blu",
+                number: 3
+              }
+            }
+          }, {
+            ble: "ble",
+            content: {
+              bly: "bly",
+              content: {
+                blur: "blur",
+                number: 4
+              }
+            }
+          }]
+        } }
+
+        it 'returns nil when the assertion is true' do
+          expect(asserter.pathFD('content/1/content/content', number: 4)).to eq nil
+        end
+
+        it 'raises an exception with a descriptive message when the assertion is false' do
+          expect { asserter.pathFD('content/1/content/content', number: 3) }
+            .to raise_exception RuntimeError,
+                                '{:number=>3} vs. {"blur":"blur","number":4}...'
+        end
+      end
+
     end
   end
 end
-
