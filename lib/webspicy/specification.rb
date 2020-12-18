@@ -14,11 +14,13 @@ module Webspicy
 
     def self.singleservice(raw)
       converted = {
-        name: raw.has_key?(:name) ? raw[:name] : "Unamed specification",
+        name: raw[:name] || "Unamed specification",
         url: raw[:url],
-        services: [raw.reject{|k, _| k == :name || k == :url}]
+        services: [
+          Webspicy.service(raw.reject{|k| k==:url or k==:name }, Webspicy.current_scope)
+        ]
       }
-      self.info(raw)
+      info(converted)
     end
 
     def located_at!(location)
