@@ -1,7 +1,9 @@
 # 0.16.0
 
 * Improve output when LOG_LEVEL is set to DEBUG
-* Improve the commandline a little bit, to be able to test a single url
+* Improve the commandline to be able to test a single url and spec
+* Improve readability of test failures
+* Add docker images for commandline and tester
 
 This release may introduce integration issues since runtime
 dependencies have been bumped.
