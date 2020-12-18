@@ -17,12 +17,27 @@ FileUpload =
         param_name   :? String
     }
 
-Specification =
-    .Webspicy::Specification <info> {
-        name: String
-        url: String
-        services: [Service]
-    }
+Specification = .Webspicy::Specification
+  <info> {
+    name: String
+    url: String
+    services: [Service]
+  }
+  <singleservice> {
+    name            :? String
+    url             : String
+    method          :  Method
+    description     :  String
+    preconditions   :? [String]|String
+    postconditions  :? [String]|String
+    input_schema    :  Schema
+    output_schema   :  Schema
+    error_schema    :  Schema
+    blackbox        :? String
+    default_example :? TestCase
+    examples        :? [TestCase]
+    counterexamples :? [TestCase]
+  }
 
 Service =
     .Webspicy::Specification::Service <info> {

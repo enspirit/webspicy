@@ -12,6 +12,15 @@ module Webspicy
       new(raw)
     end
 
+    def self.singleservice(raw)
+      converted = {
+        name: raw.has_key?(:name) ? raw[:name] : "Unamed specification",
+        url: raw[:url],
+        services: [raw.reject{|k, _| k == :name || k == :url}]
+      }
+      self.info(raw)
+    end
+
     def located_at!(location)
       @location = Path(location)
     end
@@ -53,6 +62,10 @@ module Webspicy
 
     def to_info
       @raw
+    end
+
+    def to_singleservice
+      raise NotImplementedError
     end
 
   private
