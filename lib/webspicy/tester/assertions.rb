@@ -63,16 +63,15 @@ module Webspicy
         (ids.to_set & expected.to_set).empty?
       end
 
-      def idFD(target, path, id, expected = NO_ARG)
-        if expected == NO_ARG
-          expected = id
-          id, path = path, ''
-        end
+      def element_with_id(target, path, id)
         target = extract_path(target, path)
-        found = an_array(target).find{|t| t[:id] == id }
-        expected.keys.all?{|k|
-          value_equal(expected[k], found[k])
-        }
+        an_array(target).find { |t| t[:id] == id }
+      end
+
+      def idFD(element, expected) 
+        expected.keys.all? do |k|
+          value_equal(expected[k], element[k])
+        end
       end
 
       def pathFD(target, path, expected)
