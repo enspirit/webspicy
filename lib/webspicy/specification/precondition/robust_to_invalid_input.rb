@@ -40,7 +40,7 @@ module Webspicy
         def empty_input_counterexamples(service, first)
           placeholders = service.specification.url_placeholders
           empty_input = first.params.reject{|k| !placeholders.include?(k) }
-          if !empty_input.empty? && invalid_input?(service, empty_input)
+          if invalid_input?(service, empty_input)
             [first.mutate({
               :description => "it is robust to an invalid empty input (RobustToInvalidInput)",
               :dress_params => false,
