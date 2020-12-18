@@ -1,34 +1,30 @@
 ---
-name: |-
-  Your backend is broken website
-
 url: |-
   https://yourbackendisbroken.dev
 
-services:
-- method: |-
-    GET
+method: |-
+  GET
 
-  description: |-
-    Returns the web page
+description: |-
+  Returns the web page
 
-  input_schema: |-
-    Any
+input_schema: |-
+  Any
 
-  output_schema: |-
-    Any
+output_schema: |-
+  Any
 
-  error_schema: |-
-    Any
+error_schema: |-
+  Any
 
-  examples:
+examples:
 
-    - description: |-
-        it works
-      params:
-        id: 1
-      expected:
-        content_type: text/html
-        status: 200
-      assert:
-        - notEmpty
+  - description: |-
+      it works
+    params:
+      id: 1
+    expected:
+      content_type: text/html
+      status: 200
+    assert:
+      - notEmpty
