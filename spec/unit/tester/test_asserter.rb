@@ -172,10 +172,12 @@ module Webspicy
       it 'raises an exception when the assertion is false' do
         expect { Asserter.new(target).idFD('', 2, { c: 'c2' }) }
           .to raise_exception RuntimeError,
-                              'Expected [{"id":1,"a":"a1","b":"b1"... to meet FD {:c=>"c2"}'
+                              'Expected [{"id":1,"a":"a1","b":"b1"... ' \
+                              'to contain the key(s) and value(s) {:c=>"c2"}'
         expect { Asserter.new(target).idFD('', 2, { b: 'b1' }) }
           .to raise_exception RuntimeError,
-                              'Expected [{"id":1,"a":"a1","b":"b1"... to meet FD {:b=>"b1"}'
+                              'Expected [{"id":1,"a":"a1","b":"b1"... ' \
+                              'to contain the key(s) and value(s) {:b=>"b1"}'
       end
 
       it 'raises a NoMethodError when no element with the specified id is present' do
@@ -203,10 +205,12 @@ module Webspicy
       it 'raises an exception when the assertion is false' do
         expect { Asserter.new(target).pathFD('0', { c: 'c2' }) }
           .to raise_exception RuntimeError,
-                              '{:c=>"c2"} vs. {"a":"a1","b":"b1"}'
+                              'Expected {"a":"a1","b":"b1"} ' \
+                              'to contain the key(s) and value(s) {:c=>"c2"}'
         expect { Asserter.new(target).pathFD('0', { b: 'b2' }) }
           .to raise_exception RuntimeError,
-                              '{:b=>"b2"} vs. {"a":"a1","b":"b1"}'
+                              'Expected {"a":"a1","b":"b1"} ' \
+                              'to contain the key(s) and value(s) {:b=>"b2"}'
       end
     end
 
