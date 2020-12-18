@@ -60,4 +60,4 @@ Dockerfile.mocker.pushed: Dockerfile.mocker.built
 
 images: Dockerfile.built Dockerfile.tester.built Dockerfile.mocker.built
 
-push-images: Dockerfile.pushed Dockerfile.tester.pushed Dockerfile.mocker.pushed
+push-images: Dockerfile.pushed
