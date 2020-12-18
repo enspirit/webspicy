@@ -78,7 +78,12 @@ module Webspicy
           expected = id
           id, path = path, ''
         end
-        unless @assertions.idFD(@target, path, id, expected)
+        element = @assertions.element_with_id(@target, path, id)
+        unless element
+          _! "Expected an element with id #{id} to contain the key(s) and value(s) #{expected}, but there is no element with that id"
+        end
+
+        unless @assertions.idFD(element, expected)
           _! "Expected #{_s(@target, path)} to contain the key(s) and value(s) #{expected}"
         end
       end

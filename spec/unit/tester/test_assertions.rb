@@ -96,14 +96,16 @@ module Webspicy
           { id: 1, bar: "bar" },
           { id: 2, bar: "baz" }
         ] }
-        expect(idFD(target, 'foo', 1, bar: "bar")).to be(true)
-        expect(idFD(target, 'foo', 1, bar: "baz")).to be(false)
-        expect(idFD(target, 'foo', 1, baz: "boz")).to be(false)
+        element = element_with_id(target, 'foo', 1)
+        expect(idFD(element, bar: "bar")).to be(true)
+        expect(idFD(element, bar: "baz")).to be(false)
+        expect(idFD(element, baz: "boz")).to be(false)
 
         target = { foo: { id: 1, bar: "bar" } }
-        expect(idFD(target, 'foo', 1, bar: "bar")).to be(true)
-        expect(idFD(target, 'foo', 1, bar: "baz")).to be(false)
-        expect(idFD(target, 'foo', 1, baz: "boz")).to be(false)
+        element = element_with_id(target, 'foo', 1)
+        expect(idFD(element, bar: "bar")).to be(true)
+        expect(idFD(element, bar: "baz")).to be(false)
+        expect(idFD(element, baz: "boz")).to be(false)
       end
 
       it 'has a pathFD assertion' do

@@ -180,10 +180,12 @@ module Webspicy
                               'to contain the key(s) and value(s) {:b=>"b1"}'
       end
 
-      it 'raises a NoMethodError when no element with the specified id is present' do
+      it 'raises an exception with a descriptive message when no element with the specified id is present in target' do
         expect { Asserter.new(target).idFD('', 3, { a: 'a3' }) }
-          .to raise_exception NoMethodError,
-                              'undefined method `[]\' for nil:NilClass'
+          .to raise_exception RuntimeError,
+                              'Expected an element with id 3 to contain ' \
+                              'the key(s) and value(s) {:a=>"a3"}, '\
+                              'but there is no element with that id'
       end
     end
 
