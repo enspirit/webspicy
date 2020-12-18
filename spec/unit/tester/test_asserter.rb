@@ -49,35 +49,38 @@ module Webspicy
       describe '#pathFD' do
         let(:target) { {
           bla: "bla",
-          content: [{
+          array: [{
             bli: "bli",
-            content: {
+            fstLevel: {
               blo: "blo",
-              content: {
+              sndLevel: {
                 blu: "blu",
                 number: 3
               }
             }
           }, {
             ble: "ble",
-            content: {
+            fstLevel: {
               bly: "bly",
-              content: {
+              sndLevel: {
                 blur: "blur",
-                number: 4
+                number: 4,
+                x: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                y: "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+                z: "error"
               }
             }
           }]
         } }
 
         it 'returns nil when the assertion is true' do
-          expect(asserter.pathFD('content/1/content/content', number: 4)).to eq nil
+          expect(asserter.pathFD('array/1/fstLevel/sndLevel', number: 4)).to eq nil
         end
 
         it 'raises an exception with a descriptive message when the assertion is false' do
-          expect { asserter.pathFD('content/1/content/content', number: 3) }
+          expect { asserter.pathFD('array/1/fstLevel/sndLevel', z: 'z') }
             .to raise_exception RuntimeError,
-                                '{:number=>3} vs. {"blur":"blur","number":4}...'
+                                '{:z=>z} vs. {"z":"error",...'
         end
       end
 
