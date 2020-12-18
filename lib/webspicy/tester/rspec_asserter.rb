@@ -45,7 +45,7 @@ module Webspicy
         if ect.nil?
           rspec.expect(ect).to rspec.have_no_response_type
         else
-          rspec.expect(ect).to rspec.match_content_type(got)
+          rspec.expect(got).to rspec.match_content_type(ect)
         end
       end
 
