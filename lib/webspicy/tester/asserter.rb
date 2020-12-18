@@ -79,13 +79,13 @@ module Webspicy
           id, path = path, ''
         end
         unless @assertions.idFD(@target, path, id, expected)
-          _! "Expected #{_s(@target, path)} to meet FD #{expected.inspect}"
+          _! "Expected #{_s(@target, path)} to contain the key(s) and value(s) #{expected}"
         end
       end
 
       def pathFD(path, expected)
         unless @assertions.pathFD(@target, path, expected)
-          _! "#{expected.inspect} vs. #{_s(@target, path)}"
+          _! "Expected #{_s(@target, path)} to contain the key(s) and value(s) #{expected}"
         end
       end
 
