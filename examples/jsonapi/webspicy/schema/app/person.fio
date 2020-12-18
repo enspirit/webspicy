@@ -14,7 +14,7 @@ Position = String
 Hobby = String
 
 /- examples: {1, 2, 3, 4, 5} -/
-Rating = Integer( n | 1 <= n and n <= 5 )
+Rating = Integer( n | 1 <= n and n <= 5)
 
 /- examples: {"C++", "NodeJS", "UX/UI", "Photoshop", "Testing", "Management", "Computer Science", "Translating", "Research", "Monitoring"} -/
 Skill = String

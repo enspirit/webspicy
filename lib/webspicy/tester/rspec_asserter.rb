@@ -4,7 +4,7 @@ module Webspicy
 
       def initialize(rspec, invocation)
         @rspec = rspec
-        @invocation = invocation  
+        @invocation = invocation
       end
       attr_reader :rspec,  :invocation
 

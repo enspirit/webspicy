@@ -120,8 +120,11 @@ module Webspicy
         result
       end
 
+      class AssertError < StandardError
+      end
+
       def _!(msg)
-        raise msg
+        raise AssertError, msg
       end
 
     end # class Asserter

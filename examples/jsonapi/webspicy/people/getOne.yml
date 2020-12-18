@@ -31,7 +31,7 @@ services:
         id: "1"
       expected:
         content_type: application/json
-        status: 200
+        status: 201
       assert:
         - notEmpty('curriculum/languages')
         - notEmpty('curriculum/skills')
