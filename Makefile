@@ -39,16 +39,25 @@ Dockerfile.tester.built: Dockerfile.built
 	docker build -t enspirit/webspicy-tester --file Dockerfile.tester . | tee Dockerfile.tester.log
 	touch Dockerfile.tester.built
 
+Dockerfile.mocker.built: Dockerfile.built
+	docker build -t enspirit/webspicy-mocker --file Dockerfile.mocker . | tee Dockerfile.mocker.log
+	touch Dockerfile.mocker.built
+
 Dockerfile.pushed: Dockerfile.built
 	docker tag enspirit/webspicy enspirit/webspicy:$(DOCKER_TAG)
 	docker push enspirit/webspicy:$(DOCKER_TAG) | tee -a Dockerfile.log
 	touch Dockerfile.pushed
 
 Dockerfile.tester.pushed: Dockerfile.tester.built
-	docker tag enspirit/webspicy-tester enspirit/webspicy-tester:$(DOCKER_TAG)
-	docker push enspirit/webspicy-tester:$(DOCKER_TAG) | tee -a Dockerfile.tester.log
+	docker tag enspirit/webspicy:tester enspirit/webspicy:$(DOCKER_TAG)-tester
+	docker push enspirit/webspicy:$(DOCKER_TAG)-tester | tee -a Dockerfile.tester.log
 	touch Dockerfile.tester.pushed
 
-images: Dockerfile.built Dockerfile.tester.built
+Dockerfile.mocker.pushed: Dockerfile.mocker.built
+	docker tag enspirit/webspicy:mocker enspirit/webspicy:$(DOCKER_TAG)-mocker
+	docker push enspirit/webspicy:$(DOCKER_TAG)-mocker | tee -a Dockerfile.mocker.log
+	touch Dockerfile.mocker.pushed
 
-push-images: Dockerfile.pushed Dockerfile.tester.pushed
+images: Dockerfile.built Dockerfile.tester.built Dockerfile.mocker.built
+
+push-images: Dockerfile.pushed Dockerfile.tester.pushed Dockerfile.mocker.pushed

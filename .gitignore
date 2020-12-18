@@ -11,3 +11,6 @@ Dockerfile.pushed
 Dockerfile.tester.built
 Dockerfile.tester.log
 Dockerfile.tester.pushed
+Dockerfile.mocker.built
+Dockerfile.mocker.log
+Dockerfile.mocker.pushed

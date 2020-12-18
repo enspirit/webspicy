@@ -1,0 +1,5 @@
+FROM enspirit/webspicy:latest
+
+ENTRYPOINT []
+COPY lib/webspicy/mocker/config.ru /home/app/config.ru
+CMD bundle exec rackup

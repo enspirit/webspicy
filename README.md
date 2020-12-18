@@ -60,7 +60,7 @@ to use our `:tester` docker image. Just mount your test suite as a volume
 in `/home/app` and you are good to go:
 
 ```
-docker run -v path/to/tests:/formalspec enspirit/webspicy-tester
+docker run -v path/to/tests:/formalspec enspirit/webspicy:tester
 ```
 
 If your plan is to test a backend that runs on your own machine (vs.
@@ -69,7 +69,7 @@ you will need to add some networking option, as shown below. Please
 refer to Docker documentation.
 
 ```
-docker run -v path/to/tests:/formalspec --network=host enspirit/webspicy-tester
+docker run -v path/to/tests:/formalspec --network=host enspirit/webspicy:tester
 ```
 
 ## Contributing
