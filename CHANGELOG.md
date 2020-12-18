@@ -1,3 +1,7 @@
+# 0.16.1
+
+* Fix assertion error on response content type
+
 # 0.16.0
 
 * Improve output when LOG_LEVEL is set to DEBUG
