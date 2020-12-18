@@ -14,7 +14,7 @@ namespace :test do
 
   desc "Runs all tests on the real web server (must be launched previously)"
   task :real do
-    Webspicy::Tester.new(Path.dir/'webspicy/real.rb').call
+    Webspicy::Tester.new(Path.dir/'webspicy/config.rb').call
   end
 end
 
