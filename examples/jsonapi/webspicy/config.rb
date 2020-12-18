@@ -18,7 +18,7 @@ def webspicy_config(&bl)
     #c.precondition MustBeAuthenticated
     c.host = "http://127.0.0.1:4567"
     c.client = Webspicy::Tester::HttpClient
-    c.precondition Webspicy::Specification::Precondition::RobustToInvalidInput.new
+    # c.precondition Webspicy::Specification::Precondition::RobustToInvalidInput.new
     bl.call(c) if bl
   end
 end
