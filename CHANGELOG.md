@@ -1,3 +1,7 @@
+# 0.16.2
+
+* Fix simpler schema not working properly
+
 # 0.16.1
 
 * Fix assertion error on response content type
