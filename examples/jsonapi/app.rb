@@ -60,12 +60,12 @@ persons = (Path.dir/"fixtures").glob("*.json").map{|p|
 get '/people' do
   status 200
   content_type :json
-  {
+  JSON.pretty_generate({
     data: persons.map{|p| p.reject{|k| k == "curriculum" } },
     links: {
       "self": "/people"
     }
-  }.to_json
+  })
 end
 
 get '/people/:id' do |id|
@@ -74,7 +74,7 @@ get '/people/:id' do |id|
   if p
     content_type :json
     status 200
-    p.to_json
+    JSON.pretty_generate(p)
   else
     content_type "text/plain"
     status 404
