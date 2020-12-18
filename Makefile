@@ -36,11 +36,11 @@ Dockerfile.built: Dockerfile $(shell find . -type f | grep -v "\/tmp\|\.idea\|\.
 	touch Dockerfile.built
 
 Dockerfile.tester.built: Dockerfile.built
-	docker build -t enspirit/webspicy-tester --file Dockerfile.tester . | tee Dockerfile.tester.log
+	docker build -t enspirit/webspicy:tester --file Dockerfile.tester . | tee Dockerfile.tester.log
 	touch Dockerfile.tester.built
 
 Dockerfile.mocker.built: Dockerfile.built
-	docker build -t enspirit/webspicy-mocker --file Dockerfile.mocker . | tee Dockerfile.mocker.log
+	docker build -t enspirit/webspicy:mocker --file Dockerfile.mocker . | tee Dockerfile.mocker.log
 	touch Dockerfile.mocker.built
 
 Dockerfile.pushed: Dockerfile.built

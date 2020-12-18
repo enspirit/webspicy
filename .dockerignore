@@ -1,8 +1,9 @@
 Gemfile.lock
 .bundle
 README.md
-Dockerfile*
+Dockerfile.*
 pkg
 rspec.xml
 Jenkinsfile
 LICENCE
+Makefile
