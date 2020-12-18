@@ -89,9 +89,9 @@ module Webspicy
   module_function :test_case
 
   def handle_finitio_error(ex, scope)
-    # msg = "#{ex.message}:\n    #{ex.root_cause.message}"
-    # msg = Support::Colorize.colorize_error(msg, scope.config)
-    # fatal(msg)
+    msg = "#{ex.message}:\n    #{ex.root_cause.message}"
+    msg = Support::Colorize.colorize_error(msg, scope.config)
+    fatal(msg)
     raise
   end
   module_function :handle_finitio_error
