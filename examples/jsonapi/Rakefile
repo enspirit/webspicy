@@ -1,0 +1,25 @@
+$LOAD_PATH.unshift File.expand_path("..", __FILE__)
+require 'app'
+
+desc "Checks all .yml definition files"
+task :check do
+  Webspicy::Checker.new(Path.dir/'webspicy').call
+end
+
+namespace :test do
+  desc "Run all tests directly on Sinatra application using rack/test"
+  task :rackcli do
+    Webspicy::Tester.new(Path.dir/'webspicy/rackcli.rb').call
+  end
+
+  desc "Runs all tests on the real web server (must be launched previously)"
+  task :real do
+    Webspicy::Tester.new(Path.dir/'webspicy/real.rb').call
+  end
+end
+
+desc "Runs all checks and tests"
+task :test => :check
+task :test => :"test:rackcli"
+
+task :default => :test

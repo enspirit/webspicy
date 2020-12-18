@@ -1,0 +1,9 @@
+@import webspicy/scalars
+@import jsonapi/resources
+@import app/person
+
+Error = {
+  msg: String
+}
+
+Output = Person.Full

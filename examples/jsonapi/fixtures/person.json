@@ -1,0 +1,52 @@
+{
+  "id": "1",
+  "name": "Lambeau",
+  "lastname": "Bernard",
+  "curriculum": {
+    "longBio": "0e9e40f95816 bc1d8e055fc7 d6b5479d5b17",
+    "experiences": [
+      {
+        "position": "CFO",
+        "startDate": "1984-12-02",
+        "endDate": "2000-05-24",
+        "companyName": "Enspirit"
+      }
+    ],
+    "hobbies": [
+      "Coding",
+      "Coding",
+      "Ski"
+    ],
+    "education": [
+      {
+        "institute": "f9db04946bbd 0fe6b4c763fc a38adcd9d17a",
+        "startDate": "1985-07-28",
+        "endDate": "2017-07-01"
+      }
+    ],
+    "skills": [
+      {
+        "name": "UX/UI",
+        "rating": 3
+      },
+      {
+        "name": "Computer Science",
+        "rating": 2
+      },
+      {
+        "name": "Photoshop",
+        "rating": 5
+      },
+      {
+        "name": "Monitoring",
+        "rating": 4
+      }
+    ],
+    "languages": [
+      {
+        "name": "English",
+        "rating": 3
+      }
+    ]
+  }
+}

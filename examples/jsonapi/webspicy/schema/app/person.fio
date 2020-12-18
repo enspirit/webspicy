@@ -1,0 +1,80 @@
+@import webspicy/scalars
+
+ID = String
+
+Email = String( s | s =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i )
+
+/- examples: {"New York", "Barcelona, Spain", "Brussels", "San Francisco", "Los Angeles", "Denver", "St Petersburg", "Tokyo", "Dakar"} -/
+Location = String
+
+/- examples: {"CEO", "CTO", "CFO", "Full Stack Developer", "QA Engineer", "Junior Developer", "DBA", "UX Designer"} -/
+Position = String
+
+/- examples: {"Music", "Fishing", "Hiking", "Cooking", "Books", "Coding", "Ski", "Painting"} -/
+Hobby = String
+
+/- examples: {1, 2, 3, 4, 5} -/
+Rating = Integer( n | 1 <= n and n <= 5 )
+
+/- examples: {"C++", "NodeJS", "UX/UI", "Photoshop", "Testing", "Management", "Computer Science", "Translating", "Research", "Monitoring"} -/
+Skill = String
+
+/- examples: {"English", "French", "Spanish", "Russian", "Arabic", "Dutch", "German", "Swahili", "Ancient Greek"} -/
+Language = String
+
+/- examples: {"Github", "Microsoft", "Klaro", "Enspirit", "Deloitte", "Stackoverflow", "Basecamp"} -/
+CompanyName = String
+
+Experience = {
+  position     :  Position
+  startDate    :   Date
+  endDate      :? Date
+  companyName  :  CompanyName
+  description  :? String
+}
+
+EducationPaths = {
+  institute  :  String
+  startDate  :  Date
+  endDate    :? Date
+}
+
+Curriculum = {
+  currentPosition :? Position
+  shortBio        :? String
+  longBio         :? String
+  experiences     :  [Experience]
+  hobbies         :  [Hobby]
+  education       :  [EducationPaths]
+  skills          :  [{
+    name   : Skill
+    rating : Rating
+  }]
+  languages       :  [{
+    name   : Language
+    rating : Rating
+  }]
+}
+
+Person.Short = {
+  id              :  ID
+  name            :  String
+  lastname        :  String
+  email           :? Email
+  location        :? Location
+}
+
+Person.Full = {
+  id              :  ID
+  name            :  String
+  lastname        :  String
+  email           :? Email
+  location        :? Location
+  curriculum      :  Curriculum
+}
+
+Person.Search = Nil | {
+  q    :? String
+  page :? Integer
+  size :? Integer
+}

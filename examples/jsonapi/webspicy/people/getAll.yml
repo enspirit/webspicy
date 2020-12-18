@@ -1,0 +1,33 @@
+---
+name: |-
+  Lists people, with filtering and pagination
+
+url: |-
+  /people
+
+services:
+- method: |-
+    GET
+
+  description: |-
+    Returns a collection of Person
+
+  input_schema: |-
+    Person.Search
+
+  output_schema: |-
+    Collection<Person.Short>
+
+  error_schema: |-
+    Error
+
+  examples:
+
+    - description: |-
+        when requested
+      params: {}
+      expected:
+        content_type: application/json
+        status: 200
+      assert:
+        - notEmpty

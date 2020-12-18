@@ -1,0 +1,50 @@
+---
+name: |-
+  Get the full information about a person
+
+url: |-
+  /people/{id}
+
+services:
+- method: |-
+    GET
+
+  description: |-
+    Returns the information of the specified person
+
+  input_schema: |-
+    {
+      id: ID
+    }
+
+  output_schema: |-
+    Person.Full
+
+  error_schema: |-
+    Error
+
+  examples:
+
+    - description: |-
+        Returns the full information of a person
+      params:
+        id: "1"
+      expected:
+        content_type: application/json
+        status: 200
+      assert:
+        - notEmpty('curriculum/languages')
+        - notEmpty('curriculum/skills')
+
+  counterexamples:
+
+    - description: |-
+        it fails with a 404 for non existent person
+      params:
+        id: "9999"
+      expected:
+        content_type: text/plain
+        status: 404
+      assert:
+        - match(/Not Found/)
+

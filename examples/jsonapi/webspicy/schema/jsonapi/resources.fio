@@ -1,0 +1,36 @@
+@import webspicy/scalars
+
+Entity.Ref<T> = {
+  type : T
+  id   : String|Integer
+}
+Entity.Ref.Any = Entity.Ref<String>
+
+Resource<T> = {
+  data   : T
+  links  : Links
+  meta   :? { ... }
+}
+
+/- examples: {0} -/
+PageNumber = Integer
+
+/- examples: {45} -/
+PageSize = Integer
+
+/- examples: {40} -/
+TotalItems = Integer
+
+Collection<T> = {
+  data   : [T]
+  links  : Links
+}
+
+Url = String(s | s.length > 0 )
+
+Links = {
+  self : Url|Nil
+  ...  : Url|Nil
+}
+
+PagingOpts = {}
