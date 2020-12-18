@@ -1,3 +1,8 @@
+# 0.16.3
+
+* Fix RobustToInvalidInput to include empty params as valid
+  counterexamples.
+
 # 0.16.2
 
 * Fix simpler schema not working properly
