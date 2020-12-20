@@ -95,6 +95,7 @@ GEM
 PLATFORMS
   ruby
   x86_64-darwin-15
+  x86_64-darwin-18
 
 DEPENDENCIES
   rake (~> 12)
@@ -102,4 +103,4 @@ DEPENDENCIES
   webspicy!
 
 BUNDLED WITH
-   2.2.1
+   2.2.2

@@ -27,7 +27,7 @@ GEM
     diff-lcs (1.4.4)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    ffi (1.13.1)
+    ffi (1.14.1)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
@@ -58,7 +58,7 @@ GEM
     psych (3.2.1)
     public_suffix (4.0.6)
     rack (2.2.3)
-    rack-protection (2.0.8.1)
+    rack-protection (2.1.0)
       rack
     rack-robustness (1.1.0)
     rack-test (0.6.3)
@@ -82,10 +82,10 @@ GEM
     ruby-enum (0.8.0)
       i18n
     ruby2_keywords (0.0.2)
-    sinatra (2.0.8.1)
+    sinatra (2.1.0)
       mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.8.1)
+      rack (~> 2.2)
+      rack-protection (= 2.1.0)
       tilt (~> 2.0)
     tilt (2.0.10)
     unf (0.1.4)
@@ -93,7 +93,7 @@ GEM
     unf_ext (0.0.7.7)
 
 PLATFORMS
-  ruby
+  x86_64-darwin-18
 
 DEPENDENCIES
   rake (~> 12)
@@ -101,4 +101,4 @@ DEPENDENCIES
   webspicy!
 
 BUNDLED WITH
-   2.0.2
+   2.2.2
