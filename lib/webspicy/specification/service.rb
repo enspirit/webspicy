@@ -1,9 +1,10 @@
 module Webspicy
   class Specification
     class Service
+      include Support::DataObject
 
       def initialize(raw)
-        @raw = raw
+        super(raw)
         bind_examples
         bind_counterexamples
         @preconditions = compile_preconditions
@@ -44,11 +45,11 @@ module Webspicy
       end
 
       def examples
-        @raw[:examples]
+        @raw[:examples] || []
       end
 
       def counterexamples
-        @raw[:counterexamples]
+        @raw[:counterexamples] || []
       end
 
       def generated_counterexamples
@@ -74,10 +75,6 @@ module Webspicy
 
       def dress_params(params)
         input_schema.dress(params)
-      end
-
-      def to_info
-        @raw
       end
 
       def to_s
@@ -112,13 +109,13 @@ module Webspicy
       end
 
       def bind_examples
-        (@raw[:examples] ||= []).each do |ex|
+        examples.each do |ex|
           ex.bind(self, false)
         end
       end
 
       def bind_counterexamples
-        (@raw[:counterexamples] ||= []).each do |ex|
+        counterexamples.each do |ex|
           ex.bind(self, true)
         end
       end

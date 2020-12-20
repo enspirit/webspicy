@@ -1,8 +1,9 @@
 module Webspicy
   class Specification
+    include Support::DataObject
 
     def initialize(raw, location = nil)
-      @raw = raw
+      super(raw)
       @location = location
       bind_services
     end
@@ -46,7 +47,7 @@ module Webspicy
     end
 
     def services
-      @raw[:services]
+      @raw[:services] || []
     end
 
     def url_placeholders
@@ -60,10 +61,6 @@ module Webspicy
         url = url.gsub("{#{placeholder}}", value.to_s)
       end
       [ url, rest ]
-    end
-
-    def to_info
-      @raw
     end
 
     def to_singleservice
@@ -87,7 +84,7 @@ module Webspicy
     end
 
     def bind_services
-      (@raw[:services] ||= []).each do |s|
+      services.each do |s|
         s.specification = self
       end
     end

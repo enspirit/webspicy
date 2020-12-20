@@ -1,16 +1,14 @@
 module Webspicy
   class Specification
     class TestCase
+      include Support::DataObject
 
       def initialize(raw)
-        @raw = raw
+        super(raw)
         @counterexample = nil
       end
       attr_reader :service
       attr_reader :counterexample
-
-      attr_accessor :raw
-      protected :raw, :raw=
 
       def bind(service, counterexample)
         @service = service
@@ -109,10 +107,6 @@ module Webspicy
 
       def has_assertions?
         !assert.empty?
-      end
-
-      def to_info
-        @raw
       end
 
       def instrument(client)
