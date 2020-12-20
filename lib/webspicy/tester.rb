@@ -20,8 +20,11 @@ module Webspicy
     def load
       tester = self
       RSpec.reset
-      rspec_config!
-      RSpec.describe "" do
+      RSpec.configure do |c|
+        c.filter_gems_from_backtrace "rake"
+        c.backtrace_exclusion_patterns << /rspec_service!/
+      end
+      RSpec.describe "Webspicy test suite" do
         before(:all) do
           tester.config.listeners(:before_all).each do |l|
             l.call(tester.config)
@@ -49,34 +52,27 @@ module Webspicy
         str = "#{service} #{test_case}"
         str = colorize_highlight(str)
         on.describe(str) do
-          include_examples 'a successful test case invocation', client, test_case
-        end
-      end
-    end
+          around(:each) do |example|
+            client.around(test_case) do
+              client.before(test_case)
+              test_case.instrument(client)
+              client.instrument(test_case)
+              @response = client.call(test_case)
+              @invocation = Tester::Invocation.new(test_case, @response, client)
+              example.run
+              client.after(test_case, @invocation)
+              @invocation
+            end
+          end
 
-    def rspec_config!
-      RSpec.shared_examples "a successful test case invocation" do |client, test_case|
-
-        around(:each) do |example|
-          client.around(test_case) do
-            client.before(test_case)
-            test_case.instrument(client)
-            client.instrument(test_case)
-            @response = client.call(test_case)
-            @invocation = Tester::Invocation.new(test_case, @response, client)
-            example.run
-            client.after(test_case, @invocation)
+          let(:invocation) do
             @invocation
           end
-        end
 
-        let(:invocation) do
-          @invocation
-        end
-
-        it "meets its specification" do
-          raise "Test not ran" unless invocation.done?
-          invocation.rspec_assert!(self)
+          it "meets its specification" do
+            raise "Test not ran" unless invocation.done?
+            invocation.rspec_assert!(self)
+          end
         end
       end
     end

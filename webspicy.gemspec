@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rake", "~> 12"
   s.add_development_dependency 'sinatra', '~> 2'
 
-  s.add_runtime_dependency "rspec", "~> 3.7"
+  s.add_runtime_dependency "rspec", "~> 3.10"
   s.add_runtime_dependency 'rspec_junit_formatter', '~> 0.4.1'
   s.add_runtime_dependency "rack-test", "~> 0.6.3"
   s.add_runtime_dependency 'finitio', '~> 0.9.0'
