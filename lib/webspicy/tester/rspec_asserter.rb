@@ -21,13 +21,16 @@ module Webspicy
       end
 
       def assert!
-        assert_status_met
-        assert_content_type_met
-        assert_expected_headers
+        rspec.aggregate_failures do
+          assert_status_met
+          assert_content_type_met
+          assert_expected_headers
+        end
         assert_output_schema_met
-        assert_assertions_met
-        assert_postconditions_met
-
+        rspec.aggregate_failures do
+          assert_assertions_met
+          assert_postconditions_met
+        end
         assert_no_other_errors
       end
 
