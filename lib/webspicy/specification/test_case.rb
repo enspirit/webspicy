@@ -111,7 +111,7 @@ module Webspicy
 
       def instrument(client)
         service.preconditions.each do |pre|
-          pre.instrument(self, client)
+          pre.instrument(self, client) if pre.respond_to?(:instrument)
         end
         service.postconditions.each do |post|
           post.instrument(self, client) if post.respond_to?(:instrument)
