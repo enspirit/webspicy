@@ -1,10 +1,11 @@
 # Webspicy
 
 A specification and test framework for web services seen as black-box software
-operations. Webspicy yields a better test coverage for a smaller testing effort,
-because software quality matters.
+operations. Webspicy yields a better test coverage for a smaller testing effort.
 
 See webspicy in action and make the tutorial on https://yourbackendisbroken.dev
+
+Have a look at `doc/*.md` for vocabulary and vision as well as `ROADMAP.md`.
 
 ## Features
 
@@ -19,7 +20,7 @@ See webspicy in action and make the tutorial on https://yourbackendisbroken.dev
   your API design better.
 
 * Formal and human-friendly data schema with strong data matching semantics,
-  thanks to finitio.io
+  thanks to [http://finitio.io](http://finitio.io)
 
 * Test instrumentation and generation, based on PRE & POST contracts.
 
