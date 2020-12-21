@@ -31,6 +31,10 @@ Have a look at `doc/*.md` for vocabulary and vision as well as `ROADMAP.md`.
 * Extra goodies: when a specification is written, it can also be used for
   mocking the API, generating an openapi file, etc.
 
+## Is this used on real-world cases?
+
+Yes, `webspicy` is currently used on a dozen production components. Our biggest specification has 324 specification files for thousands of tests, 35% of them being generated.
+
 ## Getting started with the commandline
 
 To install webspicy on your developer computer, install ruby then:
