@@ -40,7 +40,7 @@ module Webspicy
       end
 
       it 'supports a single .yml file and returns a specific configuration instance' do
-        file = restful_folder/"todo/getTodo.yml"
+        file = restful_folder/"formaldef/todo/get.yml"
         c = Configuration.dress(file)
         expect(c).to be_a(Configuration)
         expect(c.folder).to eq(restful_folder)

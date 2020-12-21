@@ -27,13 +27,13 @@ module Webspicy
         let(:configuration) {
           Configuration.new(restful_folder){|c|
             c.file_filter = ->(f) {
-              f.basename.to_s == "getTodo.yml"
+              f.basename.to_s == "get.yml"
             }
           }
         }
 
-        it 'returns only that file' do
-          expect(subject.size).to eql(1)
+        it 'returns only that files' do
+          expect(subject.size).to eql(2)
         end
       end
 
@@ -41,12 +41,12 @@ module Webspicy
 
         let(:configuration) {
           Configuration.new(restful_folder){|c|
-            c.file_filter = /getTodo.yml/
+            c.file_filter = /get.yml/
           }
         }
 
-        it 'returns only that file' do
-          expect(subject.size).to eql(1)
+        it 'returns only that files' do
+          expect(subject.size).to eql(2)
         end
       end
 
@@ -54,7 +54,7 @@ module Webspicy
 
         let(:configuration) {
           Configuration.new(restful_folder) do |c|
-            c.folder 'todo'
+            c.folder 'formaldef/todo'
           end
         }
 

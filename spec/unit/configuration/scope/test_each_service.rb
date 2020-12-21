@@ -19,7 +19,7 @@ module Webspicy
 
         let(:configuration) {
           Configuration.new(restful_folder){|c|
-            c.file_filter = /getTodo.yml/
+            c.file_filter = /get.yml/
           }
         }
 
@@ -32,7 +32,7 @@ module Webspicy
 
         let(:configuration) {
           Configuration.new(restful_folder){|c|
-            c.file_filter = /getTodo.yml/
+            c.file_filter = /get.yml/
             c.service_filter = ->(s) {
               s.method == "POST"
             }
