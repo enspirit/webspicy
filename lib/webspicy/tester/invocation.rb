@@ -214,5 +214,3 @@ module Webspicy
     end # class Invocation
   end # class Tester
 end # module Webspicy
-require_relative 'rspec_matchers'
-require_relative 'rspec_asserter'

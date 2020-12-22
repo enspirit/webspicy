@@ -93,6 +93,7 @@ GEM
     unf_ext (0.0.7.7)
 
 PLATFORMS
+  x86_64-darwin-15
   x86_64-darwin-18
 
 DEPENDENCIES
