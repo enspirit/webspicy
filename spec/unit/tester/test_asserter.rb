@@ -16,7 +16,7 @@ module Webspicy
 
         it 'raises an exception with a descriptive message when the assertion is false' do
           expect { Asserter.new([:a, 'foo', 99]).includes('', 42) }
-            .to raise_exception RuntimeError,
+            .to raise_exception AssertionError,
                                 'Expected ["a","foo",99] to include 42'
 
         end
@@ -35,7 +35,7 @@ module Webspicy
 
         it 'raises an exception with a descriptive message when the assertion is false' do
           expect { Asserter.new([:a, 'foo', 99]).notIncludes('', 'foo') }
-            .to raise_exception RuntimeError,
+            .to raise_exception AssertionError,
                                 'Expected ["a","foo",99] not to include foo'
         end
       end
@@ -48,7 +48,7 @@ module Webspicy
 
         it 'raises an exception with a descriptive message when the assertion is false' do
           expect { Asserter.new(['foo']).empty }
-            .to raise_exception RuntimeError,
+            .to raise_exception AssertionError,
                                 'Expected ["foo"] to be empty'
         end
       end
@@ -61,10 +61,10 @@ module Webspicy
 
         it 'raises an exception with a descriptive message when the assertion is false' do
           expect { Asserter.new([]).notEmpty }
-            .to raise_exception RuntimeError,
+            .to raise_exception AssertionError,
                                 'Expected [] to be non empty'
           expect { Asserter.new({}).notEmpty }
-            .to raise_exception RuntimeError,
+            .to raise_exception AssertionError,
                                 'Expected {} to be non empty'
         end
       end
@@ -79,7 +79,7 @@ module Webspicy
 
         it 'raises an exception with a descriptive message when the assertion is false' do
           expect { asserter.size('', 3) }
-            .to raise_exception RuntimeError, 'Expected [1,2,3,4] to have a size of 3, actual size is: 4'
+            .to raise_exception AssertionError, 'Expected [1,2,3,4] to have a size of 3, actual size is: 4'
         end
 
         context 'with a string' do
@@ -99,7 +99,7 @@ module Webspicy
 
           it 'raises an exception with a descriptive message when the assertion is false' do
             expect { asserter.size('foo/2/bar', 99) }
-              .to raise_exception RuntimeError,
+              .to raise_exception AssertionError,
                                   'Expected [10,11,12] to have a size of 99, actual size is: 3'
           end
 
@@ -122,13 +122,13 @@ module Webspicy
 
         it 'raises an exception with a descriptive message when the assertion is false' do
           expect { Asserter.new([{ id: 1}, { id: 2}]).idIn('', 123, 125) }
-            .to raise_exception RuntimeError,
+            .to raise_exception AssertionError,
                                 'Expected [{"id":1},{"id":2}] to have ids 123,125'
           expect { Asserter.new([{ id: 1}, { id: 2}]).idIn('', 1, 2, 3) }
-            .to raise_exception RuntimeError,
+            .to raise_exception AssertionError,
                                 'Expected [{"id":1},{"id":2}] to have ids 1,2,3'
           expect { Asserter.new([{ id: 1}, { id: 2}]).idIn('', 1) }
-            .to raise_exception RuntimeError,
+            .to raise_exception AssertionError,
                                 'Expected [{"id":1},{"id":2}] to have ids 1'
         end
       end
@@ -142,15 +142,15 @@ module Webspicy
 
         it 'raises an exception with a descriptive message when the assertion is false' do
           expect { Asserter.new([{ id: 1}, { id: 2}]).idNotIn('', 1, 2) }
-            .to raise_exception RuntimeError,
+            .to raise_exception AssertionError,
                                 'Expected [{"id":1},{"id":2}] to not have ids 1,2'
           expect { Asserter.new({ id: 1}).idNotIn('', 1) }
-            .to raise_exception RuntimeError,
+            .to raise_exception AssertionError,
                                 'Expected {"id":1} to not have ids 1'
 
           os = OpenStruct.new(id: 'foo')
           expect { Asserter.new(os).idNotIn('', 'foo') }
-            .to raise_exception RuntimeError,
+            .to raise_exception AssertionError,
                                 'Expected "#<OpenStruct id=\"foo\">"... to not have ids foo'
         end
       end
@@ -171,18 +171,18 @@ module Webspicy
 
       it 'raises an exception when the assertion is false' do
         expect { Asserter.new(target).idFD('', 2, { c: 'c2' }) }
-          .to raise_exception RuntimeError,
+          .to raise_exception AssertionError,
                               'Expected [{"id":1,"a":"a1","b":"b1"... ' \
                               'to contain the key(s) and value(s) {:c=>"c2"}'
         expect { Asserter.new(target).idFD('', 2, { b: 'b1' }) }
-          .to raise_exception RuntimeError,
+          .to raise_exception AssertionError,
                               'Expected [{"id":1,"a":"a1","b":"b1"... ' \
                               'to contain the key(s) and value(s) {:b=>"b1"}'
       end
 
       it 'raises an exception with a descriptive message when no element with the specified id is present in target' do
         expect { Asserter.new(target).idFD('', 3, { a: 'a3' }) }
-          .to raise_exception RuntimeError,
+          .to raise_exception AssertionError,
                               'Expected an element with id 3 to contain ' \
                               'the key(s) and value(s) {:a=>"a3"}, '\
                               'but there is no element with that id'
@@ -206,11 +206,11 @@ module Webspicy
 
       it 'raises an exception when the assertion is false' do
         expect { Asserter.new(target).pathFD('0', { c: 'c2' }) }
-          .to raise_exception RuntimeError,
+          .to raise_exception AssertionError,
                               'Expected {"a":"a1","b":"b1"} ' \
                               'to contain the key(s) and value(s) {:c=>"c2"}'
         expect { Asserter.new(target).pathFD('0', { b: 'b2' }) }
-          .to raise_exception RuntimeError,
+          .to raise_exception AssertionError,
                               'Expected {"a":"a1","b":"b1"} ' \
                               'to contain the key(s) and value(s) {:b=>"b2"}'
       end
@@ -224,7 +224,7 @@ module Webspicy
 
       it 'raises an exception when the assertion is false' do
         expect { Asserter.new('Empathise').match('', /ize/) }
-          .to raise_exception RuntimeError,
+          .to raise_exception AssertionError,
                               'Expected "Empathise" to match /ize/'
       end
     end
@@ -237,7 +237,7 @@ module Webspicy
 
       it 'raises an exception when the assertion is false' do
         expect { Asserter.new('Empathise').notMatch('', /path/) }
-          .to raise_exception RuntimeError,
+          .to raise_exception AssertionError,
                               'Expected "Empathise" not to match /path/'
       end
     end
