@@ -126,7 +126,7 @@ module Webspicy
       end
 
       def _!(msg)
-        raise AssertionError, msg
+        raise Failure, msg
       end
 
     end # class Asserter

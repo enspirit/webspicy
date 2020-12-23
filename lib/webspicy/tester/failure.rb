@@ -1,6 +1,6 @@
 module Webspicy
   class Tester
-    class AssertionError < StandardError
-    end # class AssertionError
+    class Failure < Exception
+    end # class Failure
   end # class Tester
 end # module Webspicy
