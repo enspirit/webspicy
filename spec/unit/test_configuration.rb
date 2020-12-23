@@ -106,6 +106,7 @@ module Webspicy
         ENV['ROBUST'] = 'yes'
         config = Configuration.new
         expect(config.run_counterexamples?).to eql(true)
+        ENV.delete('ROBUST')
       end
 
       it 'ignores the environment is set explicitly' do
@@ -114,6 +115,7 @@ module Webspicy
           c.run_counterexamples = false
         end
         expect(config.run_counterexamples?).to eql(false)
+        ENV.delete('ROBUST')
       end
     end
 
@@ -130,6 +132,7 @@ module Webspicy
         expect(config.file_filter).to be_a(Regexp)
         expect(config.file_filter).to match("foo/bar/getTodo.yml")
         expect(config.file_filter).not_to match("foo/bar/getTodos.yml")
+        ENV.delete('RESOURCE')
       end
 
       it 'allows expressing a no match' do
@@ -138,6 +141,7 @@ module Webspicy
         expect(config.file_filter).to be_a(Proc)
         expect(config.file_filter.call("foo/bar/getTodos.yml")).to eq(true)
         expect(config.file_filter.call("foo/bar/getTodo.yml")).to eq(false)
+        ENV.delete('RESOURCE')
       end
 
       it 'ignores the environment if set explicitly' do
@@ -146,6 +150,7 @@ module Webspicy
           c.file_filter = nil
         end
         expect(config.file_filter).to be_nil
+        ENV.delete('RESOURCE')
       end
     end
 
@@ -160,6 +165,7 @@ module Webspicy
         ENV['METHOD'] = 'GET'
         config = Configuration.new
         expect(config.service_filter).to be_a(Proc)
+        ENV.delete('METHOD')
       end
 
       it 'ignores the environment is set explicitly' do
@@ -168,6 +174,7 @@ module Webspicy
           c.service_filter = nil
         end
         expect(config.service_filter).to be_nil
+        ENV.delete('METHOD')
       end
     end
 
@@ -187,48 +194,56 @@ module Webspicy
         ENV['TAG'] = 'foo'
         expect(subject).to be_a(Proc)
         expect(subject.call(tc)).to eql(true)
+        ENV.delete('TAG')
       end
 
       it 'allows no matching a single tag' do
         ENV['TAG'] = 'baz'
         expect(subject).to be_a(Proc)
         expect(subject.call(tc)).to eql(false)
+        ENV.delete('TAG')
       end
 
       it 'allows setting multiple tags' do
         ENV['TAG'] = 'foo,baz'
         expect(subject).to be_a(Proc)
         expect(subject.call(tc)).to eql(true)
+        ENV.delete('TAG')
       end
 
       it 'allows no matching any of multiple tags' do
         ENV['TAG'] = 'foi,baz'
         expect(subject).to be_a(Proc)
         expect(subject.call(tc)).to eql(false)
+        ENV.delete('TAG')
       end
 
       it 'allows setting a single negative tag' do
         ENV['TAG'] = '!foo'
         expect(subject).to be_a(Proc)
         expect(subject.call(tc)).to eql(false)
+        ENV.delete('TAG')
       end
 
       it 'allows not matching a single negative tag' do
         ENV['TAG'] = '!baz'
         expect(subject).to be_a(Proc)
         expect(subject.call(tc)).to eql(true)
+        ENV.delete('TAG')
       end
 
       it 'allows mixing positive & negative tags and have a match' do
         ENV['TAG'] = 'foo,!baz'
         expect(subject).to be_a(Proc)
         expect(subject.call(tc)).to eql(true)
+        ENV.delete('TAG')
       end
 
       it 'allows mixing positive & negative tags and have no match' do
         ENV['TAG'] = 'foo,!bar'
         expect(subject).to be_a(Proc)
         expect(subject.call(tc)).to eql(false)
+        ENV.delete('TAG')
       end
 
     end
