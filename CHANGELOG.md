@@ -1,5 +1,9 @@
 # 0.17.0
 
+* Output and error are now loaded according to the content-type
+  announced in the response, and only if it not announced,
+  according to the expected content type.
+
 * Add support for errconditions in Configuration and TestCase.
   Errconditions are postconditions that are met when the test
   item is called while at least on precondition is violated.

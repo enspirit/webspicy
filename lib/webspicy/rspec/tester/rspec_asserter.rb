@@ -38,7 +38,6 @@ module Webspicy
           assert_postconditions_met
           assert_errconditions_met
         end
-        assert_no_other_errors
       end
 
       def assert_status_met
@@ -115,11 +114,6 @@ module Webspicy
           msg = post.check(invocation)
           rspec.expect(msg).to rspec.meet_errcondition(post)
         end
-      end
-
-      def assert_no_other_errors
-        errors = invocation.errors
-        rspec.expect(errors).to rspec.be_an_empty_errors_array
       end
 
     end # class RSpecAsserter
