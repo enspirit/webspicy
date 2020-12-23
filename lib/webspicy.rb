@@ -62,6 +62,7 @@ module Webspicy
     raw = YAML.load(raw) if raw.is_a?(String)
     with_scope(scope) do
       r = FORMALDOC["Specification"].dress(raw)
+      r.config = scope.config
       r.located_at!(file) if file
       r
     end

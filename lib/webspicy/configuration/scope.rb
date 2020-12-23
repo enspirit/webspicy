@@ -7,18 +7,6 @@ module Webspicy
       end
       attr_reader :config
 
-      def preconditions
-        config.preconditions
-      end
-
-      def postconditions
-        config.postconditions
-      end
-
-      def errconditions
-        config.errconditions
-      end
-
       ###
       ### Eachers -- Allow navigating the web service definitions
       ###

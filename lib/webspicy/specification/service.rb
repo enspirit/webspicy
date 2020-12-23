@@ -7,12 +7,15 @@ module Webspicy
         super(raw)
         bind_examples
         bind_counterexamples
-        @scope = Webspicy.current_scope
       end
       attr_accessor :specification
 
       def self.info(raw)
         new(raw)
+      end
+
+      def config
+        specification.config
       end
 
       def method
@@ -90,23 +93,19 @@ module Webspicy
 
     private
 
-      def scope
-        @scope
-      end
-
       def compile_preconditions
         @raw[:preconditions] = [@raw[:preconditions]] if @raw[:preconditions].is_a?(String)
-        compile_conditions(@raw[:preconditions] ||= [], scope.preconditions)
+        compile_conditions(@raw[:preconditions] ||= [], config.preconditions)
       end
 
       def compile_postconditions
         @raw[:postconditions] = [@raw[:postconditions]] if @raw[:postconditions].is_a?(String)
-        compile_conditions(@raw[:postconditions] ||= [], scope.postconditions)
+        compile_conditions(@raw[:postconditions] ||= [], config.postconditions)
       end
 
       def compile_errconditions
         @raw[:errconditions] = [@raw[:errconditions]] if @raw[:errconditions].is_a?(String)
-        compile_conditions(@raw[:errconditions] ||= [], scope.errconditions)
+        compile_conditions(@raw[:errconditions] ||= [], config.errconditions)
       end
 
       def compile_conditions(descriptions, conditions)
