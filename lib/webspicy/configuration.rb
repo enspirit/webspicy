@@ -24,7 +24,7 @@ module Webspicy
         :success => :green
       }
       @scope_factory = ->(config){ Scope.new(config) }
-      @client = Tester::HttpClient
+      @client = Web::HttpClient
       Path.require_tree(folder/'support') if (folder/'support').exists?
       yield(self) if block_given?
     end

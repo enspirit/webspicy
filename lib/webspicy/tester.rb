@@ -108,8 +108,7 @@ module Webspicy
         reporter.instrument_done
 
         reporter.before_invocation
-        @response = client.call(test_case)
-        @invocation = Tester::Invocation.new(test_case, @response, client)
+        @invocation = client.call(test_case)
         reporter.invocation_done
 
         reporter.before_assertions

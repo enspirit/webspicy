@@ -1,6 +1,6 @@
 module Webspicy
-  class Tester
-    class Client
+  module Web
+    class Client < Tester::Client
       module Support
         include Webspicy::Support::Colorize
 

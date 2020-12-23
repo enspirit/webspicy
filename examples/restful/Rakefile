@@ -1,4 +1,6 @@
 $LOAD_PATH.unshift File.expand_path("..", __FILE__)
+require 'webspicy'
+require 'webspicy/web'
 require 'app'
 
 desc "Checks all .yml definition files"

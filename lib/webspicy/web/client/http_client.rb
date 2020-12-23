@@ -1,5 +1,5 @@
 module Webspicy
-  class Tester
+  module Web
     class HttpClient < Client
 
       class ::HTTP::Request
@@ -19,7 +19,7 @@ module Webspicy
       end
       attr_reader :api
 
-      def call(test_case)
+      def _call(test_case)
         service, specification = test_case.service, test_case.specification
 
         # Instantiate the parameters
@@ -150,5 +150,5 @@ module Webspicy
       end # class Api
 
     end # class HttpClient
-  end # class Tester
+  end # module Web
 end # module Webspicy

@@ -21,13 +21,14 @@ module Webspicy
   require 'webspicy/specification'
   require 'webspicy/configuration'
   require 'webspicy/tester'
+  require 'webspicy/web'
 
   ###
   ### Backward compatibility
   ###
   Client = Tester::Client
-  HttpClient = Tester::HttpClient
-  RackTestClient = Tester::RackTestClient
+  HttpClient = Web::HttpClient
+  RackTestClient = Web::RackTestClient
   Resource = Specification
   Precondition = Specification::Precondition
   Postcondition = Specification::Postcondition

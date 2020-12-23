@@ -1,5 +1,5 @@
 module Webspicy
-  class Tester
+  module Web
     class RackTestClient < Client
 
       def self.for(app)
@@ -12,7 +12,7 @@ module Webspicy
       end
       attr_reader :api
 
-      def call(test_case)
+      def _call(test_case)
         service, specification = test_case.service, test_case.specification
 
         # Instantiate the parameters
@@ -184,5 +184,5 @@ module Webspicy
       end # class Api
 
     end # class RackTestClient
-  end # class Client
+  end # module Web
 end # module Webspicy
