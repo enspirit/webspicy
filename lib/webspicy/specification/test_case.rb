@@ -16,6 +16,10 @@ module Webspicy
         self
       end
 
+      def example?
+        !@counterexample
+      end
+
       def counterexample?
         !!@counterexample
       end
@@ -83,6 +87,10 @@ module Webspicy
 
       def is_expected_status?(status)
         expected_status === status
+      end
+
+      def has_expected_status?
+        not expected[:status].nil?
       end
 
       def expected_error

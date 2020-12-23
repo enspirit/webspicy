@@ -18,6 +18,11 @@ FileUpload =
     }
 
 Specification = .Webspicy::Specification
+  <info> {
+    name: String
+    url: String
+    services: [Service]
+  }
   <singleservice> {
     name            :? String
     url             :  String
@@ -33,11 +38,6 @@ Specification = .Webspicy::Specification
     default_example :? TestCase
     examples        :? [TestCase]
     counterexamples :? [TestCase]
-  }
-  <info> {
-    name: String
-    url: String
-    services: [Service]
   }
 
 Service =

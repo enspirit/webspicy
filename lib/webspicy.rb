@@ -10,6 +10,7 @@ require 'rack/test'
 require 'mustermann'
 require 'colorized_string'
 require 'securerandom'
+require 'forwardable'
 module Webspicy
 
   ###
@@ -52,6 +53,12 @@ module Webspicy
   FIO
   FORMALDOC = Finitio.system(Path.dir/("webspicy/formaldoc.fio"))
 
+  ###
+  ### Exceptions that we let pass during testing
+  ###
+
+  PASSTHROUGH_EXCEPTIONS = [NoMemoryError, SignalException, SystemExit]
+
   # Returns a default scope instance.
   def default_scope
     Configuration::Scope.new(Configuration.new)
@@ -90,9 +97,9 @@ module Webspicy
   module_function :test_case
 
   def handle_finitio_error(ex, scope)
-    msg = "#{ex.message}:\n    #{ex.root_cause.message}"
-    msg = Support::Colorize.colorize_error(msg, scope.config)
-    fatal(msg)
+    # msg = "#{ex.message}:\n    #{ex.root_cause.message}"
+    # msg = Support::Colorize.colorize_error(msg, scope.config)
+    # fatal(msg)
     raise
   end
   module_function :handle_finitio_error

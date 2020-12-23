@@ -1,18 +1,21 @@
 module Webspicy
   class Tester
     class Invocation
+      extend Forwardable
 
       def initialize(test_case, response, client)
         @test_case = test_case
         @response = response
         @client = client
       end
-
       attr_reader :test_case, :response, :client
 
-      def service
-        test_case.service
-      end
+      def_delegators :@test_case, *[
+        :config,
+        :scope,
+        :specification,
+        :service
+      ]
 
       ### Getters on response
 
