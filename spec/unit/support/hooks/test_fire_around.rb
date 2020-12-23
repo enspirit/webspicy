@@ -1,7 +1,15 @@
 require 'spec_helper'
 module Webspicy
-  class Tester
-    describe Client, "around" do
+  module Support
+    describe Hooks, "fire_around" do
+
+      class Hooker
+        include Hooks
+        def initialize(config)
+          @config = config
+        end
+        attr_reader :config
+      end
 
       it 'work with no around at all' do
         config = Configuration.new
@@ -9,8 +17,7 @@ module Webspicy
         seen = false
         block = ->(){ seen = true }
 
-        scope = Configuration::Scope.new(config)
-        Client.new(scope).around(1, 2, 3, &block)
+        Hooker.new(config).fire_around(1, 2, 3, &block)
         expect(seen).to be(true)
       end
 
@@ -24,11 +31,10 @@ module Webspicy
           bl.call
         end
 
-        scope = Configuration::Scope.new(config)
         block = ->(){ seen = true }
-        Client.new(scope).around(1, 2, 3, &block)
+        Hooker.new(config).fire_around(1, 2, 3, &block)
 
-        expect(seen_args[0...-1]).to eql([1, 2, 3])
+        expect(seen_args).to eql([1, 2, 3])
         expect(seen).to be(true)
       end
 
@@ -47,12 +53,11 @@ module Webspicy
           bl.call
         end
 
-        scope = Configuration::Scope.new(config)
         block = ->(){ seen = true }
-        Client.new(scope).around(1, 2, 3, &block)
+        Hooker.new(config).fire_around(1, 2, 3, &block)
 
         expect(seen_args.size).to eql(2)
-        expect(seen_args.all?{|sa| sa[0...-1] == [1,2,3] }).to be(true)
+        expect(seen_args.all?{|sa| sa == [1,2,3] }).to be(true)
         expect(seen).to be(true)
       end
 

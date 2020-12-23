@@ -98,14 +98,13 @@ module Webspicy
     end
 
     def run_test_case
-      client.around(test_case) do
+      fire_around(test_case, client) do
         reporter.before_each
-        client.before(test_case)
+        fire_before_each(test_case, client)
         reporter.before_each_done
 
         reporter.before_instrument
-        test_case.instrument(client)
-        client.instrument(test_case)
+        instrument_test_case
         reporter.instrument_done
 
         reporter.before_invocation
@@ -118,10 +117,25 @@ module Webspicy
         reporter.assertions_done
 
         reporter.after_each
-        client.after(test_case, @invocation)
+        fire_after_each(test_case, @invocation, client)
         reporter.after_each_done
       end
     end
+
+    def instrument_test_case
+      service.preconditions.each do |pre|
+        pre.instrument(test_case, client) if pre.respond_to?(:instrument)
+      end
+      service.postconditions.each do |post|
+        post.instrument(test_case, client) if post.respond_to?(:instrument)
+      end if test_case.example?
+      service.errconditions.each do |post|
+        post.instrument(test_case, client) if post.respond_to?(:instrument)
+      end if test_case.counterexample?
+      fire_instrument(test_case, client)
+    end
+
+    include Support::Hooks
 
     def check_invocation
       @result = Result.from(self)

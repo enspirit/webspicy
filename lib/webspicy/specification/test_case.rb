@@ -117,15 +117,6 @@ module Webspicy
         !assert.empty?
       end
 
-      def instrument(client)
-        service.preconditions.each do |pre|
-          pre.instrument(self, client) if pre.respond_to?(:instrument)
-        end
-        service.postconditions.each do |post|
-          post.instrument(self, client) if post.respond_to?(:instrument)
-        end
-      end
-
       def mutate(override)
         m = self.dup
         m.raw = self.raw.merge(override)
