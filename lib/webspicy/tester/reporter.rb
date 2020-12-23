@@ -75,6 +75,7 @@ module Webspicy
     end # class Reporter
   end # class Tester
 end # module Webspicy
+require_relative 'reporter/error_count'
 require_relative 'reporter/progress'
 require_relative 'reporter/summary'
 require_relative 'reporter/documentation'

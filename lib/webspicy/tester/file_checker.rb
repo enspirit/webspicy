@@ -3,10 +3,11 @@ module Webspicy
     class FileChecker < Tester
 
       def default_reporter
-        @reporter = Tester::Reporter::Composite.new
-        @reporter << Tester::Reporter::FileProgress.new
-        @reporter << Tester::Reporter::Exceptions.new
-        @reporter << Tester::Reporter::FileSummary.new
+        @reporter = Reporter::Composite.new
+        @reporter << Reporter::FileProgress.new
+        @reporter << Reporter::Exceptions.new
+        @reporter << Reporter::FileSummary.new
+        @reporter << Reporter::ErrorCount.new
       end
 
       def run_scope

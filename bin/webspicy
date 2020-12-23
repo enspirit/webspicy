@@ -51,4 +51,4 @@ end
 
 config = Webspicy::Configuration.dress(ARGV[0])
 res = Webspicy::Tester.new(config).call
-abort("Some tests failed") unless res == 0
+abort("#{res} errors occured") unless res == 0

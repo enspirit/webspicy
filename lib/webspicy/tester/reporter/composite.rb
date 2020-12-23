@@ -28,6 +28,10 @@ module Webspicy
           end
         end
 
+        def find(kind)
+          @reporters.find{|r| r.is_a?(kind) }
+        end
+
       end # class Composite
     end # class Reporter
   end # class Tester

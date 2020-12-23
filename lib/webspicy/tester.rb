@@ -24,6 +24,7 @@ module Webspicy
       @reporter << Reporter::Documentation.new
       @reporter << Reporter::Exceptions.new
       @reporter << Reporter::Summary.new
+      @reporter << Reporter::ErrorCount.new
     end
 
     def call
@@ -32,6 +33,7 @@ module Webspicy
       run_config
       after_all
       reporter.report
+      reporter.find(Reporter::ErrorCount).report
     end
 
   private
