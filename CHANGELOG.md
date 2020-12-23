@@ -1,3 +1,15 @@
+# 0.19.0
+
+* RSpec is no longer used to run the test suite. Webspicy now
+  has its own test engine. The aim is to provide test suite
+  reporting appearing more natural in a techno-agnotic setting.
+  In particular, no stacktrace is shown for errors and failures
+  that do not involve user-specific ruby code.
+
+* Improves error messages ; distinguish various stages of
+  assertions (web protocol, then and only then output, then and
+  only then semantics)
+
 # 0.18.0 - 2021/02/23
 
 * Dependencies upgraded, http >= 4.0 and finitio >= 0.10.0
@@ -14,10 +26,6 @@
 * Add support for errconditions in Configuration and TestCase.
   Errconditions are postconditions that are met when the test
   item is called while at least on precondition is violated.
-
-* Improves error messages ; distinguish various stages of
-  assertions (web protocol, then and only then output, then and
-  only then semantics)
 
 # 0.16.3 - 2020/12/18
 

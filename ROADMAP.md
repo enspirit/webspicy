@@ -6,8 +6,6 @@ A few ideas listed here, from the vision exposed in `doc/`.
 
 * YAML schemas must have a better mapping with vocabulary, in a backward compatible way. It must be easy to migrate an existing specification & test suite.
 
-* Reuse an assertions framework, either from RSpec or Minitest.
-
 * Make assertion support more generic: it should be possible to assert the response, not only the output.
 
 * Support jsonpath for assertions paths, instead of hardcoded paths.

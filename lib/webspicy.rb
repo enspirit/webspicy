@@ -5,7 +5,6 @@ require 'finitio'
 require 'logger'
 require 'ostruct'
 require 'yaml'
-require 'rspec'
 require 'rack/test'
 require 'mustermann'
 require 'colorized_string'
@@ -21,7 +20,6 @@ module Webspicy
   require 'webspicy/support'
   require 'webspicy/specification'
   require 'webspicy/configuration'
-  require 'webspicy/checker'
   require 'webspicy/tester'
 
   ###
@@ -35,6 +33,7 @@ module Webspicy
   Postcondition = Specification::Postcondition
   FileUpload = Specification::FileUpload
   Scope = Configuration::Scope
+  Checker = Tester::FileChecker
 
   ###
   ### About folders
