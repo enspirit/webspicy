@@ -12,6 +12,7 @@ module Webspicy
       @errconditions = []
       @listeners = Hash.new{|h,k| h[k] = [] }
       @rspec_options = default_rspec_options
+      @failfast = default_failfast
       @run_examples = default_run_examples
       @run_counterexamples = default_run_counterexamples
       @run_generated_counterexamples = default_run_generated_counterexamples
@@ -376,6 +377,17 @@ module Webspicy
     end
     attr_accessor :rspec_options
     protected :rspec_options=
+
+    # Returns the default value for failfast
+    #
+    # The following environment variables <-> option are supported:
+    #
+    # - FAILFAST=yes <-> true
+    #
+    def default_failfast
+      ENV['FAILFAST'] == 'yes' || ENV['FAILFAST'] == "1"
+    end
+    attr_accessor :failfast
 
     # Returns the default rspec options.
     #

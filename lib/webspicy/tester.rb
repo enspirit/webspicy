@@ -1,6 +1,8 @@
 module Webspicy
   class Tester
 
+    class FailFast < Exception; end
+
     def initialize(config)
       @config = Configuration.dress(config)
       @scope = nil
@@ -18,6 +20,10 @@ module Webspicy
     attr_reader :invocation, :result
     attr_reader :reporter
 
+    def failfast?
+      config.failfast
+    end
+
     def default_reporter
       @reporter = Reporter::Composite.new
       #@reporter << Reporter::Progress.new
@@ -31,6 +37,8 @@ module Webspicy
       reporter.init(self)
       before_all
       run_config
+    rescue FailFast
+    ensure
       after_all
       reporter.report
       reporter.find(Reporter::ErrorCount).report
@@ -64,6 +72,8 @@ module Webspicy
           run_specification
           reporter.specification_done
           reporter.spec_file_done
+        elsif failfast?
+          raise FailFast
         end
       end
     end
@@ -118,6 +128,8 @@ module Webspicy
         reporter.after_each
         fire_after_each(test_case, @invocation, client)
         reporter.after_each_done
+
+        raise FailFast if !result.success? and failfast?
       end
     end
 
