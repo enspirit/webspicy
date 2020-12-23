@@ -93,6 +93,7 @@ module Webspicy
   end # class Specification
 end # module Webspicy
 require_relative 'specification/service'
+require_relative 'specification/condition'
 require_relative 'specification/precondition'
 require_relative 'specification/postcondition'
 require_relative 'specification/test_case'

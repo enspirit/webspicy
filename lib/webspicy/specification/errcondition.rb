@@ -1,6 +1,7 @@
 module Webspicy
   class Specification
     module Errcondition
+      include Condition
 
       def self.match(service, descr)
       end

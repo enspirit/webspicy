@@ -1,6 +1,7 @@
 module Webspicy
   class Specification
     module Precondition
+      include Condition
 
       def self.match(service, pre)
       end
