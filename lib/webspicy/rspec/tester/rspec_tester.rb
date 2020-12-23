@@ -46,7 +46,7 @@ module Webspicy
         
                     it "meets its specification" do
                       raise "Test not ran" unless invocation.done?
-                      invocation.rspec_assert!(self)
+                      RSpecAsserter.call(self, invocation)
                     end
 
                   end

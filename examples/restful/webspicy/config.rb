@@ -11,6 +11,7 @@ def webspicy_config(&bl)
     c.precondition Webspicy::Specification::Precondition::RobustToInvalidInput.new
 
     c.postcondition TodoRemoved
+    c.errcondition  TodoNotRemoved
 
     c.instrument do |tc, client|
       role = tc.metadata[:role]

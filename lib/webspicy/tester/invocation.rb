@@ -14,10 +14,6 @@ module Webspicy
         test_case.service
       end
 
-      def rspec_assert!(rspec)
-        RSpecAsserter.new(rspec, self).assert!
-      end
-
       def errors
         @errors ||= begin
           errs = [

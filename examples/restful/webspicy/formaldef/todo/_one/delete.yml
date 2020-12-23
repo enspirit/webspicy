@@ -18,6 +18,9 @@ services:
   postconditions:
     - The todo has been removed
 
+  errconditions:
+    - If it existed, the todo has not been removed
+
   input_schema: |-
     {
       id: Integer

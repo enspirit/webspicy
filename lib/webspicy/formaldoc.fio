@@ -25,6 +25,7 @@ Specification = .Webspicy::Specification
     description     :  String
     preconditions   :? [String]|String
     postconditions  :? [String]|String
+    errconditions   :? [String]|String
     input_schema    :  Schema
     output_schema   :  Schema
     error_schema    :  Schema
@@ -45,6 +46,7 @@ Service =
         description     :  String
         preconditions   :? [String]|String
         postconditions  :? [String]|String
+        errconditions   :? [String]|String
         input_schema    :  Schema
         output_schema   :  Schema
         error_schema    :  Schema

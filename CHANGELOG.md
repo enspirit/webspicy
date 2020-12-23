@@ -1,17 +1,23 @@
-# 0.16.3
+# 0.17.0
+
+* Add support for errconditions in Configuration and TestCase.
+  Errconditions are postconditions that are met when the test
+  item is called while at least on precondition is violated.
+
+# 0.16.3 - 2020/12/18
 
 * Fix RobustToInvalidInput to include empty params as valid
   counterexamples.
 
-# 0.16.2
+# 0.16.2 - 2020/12/18
 
 * Fix simpler schema not working properly
 
-# 0.16.1
+# 0.16.1 - 2020/12/18
 
 * Fix assertion error on response content type
 
-# 0.16.0
+# 0.16.0 - 2020/12/18
 
 * Improve output when LOG_LEVEL is set to DEBUG
 * Improve the commandline to be able to test a single url and spec

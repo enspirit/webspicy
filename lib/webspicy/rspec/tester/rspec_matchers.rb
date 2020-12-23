@@ -94,6 +94,16 @@ RSpec::Matchers.define :meet_postcondition do |post|
   end
 end
 
+RSpec::Matchers.define :meet_errcondition do |post|
+  match do |actual|
+    actual.nil?
+  end
+  failure_message_for_should do |actual|
+    "expected errcondition `#{post.class.name}` to be met, got following error:\n" + \
+    "    #{actual}"
+  end
+end
+
 RSpec::Matchers.define :be_an_empty_errors_array do
   match do |actual|
     actual.empty?

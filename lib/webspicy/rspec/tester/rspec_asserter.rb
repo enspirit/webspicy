@@ -8,6 +8,10 @@ module Webspicy
       end
       attr_reader :rspec,  :invocation
 
+      def self.call(rspec, invocation)
+        new(rspec, invocation).send(:assert!)
+      end
+
       def response
         invocation.response
       end
@@ -20,6 +24,8 @@ module Webspicy
         test_case.service
       end
 
+    protected
+
       def assert!
         rspec.aggregate_failures do
           assert_status_met
@@ -30,6 +36,7 @@ module Webspicy
         rspec.aggregate_failures do
           assert_assertions_met
           assert_postconditions_met
+          assert_errconditions_met
         end
         assert_no_other_errors
       end
@@ -98,6 +105,15 @@ module Webspicy
         service.postconditions.each do |post|
           msg = post.check(invocation)
           rspec.expect(msg).to rspec.meet_postcondition(post)
+        end
+      end
+
+      def assert_errconditions_met
+        return unless service.has_errconditions?
+        return unless test_case.counterexample?
+        service.errconditions.each do |post|
+          msg = post.check(invocation)
+          rspec.expect(msg).to rspec.meet_errcondition(post)
         end
       end
 

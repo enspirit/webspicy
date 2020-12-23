@@ -15,6 +15,10 @@ module Webspicy
         config.postconditions
       end
 
+      def errconditions
+        config.errconditions
+      end
+
       ###
       ### Eachers -- Allow navigating the web service definitions
       ###

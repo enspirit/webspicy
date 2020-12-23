@@ -9,6 +9,7 @@ module Webspicy
       @children = []
       @preconditions = []
       @postconditions = []
+      @errconditions = []
       @listeners = Hash.new{|h,k| h[k] = [] }
       @rspec_options = default_rspec_options
       @run_examples = default_run_examples
@@ -125,6 +126,13 @@ module Webspicy
     end
     attr_accessor :postconditions
     protected :postconditions=
+
+    # Registers an errcondition matcher
+    def errcondition(clazz)
+      errconditions << clazz
+    end
+    attr_accessor :errconditions
+    protected :errconditions=
 
     # Returns whether this configuration has children configurations or not
     def has_children?
@@ -422,6 +430,7 @@ module Webspicy
         d.children = []
         d.preconditions = self.preconditions.dup
         d.postconditions = self.postconditions.dup
+        d.errconditions = self.errconditions.dup
         d.rspec_options = self.rspec_options.dup
         d.listeners = LISTENER_KINDS.inject({}){|ls,kind|
           ls.merge(kind => self.listeners(kind).dup)
