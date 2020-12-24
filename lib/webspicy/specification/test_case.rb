@@ -10,6 +10,18 @@ module Webspicy
       attr_reader :service
       attr_reader :counterexample
 
+      def self.info(raw)
+        new(raw)
+      end
+
+      def self.v2(raw)
+        raise NotImplementedError
+      end
+
+      def to_v2
+        raise NotImplementedError
+      end
+
       def bind(service, counterexample)
         @service = service
         @counterexample = counterexample
@@ -26,10 +38,6 @@ module Webspicy
 
       def specification
         service.specification
-      end
-
-      def self.info(raw)
-        new(raw)
       end
 
       def description
