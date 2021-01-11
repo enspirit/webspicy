@@ -1,4 +1,4 @@
-# 0.17.0
+# 0.17.0 - 2021/01/11
 
 * Output and error are now loaded according to the content-type
   announced in the response, and only if it not announced,
@@ -7,6 +7,10 @@
 * Add support for errconditions in Configuration and TestCase.
   Errconditions are postconditions that are met when the test
   item is called while at least on precondition is violated.
+
+* Improves error messages ; distinguish various stages of
+  assertions (web protocol, then and only then output, then and
+  only then semantics)
 
 # 0.16.3 - 2020/12/18
 
