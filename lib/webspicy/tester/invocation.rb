@@ -46,6 +46,7 @@ module Webspicy
 
       def loaded_body
         ct = response.content_type || test_case.expected_content_type
+        ct = ct.mime_type if ct.respond_to?(:mime_type)
         case ct
         when %r{json}
           raise "Body empty while expected" if response.body.to_s.empty?

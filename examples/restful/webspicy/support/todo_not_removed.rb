@@ -6,10 +6,12 @@ class TodoNotRemoved
   end
 
   def check(invocation)
+    client, scope, test_case = invocation.client,
+                               invocation.client.scope,
+                               invocation.test_case
     return if invocation.response.status == 404
-    client = invocation.client
-    id = invocation.test_case.params['id']
-    url = "/todo/#{id}"
+    id = test_case.params['id']
+    url = scope.to_real_url("/todo/#{id}", test_case){|url| url }
     response = client.api.get(url, {}, {
       "Accept" => "application/json"
     })
