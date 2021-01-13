@@ -1,4 +1,15 @@
 language: ruby
+cache: bundler
 rvm:
+  - 2.4
   - 2.5
   - 2.6
+  - 2.7
+  - 3.0
+  - ruby-head
+jobs:
+  allow_failures:
+    - rvm: 3.0
+    - rvm: ruby-head
+
+before_install: make bundle
