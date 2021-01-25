@@ -3,8 +3,8 @@ PATH
   specs:
     webspicy (0.17.0)
       colorize (~> 0.8.1)
-      finitio (~> 0.9.0)
-      http (>= 2)
+      finitio (~> 0.10.0)
+      http (>= 4)
       mustermann (~> 1.0)
       mustermann-contrib
       openapi3_parser (~> 0.8.2)
@@ -21,9 +21,9 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     citrus (3.0.2)
     colorize (0.8.1)
-    commonmarker (0.21.0)
+    commonmarker (0.21.1)
       ruby-enum (~> 0.5)
-    concurrent-ruby (1.1.7)
+    concurrent-ruby (1.1.8)
     diff-lcs (1.4.4)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -31,8 +31,8 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
-    finitio (0.9.1)
-      citrus (>= 2.4, < 4.0)
+    finitio (0.10.0)
+      citrus (>= 3.0, < 4.0)
     hansi (0.2.0)
     http (4.4.1)
       addressable (~> 2.3)
@@ -63,7 +63,7 @@ GEM
     rack-robustness (1.1.0)
     rack-test (0.6.3)
       rack (>= 1.0)
-    rake (12.3.3)
+    rake (13.0.3)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
       rspec-expectations (~> 3.10.0)
@@ -81,7 +81,7 @@ GEM
       rspec-core (>= 2, < 4, != 2.12.0)
     ruby-enum (0.8.0)
       i18n
-    ruby2_keywords (0.0.2)
+    ruby2_keywords (0.0.4)
     sinatra (2.1.0)
       mustermann (~> 1.0)
       rack (~> 2.2)
@@ -93,13 +93,12 @@ GEM
     unf_ext (0.0.7.7)
 
 PLATFORMS
-  x86_64-darwin-15
-  x86_64-darwin-18
+  x86_64-linux
 
 DEPENDENCIES
-  rake (~> 12)
+  rake (~> 13)
   sinatra (~> 2)
   webspicy!
 
 BUNDLED WITH
-   2.2.2
+   2.2.4
