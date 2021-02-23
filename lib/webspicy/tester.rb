@@ -35,11 +35,13 @@ module Webspicy
 
     def call
       reporter.init(self)
-      before_all
-      run_config
-    rescue FailFast
-    ensure
-      after_all
+      begin
+        before_all
+        run_config
+      rescue FailFast
+      ensure
+        after_all
+      end
       reporter.report
       reporter.find(Reporter::ErrorCount).report
     end
