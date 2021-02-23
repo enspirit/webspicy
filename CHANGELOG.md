@@ -1,3 +1,10 @@
+# 0.18.0 - 2021/02/23
+
+* Dependencies upgraded, http >= 4.0 and finitio >= 0.10.0
+  in particular. This may break existing projects and is a
+  major upgrade towards new webspicy engine not relying on
+  rspec.
+
 # 0.17.0 - 2021/01/11
 
 * Output and error are now loaded according to the content-type
