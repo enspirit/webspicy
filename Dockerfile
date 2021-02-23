@@ -4,7 +4,8 @@ RUN apk add alpine-sdk
 
 WORKDIR /gem
 COPY . ./
-RUN bundle install && bundle exec rake test && \
+RUN bundle install && cd examples/restful && bundle install
+RUN bundle exec rake test && \
   gem build -o /tmp/webspicy.gem webspicy.gemspec && \
   gem install /tmp/webspicy.gem
 
