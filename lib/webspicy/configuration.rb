@@ -10,6 +10,7 @@ module Webspicy
       @preconditions = []
       @postconditions = []
       @errconditions = []
+      @insecure = default_insecure
       @listeners = Hash.new{|h,k| h[k] = [] }
       @rspec_options = default_rspec_options
       @failfast = default_failfast
@@ -388,6 +389,17 @@ module Webspicy
       ENV['FAILFAST'] == 'yes' || ENV['FAILFAST'] == "1"
     end
     attr_accessor :failfast
+
+    # Returns the default value to use for insecure.
+    #
+    # The following environment variables <-> option are supported:
+    #
+    # - INSECURE=yes <-> true
+    #
+    def default_insecure
+      ENV['INSECURE'] == 'yes' || ENV['INSECURE'] == "1"
+    end
+    attr_accessor :insecure
 
     # Returns the default rspec options.
     #

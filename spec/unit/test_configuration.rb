@@ -178,6 +178,35 @@ module Webspicy
       end
     end
 
+    describe 'insecure' do
+
+      it 'is false by default' do
+        config = Configuration.new
+        expect(config.insecure).to eql(false)
+      end
+
+      it 'is true if INSECURE is set to yes' do
+        ENV['INSECURE'] = 'yes'
+        config = Configuration.new
+        expect(config.insecure).to eql(true)
+        ENV.delete('INSECURE')
+      end
+
+      it 'is true if INSECURE is set to 1' do
+        ENV['INSECURE'] = '1'
+        config = Configuration.new
+        expect(config.insecure).to eql(true)
+        ENV.delete('INSECURE')
+      end
+
+      it 'is false if INSECURE is set to no' do
+        ENV['INSECURE'] = 'no'
+        config = Configuration.new
+        expect(config.insecure).to eql(false)
+        ENV.delete('INSECURE')
+      end
+    end
+
     describe 'test_case_filter' do
 
       let(:tc){ OpenStruct.new(tags: ["foo", "bar"]) }

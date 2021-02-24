@@ -10,6 +10,9 @@
   assertions (web protocol, then and only then output, then and
   only then semantics)
 
+* An --insecure (INSECURE=yes) option is added that mimics curl
+  and allows bypassing SSL certifiation verification
+
 # 0.18.0 - 2021/02/23
 
 * Dependencies upgraded, http >= 4.0 and finitio >= 0.10.0

@@ -43,11 +43,10 @@ module Webspicy
       class Api
         include Client::Support
 
-        attr_reader :last_response
-
         def initialize(scope)
           @scope = scope
         end
+        attr_reader :last_response
 
         def config
           @scope.config
@@ -57,7 +56,8 @@ module Webspicy
           info_request("OPTIONS", url, params, headers, body)
 
           params = querystring_params(params)
-          @last_response = HTTP[headers || {}].options(url, params: params)
+          http_opts = http_options(params: params)
+          @last_response = HTTP[headers || {}].options(url, http_opts)
 
           debug_response(@last_response)
 
@@ -68,7 +68,8 @@ module Webspicy
           info_request("GET", url, params, headers, body)
 
           params = querystring_params(params)
-          @last_response = HTTP[headers || {}].get(url, params: params)
+          http_opts = http_options(params: params)
+          @last_response = HTTP[headers || {}].get(url, http_opts)
 
           debug_response(@last_response)
 
@@ -85,18 +86,21 @@ module Webspicy
           case body
           when NilClass
             headers['Content-Type'] ||= 'application/json'
-            @last_response = HTTP[headers].post(url, body: params.to_json)
+            http_opts = http_options(body: params.to_json)
+            @last_response = HTTP[headers].post(url, http_opts)
           when FileUpload
             file = HTTP::FormData::File.new(body.path.to_s, {
               content_type: body.content_type,
               filename: body.path.basename.to_s
             })
-            @last_response = HTTP[headers].post(url, form: {
+            http_opts = http_options(form: {
               body.param_name.to_sym => file
             })
+            @last_response = HTTP[headers].post(url, http_opts)
           else
             headers['Content-Type'] ||= 'application/json'
-            @last_response = HTTP[headers].post(url, body: body)
+            http_opts = http_options(body: body)
+            @last_response = HTTP[headers].post(url, http_opts)
           end
 
           debug_response(@last_response)
@@ -109,7 +113,8 @@ module Webspicy
 
           headers ||= {}
           headers['Content-Type'] ||= 'application/json'
-          @last_response = HTTP[headers].patch(url, body: params.to_json)
+          http_opts = http_options(body: params.to_json)
+          @last_response = HTTP[headers].patch(url, http_opts)
 
           debug_response(@last_response)
 
@@ -121,7 +126,8 @@ module Webspicy
 
           headers ||= {}
           headers['Content-Type'] ||= 'application/json'
-          @last_response = HTTP[headers].put(url, body: params.to_json)
+          http_opts = http_options(body: params.to_json)
+          @last_response = HTTP[headers].put(url, http_opts)
 
           debug_response(@last_response)
 
@@ -131,7 +137,8 @@ module Webspicy
         def post_form(url, params = {}, headers = nil, body = nil)
           info_request("POST", url, params, headers, body)
 
-          @last_response = HTTP[headers || {}].post(url, form: params)
+          http_opts = http_options(form: params)
+          @last_response = HTTP[headers || {}].post(url, http_opts)
 
           debug_response(@last_response)
 
@@ -141,11 +148,24 @@ module Webspicy
         def delete(url, params = {}, headers = nil, body = nil)
           info_request("DELETE", url, params, headers, body)
 
-          @last_response = HTTP[headers || {}].delete(url, body: params.to_json)
+          http_opts = http_options(body: params.to_json)
+          @last_response = HTTP[headers || {}].delete(url, http_opts)
 
           debug_response(@last_response)
 
           @last_response
+        end
+
+        def http_options(extra)
+          if config.insecure
+            ctx = OpenSSL::SSL::SSLContext.new
+            ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
+            {
+              :ssl_context => ctx
+            }.merge(extra)
+          else
+            extra
+          end
         end
       end # class Api
 

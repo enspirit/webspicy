@@ -9,6 +9,7 @@
 #/
 #/ Options:
 #/ -h, --help       Show this help message
+#/ -k, --insecure   Allow insecure server connections when using SSL
 #/ -v, --version    Show webspicy version
 #/     --debug      Same as LOG_LEVEL=DEBUG, takes precedence
 #/
@@ -19,6 +20,7 @@
 #/ - METHOD=GET|POST|DELETE...    execute only tests matching the HTTP verb
 #/ - TAG=...                      execute only tests matching the given tag
 #/ - FAILFAST=yes|no              stop executing tests on first failure
+#/ - INSECURE=yes|no              allow insecure server connections when using SSL
 #/
 require 'webspicy'
 require 'webspicy/tester'
@@ -36,6 +38,9 @@ ARGV.options do |opts|
   opts.on("-v", "--version"){
     puts "webspicy v#{Webspicy::VERSION}, (c) Enspirit SRL"
     exit(0)
+  }
+  opts.on('-k', '--insecure') {
+    ENV['INSECURE'] = 'yes'
   }
   opts.on("--debug") {
     ENV['LOG_LEVEL'] = 'DEBUG'
