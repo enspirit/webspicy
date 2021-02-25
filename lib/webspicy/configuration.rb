@@ -84,7 +84,7 @@ module Webspicy
           config.each_scope(&bl)
         end
       else
-        yield factor_scope
+        yield(factor_scope)
       end
     end
 

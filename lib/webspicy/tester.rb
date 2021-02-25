@@ -6,6 +6,7 @@ module Webspicy
     def initialize(config)
       @config = Configuration.dress(config)
       @scope = nil
+      @hooks = nil
       @client = nil
       @spec_file = nil
       @specification = nil
@@ -14,7 +15,7 @@ module Webspicy
       @invocation = nil
       @reporter = default_reporter
     end
-    attr_reader :config, :scope, :client
+    attr_reader :config, :scope, :hooks, :client
     attr_reader :specification, :spec_file
     attr_reader :service, :test_case
     attr_reader :invocation, :result
@@ -59,6 +60,7 @@ module Webspicy
     def run_config
       config.each_scope do |scope|
         @scope = scope
+        @hooks = Support::Hooks.for(scope.config)
         @client = scope.get_client
         reporter.before_scope
         run_scope
@@ -110,9 +112,9 @@ module Webspicy
     end
 
     def run_test_case
-      fire_around(test_case, client) do
+      hooks.fire_around(test_case, client) do
         reporter.before_each
-        fire_before_each(test_case, client)
+        hooks.fire_before_each(test_case, client)
         reporter.before_each_done
 
         reporter.before_instrument
@@ -128,7 +130,7 @@ module Webspicy
         reporter.assertions_done
 
         reporter.after_each
-        fire_after_each(test_case, @invocation, client)
+        hooks.fire_after_each(test_case, @invocation, client)
         reporter.after_each_done
 
         raise FailFast if !result.success? and failfast?
@@ -145,10 +147,8 @@ module Webspicy
       service.errconditions.each do |post|
         post.instrument(test_case, client) if post.respond_to?(:instrument)
       end if test_case.counterexample?
-      fire_instrument(test_case, client)
+      hooks.fire_instrument(test_case, client)
     end
-
-    include Support::Hooks
 
     def check_invocation
       @result = Result.from(self)

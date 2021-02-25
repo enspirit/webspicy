@@ -2,6 +2,18 @@ module Webspicy
   module Support
     module Hooks
 
+      class Object
+        def initialize(config)
+          @config = config
+        end
+        attr_accessor :config
+        include Hooks
+      end
+
+      def self.for(config)
+        Object.new(config)
+      end
+
       def fire_around(*args, &bl)
         ls = config.listeners(:around_each)
         if ls.size == 0
