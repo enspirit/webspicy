@@ -21,9 +21,13 @@ module Webspicy
       # folder in the configuration.
       def _each_specification_file(config)
         folder = config.folder
-        folder.glob("**/*.yml").select(&to_filter_proc(config.file_filter)).each do |file|
-          yield file, folder
-        end
+        world  = config.folder/"world"
+        folder.glob("**/*.yml")
+          .reject{|f| f.to_s.start_with?(world.to_s) }
+          .select(&to_filter_proc(config.file_filter))
+          .each do |file|
+            yield file, folder
+          end
       end
       private :_each_specification_file
 
