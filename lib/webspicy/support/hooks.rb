@@ -48,6 +48,18 @@ module Webspicy
         end
       end
 
+      def fire_before_all(*args, &bl)
+        config.listeners(:before_all).each do |beach|
+          beach.call(*args, &bl)
+        end
+      end
+
+      def fire_after_all(*args, &bl)
+        config.listeners(:after_all).each do |aeach|
+          aeach.call(*args, &bl)
+        end
+      end
+
     end # module Hooks
   end # module Support
 end # module Webspicy

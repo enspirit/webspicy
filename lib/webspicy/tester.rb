@@ -37,11 +37,8 @@ module Webspicy
     def call
       reporter.init(self)
       begin
-        before_all
         run_config
       rescue FailFast
-      ensure
-        after_all
       end
       reporter.report
       reporter.find(Reporter::ErrorCount).report
@@ -49,22 +46,20 @@ module Webspicy
 
   private
 
-    def before_all
-      reporter.before_all
-      config.listeners(:before_all).each do |l|
-        l.call(config)
-      end
-      reporter.before_all_done
-    end
-
     def run_config
       config.each_scope do |scope|
         @scope = scope
         @hooks = Support::Hooks.for(scope.config)
         @client = scope.get_client
+        reporter.before_all
+        @hooks.fire_before_all
+        reporter.before_all_done
         reporter.before_scope
         run_scope
         reporter.scope_done
+        reporter.after_all
+        @hooks.fire_after_all
+        reporter.after_all_done
       end
     end
 
@@ -139,14 +134,6 @@ module Webspicy
 
     def check_invocation
       @result = Result.from(self)
-    end
-
-    def after_all
-      reporter.after_all
-      config.listeners(:after_all).each do |l|
-        l.call(config)
-      end
-      reporter.after_all_done
     end
 
   end # class Tester
