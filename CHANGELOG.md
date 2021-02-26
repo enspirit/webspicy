@@ -27,6 +27,9 @@
 * Fix webspicy commandline when used with a folder (or its config
   file) and not running in the same directory.
 
+* BREAKING: before_all and after_all now take two arguments: the
+  scope and client
+
 # 0.18.0 - 2021/02/23
 
 * Dependencies upgraded, http >= 4.0 and finitio >= 0.10.0

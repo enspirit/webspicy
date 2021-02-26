@@ -52,13 +52,13 @@ module Webspicy
         @hooks = Support::Hooks.for(scope.config)
         @client = scope.get_client
         reporter.before_all
-        @hooks.fire_before_all
+        @hooks.fire_before_all(@scope, @client)
         reporter.before_all_done
         reporter.before_scope
         run_scope
         reporter.scope_done
         reporter.after_all
-        @hooks.fire_after_all
+        @hooks.fire_after_all(@scope, @client)
         reporter.after_all_done
       end
     end
