@@ -12,29 +12,28 @@ module Webspicy
       ###
 
       # Yields each specification file in the current scope
-      def each_specification_file(&bl)
-        return enum_for(:each_specification_file) unless block_given?
-        _each_specification_file(config, &bl)
+      def each_specification_file(apply_filter = true, &bl)
+        return enum_for(:each_specification_file, apply_filter) unless block_given?
+        _each_specification_file(config, apply_filter, &bl)
       end
 
       # Recursive implementation of `each_specification_file` for each
       # folder in the configuration.
-      def _each_specification_file(config)
+      def _each_specification_file(config, apply_filter = true)
         folder = config.folder
         world  = config.folder/"world"
-        folder.glob("**/*.yml")
-          .reject{|f| f.to_s.start_with?(world.to_s) }
-          .select(&to_filter_proc(config.file_filter))
-          .each do |file|
-            yield file, folder
-          end
+        fs = folder.glob("**/*.yml").reject{|f| f.to_s.start_with?(world.to_s) }
+        fs = fs.select(&to_filter_proc(config.file_filter)) if apply_filter
+        fs.each do |file|
+          yield file, folder
+        end
       end
       private :_each_specification_file
 
       # Yields each specification in the current scope in turn.
-      def each_specification(&bl)
-        return enum_for(:each_specification) unless block_given?
-        each_specification_file do |file, folder|
+      def each_specification(apply_filter = true, &bl)
+        return enum_for(:each_specification, apply_filter) unless block_given?
+        each_specification_file(apply_filter) do |file, folder|
           yield Webspicy.specification(file.load, file, self)
         end
       end
@@ -73,7 +72,7 @@ module Webspicy
       end
 
       def find_test_case(method, url)
-        each_specification do |spec|
+        each_specification(false) do |spec|
           next unless spec.url == url
           spec.services.each do |service|
             next unless service.method == method
