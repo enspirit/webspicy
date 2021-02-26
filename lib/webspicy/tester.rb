@@ -118,7 +118,7 @@ module Webspicy
         reporter.before_each_done
 
         reporter.before_instrument
-        instrument_test_case
+        client.instrument(test_case)
         reporter.instrument_done
 
         reporter.before_invocation
@@ -135,19 +135,6 @@ module Webspicy
 
         raise FailFast if !result.success? and failfast?
       end
-    end
-
-    def instrument_test_case
-      service.preconditions.each do |pre|
-        pre.instrument(test_case, client) if pre.respond_to?(:instrument)
-      end
-      service.postconditions.each do |post|
-        post.instrument(test_case, client) if post.respond_to?(:instrument)
-      end if test_case.example?
-      service.errconditions.each do |post|
-        post.instrument(test_case, client) if post.respond_to?(:instrument)
-      end if test_case.counterexample?
-      hooks.fire_instrument(test_case, client)
     end
 
     def check_invocation

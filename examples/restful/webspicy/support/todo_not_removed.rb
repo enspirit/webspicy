@@ -6,16 +6,14 @@ class TodoNotRemoved
   end
 
   def check(invocation)
-    client, scope, test_case = invocation.client,
-                               invocation.client.scope,
-                               invocation.test_case
     return if invocation.response.status == 404
-    id = test_case.params['id']
-    url = scope.to_real_url("/todo/#{id}", test_case){|url| url }
-    response = client.api.get(url, {}, {
-      "Accept" => "application/json"
-    })
-    return nil if response.status == 200
+    client, test_case = invocation.client, invocation.test_case
+
+    res = client.find_and_call("GET", "/todo/{id}", {
+      params: { "id" => test_case.params['id'] },
+    }).response
+    return nil if res.status == 200
+
     "Todo `#{id}` was not supposed to be deleted, it was not found"
   end
 end

@@ -96,7 +96,9 @@ post '/todo/', :auth => :user do
 end
 
 get '/todo/:id' do |id|
-  raise unless request.env['HTTP_ACCEPT'] == 'application/json'
+  unless (accept = request.env['HTTP_ACCEPT']) == 'application/json'
+    raise "Invalid HTTP_ACCEPT: `#{accept}`"
+  end
   content_type :json
   todo = settings.todolist.find{|todo| todo[:id] == Integer(id) }
   if todo.nil?

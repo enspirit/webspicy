@@ -68,6 +68,17 @@ module Webspicy
         each_generated_counterexamples(service, &bl)
       end
 
+      def find_test_case(method, url)
+        each_specification do |spec|
+          next unless spec.url == url
+          spec.services.each do |service|
+            next unless service.method == method
+            return service.examples.first
+          end
+        end
+        nil
+      end
+
       ###
       ### Schemas -- For parsing input and output data schemas found in
       ### web service definitions

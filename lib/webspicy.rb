@@ -23,6 +23,8 @@ module Webspicy
   require 'webspicy/tester'
   require 'webspicy/web'
 
+  class Error < StandardError; end
+
   ###
   ### Backward compatibility
   ###

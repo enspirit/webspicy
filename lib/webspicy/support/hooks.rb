@@ -48,12 +48,6 @@ module Webspicy
         end
       end
 
-      def fire_instrument(*args, &bl)
-        config.listeners(:instrument).each do |i|
-          i.call(*args, &bl)
-        end
-      end
-
     end # module Hooks
   end # module Support
 end # module Webspicy
