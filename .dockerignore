@@ -1,8 +1,13 @@
+.git
 Gemfile.lock
 .bundle
+vendor
 README.md
 Dockerfile*
 pkg
 rspec.xml
 Jenkinsfile
 LICENCE
+examples/restful/vendor
+examples/restful/.bundle
+examples/restful/Gemfile.lock
