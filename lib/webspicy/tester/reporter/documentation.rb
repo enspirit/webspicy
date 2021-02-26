@@ -13,7 +13,7 @@ module Webspicy
             str
           end
 
-          def service_line(service)
+          def service_line(service, test_case)
             str = service.to_s + ", " + test_case.to_s
             str = colorize_highlight(str)
           end
@@ -38,7 +38,7 @@ module Webspicy
         end
 
         def before_test_case
-          io.puts service_line(service)
+          io.puts service_line(service, test_case)
         end
 
         def check_success(check)

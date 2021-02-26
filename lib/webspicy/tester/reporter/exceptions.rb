@@ -41,7 +41,7 @@ module Webspicy
           io.puts "Exceptions:"
           io.puts
           failed_results.each_with_index do |result,i|
-            io.puts service_line(result.service)
+            io.puts service_line(result.service, result.test_case)
             result.failures.each do |(c,e)|
               io.puts check_failure_line(c,e)
             end
