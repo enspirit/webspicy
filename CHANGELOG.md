@@ -16,6 +16,14 @@
 * Fix hooks (e.g. before_each) not working properly when using
   configuration folders.
 
+* Add a World abstraction, available at Configuration#world.
+  The world is automatically loaded from data files in the
+  'world' folder (next to 'support') during Configuration
+  construction (just before yielding the instance to the block).
+  JSON and YAML files are supported for now. Objects are
+  recursively loaded as OpenStruct. The world itself and all
+  its objects are mutable on intent.
+
 # 0.18.0 - 2021/02/23
 
 * Dependencies upgraded, http >= 4.0 and finitio >= 0.10.0

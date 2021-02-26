@@ -48,6 +48,11 @@ module Webspicy
         expect(c.each_scope.to_a.first.each_specification.to_a.size).to eql(1)
       end
 
+      it 'exposes the world as a World instance' do
+        c = Configuration.dress(restful_folder)
+        expect(c.world).to be_a(Support::World)
+      end
+
       it 'yields the block with the configuration, if given' do
         seen = nil
         Configuration.dress(Path.dir/'configuration'){|c|
