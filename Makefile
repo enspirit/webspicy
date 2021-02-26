@@ -22,6 +22,11 @@ bundle-install:
 	cd examples/restful && bundle install
 bundle: bundle-install
 
+install:
+	rm -rf pkg
+	bundle exec rake gem
+	gem install pkg/*.gem
+
 release:
 	bundle exec rake
 	bundle exec rake gem
