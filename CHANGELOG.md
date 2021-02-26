@@ -24,6 +24,9 @@
   recursively loaded as OpenStruct. The world itself and all
   its objects are mutable on intent.
 
+* Fix webspicy commandline when used with a folder (or its config
+  file) and not running in the same directory.
+
 # 0.18.0 - 2021/02/23
 
 * Dependencies upgraded, http >= 4.0 and finitio >= 0.10.0

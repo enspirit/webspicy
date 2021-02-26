@@ -3,8 +3,20 @@ module Webspicy
 
     LISTENER_KINDS = [ :before_all, :before_each, :after_all, :after_each, :around_each ]
 
-    def initialize(folder = Path.pwd, parent = nil)
-      @folder = folder
+    class << self
+      attr_accessor :default_folder
+
+      def with_default_folder(f)
+        old = default_folder
+        @default_folder = f
+        yield.tap{
+          @default_folder = old
+        }
+      end
+    end
+
+    def initialize(folder = Configuration.default_folder || Path.pwd, parent = nil)
+      @folder = folder.expand_path
       @parent = parent
       @children = []
       @preconditions = []
@@ -28,7 +40,7 @@ module Webspicy
       @scope_factory = ->(config){ Scope.new(config) }
       @client = Web::HttpClient
       @world = Support::World.new(folder/'world')
-      Path.require_tree(folder/'support') if (folder/'support').exists?
+      Path.require_tree(@folder/'support') if (@folder/'support').exists?
       yield(self) if block_given?
     end
     attr_accessor :folder
@@ -48,9 +60,11 @@ module Webspicy
       when ->(f){ Path(f).exists? }
         arg = Path(arg)
         if arg.file? && arg.ext == ".rb"
-          c = Kernel.instance_eval arg.read, arg.to_s
-          yield(c) if block_given?
-          c
+          Configuration.with_default_folder(arg.parent) do
+            c = Kernel.instance_eval arg.read, arg.to_s
+            yield(c) if block_given?
+            c
+          end
         elsif arg.file? && arg.ext == '.yml'
           folder = arg.backfind("[config.rb]")
           if folder && folder.exists?
