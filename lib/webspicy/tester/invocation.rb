@@ -10,8 +10,11 @@ module Webspicy
       end
       attr_reader :test_case, :response, :client
 
+      def_delegators :@client, *[
+        :config
+      ]
+
       def_delegators :@test_case, *[
-        :config,
         :scope,
         :specification,
         :service
