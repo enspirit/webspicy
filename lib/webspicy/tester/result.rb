@@ -71,7 +71,7 @@ module Webspicy
       def check_response!
         check_one! Result::ResponseStatusMet
         if ect = test_case.expected_content_type
-          check_one! Result::ResponseHeaderMet.new(self, "Content-Type", ect)
+          check_one! Result::ResponseHeaderMet.new(self, "Content-Type", ect, :start_with)
         end
         test_case.expected_headers.each_pair do |k,v|
           check_one! Result::ResponseHeaderMet.new(self, k, v)

@@ -3,12 +3,16 @@ module Webspicy
     class Result
       class ResponseHeaderMet < Check
 
-        def initialize(result, header, expected)
+        def initialize(result, header, expected, strategy = :eq)
+          unless [:eq, :start_with].include?(strategy)
+            raise ArgumentError, "Invalid strategy `#{strategy.inspect}`"
+          end
           super(result)
           @header = header
           @expected = expected
+          @strategy = strategy
         end
-        attr_reader :header, :expected
+        attr_reader :header, :expected, :strategy
 
         def behavior
           "It has a `#{header}: #{expected}` response header"
@@ -22,8 +26,14 @@ module Webspicy
           got = response.headers[header]
           if got.nil?
             _! "Expected response header `#{header}` to be set"
-          elsif expected != got
-            _! "Expected response header `#{header}` to be `#{expected}`, got `#{got}`"
+          else
+            msg = "Expected response header `#{header}` to be `#{expected}`, got `#{got}`"
+            case strategy
+            when :eq
+              _!(msg) unless expected == got
+            when :start_with
+              _!(msg) unless got.start_with?(expected)
+            end
           end
         end
 
