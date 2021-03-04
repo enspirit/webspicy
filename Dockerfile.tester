@@ -1,4 +1,8 @@
 FROM enspirit/webspicy:latest
 
+RUN apk add curl vim bash
+
+WORKDIR /formalspec/
+
 ENTRYPOINT []
 CMD cd /formalspec/ && webspicy .
