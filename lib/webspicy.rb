@@ -24,6 +24,7 @@ module Webspicy
   require 'webspicy/web'
 
   class Error < StandardError; end
+  class TimeoutError < Error; end
 
   ###
   ### Backward compatibility

@@ -30,6 +30,11 @@
 * BREAKING: before_all and after_all now take two arguments: the
   scope and client
 
+* Pre/Post/Errcondition now include a `sooner_or_later` helper
+  method that will make an active loop until the block returns a
+  truthy value and return nil after a certain number of attempts
+  (or raise a TimeoutError)
+
 # 0.18.0 - 2021/02/23
 
 * Dependencies upgraded, http >= 4.0 and finitio >= 0.10.0
