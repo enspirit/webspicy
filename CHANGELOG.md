@@ -24,6 +24,12 @@
   recursively loaded as OpenStruct. The world itself and all
   its objects are mutable on intent.
 
+* The World abstraction also supports .rb files that are Kernel
+  evaluated. If the resulting object includes the
+  Webspicy::Support::World::Item marker module, it gets the
+  webspicy configuration set through `#config=` and available
+  under `#config`.
+
 * Fix webspicy commandline when used with a folder (or its config
   file) and not running in the same directory.
 

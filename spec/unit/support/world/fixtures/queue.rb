@@ -1,0 +1,1 @@
+Webspicy::SpecTests::Queue.new

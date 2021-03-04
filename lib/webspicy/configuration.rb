@@ -39,8 +39,8 @@ module Webspicy
       }
       @scope_factory = ->(config){ Scope.new(config) }
       @client = Web::HttpClient
-      @world = Support::World.new(folder/'world')
       Path.require_tree(@folder/'support') if (@folder/'support').exists?
+      @world = Support::World.new(folder/'world', self)
       yield(self) if block_given?
     end
     attr_accessor :folder
