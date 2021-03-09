@@ -112,16 +112,37 @@ module Webspicy
         # Because we want pre & post to be able to match in all cases
         # we need at least one condition
         descriptions = [Condition::MATCH_ALL] if descriptions.empty?
-        conditions.map{|c|
+        mapping = {}
+        instances = conditions.map{|c|
           instance = nil
           descr = descriptions.find do |d|
             instance = c.match(self, d)
           end
-          if instance && instance.respond_to?(:matching_description=)
-            instance.matching_description = descr
-          end
-          instance
+          instance.tap{|i|
+            mapping[descr] ||= i if i
+            i.matching_description = descr if i.respond_to?(:matching_description=)
+          }
         }.compact
+        mapped = descriptions
+          .select{|d| mapping[d] }
+          .map{|d| mapping[d] }
+        unmapped = descriptions
+          .reject{|d| mapping[d] }
+          .select{|d| d.strip =~ /^(\(\w+\))?\(x\)/ }
+          .map{|d|
+            Postcondition::MissingConditionImpl.new.tap{|mc|
+              mc.matching_description = d
+            }
+          }
+        unexpected = descriptions
+          .select{|d| mapping[d] }
+          .select{|d| d.strip =~ /^(\(\w+\))?\( \)/ }
+          .map{|d|
+            Postcondition::UnexpectedConditionImpl.new.tap{|mc|
+              mc.matching_description = d
+            }
+          }
+        mapped + unmapped + unexpected
       end
 
       def bind_examples

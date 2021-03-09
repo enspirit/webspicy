@@ -15,3 +15,5 @@ module Webspicy
     end # module Postcondition
   end # module Specification
 end # module Webspicy
+require_relative "postcondition/missing_condition_impl"
+require_relative "postcondition/unexpected_condition_impl"

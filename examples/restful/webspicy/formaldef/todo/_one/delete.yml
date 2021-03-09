@@ -16,10 +16,10 @@ services:
     - Must be an admin
 
   postconditions:
-    - The todo has been removed
+    - (x) The todo has been removed
 
   errconditions:
-    - If it existed, the todo has not been removed
+    - (x) If it existed, the todo has not been removed
 
   input_schema: |-
     {

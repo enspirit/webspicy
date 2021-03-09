@@ -1,3 +1,17 @@
+# 0.20.0
+
+* Tester::Fakesmtp is provided to help writing post conditions
+  about emails captured using the `reachfive/fake-smtp-server`
+  docker image.
+
+* Post and Err conditions may now start with a checked box
+  `(x) ...`. In such case, webspicy will fail when no post
+  condition instrumentation class is provided that matches the
+  POST.
+
+  When the checkbox is unchecked `( ) ...` the test will fail
+  when instrumentation code is actually provided.
+
 # 0.19.0
 
 * RSpec is no longer used to run the test suite. Webspicy now
