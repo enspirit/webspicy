@@ -27,6 +27,9 @@ install:
 	bundle exec rake gem
 	gem install pkg/*.gem
 
+test: bundle
+	bundle exec rake
+
 release:
 	bundle exec rake
 	bundle exec rake gem
