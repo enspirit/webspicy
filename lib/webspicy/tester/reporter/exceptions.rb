@@ -33,6 +33,7 @@ module Webspicy
             io.puts e
           end
           io.puts
+          io.flush
         end
 
         def report_failed_results
@@ -52,6 +53,7 @@ module Webspicy
             io.puts
           end
           io.puts
+          io.flush
         end
 
       end # class Exceptions

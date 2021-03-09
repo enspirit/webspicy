@@ -5,15 +5,18 @@ module Webspicy
 
         def spec_file_error(e)
           io.print colorize_error("X")
+          io.flush
         end
 
         def spec_file_done
           io.print colorize_success(".")
+          io.flush
         end
 
         def report
           io.puts
           io.puts
+          io.flush
         end
 
       end # class FileProgress

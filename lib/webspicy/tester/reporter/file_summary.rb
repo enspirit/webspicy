@@ -28,6 +28,7 @@ module Webspicy
           end
           io.puts(msg)
           io.puts
+          io.flush
         end
 
       private

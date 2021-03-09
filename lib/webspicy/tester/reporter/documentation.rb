@@ -35,30 +35,37 @@ module Webspicy
         def spec_file_error(e)
           io.puts spec_file_error_line(spec_file, e)
           io.puts
+          io.flush
         end
 
         def before_test_case
           io.puts service_line(service, test_case)
+          io.flush
         end
 
         def check_success(check)
           io.puts check_success_line(check)
+          io.flush
         end
 
         def check_failure(check, ex)
           io.puts check_failure_line(check, ex)
+          io.flush
         end
 
         def check_error(check, ex)
           io.puts check_error_line(check, ex)
+          io.flush
         end
 
         def test_case_done
           io.puts
+          io.flush
         end
 
         def service_done
           io.puts
+          io.flush
         end
 
       end # class Documentation

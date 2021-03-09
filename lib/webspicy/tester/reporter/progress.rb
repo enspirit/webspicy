@@ -15,11 +15,13 @@ module Webspicy
           elsif result.error?
             io.print colorize_error("E")
           end
+          io.flush
         end
 
         def report
           io.puts
           io.puts
+          io.flush
         end
 
       end # class Progress
