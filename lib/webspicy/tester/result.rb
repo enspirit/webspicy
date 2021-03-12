@@ -5,26 +5,28 @@ module Webspicy
 
       def initialize(tester)
         @tester = tester
+        @scope = tester.scope
+        @client = tester.client
+        @specification = tester.specification
+        @service = tester.service
+        @test_case = tester.test_case
         @invocation = tester.invocation
         @assertions = []
         @failures = []
         @errors = []
-        check!
+        if @invocation
+          check!
+        else
+          @errors << [InvocationSuceeded.new(self), tester.invocation_error]
+        end
       end
-      attr_reader :tester, :invocation
+      attr_reader :tester, :scope, :client
+      attr_reader :specification, :service, :test_case, :invocation
       attr_reader :assertions, :failures, :errors
 
       def_delegators :@tester, *[
-        :reporter
-      ]
-
-      def_delegators :@invocation, *[
         :config,
-        :scope,
-        :client,
-        :specification,
-        :service,
-        :test_case
+        :reporter
       ]
 
       def self.from(tester)
@@ -130,6 +132,7 @@ module Webspicy
   end # class Tester
 end # module Webspicy
 require_relative "result/check"
+require_relative "result/invocation_succeeded"
 require_relative "result/response_status_met"
 require_relative "result/response_header_met"
 require_relative "result/output_schema_met"

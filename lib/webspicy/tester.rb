@@ -14,12 +14,13 @@ module Webspicy
       @service = nil
       @test_case = nil
       @invocation = nil
+      @invocation_error = nil
       @reporter = default_reporter
     end
     attr_reader :config, :scope, :hooks, :client
     attr_reader :specification, :spec_file
     attr_reader :service, :test_case
-    attr_reader :invocation, :result
+    attr_reader :invocation, :invocation_error, :result
     attr_reader :reporter
 
     def_delegators :@config, *[
@@ -132,9 +133,7 @@ module Webspicy
         instrument_test_case
         reporter.instrument_done
 
-        reporter.before_invocation
-        @invocation = client.call(test_case)
-        reporter.invocation_done
+        call_test_case_target
 
         reporter.before_assertions
         check_invocation
@@ -146,6 +145,17 @@ module Webspicy
 
         raise FailFast if !result.success? and failfast?
       end
+    end
+
+    def call_test_case_target
+      reporter.before_invocation
+      @invocation = client.call(test_case)
+      reporter.invocation_done
+    rescue *PASSTHROUGH_EXCEPTIONS
+      raise
+    rescue => ex
+      @invocation_error = ex
+      reporter.invocation_done
     end
 
     def instrument_test_case
