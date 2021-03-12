@@ -1,4 +1,4 @@
-# 0.21.0
+# 0.20.0 - 2021-03-12
 
 * BROKEN: all hooks now take a single `tester` instance instead
   of client and/or scope.
@@ -15,8 +15,6 @@
   about emails captured using the `quadrabee/fake-ses` docker
   image.
 
-# 0.20.0
-
 * Tester::Fakesmtp is provided to help writing post conditions
   about emails captured using the `reachfive/fake-smtp-server`
   docker image.
@@ -29,7 +27,7 @@
   When the checkbox is unchecked `( ) ...` the test will fail
   when instrumentation code is actually provided.
 
-# 0.19.0
+# 0.19.0 - 2021-03-09
 
 * RSpec is no longer used to run the test suite. Webspicy now
   has its own test engine. The aim is to provide test suite
