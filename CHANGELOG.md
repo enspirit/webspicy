@@ -1,7 +1,10 @@
 # 0.21.0
 
+* BROKEN: all hooks now take a single `tester` instance instead
+  of client and/or scope.
+
 * DEPRECATED: Specification::Pre/Post/Errcondition are deprecated
-  but a compatibility bridge is provided.
+  but a compatibility bridge is provided and automatically used.
 
   Please now use Specification::Pre, ::Post and ::Err instead,
   whose `instrument` and `check!` methods take no arguments at

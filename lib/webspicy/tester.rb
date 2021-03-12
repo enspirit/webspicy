@@ -68,13 +68,13 @@ module Webspicy
         @hooks = Support::Hooks.for(scope.config)
         @client = scope.get_client
         reporter.before_all
-        @hooks.fire_before_all(@scope, @client)
+        @hooks.fire_before_all(self)
         reporter.before_all_done
         reporter.before_scope
         run_scope
         reporter.scope_done
         reporter.after_all
-        @hooks.fire_after_all(@scope, @client)
+        @hooks.fire_after_all(self)
         reporter.after_all_done
       end
     end
@@ -123,9 +123,9 @@ module Webspicy
     end
 
     def run_test_case
-      hooks.fire_around(test_case, client) do
+      hooks.fire_around(self) do
         reporter.before_each
-        hooks.fire_before_each(test_case, client)
+        hooks.fire_before_each(self)
         reporter.before_each_done
 
         reporter.before_instrument
@@ -141,7 +141,7 @@ module Webspicy
         reporter.assertions_done
 
         reporter.after_each
-        hooks.fire_after_each(test_case, @invocation, client)
+        hooks.fire_after_each(self)
         reporter.after_each_done
 
         raise FailFast if !result.success? and failfast?

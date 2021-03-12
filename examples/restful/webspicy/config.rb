@@ -13,8 +13,8 @@ def webspicy_config(&bl)
     c.postcondition TodoRemoved
     c.errcondition  TodoNotRemoved
 
-    c.instrument do |t|
-      tc = t.test_case
+    c.instrument do |tester|
+      tc = tester.test_case
       role = tc.metadata[:role]
       tc.headers['Authorization'] = "Bearer #{role}" if role
     end
