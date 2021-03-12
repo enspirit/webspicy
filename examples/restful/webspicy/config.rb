@@ -4,16 +4,17 @@ def webspicy_config(&bl)
     c.precondition MustBeAuthenticated
     c.precondition MustBeAnAdmin
 
-    c.precondition Webspicy::Specification::Precondition::GlobalRequestHeaders.new({
+    c.precondition Webspicy::Specification::Pre::GlobalRequestHeaders.new({
       'Accept' => 'application/json'
     }){|service| service.method == "GET" }
 
-    c.precondition Webspicy::Specification::Precondition::RobustToInvalidInput.new
+    c.precondition Webspicy::Specification::Pre::RobustToInvalidInput.new
 
     c.postcondition TodoRemoved
     c.errcondition  TodoNotRemoved
 
-    c.instrument do |tc, client|
+    c.instrument do |t|
+      tc = t.test_case
       role = tc.metadata[:role]
       tc.headers['Authorization'] = "Bearer #{role}" if role
     end

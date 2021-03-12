@@ -1,5 +1,6 @@
 module Webspicy
   class Specification
+    # Deprecated, use Pre instead
     module Precondition
       include Condition
 
@@ -16,5 +17,3 @@ module Webspicy
     end # module Precondition
   end # class Specification
 end # module Webspicy
-require_relative 'precondition/global_request_headers'
-require_relative 'precondition/robust_to_invalid_input'

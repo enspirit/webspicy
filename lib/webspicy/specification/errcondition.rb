@@ -1,5 +1,6 @@
 module Webspicy
   class Specification
+    # Deprecated, use Err instead
     module Errcondition
       include Condition
 

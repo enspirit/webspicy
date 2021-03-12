@@ -1,5 +1,5 @@
 class MustBeAuthenticated
-  include Webspicy::Precondition
+  include Webspicy::Specification::Pre
 
   def initialize(role = :user)
     @role = role
@@ -10,7 +10,7 @@ class MustBeAuthenticated
     MustBeAuthenticated.new if pre =~ /Must be authenticated/
   end
 
-  def instrument(test_case, client)
+  def instrument
     return if test_case.metadata.has_key?(:role)
     return if test_case.description =~ /When not authenticated at all/
     test_case.metadata[:role] = role

@@ -1,8 +1,8 @@
 module Webspicy
   class Specification
-    module Precondition
+    module Pre
       class RobustToInvalidInput
-        include Precondition
+        include Pre
 
         def self.match(service, pre)
           self.new
@@ -49,7 +49,7 @@ module Webspicy
                 status: Support::StatusRange.str("4xx")
               },
               :assert => []
-            })]            
+            })]
           else
             []
           end
@@ -63,6 +63,6 @@ module Webspicy
         end
 
       end # class RobustToInvalidInput
-    end # module Precondition
+    end # module Pre
   end # class Specification
 end # module Webspicy

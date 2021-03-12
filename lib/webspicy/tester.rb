@@ -44,7 +44,18 @@ module Webspicy
       reporter.find(Reporter::ErrorCount).report
     end
 
-  private
+    def find_and_call(method, url, mutation)
+      unless tc = scope.find_test_case(method, url)
+        raise Error, "No such service `#{method} #{url}`"
+      end
+      mutated = tc.mutate(mutation)
+      fork_tester(test_case: mutated) do |t|
+        instrumented = t.instrument_test_case
+        t.client.call(instrumented)
+      end
+    end
+
+  protected
 
     def run_config
       config.each_scope do |scope|
@@ -113,7 +124,7 @@ module Webspicy
         reporter.before_each_done
 
         reporter.before_instrument
-        client.instrument(test_case)
+        instrument_test_case
         reporter.instrument_done
 
         reporter.before_invocation
@@ -132,9 +143,44 @@ module Webspicy
       end
     end
 
+    def instrument_test_case
+      service = test_case.service
+      service.preconditions.each do |pre|
+        instrument_one(pre)
+      end
+      service.postconditions.each do |post|
+        instrument_one(post)
+      end if test_case.example?
+      service.errconditions.each do |err|
+        instrument_one(err)
+      end if test_case.counterexample?
+      config.listeners(:instrument).each do |i|
+        i.call(self)
+      end
+      test_case
+    end
+
+    def instrument_one(condition)
+      condition.bind(self).instrument
+    rescue ArgumentError
+      raise "#{condition.class} implements old PRE/POST contract"
+    end
+
     def check_invocation
       @result = Result.from(self)
     end
+
+    def fork_tester(binding = {})
+      yield dup.tap{|t|
+        binding.each_pair do |k,v|
+          t.send(:"#{k}=", v)
+        end
+      }
+    end
+
+  private
+
+    attr_writer :test_case
 
   end # class Tester
 end # module Webspicy
