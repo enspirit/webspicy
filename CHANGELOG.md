@@ -1,3 +1,9 @@
+# 0.20.3 - 2021-03-12
+
+* Jenkins now builds and push tagged images,
+  e.g enspirit/webspicy:0.20-tester
+  and enspirit/webspicy:0.20.3-tester
+
 # 0.20.2 - 2021-03-12
 
 * Improve backward compatibility where possible, to ease
