@@ -36,11 +36,14 @@ module Webspicy
         response.body.to_s
       end
 
-      def loaded_output
+      def is_structured_output?
         ct = response.content_type || test_case.expected_content_type
         ct = ct.mime_type if ct.respond_to?(:mime_type)
-        case ct
-        when %r{json}
+        ct =~ /json/
+      end
+
+      def loaded_output
+        if is_structured_output?
           raise "Body empty while expected" if raw_output.empty?
           @loaded_output ||= ::JSON.parse(response.body)
         else

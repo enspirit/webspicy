@@ -1,3 +1,8 @@
+# 0.20.1 - 2021-03-12
+
+* Fixed output schema validation wrongly occuring even when
+  application/json is not used as response content-type.
+
 # 0.20.0 - 2021-03-12
 
 * BROKEN: all hooks now take a single `tester` instance instead
