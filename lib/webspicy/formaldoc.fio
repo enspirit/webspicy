@@ -56,8 +56,8 @@ Service =
         counterexamples :? [TestCase]
     }
 
-TestCase =
-    .Webspicy::Specification::TestCase <info> {
+TestCase = .Webspicy::Specification::TestCase
+    <info> {
         description      :? String
         dress_params     :? Boolean
         params           :? Params
@@ -76,9 +76,38 @@ TestCase =
         assert           :? [String]
         tags             :? [Tag]
     }
+    <v2> {
+        description      :? String
+        for              :? String
+        tags             :? [Tag]
+        metadata         :? { ...: .Object }
+        request          :? {
+            headers      :? Headers
+            body         :? String
+            file_upload  :? FileUpload
+        }
+        dress_input      :? Boolean
+        input            :? Input
+        response         :? Assertions
+        output           :? Assertions
+        assert           :? Assertions
+    }
 
 Params = .Array|.Hash
+Headers = .Hash
+Input = .Array|.Hash
 
 StatusRange = .Webspicy::Support::StatusRange
   <int> Integer
   <str> String(s | s =~ /^\dxx$/ )
+
+Assertions =
+  <hash>   { ... : Regexp|Scalar|Assertions }
+  <array>  [Assertions]
+  <assert> String
+
+Regexp = .Regexp <str> .String( s | s =~ %r{^\/(.*?)\/$} )
+        \( s | Regexp.compile(s[1...-1]) )
+        \( r | r.to_s )
+
+Scalar = .Integer|.Float|.String|.NilClass
