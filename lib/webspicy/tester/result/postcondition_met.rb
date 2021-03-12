@@ -18,7 +18,7 @@ module Webspicy
         end
 
         def call
-          if err = post.check(invocation)
+          if err = post.check!
             _! err
           end
         end

@@ -33,8 +33,6 @@ module Webspicy
   HttpClient = Web::HttpClient
   RackTestClient = Web::RackTestClient
   Resource = Specification
-  Precondition = Specification::Precondition
-  Postcondition = Specification::Postcondition
   FileUpload = Specification::FileUpload
   Scope = Configuration::Scope
   Checker = Tester::FileChecker

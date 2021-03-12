@@ -2,9 +2,9 @@ module Webspicy
   class Specification
     module Postcondition
       class MissingConditionImpl
-        include Postcondition
+        include Post
 
-        def check(invocation)
+        def check
           msg = matching_description.gsub(/\(x\)/, "<!>")
           raise "#{msg} (not instrumented)"
         end

@@ -1,3 +1,13 @@
+# 0.21.0
+
+* DEPRECATED: Specification::Pre/Post/Errcondition are deprecated
+  but a compatibility bridge is provided.
+
+  Please now use Specification::Pre, ::Post and ::Err instead,
+  whose `instrument` and `check!` methods take no arguments at
+  all (but provide invocation, test_case, config, scope, etc.
+  through getters).
+
 # 0.20.0
 
 * Tester::Fakesmtp is provided to help writing post conditions

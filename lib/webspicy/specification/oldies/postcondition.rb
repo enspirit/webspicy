@@ -1,7 +1,12 @@
 module Webspicy
   class Specification
-    module Errcondition
+    # Deprecated, use Post instead
+    module Postcondition
       include Condition
+
+      def bind(tester)
+        Oldies::Bridge.new(self).bind(tester)
+      end
 
       def self.match(service, descr)
       end
@@ -12,6 +17,6 @@ module Webspicy
       def check(invocation)
       end
 
-    end # module Errcondition
+    end # module Postcondition
   end # module Specification
 end # module Webspicy

@@ -1,6 +1,6 @@
 require_relative 'must_be_authenticated'
 class MustBeAnAdmin < MustBeAuthenticated
-  include Webspicy::Precondition
+  include Webspicy::Specification::Pre
 
   def self.match(service, pre)
     MustBeAnAdmin.new(:admin) if pre =~ /Must be an admin/

@@ -1,7 +1,12 @@
 module Webspicy
   class Specification
+    # Deprecated, use Pre instead
     module Precondition
       include Condition
+
+      def bind(tester)
+        Oldies::Bridge.new(self).bind(tester)
+      end
 
       def self.match(service, pre)
       end
@@ -16,5 +21,3 @@ module Webspicy
     end # module Precondition
   end # class Specification
 end # module Webspicy
-require_relative 'precondition/global_request_headers'
-require_relative 'precondition/robust_to_invalid_input'

@@ -1,8 +1,8 @@
 module Webspicy
   class Specification
-    module Precondition
+    module Pre
       class GlobalRequestHeaders
-        include Precondition
+        include Pre
 
         DEFAULT_OPTIONS = {}
 
@@ -22,7 +22,7 @@ module Webspicy
           end
         end
 
-        def instrument(test_case, client)
+        def instrument
           extra = headers.reject{|k|
             test_case.headers.has_key?(k)
           }
@@ -30,6 +30,6 @@ module Webspicy
         end
 
       end # class GlobalRequestHeaders
-    end # module Precondition
+    end # module Pre
   end # class Specification
 end # module Webspicy

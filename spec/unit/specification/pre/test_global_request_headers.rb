@@ -2,16 +2,21 @@ require 'spec_helper'
 
 module Webspicy
   class Specification
-    module Precondition
+    module Pre
       describe GlobalRequestHeaders do
         let(:gbr){
           GlobalRequestHeaders.new('Accept' => 'application/json')
         }
 
+        def instrument(tc)
+          t = OpenStruct.new(test_case: tc)
+          gbr.bind(t).instrument
+        end
+
         describe "instrument" do
           it 'injects the headers' do
             tc = TestCase.new({})
-            gbr.instrument(tc, nil)
+            instrument(tc)
             expect(tc.headers['Accept']).to eql("application/json")
           end
 
@@ -21,7 +26,7 @@ module Webspicy
                 'Content-Type' => 'text/plain'
               }
             })
-            gbr.instrument(tc, nil)
+            instrument(tc)
             expect(tc.headers['Content-Type']).to eql("text/plain")
             expect(tc.headers['Accept']).to eql("application/json")
           end
@@ -32,7 +37,7 @@ module Webspicy
                 'Accept' => 'text/plain'
               }
             })
-            gbr.instrument(tc, nil)
+            instrument(tc)
             expect(tc.headers['Accept']).to eql("text/plain")
           end
         end
