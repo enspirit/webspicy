@@ -9,7 +9,7 @@ pipeline {
   environment {
     SLACK_CHANNEL = '#opensource-cicd'
     DOCKER_REGISTRY = 'docker.io'
-    DOCKER_TAG = get_docker_tag()
+    VERSION = get_docker_tag()
   }
 
   stages {
@@ -35,6 +35,7 @@ pipeline {
       when {
         anyOf {
           branch 'master'
+          buildingTag()
         }
       }
       steps {
