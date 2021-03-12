@@ -11,6 +11,10 @@
   all (but provide invocation, test_case, config, scope, etc.
   through getters).
 
+* Tester::Fakeses is provided to help writing post conditions
+  about emails captured using the `quadrabee/fake-ses` docker
+  image.
+
 # 0.20.0
 
 * Tester::Fakesmtp is provided to help writing post conditions
