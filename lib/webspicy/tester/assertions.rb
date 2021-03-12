@@ -40,7 +40,7 @@ module Webspicy
         actual_size(target, path) == expected
       end
 
-      def actual_size(target, path) 
+      def actual_size(target, path)
         target = extract_path(target, path)
         respond_to!(target, :size).size
       end
@@ -68,7 +68,7 @@ module Webspicy
         an_array(target).find { |t| t[:id] == id }
       end
 
-      def idFD(element, expected) 
+      def idFD(element, expected)
         expected.keys.all? do |k|
           value_equal(expected[k], element[k])
         end

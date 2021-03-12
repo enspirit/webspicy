@@ -61,6 +61,11 @@ module Webspicy
       end
     end
 
+    def bind_condition(c)
+      c = Specification::Oldies::Bridge.new(c) unless c.respond_to?(:bind)
+      c.bind(self)
+    end
+
   protected
 
     def run_config
@@ -176,7 +181,7 @@ module Webspicy
     end
 
     def instrument_one(condition)
-      condition.bind(self).instrument
+      bind_condition(condition).instrument
     rescue ArgumentError
       raise "#{condition.class} implements old PRE/POST contract"
     end

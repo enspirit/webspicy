@@ -10,6 +10,9 @@ module Webspicy
       end
       attr_accessor :specification
 
+      # Deprecated
+      alias :resource :specification
+
       def self.info(raw)
         new(raw)
       end

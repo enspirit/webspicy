@@ -53,6 +53,7 @@ module Webspicy
       alias :loaded_body :loaded_output
 
       def output
+        return loaded_output unless is_structured_output?
         schema = is_expected_success? ? service.output_schema : service.error_schema
         begin
           schema.dress(loaded_output)

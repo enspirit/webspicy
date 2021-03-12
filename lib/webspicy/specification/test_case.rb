@@ -28,6 +28,9 @@ module Webspicy
         service.specification
       end
 
+      # Deprecated
+      alias :resource :specification
+
       def self.info(raw)
         new(raw)
       end

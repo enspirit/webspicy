@@ -96,13 +96,13 @@ module Webspicy
 
       def check_postconditions!
         service.postconditions.each do |c|
-          check_one! Result::PostconditionMet.new(self, c.bind(tester))
+          check_one! Result::PostconditionMet.new(self, tester.bind_condition(c))
         end
       end
 
       def check_errconditions!
         service.errconditions.each do |c|
-          check_one! Result::ErrconditionMet.new(self, c.bind(tester))
+          check_one! Result::ErrconditionMet.new(self, tester.bind_condition(c))
         end
       end
 

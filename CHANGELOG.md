@@ -1,3 +1,8 @@
+# 0.20.2 - 2021-03-12
+
+* Improve backward compatibility where possible, to ease
+  transition from 0.16.x and 0.17.x
+
 # 0.20.1 - 2021-03-12
 
 * Fixed output schema validation wrongly occuring even when

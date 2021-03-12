@@ -10,11 +10,14 @@ module Webspicy
         attr_reader :target
 
         def instrument
+          return unless target.respond_to?(:instrument)
           target.instrument(test_case, client)
         end
 
         def check!
-          target.check(invocation)
+          return unless target.respond_to?(:check)
+          res = target.check(invocation)
+          res ? fail!(res) : nil
         end
 
         def to_s
