@@ -4,37 +4,52 @@ module Webspicy
       class Documentation < Reporter
 
         module Helpers
-          def spec_file_error_line(spec_file, ex)
+          INDENT = "  ".freeze
+
+          def spec_file_line(spec_file)
             relative_path = Path(spec_file).relative_to(config.folder)
-            str = colorize_highlight(relative_path.to_s, config)
-            str += "\n  " + colorize_error("X  #{ex.message}", config)
+            colorize_section(">> #{relative_path}", config)
+          end
+
+          def spec_file_error_line(spec_file, ex)
+            str = ""
+            str += colorize_error(INDENT + "X  #{ex.message}", config)
             if ex.root_cause && ex.root_cause != ex
-              str += "\n    " + colorize_error("#{ex.root_cause.message}", config)
+              str += "\n"
+              str += INDENT + colorize_error("#{ex.root_cause.message}", config)
             end
             str
           end
 
           def service_line(service, test_case)
-            str = service.to_s + ", " + test_case.to_s
+            str = "#{service}, #{test_case}"
             str = colorize_highlight(str, config)
           end
 
           def check_success_line(check)
-            "  " + colorize_success("v  " + check.behavior, config)
+            INDENT + colorize_success("v  " + check.behavior, config)
           end
 
           def check_failure_line(check, ex)
-            "  " + colorize_error("F  " + ex.message, config)
+            INDENT + colorize_error("F  " + ex.message, config)
           end
 
           def check_error_line(check, ex)
-            "  " + colorize_error("E  " + ex.message, config)
+            INDENT + colorize_error("E  " + ex.message, config)
           end
         end
         include Helpers
 
         def spec_file_error(e)
+          io.puts spec_file_line(spec_file)
+          io.puts
           io.puts spec_file_error_line(spec_file, e)
+          io.puts
+          io.flush
+        end
+
+        def before_service
+          io.puts spec_file_line(spec_file)
           io.puts
           io.flush
         end

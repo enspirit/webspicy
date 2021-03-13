@@ -33,6 +33,7 @@ module Webspicy
       @service_filter = default_service_filter
       @test_case_filter = default_test_case_filter
       @colors = {
+        :section => :magenta,
         :highlight => :cyan,
         :error => :red,
         :success => :green
