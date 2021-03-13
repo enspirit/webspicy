@@ -18,7 +18,8 @@ namespace :test do
     desc "Runs the integration tests on the #{file.basename} example"
     task(test_name) do
       Bundler.with_original_env do
-        system("cd #{file} && bundle exec rake")
+        x = system("cd #{file} && bundle exec rake")
+        abort("Example test suite failed: #{file}") unless x
       end
     end
     tests << test_name
