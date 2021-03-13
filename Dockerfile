@@ -11,6 +11,9 @@ RUN bundle install
 COPY examples/restful/Gemfile ./examples/restful/Gemfile
 RUN cd examples/restful && bundle install
 
+COPY examples/failures/Gemfile ./examples/failures/Gemfile
+RUN cd examples/failures && bundle install
+
 COPY . ./
 
 RUN bundle exec rake test && \

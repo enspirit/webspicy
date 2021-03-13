@@ -1,0 +1,49 @@
+$LOAD_PATH.unshift File.expand_path("..", __FILE__)
+require 'webspicy'
+require 'webspicy/web'
+require 'app'
+require 'differ'
+
+task :suite do
+  t = Webspicy::Tester.new(Path.dir/'webspicy/suite.rb')
+  t.call!
+end
+
+task :test do
+  t = Webspicy::Tester.new(Path.dir/'webspicy/test.rb')
+  config = t.config
+  summary = config.reporter.find(Webspicy::Tester::Reporter::Summary)
+
+  t.call
+
+  if summary.success?
+    abort("Expected to fail, it passes")
+  end
+
+  unless (x = summary.spec_file_errors_count) == 1
+    abort("FAILURE: Expected 1 spec_file error, got #{x}")
+  end
+
+  unless (x = summary.spec_file_errors_count) == 1
+    abort("FAILURE: Expected 1 spec_file error, got #{x}")
+  end
+
+  unless (x = summary.failures_count) == 19
+    abort("FAILURE: Expected 19 failures, got #{x}")
+  end
+
+  [:documentation, :progress, :summary].each do |kind|
+    doc = (Path.dir/"expected/#{kind}.output.txt")
+    got = config.world.send(:"#{kind}_output").string
+    doc.write(got) unless doc.file?
+    unless got == (exp = doc.read)
+      Differ.format = :color
+      puts Differ.diff(got, exp)
+      abort("FAILURE: Unexpected #{kind} output")
+    end
+  end
+
+  puts "GOOD"
+end
+
+task :default => :test

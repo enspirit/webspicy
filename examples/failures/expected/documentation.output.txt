@@ -1,0 +1,127 @@
+>> formaldef/wrong-assertion.yml
+
+GET /, when the assertions are ok
+  v  It has a 200 response status
+  v  It has a `Content-Type: application/json` response header
+  v  Its output meets the expected data schema
+  v  Assert notEmpty
+  v  Assert pathFD('', :ok => true)
+  v  Assert notEmpty('hobbies')
+  v  Assert size('hobbies', 3)
+
+GET /, when an empty is wrong
+  v  It has a 200 response status
+  v  It has a `Content-Type: application/json` response header
+  v  Its output meets the expected data schema
+  F  Expected {"ok":true,"hobbies":["pro... to be empty
+  F  Expected ["programming","quality","... to be empty
+
+GET /, when a pathFD is wrong
+  v  It has a 200 response status
+  v  It has a `Content-Type: application/json` response header
+  v  Its output meets the expected data schema
+  F  Expected {"ok":true,"hobbies":["pro... to contain the key(s) and value(s) {:ok=>false}
+
+GET /, when an size is wrong
+  v  It has a 200 response status
+  v  It has a `Content-Type: application/json` response header
+  v  Its output meets the expected data schema
+  F  Expected ["programming","quality","... to have a size of 4, actual size is: 3
+
+
+>> formaldef/wrong-checkbox.yml
+
+GET /, when the response is as expected
+  v  It has a 200 response status
+  v  It has a `Content-Type: application/json` response header
+  v  Its output meets the expected data schema
+  v  ( ) Succeeding postcondition
+  F  <!> Unimplemented postcondition (not instrumented)
+  F  <x> Succeeding postcondition (is instrumented)
+
+GET /, when the response is as expected
+  v  It has a 200 response status
+  v  It has a `Content-Type: application/json` response header
+  v  Error data meets the expected error schema
+  v  ( ) Succeeding errcondition
+  F  <!> Unimplemented errcondition (not instrumented)
+  F  <x> Succeeding errcondition (is instrumented)
+
+
+>> formaldef/wrong-condition.yml
+
+GET /, when the response is as expected
+  v  It has a 200 response status
+  v  It has a `Content-Type: application/json` response header
+  v  Its output meets the expected data schema
+  v  (x) Succeeding postcondition
+  v  (x) Succeeding postcondition (deprecated) (backward compatibility bridge)
+  F  It is not met
+  F  Is is not met (deprecated protocol)
+
+GET /, when the response is as expected
+  v  It has a 200 response status
+  v  It has a `Content-Type: application/json` response header
+  v  Error data meets the expected error schema
+  v  (x) Succeeding errcondition
+  v  (x) Succeeding errcondition (deprecated) (backward compatibility bridge)
+  F  It is not met
+  F  Is is not met (deprecated protocol)
+
+
+>> formaldef/wrong-file.yml
+
+  X  Invalid Specification `{"name"=>"Not a valid spec...`
+  Missing attribute `url`
+
+>> formaldef/wrong-output.yml
+
+GET /{service}, when the output is as expected
+  v  It has a 200 response status
+  v  It has a `Content-Type: application/json` response header
+  v  Its output meets the expected data schema
+
+GET /{service}, when an attribute is missing
+  v  It has a 200 response status
+  v  It has a `Content-Type: application/json` response header
+  F  Invalid output: Missing attribute `hobbies`
+
+GET /{service}, when an extra attribute is unexpected
+  v  It has a 200 response status
+  v  It has a `Content-Type: application/json` response header
+  F  Invalid output: Unrecognized attribute `foo`
+
+GET /{service}, when a attribute has the wrong type
+  v  It has a 200 response status
+  v  It has a `Content-Type: application/json` response header
+  F  Invalid output: Invalid Boolean `12`
+
+
+>> formaldef/wrong-response.yml
+
+GET /, when the response is as expected
+  v  It has a 200 response status
+  v  It has a `Content-Type: application/json` response header
+  v  It has a `X-Hello: World` response header
+  v  Its output meets the expected data schema
+  v  Assert pathFD('', ok: true)
+
+GET /, when the content type is not as expected
+  v  It has a 200 response status
+  F  Expected response header `Content-Type` to be `text/csv`, got `application/json`
+
+GET /, when the status is not as expected
+  F  Expected response status to be 400, got 200
+  v  It has a `Content-Type: application/json` response header
+
+GET /, when a header is not as expected
+  v  It has a 200 response status
+  v  It has a `Content-Type: application/json` response header
+  F  Expected response header `X-Hello` to be `Dude`, got `World`
+
+GET /, when a header is missing
+  v  It has a 200 response status
+  v  It has a `Content-Type: application/json` response header
+  F  Expected response header `X-NotSet` to be set
+
+
