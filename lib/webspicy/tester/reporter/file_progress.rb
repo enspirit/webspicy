@@ -4,12 +4,12 @@ module Webspicy
       class FileProgress < Reporter
 
         def spec_file_error(e)
-          io.print colorize_error("X")
+          io.print colorize_error("X", config)
           io.flush
         end
 
         def spec_file_done
-          io.print colorize_success(".")
+          io.print colorize_success(".", config)
           io.flush
         end
 

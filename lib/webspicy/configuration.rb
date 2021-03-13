@@ -37,6 +37,7 @@ module Webspicy
         :error => :red,
         :success => :green
       }
+      @colorize = true
       @scope_factory = ->(config){ Scope.new(config) }
       @client = Web::HttpClient
       @reporter = default_reporter
@@ -48,6 +49,8 @@ module Webspicy
     protected :folder=
 
     attr_accessor :colors
+    attr_accessor :colorize
+
     attr_reader :world
 
     def self.dress(arg, &bl)

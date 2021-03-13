@@ -42,9 +42,9 @@ module Webspicy
                 "#{plural('error', errors_count)}, "\
                 "#{plural('failure', failures_count)}"
           if success?
-            msg = colorize_success(msg)
+            msg = colorize_success(msg, config)
           else
-            msg = colorize_error(msg)
+            msg = colorize_error(msg, config)
           end
           io.puts(msg)
           io.puts
