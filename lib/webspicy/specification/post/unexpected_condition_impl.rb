@@ -4,9 +4,9 @@ module Webspicy
       class UnexpectedConditionImpl
         include Post
 
-        def check
+        def check!
           msg = matching_description.gsub(/\( \)/, "<x>")
-          raise "#{msg} (is instrumented)"
+          fail!("#{msg} (is instrumented)")
         end
 
       end # class UnexpectedConditionImpl
