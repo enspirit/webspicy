@@ -8,6 +8,9 @@
 * Configuration#reporter is now provided to set the reporter to
   use. It must be a Tester::Reporter instance for now.
 
+* Configuration#colorize is now a boolean flag allowing to enable
+  or disable colors in reporter output(s).
+
 # 0.20.3 - 2021-03-12
 
 * Jenkins now builds and push tagged images,

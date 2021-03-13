@@ -22,9 +22,9 @@ module Webspicy
           msg = "#{plural('spec file', spec_files_count)}, "\
                 "#{plural('error', errors_count)}"
           if success?
-            msg = colorize_success(msg)
+            msg = colorize_success(msg, config)
           else
-            msg = colorize_error(msg)
+            msg = colorize_error(msg, config)
           end
           io.puts(msg)
           io.puts

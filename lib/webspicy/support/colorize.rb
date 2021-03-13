@@ -3,6 +3,7 @@ module Webspicy
     module Colorize
 
       def colorize(str, kind, config = nil)
+        return str if config && !config.colorize
         color = (config || self.config).colors[kind]
         ColorizedString[str].colorize(color)
       end
