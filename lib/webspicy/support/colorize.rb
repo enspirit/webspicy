@@ -9,6 +9,11 @@ module Webspicy
       end
       module_function :colorize
 
+      def colorize_section(str, cfg = nil)
+        colorize(str, :section, cfg)
+      end
+      module_function :colorize_section
+
       def colorize_highlight(str, cfg = nil)
         colorize(str, :highlight, cfg)
       end
