@@ -5,6 +5,9 @@
   tasks to make sure the process status properly reflects a test
   suite failure.
 
+* Configuration#reporter is now provided to set the reporter to
+  use. It must be a Tester::Reporter instance for now.
+
 # 0.20.3 - 2021-03-12
 
 * Jenkins now builds and push tagged images,

@@ -66,6 +66,11 @@ module Webspicy
         }
       end
 
+      def find(kind)
+        return self if self.is_a?(kind)
+        raise "Missing reporter #{kind}"
+      end
+
     protected
 
       def plural(word, count)
