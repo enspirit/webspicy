@@ -50,6 +50,11 @@ module Webspicy
       reporter.find(Reporter::ErrorCount).report
     end
 
+    def call!
+      res = call
+      abort("KO") unless res == 0
+    end
+
     def find_and_call(method, url, mutation)
       unless tc = scope.find_test_case(method, url)
         raise Error, "No such service `#{method} #{url}`"
