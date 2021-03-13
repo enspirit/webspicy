@@ -15,7 +15,7 @@ module Webspicy
       @test_case = nil
       @invocation = nil
       @invocation_error = nil
-      @reporter = default_reporter
+      @reporter = @config.reporter
     end
     attr_reader :config, :scope, :hooks, :client
     attr_reader :specification, :spec_file
@@ -29,15 +29,6 @@ module Webspicy
 
     def failfast?
       config.failfast
-    end
-
-    def default_reporter
-      @reporter = Reporter::Composite.new
-      #@reporter << Reporter::Progress.new
-      @reporter << Reporter::Documentation.new
-      @reporter << Reporter::Exceptions.new
-      @reporter << Reporter::Summary.new
-      @reporter << Reporter::ErrorCount.new
     end
 
     def call

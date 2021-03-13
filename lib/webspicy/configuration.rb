@@ -39,6 +39,7 @@ module Webspicy
       }
       @scope_factory = ->(config){ Scope.new(config) }
       @client = Web::HttpClient
+      @reporter = default_reporter
       Path.require_tree(@folder/'support') if (@folder/'support').exists?
       @world = Support::World.new(folder/'world', self)
       yield(self) if block_given?
@@ -433,6 +434,16 @@ module Webspicy
       options
     end
     private :default_rspec_options
+
+    # Returns the default reporter to use.
+    def default_reporter
+      @reporter = Tester::Reporter::Composite.new
+      @reporter << Tester::Reporter::Documentation.new
+      @reporter << Tester::Reporter::Exceptions.new
+      @reporter << Tester::Reporter::Summary.new
+      @reporter << Tester::Reporter::ErrorCount.new
+    end
+    attr_accessor :reporter
 
     # Returns the Data system to use for parsing schemas
     #
