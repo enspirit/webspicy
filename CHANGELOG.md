@@ -11,6 +11,8 @@
 * Configuration#colorize is now a boolean flag allowing to enable
   or disable colors in reporter output(s).
 
+* Fix POST/ERR condition checkboxes not working properly.
+
 # 0.20.3 - 2021-03-12
 
 * Jenkins now builds and push tagged images,
