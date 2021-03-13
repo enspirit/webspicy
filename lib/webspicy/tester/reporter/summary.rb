@@ -9,18 +9,21 @@ module Webspicy
           @examples_count = 0
           @counterexamples_count = 0
           @assertions_count = 0
+          #
+          @spec_file_errors_count = 0
           @errors_count = 0
           @failures_count = 0
         end
         attr_reader :spec_files_count, :examples_count, :counterexamples_count
-        attr_reader :assertions_count, :errors_count, :failures_count
+        attr_reader :assertions_count
+        attr_reader :spec_file_errors_count, :errors_count, :failures_count
 
         def before_spec_file
           @spec_files_count += 1
         end
 
         def spec_file_error(e)
-          @errors_count += 1
+          @spec_file_errors_count += 1
         end
 
         def after_each_done
@@ -51,10 +54,8 @@ module Webspicy
           io.flush
         end
 
-      private
-
         def success?
-          @errors_count == 0 && @failures_count == 0
+          @spec_file_errors_count == 0 && @errors_count == 0 && @failures_count == 0
         end
 
       end # class Summary
