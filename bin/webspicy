@@ -55,5 +55,4 @@ if ARGV.size != 1
 end
 
 config = Webspicy::Configuration.dress(ARGV[0])
-res = Webspicy::Tester.new(config).call
-abort("#{res} errors occured") unless res == 0
+Webspicy::Tester.new(config).call!

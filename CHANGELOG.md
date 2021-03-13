@@ -1,3 +1,10 @@
+# 0.20.4
+
+* Add Tester#call! that will abort the current process in case
+  of errors. This is the method that should be called in rake
+  tasks to make sure the process status properly reflects a test
+  suite failure.
+
 # 0.20.3 - 2021-03-12
 
 * Jenkins now builds and push tagged images,
