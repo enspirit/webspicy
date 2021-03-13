@@ -18,9 +18,7 @@ module Webspicy
         end
 
         def call
-          if err = post.check!
-            _! err
-          end
+          post.check!
         end
 
       end # class ErrconditionMet

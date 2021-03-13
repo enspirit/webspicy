@@ -13,6 +13,9 @@
 
 * Fix POST/ERR condition checkboxes not working properly.
 
+* Fix POST/ERR condition check raising a failure when the condition
+  actually succeeds (following former protocol).
+
 # 0.20.3 - 2021-03-12
 
 * Jenkins now builds and push tagged images,
