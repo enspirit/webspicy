@@ -5,7 +5,8 @@ module Webspicy
 
         module Helpers
           def spec_file_error_line(spec_file, ex)
-            str = colorize_highlight(spec_file.to_s, config)
+            relative_path = Path(spec_file).relative_to(config.folder)
+            str = colorize_highlight(relative_path.to_s, config)
             str += "\n  " + colorize_error("X  #{ex.message}", config)
             if ex.root_cause && ex.root_cause != ex
               str += "\n    " + colorize_error("#{ex.root_cause.message}", config)
