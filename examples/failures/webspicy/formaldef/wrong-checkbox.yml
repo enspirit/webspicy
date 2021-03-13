@@ -1,0 +1,44 @@
+---
+description: |-
+  Wrong checkbox tests
+
+url: |-
+  /
+
+method: |-
+  GET
+
+input_schema: |-
+  {}
+
+output_schema: |-
+  {
+    ok: Boolean
+    ...
+  }
+
+error_schema: |-
+  .
+
+postconditions:
+  - (x) Unimplemented postcondition
+  - ( ) Succeeding postcondition
+
+errconditions:
+  - (x) Unimplemented errcondition
+  - ( ) Succeeding errcondition
+
+default_example:
+  expected:
+    content_type: application/json
+    status: 200
+
+examples:
+
+- description: |-
+    when the response is as expected
+
+counterexamples:
+
+- description: |-
+    when the response is as expected

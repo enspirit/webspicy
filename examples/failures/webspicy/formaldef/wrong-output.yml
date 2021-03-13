@@ -1,0 +1,52 @@
+---
+description: |-
+  Wrong output tests
+
+url: |-
+  /{service}
+
+method: |-
+  GET
+
+input_schema: |-
+  {
+    service: String
+  }
+
+output_schema: |-
+  {
+    ok: Boolean
+    hobbies: [String]
+  }
+
+error_schema: |-
+  .
+
+default_example:
+  expected:
+    content_type: application/json
+    status: 200
+
+examples:
+
+- description: |-
+    when the output is as expected
+  params:
+    service: ''
+
+##
+
+- description: |-
+    when an attribute is missing
+  params:
+    service: missing-attribute
+
+- description: |-
+    when an extra attribute is unexpected
+  params:
+    service: extra-attribute
+
+- description: |-
+    when a attribute has the wrong type
+  params:
+    service: wrong-attribute-type

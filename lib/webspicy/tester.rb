@@ -69,19 +69,15 @@ module Webspicy
         @scope = scope
         @hooks = Support::Hooks.for(scope.config)
         @client = scope.get_client
-        reporter.before_all
-        @hooks.fire_before_all(self)
-        reporter.before_all_done
-        reporter.before_scope
         run_scope
-        reporter.scope_done
-        reporter.after_all
-        @hooks.fire_after_all(self)
-        reporter.after_all_done
       end
     end
 
     def run_scope
+      reporter.before_all
+      hooks.fire_before_all(self)
+      reporter.before_all_done
+      reporter.before_scope
       scope.each_specification_file do |spec_file|
         @specification = load_specification(spec_file)
         if @specification
@@ -93,6 +89,10 @@ module Webspicy
           raise FailFast
         end
       end
+      reporter.scope_done
+      reporter.after_all
+      hooks.fire_after_all(self)
+      reporter.after_all_done
     end
 
     def load_specification(spec_file)

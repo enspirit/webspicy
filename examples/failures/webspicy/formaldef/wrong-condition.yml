@@ -1,0 +1,48 @@
+---
+description: |-
+  Wrong post/err condition tests
+
+url: |-
+  /
+
+method: |-
+  GET
+
+input_schema: |-
+  {}
+
+output_schema: |-
+  {
+    ok: Boolean
+    ...
+  }
+
+error_schema: |-
+  .
+
+postconditions:
+  - (x) Succeeding postcondition
+  - (x) Succeeding postcondition (deprecated)
+  - (x) Failing postcondition
+  - (x) Failing postcondition (deprecated)
+
+errconditions:
+  - (x) Succeeding errcondition
+  - (x) Succeeding errcondition (deprecated)
+  - (x) Failing errcondition
+  - (x) Failing errcondition (deprecated)
+
+default_example:
+  expected:
+    content_type: application/json
+    status: 200
+
+examples:
+
+- description: |-
+    when the response is as expected
+
+counterexamples:
+
+- description: |-
+    when the response is as expected

@@ -1,0 +1,61 @@
+---
+description: |-
+  Wrong response tests
+
+url: |-
+  /
+
+method: |-
+  GET
+
+input_schema: |-
+  {}
+
+output_schema: |-
+  {
+    ok: Boolean
+    ...
+  }
+
+error_schema: |-
+  .
+
+default_example:
+  params: {}
+  expected:
+    content_type: application/json
+    status: 200
+
+examples:
+
+- description: |-
+    when the response is as expected
+  expected:
+    headers:
+      X-Hello: World
+  assert:
+    - "pathFD('', ok: true)"
+
+##
+
+- description: |-
+    when the content type is not as expected
+  expected:
+    content_type: text/csv
+
+- description: |-
+    when the status is not as expected
+  expected:
+    status: 400
+
+- description: |-
+    when a header is not as expected
+  expected:
+    headers:
+      X-Hello: Dude
+
+- description: |-
+    when a header is missing
+  expected:
+    headers:
+      X-NotSet: World

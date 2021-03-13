@@ -5,18 +5,22 @@ module Webspicy
 
         def initialize(*args, &bl)
           super
-          @error_count = 0
+          @errors = Hash.new{|h,k| 0 }
         end
+        attr_reader :errors
 
-        def on_error(*args, &bl)
-          @error_count += 1
+        [
+          :spec_file_error,
+          :check_error,
+          :check_failure
+        ].each do |meth|
+          define_method(meth) do |*args, &bl|
+            @errors[meth] += 1
+          end
         end
-        alias :spec_file_error :on_error
-        alias :check_failure   :on_error
-        alias :check_error     :on_error
 
         def report
-          @error_count
+          @errors.values.inject(0){|memo,x| memo+x }
         end
 
       end # class ErrorCount

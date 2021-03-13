@@ -25,10 +25,12 @@ clean:
 bundle-update:
 	bundle update
 	cd examples/restful && bundle update
+	cd examples/failures && bundle update
 
 bundle-install:
 	bundle install
 	cd examples/restful && bundle install
+	cd examples/failures && bundle install
 bundle: bundle-install
 
 install:
