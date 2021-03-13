@@ -1,4 +1,4 @@
-# 0.20.4
+# 0.20.4 - 2021-03-13
 
 * Add Tester#call! that will abort the current process in case
   of errors. This is the method that should be called in rake
