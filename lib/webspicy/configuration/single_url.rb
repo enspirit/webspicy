@@ -10,37 +10,47 @@ module Webspicy
         end
         attr_reader :url
 
-        def each_specification(&bl)
+        def each_specification_file(*args, &bl)
+          return enum_for(:each_specification_file) unless block_given?
+          yield Path.tempfile(["specification",".yml"]).tap{|f|
+            f.write(specification_src)
+          }
+        end
+
+        def each_specification(*args, &bl)
           return enum_for(:each_specification) unless block_given?
-          spec = <<~YML
+          yield Webspicy.specification(specification_src, nil, self)
+        end
+
+        def specification_src
+          <<~YML.tap{|s| Webspicy.debug(s) }
           ---
-          name: |-
-            Default specification
+          description: |-
+            Getting #{url}
+
           url: |-
             #{url}
 
-          services:
-          - method: |-
-              GET
-            description: |-
-              Getting #{url}
+          method: |-
+            GET
 
-            input_schema: |-
-              Any
-            output_schema: |-
-              Any
-            error_schema: |-
-              Any
+          input_schema: |-
+            Any
 
-            examples:
-              - description: |-
-                  it returns a 200
-                params: {}
-                expected:
-                  status: 200
+          output_schema: |-
+            Any
+
+          error_schema: |-
+            Any
+
+          examples:
+
+            - description: |-
+                it returns a 200
+              params: {}
+              expected:
+                status: 200
           YML
-          Webspicy.debug(spec)
-          yield Webspicy.specification(spec, nil, self)
         end
 
       end # class SingleUrlScope

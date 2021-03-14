@@ -10,7 +10,12 @@ module Webspicy
         end
         attr_reader :file
 
-        def each_specification(&bl)
+        def each_specification_file(*args, &bl)
+          return enum_for(:each_specification_file) unless block_given?
+          yield(file)
+        end
+
+        def each_specification(*args, &bl)
           return enum_for(:each_specification) unless block_given?
           yield Webspicy.specification(file.read, nil, self)
         end

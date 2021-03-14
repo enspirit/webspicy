@@ -36,6 +36,7 @@ module Webspicy
         expect(c).to be_a(Configuration)
         expect(c.folder).to eq(Path.pwd)
         expect(c.each_scope.to_a.size).to eql(1)
+        expect(c.each_scope.to_a.first.each_specification_file.to_a.size).to eql(1)
         expect(c.each_scope.to_a.first.each_specification.to_a.size).to eql(1)
       end
 

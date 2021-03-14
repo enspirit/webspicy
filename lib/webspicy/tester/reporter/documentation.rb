@@ -7,8 +7,10 @@ module Webspicy
           INDENT = "  ".freeze
 
           def spec_file_line(spec_file)
-            relative_path = Path(spec_file).relative_to(config.folder)
-            colorize_section(">> #{relative_path}", config)
+            path = Path(spec_file).expand_path
+            path = path.relative_to(config.folder)
+            path = spec_file if path.to_s.start_with?(".")
+            colorize_section(">> #{path}", config)
           end
 
           def spec_file_error_line(spec_file, ex)
