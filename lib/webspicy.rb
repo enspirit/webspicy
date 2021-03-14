@@ -144,7 +144,7 @@ module Webspicy
   HttpClient = Web::HttpClient
   RackTestClient = Web::RackTestClient
   Resource = Specification
-  FileUpload = Specification::FileUpload
+  FileUpload = Web::Specification::FileUpload
   Scope = Configuration::Scope
   Checker = Tester::FileChecker
 

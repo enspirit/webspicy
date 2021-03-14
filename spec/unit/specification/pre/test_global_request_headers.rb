@@ -15,13 +15,13 @@ module Webspicy
 
         describe "instrument" do
           it 'injects the headers' do
-            tc = TestCase.new({})
+            tc = Web::Specification::TestCase.new({})
             instrument(tc)
             expect(tc.headers['Accept']).to eql("application/json")
           end
 
           it 'keeps original headers unchanged' do
-            tc = TestCase.new({
+            tc = Web::Specification::TestCase.new({
               headers: {
                 'Content-Type' => 'text/plain'
               }
@@ -32,7 +32,7 @@ module Webspicy
           end
 
           it 'has low precedence' do
-            tc = TestCase.new({
+            tc = Web::Specification::TestCase.new({
               headers: {
                 'Accept' => 'text/plain'
               }

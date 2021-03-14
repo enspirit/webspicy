@@ -1,6 +1,8 @@
 module Webspicy
   module Web
 
+    require_relative 'web/specification'
+
     FORMALDOC = Finitio.system(Path.dir/("web/formaldoc.fio"))
 
     def specification(raw, file = nil, scope = Webspicy.default_scope)

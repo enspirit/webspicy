@@ -5,13 +5,13 @@ Method =
     String( s | s =~ /^(GET|POST|POST_FORM|PUT|DELETE|PATCH|PUT|OPTIONS)$/ )
 
 FileUpload =
-    .Webspicy::Specification::FileUpload <info> {
+    .Webspicy::Web::Specification::FileUpload <info> {
         path         :  String
         content_type :  String
         param_name   :? String
     }
 
-Specification = .Webspicy::Specification
+Specification = .Webspicy::Web::Specification
   <info> {
     name: String
     url: String
@@ -35,7 +35,7 @@ Specification = .Webspicy::Specification
   }
 
 Service =
-    .Webspicy::Specification::Service <info> {
+    .Webspicy::Web::Specification::Service <info> {
         method          :  Method
         description     :  String
         preconditions   :? [String]|String
@@ -51,7 +51,7 @@ Service =
     }
 
 TestCase =
-    .Webspicy::Specification::TestCase <info> {
+    .Webspicy::Web::Specification::TestCase <info> {
         description      :? String
         dress_params     :? Boolean
         params           :? Params

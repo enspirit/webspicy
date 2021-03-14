@@ -21,10 +21,6 @@ module Webspicy
         specification.config
       end
 
-      def method
-        @raw[:method]
-      end
-
       def description
         @raw[:description]
       end

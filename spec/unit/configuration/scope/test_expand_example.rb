@@ -3,7 +3,13 @@ module Webspicy
   class Configuration
     describe Scope, "expand_example" do
 
-      subject{ Scope.new({}).send(:expand_example, service, example) }
+      let(:config){
+        Configuration.new(Path.dir)
+      }
+
+      subject{
+        Scope.new(config).send(:expand_example, service, example)
+      }
 
       context 'when the service has no default example' do
         let(:service) {
