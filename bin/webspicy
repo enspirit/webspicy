@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 #/
 #/ Document & test web services as black-box operations.
-#/ (c) Enspirit SRL. Distributed under MIT licence.
+#/ Webspicy vVERSION, (c) Enspirit SRL. Distributed under MIT licence.
 #/
 #/ Usage: webspicy [options] URL                 # run default test againt url
 #/ Usage: webspicy [options] path/to/config.rb   # run whole test suite
@@ -28,7 +28,7 @@ require 'optparse'
 
 def showhelp
   file = __FILE__
-  exec "grep ^#/<'#{file}'|cut -c4-"
+  exec "grep ^#/<'#{file}'|cut -c4-|sed s/VERSION/#{Webspicy::VERSION}/g"
 end
 
 ARGV.options do |opts|
