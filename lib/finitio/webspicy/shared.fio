@@ -1,0 +1,10 @@
+@import finitio/data
+
+Tag = String( s | s.length > 0 )
+
+Schema =
+    .Finitio::System <fio> String
+      \( s | ::Webspicy.schema(s) )
+      \( s | raise "Unsupported"  )
+
+Params = .Array|.Hash

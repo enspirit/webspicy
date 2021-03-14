@@ -7,7 +7,7 @@ module Webspicy
 
       context 'when the service has no default example' do
         let(:service) {
-          Webspicy.service({
+          Webspicy::Web.service({
             method: "GET",
             description: "Test service",
             preconditions: "Foo",
@@ -18,7 +18,7 @@ module Webspicy
         }
 
         let(:example) {
-          Webspicy.test_case({
+          Webspicy::Web.test_case({
             description: "Hello world"
           })
         }
@@ -30,7 +30,7 @@ module Webspicy
 
       context 'when the service has a default example' do
         let(:service) {
-          Webspicy.service({
+          Webspicy::Web.service({
             method: "GET",
             description: "Test service",
             preconditions: "Foo",
@@ -44,7 +44,7 @@ module Webspicy
         }
 
         let(:example) {
-          Webspicy.test_case({
+          Webspicy::Web.test_case({
             description: "Hello world",
             expected: { content_type: "application/json" }
           })

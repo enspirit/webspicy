@@ -39,6 +39,7 @@ module Webspicy
         :success => :green
       }
       @colorize = true
+      @factory = Webspicy::Web
       @scope_factory = ->(config){ Scope.new(config) }
       @client = Web::HttpClient
       @reporter = default_reporter
@@ -109,6 +110,7 @@ module Webspicy
       end
     end
 
+    attr_accessor :factory
     attr_accessor :scope_factory
 
     def factor_scope

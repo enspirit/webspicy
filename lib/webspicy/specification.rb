@@ -19,7 +19,7 @@ module Webspicy
         name: raw[:name] || "Unamed specification",
         url: raw[:url],
         services: [
-          Webspicy.service(raw.reject{|k| k==:url or k==:name }, Webspicy.current_scope)
+          Webspicy::Web.service(raw.reject{|k| k==:url or k==:name }, Webspicy.current_scope)
         ]
       }
       info(converted)

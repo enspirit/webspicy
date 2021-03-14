@@ -1,17 +1,11 @@
 @import finitio/data
+@import webspicy/shared
 
 Method =
     String( s | s =~ /^(GET|POST|POST_FORM|PUT|DELETE|PATCH|PUT|OPTIONS)$/ )
 
-Tag = String( s | s.length > 0 )
-
-Schema =
-    .Finitio::System <fio> String
-      \( s | ::Webspicy.schema(s) )
-      \( s | raise "Unsupported"  )
-
 FileUpload =
-    .Webspicy::FileUpload <info> {
+    .Webspicy::Specification::FileUpload <info> {
         path         :  String
         content_type :  String
         param_name   :? String
@@ -76,8 +70,6 @@ TestCase =
         assert           :? [String]
         tags             :? [Tag]
     }
-
-Params = .Array|.Hash
 
 StatusRange = .Webspicy::Support::StatusRange
   <int> Integer

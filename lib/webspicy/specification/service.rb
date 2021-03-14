@@ -68,7 +68,7 @@ module Webspicy
       def generated_counterexamples
         preconditions.map{|pre|
           pre.counterexamples(self).map{|tc|
-            tc = Webspicy.test_case(tc, Webspicy.current_scope)
+            tc = config.factory.test_case(tc, Webspicy.current_scope)
             tc.bind(self, true)
           }
         }.flatten

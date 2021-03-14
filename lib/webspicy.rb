@@ -21,21 +21,9 @@ module Webspicy
   require 'webspicy/specification'
   require 'webspicy/configuration'
   require 'webspicy/tester'
-  require 'webspicy/web'
 
   class Error < StandardError; end
   class TimeoutError < Error; end
-
-  ###
-  ### Backward compatibility
-  ###
-  Client = Tester::Client
-  HttpClient = Web::HttpClient
-  RackTestClient = Web::RackTestClient
-  Resource = Specification
-  FileUpload = Specification::FileUpload
-  Scope = Configuration::Scope
-  Checker = Tester::FileChecker
 
   ###
   ### About folders
@@ -49,10 +37,11 @@ module Webspicy
   ### About formal doc and specifications defined there
   ###
   Finitio.stdlib_path(Path.dir/"finitio")
+
   DEFAULT_SYSTEM = Finitio.system(<<~FIO)
     @import webspicy/scalars
   FIO
-  FORMALDOC = Finitio.system(Path.dir/("webspicy/formaldoc.fio"))
+
 
   ###
   ### Exceptions that we let pass during testing
@@ -65,45 +54,6 @@ module Webspicy
     Configuration::Scope.new(Configuration.new)
   end
   module_function :default_scope
-
-  def specification(raw, file = nil, scope = default_scope)
-    raw = YAML.load(raw) if raw.is_a?(String)
-    with_scope(scope) do
-      r = FORMALDOC["Specification"].dress(raw)
-      r.config = scope.config
-      r.located_at!(file) if file
-      r
-    end
-  rescue Finitio::Error => ex
-    handle_finitio_error(ex, scope)
-  end
-  module_function :specification
-
-  def service(raw, scope = default_scope)
-    with_scope(scope) do
-      FORMALDOC["Service"].dress(raw)
-    end
-  rescue Finitio::Error => ex
-    handle_finitio_error(ex)
-  end
-  module_function :service
-
-  def test_case(raw, scope = default_scope)
-    with_scope(scope) do
-      FORMALDOC["TestCase"].dress(raw)
-    end
-  rescue Finitio::Error => ex
-    handle_finitio_error(ex)
-  end
-  module_function :test_case
-
-  def handle_finitio_error(ex, scope)
-    # msg = "#{ex.message}:\n    #{ex.root_cause.message}"
-    # msg = Support::Colorize.colorize_error(msg, scope.config)
-    # fatal(msg)
-    raise
-  end
-  module_function :handle_finitio_error
 
   #
   # Yields the block after having installed `scope` globally.
@@ -185,4 +135,23 @@ module Webspicy
   end
   module_function :fatal
 
+  require 'webspicy/web'
+
+  ###
+  ### Backward compatibility
+  ###
+  Client = Tester::Client
+  HttpClient = Web::HttpClient
+  RackTestClient = Web::RackTestClient
+  Resource = Specification
+  FileUpload = Specification::FileUpload
+  Scope = Configuration::Scope
+  Checker = Tester::FileChecker
+
+  [:specification, :service, :test_case].each do |meth|
+    define_method(meth) do |*args, &bl|
+      Webspicy::Web.send(meth, *args, &bl)
+    end
+    module_function(meth)
+  end
 end

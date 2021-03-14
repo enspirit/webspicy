@@ -35,7 +35,7 @@ module Webspicy
       def each_specification(apply_filter = true, &bl)
         return enum_for(:each_specification, apply_filter) unless block_given?
         each_specification_file(apply_filter) do |file, folder|
-          yield Webspicy.specification(file.load, file, self)
+          yield config.factory.specification(file.load, file, self)
         end
       end
 

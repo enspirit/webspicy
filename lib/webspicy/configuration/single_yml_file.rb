@@ -17,7 +17,7 @@ module Webspicy
 
         def each_specification(*args, &bl)
           return enum_for(:each_specification) unless block_given?
-          yield Webspicy.specification(file.read, nil, self)
+          yield config.factory.specification(file.read, nil, self)
         end
 
       end # class SingleYmlFileScope

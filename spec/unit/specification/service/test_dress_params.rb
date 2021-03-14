@@ -4,7 +4,7 @@ module Webspicy
     describe Service, "dress_params" do
 
       it 'symbolizes keys' do
-        service = Webspicy.service({
+        service = Webspicy::Web.service({
           method: "GET",
           description: "Test service",
           preconditions: "Foo",
@@ -17,7 +17,7 @@ module Webspicy
       end
 
       it 'supports an array' do
-        service = Webspicy.service({
+        service = Webspicy::Web.service({
           method: "GET",
           description: "Test service",
           preconditions: "Foo",

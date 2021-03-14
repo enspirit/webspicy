@@ -19,7 +19,7 @@ module Webspicy
 
         def each_specification(*args, &bl)
           return enum_for(:each_specification) unless block_given?
-          yield Webspicy.specification(specification_src, nil, self)
+          yield config.factory.specification(specification_src, nil, self)
         end
 
         def specification_src

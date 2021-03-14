@@ -98,7 +98,7 @@ module Webspicy
     def load_specification(spec_file)
       @spec_file = spec_file
       reporter.before_spec_file
-      Webspicy.specification(spec_file.load, spec_file, scope)
+      config.factory.specification(spec_file.load, spec_file, scope)
     rescue *PASSTHROUGH_EXCEPTIONS
       raise
     rescue Exception => e
