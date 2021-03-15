@@ -1,4 +1,4 @@
-# 0.20.5
+# 0.20.5 - 2021-03-15
 
 * Replace `colorize` gem by `paint` to avoid a GPL licence
   issue (`paint` is licensed under MIT).
