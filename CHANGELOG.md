@@ -1,3 +1,8 @@
+# 0.20.5
+
+* Replace `colorize` gem by `paint` to avoid a GPL licence
+  issue (`paint` is licensed under MIT).
+
 # 0.20.4 - 2021-03-13
 
 * Add Tester#call! that will abort the current process in case

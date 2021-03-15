@@ -7,7 +7,7 @@ require 'ostruct'
 require 'yaml'
 require 'rack/test'
 require 'mustermann'
-require 'colorized_string'
+require 'paint'
 require 'securerandom'
 require 'forwardable'
 module Webspicy
