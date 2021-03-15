@@ -14,5 +14,4 @@ Dockerfile.tester.pushed
 Dockerfile.mocker.built
 Dockerfile.mocker.log
 Dockerfile.mocker.pushed
-Gemfile.lock
-examples/restful/Gemfile.lock
+examples/**/Gemfile.lock
