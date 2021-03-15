@@ -5,7 +5,7 @@ module Webspicy
       def colorize(str, kind, config = nil)
         return str if config && !config.colorize
         color = (config || self.config).colors[kind]
-        ColorizedString[str].colorize(color)
+        Paint[str, color]
       end
       module_function :colorize
 
