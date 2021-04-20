@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    webspicy (0.20.5)
+    webspicy (0.20.6)
       finitio (~> 0.10.0)
       http (>= 4)
       mustermann (~> 1.0)
@@ -41,7 +41,7 @@ GEM
     http-form_data (2.3.0)
     http-parser (1.2.3)
       ffi-compiler (>= 1.0, < 2.0)
-    i18n (1.8.9)
+    i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
