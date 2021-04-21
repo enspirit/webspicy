@@ -30,7 +30,7 @@ module Webspicy
       end
 
       def last_email
-        emails.last
+        emails.first
       end
 
     end # class Fakesmtp
