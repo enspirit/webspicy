@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    webspicy (0.20.6)
+    webspicy (0.20.7)
       finitio (~> 0.10.0)
       http (>= 4)
       mustermann (~> 1.0)
@@ -18,7 +18,7 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     citrus (3.0.2)
-    commonmarker (0.21.1)
+    commonmarker (0.21.2)
       ruby-enum (~> 0.5)
     concurrent-ruby (1.1.8)
     diff-lcs (1.4.4)
@@ -102,4 +102,4 @@ DEPENDENCIES
   webspicy!
 
 BUNDLED WITH
-   2.2.1
+   2.2.16
