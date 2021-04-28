@@ -1,9 +1,25 @@
-# 0.20.5 - 2021-03-15
+## 0.20.7 - 2021-04-28
+
+* Fix Fakesmtp#last_email when more than one email was sent (the first
+  one was returned instead of last one)
+
+* Fix status code of `webspicy` commandline tool when errors occur (vs.
+  failures). The ErrorCount reporter is replaced by SuccessOrNot. The
+  former name can still be used for backward compatibility and will
+  replaced in 0.21.
+
+## 0.20.6 - 2021-04-20
+
+* Add support for reply-to in Fakesmtp::Email.
+
+* Prevent Documentation reporter from showing empty service sections.
+
+## 0.20.5 - 2021-03-15
 
 * Replace `colorize` gem by `paint` to avoid a GPL licence
   issue (`paint` is licensed under MIT).
 
-# 0.20.4 - 2021-03-13
+## 0.20.4 - 2021-03-13
 
 * Add Tester#call! that will abort the current process in case
   of errors. This is the method that should be called in rake
@@ -21,23 +37,23 @@
 * Fix POST/ERR condition check raising a failure when the condition
   actually succeeds (following former protocol).
 
-# 0.20.3 - 2021-03-12
+## 0.20.3 - 2021-03-12
 
 * Jenkins now builds and push tagged images,
   e.g enspirit/webspicy:0.20-tester
   and enspirit/webspicy:0.20.3-tester
 
-# 0.20.2 - 2021-03-12
+## 0.20.2 - 2021-03-12
 
 * Improve backward compatibility where possible, to ease
   transition from 0.16.x and 0.17.x
 
-# 0.20.1 - 2021-03-12
+## 0.20.1 - 2021-03-12
 
 * Fixed output schema validation wrongly occuring even when
   application/json is not used as response content-type.
 
-# 0.20.0 - 2021-03-12
+## 0.20.0 - 2021-03-12
 
 * BROKEN: all hooks now take a single `tester` instance instead
   of client and/or scope.
@@ -66,7 +82,7 @@
   When the checkbox is unchecked `( ) ...` the test will fail
   when instrumentation code is actually provided.
 
-# 0.19.0 - 2021-03-09
+## 0.19.0 - 2021-03-09
 
 * RSpec is no longer used to run the test suite. Webspicy now
   has its own test engine. The aim is to provide test suite
@@ -109,14 +125,14 @@
   truthy value and return nil after a certain number of attempts
   (or raise a TimeoutError)
 
-# 0.18.0 - 2021/02/23
+## 0.18.0 - 2021/02/23
 
 * Dependencies upgraded, http >= 4.0 and finitio >= 0.10.0
   in particular. This may break existing projects and is a
   major upgrade towards new webspicy engine not relying on
   rspec.
 
-# 0.17.0 - 2021/01/11
+## 0.17.0 - 2021/01/11
 
 * Output and error are now loaded according to the content-type
   announced in the response, and only if it not announced,
@@ -126,20 +142,20 @@
   Errconditions are postconditions that are met when the test
   item is called while at least on precondition is violated.
 
-# 0.16.3 - 2020/12/18
+## 0.16.3 - 2020/12/18
 
 * Fix RobustToInvalidInput to include empty params as valid
   counterexamples.
 
-# 0.16.2 - 2020/12/18
+## 0.16.2 - 2020/12/18
 
 * Fix simpler schema not working properly
 
-# 0.16.1 - 2020/12/18
+## 0.16.1 - 2020/12/18
 
 * Fix assertion error on response content type
 
-# 0.16.0 - 2020/12/18
+## 0.16.0 - 2020/12/18
 
 * Improve output when LOG_LEVEL is set to DEBUG
 * Improve the commandline to be able to test a single url and spec
@@ -152,21 +168,21 @@ dependencies have been bumped.
 * Bump `path` to `2.0` runtime dependency
 * Bump `finitio` to `0.9` runtime dependency
 
-# 0.15.7 - 2020/06/07
+## 0.15.7 - 2020/06/07
 
 * Add support for HTTP PUT verb, in both real and rack clients.
 
-# 0.15.6 - 2020/06/05
+## 0.15.6 - 2020/06/05
 
 * Fix return code of the webspicy commandline tool.
 
-# 0.15.5 - 2020/05/14
+## 0.15.5 - 2020/05/14
 
 * Fix error message when the status code does not meet the expectation
 
 * Fix TAG=... not working when the tag is part of the default_example.
 
-# 0.15.4 - 2020/05/13
+## 0.15.4 - 2020/05/13
 
 * Expected status may now use expresions like "2xx" or "3xx" to indicate
   that any status within the century range is considered a success. This
@@ -182,7 +198,7 @@ dependencies have been bumped.
   spliting test executions in two: all examples first, all counterexamples
   too.
 
-# 0.15.3 - 2020/05/05
+## 0.15.3 - 2020/05/05
 
 * Test case now expose a `counterexample?` method with the obvious
   semantics.
@@ -198,18 +214,18 @@ dependencies have been bumped.
 
       c.after_each(any_instance_responding_to_call)
 
-# 0.15.2 - 2020/04/28
+## 0.15.2 - 2020/04/28
 
 * Webspicy no longer checks expected headers and schema when the response
   is expected to be empty (e.g. 204). This yields too many false positive
   since different web servers do not react exactly the same on 204.
 
-# 0.15.1 - 2020/04/28
+## 0.15.1 - 2020/04/28
 
 * Params sent in GET and OPTIONS are correctly converted to String before
   being used. An error is otherwise raised by HTTP#get.
 
-# 0.15.0 - 2020/03/18
+## 0.15.0 - 2020/03/18
 
 * BREAKING: schema.fio now have to `@import finitio/data` explicitly.
   The Finitio default system is no longer started from by default.
@@ -234,7 +250,7 @@ dependencies have been bumped.
   expected some tests and config.rb file mounted as a volume in /home/app.
   The image executes the tests by default.
 
-# 0.14.0 - 2020/02/02
+## 0.14.0 - 2020/02/02
 
 * Allow negative RESOURCE filtering, by prefixing the resource match
   by a !. E.g. RESOURCE=!get will execute all resources in files not
@@ -249,7 +265,7 @@ dependencies have been bumped.
   The feature can for instance be used to implement the 'only' feature that
   many frameworks have.
 
-# 0.13.0 - 2020/01/21
+## 0.13.0 - 2020/01/21
 
 * Add junit xml output by default.
 
@@ -261,32 +277,32 @@ dependencies have been bumped.
 * Adds an experimental Mocker abstraction that allows running a real API
   mock based on webspicy files.
 
-# 0.12.5 - 2019/07/17
+## 0.12.5 - 2019/07/17
 
 * RackTestClient now converts nil parameters to '' on GET requests. Before
   ruby 2.5.0, nil.dup raises an error and sinatra tries to duplicate param
   values on dispatch!.
 
-# 0.12.4 - 2019/05/31
+## 0.12.4 - 2019/05/31
 
 * Add Date coercer/asserter
 
-# 0.12.3 - 2019/02/27
+## 0.12.3 - 2019/02/27
 
 * Weaken webspicy dependency constraint, to prevent clients from upgrading
   to higher versions of finitio.
 
-# 0.12.2 - 2019/01/25
+## 0.12.2 - 2019/01/25
 
 * Expose Resource#location, to let hooks make decisions depending on the
   file in which test cases currently executed are defined.
 
-# 0.12.1 - 2018/10/12
+## 0.12.1 - 2018/10/12
 
 * HttpClient now correctly sends the file name to the tested backend when
   using file uploads.
 
-# 0.12.0 - 2018/08/22
+## 0.12.0 - 2018/08/22
 
 * A service can now define a `default_example` with shared attributes of all
   examples, counterexamples and generated counter exampled. The default example
@@ -295,16 +311,16 @@ dependencies have been bumped.
   and a concatenation on arrays. This allows the example/counterexample to
   easily override the default example on specific attributes.
 
-# 0.11.2 - 2018/08/16
+## 0.11.2 - 2018/08/16
 
 * Fixed a `NoSuchMethodError each` on NilClass related to :instrument listeners
   on Config.
 
-# 0.11.1 - 2018/08/16
+## 0.11.1 - 2018/08/16
 
 * Fixed dependency requirements to avoid rubygems warnings.
 
-# 0.11.0 - 2018/08/16
+## 0.11.0 - 2018/08/16
 
 * Webspicy now comes with Precondition and Postcondition modules. They aim at
   being included by actual classes to meet the expected contracts easily.
@@ -317,27 +333,27 @@ dependencies have been bumped.
 * Test cases now support a `metadata` YAML entry, to track domain specific tags
   (typically used in PRE/POST conditions or Config#instrument).
 
-# 0.10.2
+## 0.10.2
 
 * Fixed gem publish date.
 
-# 0.10.1
+## 0.10.1
 
 * Postconditions can optionally instrument a test case before execution too. This
   is handy to clean stuff before running a test case.
 
-# 0.10.0
+## 0.10.0
 
 * Add support for file upload based on multi-part for data and a single parameter.
 
-# 0.9.1
+## 0.9.1
 
 * Fixed assertion messages when an assertion fails. Now the extracted value is shown
   instead of the general web service invocation result.
 
 * Added `includes` and `notIncludes` assertions.
 
-# 0.9.0
+## 0.9.0
 
 * Added `Configuration#before_each` for executing code before each test case execution.
 
@@ -360,16 +376,16 @@ dependencies have been bumped.
 * Fixed URL instantitation procedure: all URL parameters are now correctly removed
   from sent body.
 
-# 0.8.6
+## 0.8.6
 
 * Weakened finitio version requirement to prevent conflicts on projects using
   Finitio themselves.
 
-# 0.8.5
+## 0.8.5
 
 * Add match and notMatch assertions
 
-# 0.8.4
+## 0.8.4
 
 * Authorize URL parameters to be dotted expression, e.g. `/customers/{customer.id}`,
   that are properly extracted from the input data.
@@ -377,28 +393,28 @@ dependencies have been bumped.
 * Upgraded rspec to 3.7. Fixed Tester to load tests on construction, properly resetting
   RSpec global state (!!) first, and running them on call.
 
-# 0.8.3
+## 0.8.3
 
 * Make sure real HTTP requests are not made on normalized URLs, because it makes
   security tests checking that URL hacks are done impossible to write. In particular,
   this means that URLs containing '..' are sent as such to the server.
 
-# 0.8.2
+## 0.8.2
 
 * Add support for OPTIONS verb in rack and http clients
 
-# 0.8.1
+## 0.8.1
 
 * Fix HttpClient failing with a `NoSuchMethodError "to_real_url"`
 
-# 0.8.0
+## 0.8.0
 
 * BREAKING CHANGE: The Proc used as host resolver in the configuration now takes
   two arguments instead of one: the url to resolve, and the current test case under
   execution. This allows the configuration to dynamically adjust the host to use
   on a test-case basis.
 
-# 0.7.0
+## 0.7.0
 
 * BREAKING CHANGE: Precondition#instrument now takes the client as
   first argument. That allows preconditions to make external API calls as part of
@@ -407,11 +423,11 @@ dependencies have been bumped.
 * BREAKING CHANGE: Preconditions instrumentation is now called after the before
   handlers, not after them.
 
-# 0.6.0
+## 0.6.0
 
 * Added support for an explicit `body` (yml entry) on POST requests.
 
-# 0.5.0
+## 0.5.0
 
 * The PATCH http method is now supported by webspicy.
 
@@ -438,16 +454,16 @@ dependencies have been bumped.
 
 * BREAKING CHANGE: Preconditions#ensure is renamed as Precondition#instrument.
 
-# 0.4.2
+## 0.4.2
 
 * Fix a bug with path extraction on arrays, e.g. notEmpty('0/foo/1/bar')
 
-# 0.4.1
+## 0.4.1
 
 * Fix a bug when with url placeholder replacement when dressParams is set to false
   while the URL contains placeholders.
 
-# 0.4.0
+## 0.4.0
 
 * BREAKING CHANGE: before handlers only take two arguments (test_case, client) instead
   of 4. The service and resource can be obtained through the test_case itself, which now
@@ -478,7 +494,7 @@ dependencies have been bumped.
   When setting a domain, rack-test is fed with absolute URLs instead of relative
   ones.
 
-# 0.3.0
+## 0.3.0
 
 * The Configuration constructor now takes a required main folder as argument
 
