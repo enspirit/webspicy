@@ -13,10 +13,11 @@ task :test do
   t = Webspicy::Tester.new(Path.dir/'webspicy/test.rb')
   config = t.config
   summary = config.reporter.find(Webspicy::Tester::Reporter::Summary)
+  success_or_not = config.reporter.find(Webspicy::Tester::Reporter::SuccessOrNot)
 
   t.call
 
-  if summary.success?
+  if summary.success? || success_or_not.success?
     abort("Expected to fail, it passes")
   end
 
@@ -24,12 +25,16 @@ task :test do
     abort("FAILURE: Expected 1 spec_file error, got #{x}")
   end
 
-  unless (x = summary.spec_file_errors_count) == 1
-    abort("FAILURE: Expected 1 spec_file error, got #{x}")
+  unless (x = summary.errors_count) == 0
+    abort("FAILURE: Expected 0 errors, got #{x}")
   end
 
   unless (x = summary.failures_count) == 19
     abort("FAILURE: Expected 19 failures, got #{x}")
+  end
+
+  unless (x = success_or_not.report) == 20
+    abort("FAILURE: Expected success or not report to be 20, got #{x}")
   end
 
   [:documentation, :progress, :summary].each do |kind|

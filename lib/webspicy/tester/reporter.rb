@@ -80,7 +80,6 @@ module Webspicy
     end # class Reporter
   end # class Tester
 end # module Webspicy
-require_relative 'reporter/error_count'
 require_relative 'reporter/progress'
 require_relative 'reporter/summary'
 require_relative 'reporter/documentation'
@@ -88,3 +87,4 @@ require_relative 'reporter/exceptions'
 require_relative 'reporter/composite'
 require_relative 'reporter/file_progress'
 require_relative 'reporter/file_summary'
+require_relative 'reporter/success_or_not'

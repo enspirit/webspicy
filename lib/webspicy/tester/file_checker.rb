@@ -7,7 +7,7 @@ module Webspicy
         @reporter << Reporter::FileProgress.new
         @reporter << Reporter::Exceptions.new
         @reporter << Reporter::FileSummary.new
-        @reporter << Reporter::ErrorCount.new
+        @reporter << Reporter::SuccessOrNot.new
       end
 
       def run_scope

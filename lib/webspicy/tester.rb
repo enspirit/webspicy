@@ -38,12 +38,12 @@ module Webspicy
       rescue FailFast
       end
       reporter.report
-      reporter.find(Reporter::ErrorCount).report
+      reporter.find(Reporter::SuccessOrNot).report
     end
 
     def call!
       res = call
-      abort("KO") unless res == 0
+      abort("KO") unless reporter.find(Reporter::SuccessOrNot).success?
     end
 
     def find_and_call(method, url, mutation)

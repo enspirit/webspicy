@@ -447,7 +447,7 @@ module Webspicy
       @reporter << Tester::Reporter::Documentation.new
       @reporter << Tester::Reporter::Exceptions.new
       @reporter << Tester::Reporter::Summary.new
-      @reporter << Tester::Reporter::ErrorCount.new
+      @reporter << Tester::Reporter::SuccessOrNot.new
     end
     attr_accessor :reporter
 

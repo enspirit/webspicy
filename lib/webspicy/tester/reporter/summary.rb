@@ -54,8 +54,12 @@ module Webspicy
           io.flush
         end
 
+        def total_error_count
+          @spec_file_errors_count + @errors_count + @failures_count
+        end
+
         def success?
-          @spec_file_errors_count == 0 && @errors_count == 0 && @failures_count == 0
+          total_error_count == 0
         end
 
       end # class Summary
