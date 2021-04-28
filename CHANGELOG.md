@@ -1,12 +1,14 @@
-## 0.20.7 - 2021-04-28
-
-* Fix Fakesmtp#last_email when more than one email was sent (the first
-  one was returned instead of last one)
+## 0.20.8 - 2021-04-28
 
 * Fix status code of `webspicy` commandline tool when errors occur (vs.
   failures). The ErrorCount reporter is replaced by SuccessOrNot. The
   former name can still be used for backward compatibility and will
   replaced in 0.21.
+
+## 0.20.7 - 2021-04-21
+
+* Fix Fakesmtp#last_email when more than one email was sent (the first
+  one was returned instead of last one)
 
 ## 0.20.6 - 2021-04-20
 

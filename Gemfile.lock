@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    webspicy (0.20.7)
+    webspicy (0.20.8)
       finitio (~> 0.10.0)
       http (>= 4)
       mustermann (~> 1.0)
