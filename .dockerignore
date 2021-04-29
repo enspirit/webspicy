@@ -11,3 +11,4 @@ LICENCE
 examples/restful/vendor
 examples/restful/.bundle
 examples/restful/Gemfile.lock
+.bash_history

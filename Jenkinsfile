@@ -21,6 +21,18 @@ pipeline {
       }
     }
 
+    stage ('Running all tests') {
+      steps {
+        container('builder') {
+          script {
+            sh 'make jenkins-test'
+          }
+        }
+        junit testResults: 'test-results/*.xml',
+          allowEmptyResults: false
+      }
+    }
+
     stage ('Building Docker Images') {
       steps {
         container('builder') {
@@ -56,6 +68,8 @@ pipeline {
     }
     failure {
       sendNotifications('FAILED', SLACK_CHANNEL)
+      junit testResults: '/test-results/*.xml',
+        allowEmptyResults: true
     }
   }
 }

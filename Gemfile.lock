@@ -4,6 +4,7 @@ PATH
     webspicy (0.20.8)
       finitio (~> 0.10.0)
       http (>= 4)
+      mustache (~> 1.0)
       mustermann (~> 1.0)
       mustermann-contrib
       openapi3_parser (~> 0.8.2)
@@ -43,6 +44,7 @@ GEM
       ffi-compiler (>= 1.0, < 2.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    mustache (1.1.1)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     mustermann-contrib (1.1.1)

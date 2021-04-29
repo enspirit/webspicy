@@ -1,5 +1,8 @@
 def webspicy_config(&bl)
   Webspicy::Configuration.new(Path.dir) do |c|
+    root_folder = Path.backfind('.[webspicy.gemspec]')
+    test_results, my_name = root_folder/"test-results", Path.dir.dir.basename
+    c.reporter << Webspicy::Tester::Reporter::JunitXmlFile.new(test_results/"#{my_name}.xml")
 
     c.precondition MustBeAuthenticated
     c.precondition MustBeAnAdmin

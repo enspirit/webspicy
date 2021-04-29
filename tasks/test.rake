@@ -5,8 +5,12 @@ namespace :test do
 
   desc "Runs unit tests on the library itself"
   RSpec::Core::RakeTask.new(:unit) do |t|
+    require 'path'
+    root_folder = Path.dir.parent
+    test_results = root_folder/"test-results"
+    puts (test_results/"unit-tests.xml").inspect
     t.pattern = "spec/unit/**/test_*.rb"
-    t.rspec_opts = ["-Ilib", "-Ispec/unit", "--color", "--backtrace", "--format=progress"]
+    t.rspec_opts = ["-Ilib", "-Ispec/unit", "--color", "--backtrace", "--format=progress", "--format RspecJunitFormatter", "--out #{test_results}/unit-tests.xml"]
   end
   tests << :unit
 

@@ -31,4 +31,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "mustermann-contrib"
   s.add_runtime_dependency "paint", "~> 2.2"
   s.add_runtime_dependency "openapi3_parser", "~> 0.8.2"
+  s.add_runtime_dependency "mustache", "~> 1.0"
 end

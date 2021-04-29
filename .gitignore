@@ -8,10 +8,9 @@ rspec.xml
 Dockerfile.built
 Dockerfile.log
 Dockerfile.pushed
-Dockerfile.tester.built
-Dockerfile.tester.log
-Dockerfile.tester.pushed
-Dockerfile.mocker.built
-Dockerfile.mocker.log
-Dockerfile.mocker.pushed
+Dockerfile.*.built
+Dockerfile.*.log
+Dockerfile.*.pushed
 examples/**/Gemfile.lock
+test-results
+.bash_history

@@ -50,9 +50,15 @@ release:
 # Docker images generation rules
 #
 
+# builder
+
+Dockerfile.builder.built: Dockerfile.builder $(shell git ls-files .)
+	docker build -t enspirit/webspicy:builder --file Dockerfile.builder . | tee Dockerfile.builder.log
+	touch Dockerfile.builder.built
+
 # commandline
 
-Dockerfile.built: Dockerfile $(shell find . -type f | grep -v "\/tmp\|\.idea\|\.bundle\|\.log\|\.bash_history\|\.pushed\|\.built\|vendor")
+Dockerfile.built: Dockerfile.builder.built Dockerfile
 	docker build -t enspirit/webspicy . | tee Dockerfile.log
 	touch Dockerfile.built
 
@@ -89,6 +95,8 @@ Dockerfile.mocker.pushed: Dockerfile.mocker.built
 	docker push $(DOCKER_REGISTRY)/enspirit/webspicy:$(MINOR)-mocker | tee -a Dockerfile.mocker.log;\
 	touch Dockerfile.mocker.pushed
 
+jenkins-test: Dockerfile.builder.built
+	docker run -v ${PWD}/test-results/:/gem/test-results/ enspirit/webspicy:builder
 
 images: Dockerfile.built Dockerfile.tester.built Dockerfile.mocker.built
 
