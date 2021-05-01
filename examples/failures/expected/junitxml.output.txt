@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites
+  disabled="0"
+  errors="1"
+  failures="19"
+  tests="18"
+  time="0.0277663s"
+>
+    <testsuite
+      name="formaldef/wrong-assertion.yml"
+      tests="4"
+      errors="0"
+      failures="4"
+      time="0.009537122s"
+    >
+        <testcase
+          name="when the assertions are ok"
+          assertions="4"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.008025041s"
+        >
+        </testcase>
+        <testcase
+          name="when an empty is wrong"
+          assertions="2"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.000465518s"
+        >
+            <failure
+              message="Expected {&quot;ok&quot;:true,&quot;hobbies&quot;:[&quot;pro... to be empty"
+              type="Webspicy::Tester::Result::AssertMet"
+              ></failure>
+            <failure
+              message="Expected [&quot;programming&quot;,&quot;quality&quot;,&quot;... to be empty"
+              type="Webspicy::Tester::Result::AssertMet"
+              ></failure>
+        </testcase>
+        <testcase
+          name="when a pathFD is wrong"
+          assertions="1"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.000363331s"
+        >
+            <failure
+              message="Expected {&quot;ok&quot;:true,&quot;hobbies&quot;:[&quot;pro... to contain the key(s) and value(s) {:ok=&gt;false}"
+              type="Webspicy::Tester::Result::AssertMet"
+              ></failure>
+        </testcase>
+        <testcase
+          name="when an size is wrong"
+          assertions="1"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.000362471s"
+        >
+            <failure
+              message="Expected [&quot;programming&quot;,&quot;quality&quot;,&quot;... to have a size of 4, actual size is: 3"
+              type="Webspicy::Tester::Result::AssertMet"
+              ></failure>
+        </testcase>
+    </testsuite>
+    <testsuite
+      name="formaldef/wrong-checkbox.yml"
+      tests="2"
+      errors="0"
+      failures="4"
+      time="0.001109343s"
+    >
+        <testcase
+          name="when the response is as expected"
+          assertions="0"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.000446144s"
+        >
+            <failure
+              message="&lt;!&gt; Unimplemented postcondition (not instrumented)"
+              type="Webspicy::Tester::Result::PostconditionMet"
+              ></failure>
+            <failure
+              message="&lt;x&gt; Succeeding postcondition (is instrumented)"
+              type="Webspicy::Tester::Result::PostconditionMet"
+              ></failure>
+        </testcase>
+        <testcase
+          name="when the response is as expected"
+          assertions="0"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.000360475s"
+        >
+            <failure
+              message="&lt;!&gt; Unimplemented errcondition (not instrumented)"
+              type="Webspicy::Tester::Result::ErrconditionMet"
+              ></failure>
+            <failure
+              message="&lt;x&gt; Succeeding errcondition (is instrumented)"
+              type="Webspicy::Tester::Result::ErrconditionMet"
+              ></failure>
+        </testcase>
+    </testsuite>
+    <testsuite
+      name="formaldef/wrong-condition.yml"
+      tests="2"
+      errors="0"
+      failures="4"
+      time="0.001133063s"
+    >
+        <testcase
+          name="when the response is as expected"
+          assertions="0"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.000525257s"
+        >
+            <failure
+              message="It is not met"
+              type="Webspicy::Tester::Result::PostconditionMet"
+              ></failure>
+            <failure
+              message="Is is not met (deprecated protocol)"
+              type="Webspicy::Tester::Result::PostconditionMet"
+              ></failure>
+        </testcase>
+        <testcase
+          name="when the response is as expected"
+          assertions="0"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.000389419s"
+        >
+            <failure
+              message="It is not met"
+              type="Webspicy::Tester::Result::ErrconditionMet"
+              ></failure>
+            <failure
+              message="Is is not met (deprecated protocol)"
+              type="Webspicy::Tester::Result::ErrconditionMet"
+              ></failure>
+        </testcase>
+        <testcase
+          name="Specification can be loaded"
+          assertions="1"
+          classname="Webspicy::Specification"
+          status=""
+          time="0.001133063s"
+        >
+            <error
+              message="Invalid Specification `{&quot;name&quot;=&gt;&quot;Not a valid spec...`"
+              type="Finitio::TypeError"
+            ></error>
+        </testcase>
+    </testsuite>
+    <testsuite
+      name="formaldef/wrong-host.yml"
+      tests="1"
+      errors="1"
+      failures="0"
+      time="0.000303662s"
+    >
+        <testcase
+          name="when called"
+          assertions="0"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.000122672s"
+        >
+            <error
+              message="Unable to access host"
+              type="Webspicy::Tester::Result::InvocationSuceeded"
+            ></error>
+        </testcase>
+    </testsuite>
+    <testsuite
+      name="formaldef/wrong-output.yml"
+      tests="4"
+      errors="0"
+      failures="3"
+      time="0.001728486s"
+    >
+        <testcase
+          name="when the output is as expected"
+          assertions="0"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.000433131s"
+        >
+        </testcase>
+        <testcase
+          name="when an attribute is missing"
+          assertions="0"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.000336022s"
+        >
+            <failure
+              message="Invalid output: Missing attribute `hobbies`"
+              type="Webspicy::Tester::Result::OutputSchemaMet"
+              ></failure>
+        </testcase>
+        <testcase
+          name="when an extra attribute is unexpected"
+          assertions="0"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.000332143s"
+        >
+            <failure
+              message="Invalid output: Unrecognized attribute `foo`"
+              type="Webspicy::Tester::Result::OutputSchemaMet"
+              ></failure>
+        </testcase>
+        <testcase
+          name="when a attribute has the wrong type"
+          assertions="0"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.000346861s"
+        >
+            <failure
+              message="Invalid output: Invalid Boolean `12`"
+              type="Webspicy::Tester::Result::OutputSchemaMet"
+              ></failure>
+        </testcase>
+    </testsuite>
+    <testsuite
+      name="formaldef/wrong-response.yml"
+      tests="5"
+      errors="0"
+      failures="4"
+      time="0.001903155s"
+    >
+        <testcase
+          name="when the response is as expected"
+          assertions="1"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.00042275s"
+        >
+        </testcase>
+        <testcase
+          name="when the content type is not as expected"
+          assertions="0"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.000298824s"
+        >
+            <failure
+              message="Expected response header `Content-Type` to be `text/csv`, got `application/json`"
+              type="Webspicy::Tester::Result::ResponseHeaderMet"
+              ></failure>
+        </testcase>
+        <testcase
+          name="when the status is not as expected"
+          assertions="0"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.0002883s"
+        >
+            <failure
+              message="Expected response status to be 400, got 200"
+              type="Webspicy::Tester::Result::ResponseStatusMet"
+              ></failure>
+        </testcase>
+        <testcase
+          name="when a header is not as expected"
+          assertions="0"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.000291562s"
+        >
+            <failure
+              message="Expected response header `X-Hello` to be `Dude`, got `World`"
+              type="Webspicy::Tester::Result::ResponseHeaderMet"
+              ></failure>
+        </testcase>
+        <testcase
+          name="when a header is missing"
+          assertions="0"
+          classname="Webspicy::Web::Specification::TestCase"
+          status=""
+          time="0.000290448s"
+        >
+            <failure
+              message="Expected response header `X-NotSet` to be set"
+              type="Webspicy::Tester::Result::ResponseHeaderMet"
+              ></failure>
+        </testcase>
+    </testsuite>
+</testsuites>

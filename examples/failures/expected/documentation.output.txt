@@ -74,6 +74,12 @@ GET /, when the response is as expected
   X  Invalid Specification `{"name"=>"Not a valid spec...`
   Missing attribute `url`
 
+>> formaldef/wrong-host.yml
+
+GET http://failing-host.local/, when called
+  E  Unable to access host
+
+
 >> formaldef/wrong-output.yml
 
 GET /{service}, when the output is as expected

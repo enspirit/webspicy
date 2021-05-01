@@ -25,23 +25,23 @@ task :test do
     abort("FAILURE: Expected 1 spec_file error, got #{x}")
   end
 
-  unless (x = summary.errors_count) == 0
-    abort("FAILURE: Expected 0 errors, got #{x}")
+  unless (x = summary.errors_count) == 1
+    abort("FAILURE: Expected 1 errors, got #{x}")
   end
 
   unless (x = summary.failures_count) == 19
     abort("FAILURE: Expected 19 failures, got #{x}")
   end
 
-  unless (x = success_or_not.report) == 20
-    abort("FAILURE: Expected success or not report to be 20, got #{x}")
+  unless (x = success_or_not.report) == 21
+    abort("FAILURE: Expected success or not report to be 21, got #{x}")
   end
 
-  [:documentation, :progress, :summary].each do |kind|
+  [:documentation, :progress, :summary, :junitxml].each do |kind|
     doc = (Path.dir/"expected/#{kind}.output.txt")
     got = config.world.send(:"#{kind}_output").string
     doc.write(got) unless doc.file?
-    unless got == (exp = doc.read)
+    unless got.gsub(/time="[^"]+"/,"") == (exp = doc.read.gsub(/time="[^"]+"/,""))
       Differ.format = :color
       puts Differ.diff(got, exp)
       abort("FAILURE: Unexpected #{kind} output")

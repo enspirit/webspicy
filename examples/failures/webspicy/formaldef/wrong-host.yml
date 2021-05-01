@@ -1,0 +1,34 @@
+---
+description: |-
+  Wrong host tests
+
+url: |-
+  http://failing-host.local/
+
+method: |-
+  GET
+
+input_schema: |-
+  {}
+
+output_schema: |-
+  .
+
+error_schema: |-
+  .
+
+preconditions:
+  - The host does not exist
+
+default_example:
+  params: {}
+  expected:
+    content_type: application/json
+    status: 200
+
+examples:
+
+- description: |-
+    when called
+  tags:
+    - ONLY
