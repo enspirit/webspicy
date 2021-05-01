@@ -9,7 +9,7 @@ module Webspicy
 
         def singleservice(raw)
           converted = {
-            name: raw[:name] || "Unamed specification",
+            name: raw[:name],
             url: raw[:url],
             services: [
               Webspicy::Web.service(raw.reject{|k| k==:url or k==:name }, Webspicy.current_scope)

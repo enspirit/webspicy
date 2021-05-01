@@ -14,6 +14,10 @@ module Webspicy
       @location = Path(location)
     end
 
+    def relative_location
+      @location && @location.relative_to(config.folder)
+    end
+
     def locate(relative_path)
       file = @location.parent/relative_path
       raise "File not found: #{file}" unless file.exists?
@@ -21,7 +25,7 @@ module Webspicy
     end
 
     def name
-      @raw[:name]
+      @raw[:name] || relative_location || "Unnamed"
     end
 
     def services
