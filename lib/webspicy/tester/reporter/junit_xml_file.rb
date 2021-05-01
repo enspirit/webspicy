@@ -83,7 +83,7 @@ module Webspicy
           template_data.testsuites[-1].testcases << OpenStruct.new({
             :name => "Specification can be loaded",
             :assert => 1,
-            :classname => "Webspicy::Specification",
+            :classname => "Webspicy.Specification",
             :failures => [],
             :errors => [OpenStruct.new({
               :type => e.class,
@@ -97,7 +97,7 @@ module Webspicy
           template_data.testsuites[-1].testcases << OpenStruct.new({
             :name => test_case.description,
             :assert => test_case.assert.length,
-            :classname => test_case.class.name,
+            :classname => test_case.class.name.to_s.gsub(/::/, "."),
             :failures => [],
             :errors => [],
           })
