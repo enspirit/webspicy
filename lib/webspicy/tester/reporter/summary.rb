@@ -26,7 +26,7 @@ module Webspicy
           @spec_file_errors_count += 1
         end
 
-        def after_each_done
+        def test_case_done
           if tester.test_case.counterexample?
             @counterexamples_count += 1
           else

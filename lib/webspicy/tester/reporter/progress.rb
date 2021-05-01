@@ -7,7 +7,7 @@ module Webspicy
           io.print colorize_error("X", config)
         end
 
-        def after_each_done
+        def test_case_done
           if result.success?
             io.print colorize_success(".", config)
           elsif result.failure?

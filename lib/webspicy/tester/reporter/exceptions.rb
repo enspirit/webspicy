@@ -15,7 +15,7 @@ module Webspicy
           @spec_file_errors << spec_file_error_line(spec_file, e)
         end
 
-        def after_each_done
+        def test_case_done
           @failed_results << result unless result.success?
         end
 
@@ -23,6 +23,8 @@ module Webspicy
           report_spec_file_errors
           report_failed_results
         end
+
+      private
 
         def report_spec_file_errors
           return if spec_file_errors.empty?

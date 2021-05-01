@@ -18,6 +18,7 @@ module Webspicy
           check!
         else
           @errors << [InvocationSuceeded.new(self), tester.invocation_error]
+          reporter.check_error(*errors.first)
         end
       end
       attr_reader :tester, :scope, :client

@@ -149,6 +149,8 @@ module Webspicy
     end
 
     def call_test_case_target
+      @invocation = nil
+      @invocation_error = nil
       reporter.before_invocation
       @invocation = client.call(test_case)
       reporter.invocation_done
