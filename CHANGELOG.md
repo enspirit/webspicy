@@ -1,3 +1,11 @@
+## 0.20.9 - 2021-05-01
+
+* Fix tester skipping error summary & documentation reporting after
+  successful tests.
+
+* Add a JUnit xml reporter, that can be used in Jenkins to easily navigate
+  the test failures.
+
 ## 0.20.8 - 2021-04-28
 
 * Fix status code of `webspicy` commandline tool when errors occur (vs.
