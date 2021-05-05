@@ -42,9 +42,8 @@ test: bundle
 	bundle exec rake
 
 release:
-	bundle exec rake
-	bundle exec rake gem
-	gem push `ls -Art pkg/*.gem | tail -n 1`
+	docker run --rm -t -v ${PWD}/:/app -w /app ruby bash -c 'make bundle-install && bundle exec rake && bundle exec rake gem'
+	docker run --rm -t -v ${PWD}/:/app -w /app -e GEM_HOST_API_KEY=${GEM_HOST_API_KEY} ruby bash -c "gem push `ls -Art pkg/*.gem | tail -n 1`"
 
 ################################################################################
 # Docker images generation rules
