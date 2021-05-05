@@ -1,3 +1,7 @@
+## 0.20.10 - 2021-05-05
+
+* Adding gem release to Jennkins pipeline.
+
 ## 0.20.9 - 2021-05-01
 
 * Fix tester skipping error summary & documentation reporting after
