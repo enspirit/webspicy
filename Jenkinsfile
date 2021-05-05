@@ -43,6 +43,22 @@ pipeline {
       }
     }
 
+    stage ('Building and Pushing Gems') {
+      environment {
+        GEM_HOST_API_KEY = credentials('jenkins-rubygems-api-key')
+      }
+      // when {
+      //   buildingTag()
+      // }
+      steps {
+        container('builder') {
+          script { 
+            sh 'make release'
+          }
+        }
+      }
+    }
+
     stage ('Pushing Docker Images') {
       when {
         anyOf {
