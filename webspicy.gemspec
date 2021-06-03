@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency "rack-test", "~> 0.6.3"
   s.add_runtime_dependency 'finitio', '~> 0.10.0'
-  s.add_runtime_dependency "http", ">= 4"
+  s.add_runtime_dependency "http", "~> 4.4.1"
   s.add_runtime_dependency "path", "~> 2.0"
   s.add_runtime_dependency 'rack-robustness', '~> 1.1', '>= 1.1.0'
   s.add_runtime_dependency "mustermann", "~> 1.0"
