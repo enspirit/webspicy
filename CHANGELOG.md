@@ -1,3 +1,9 @@
+## 0.20.11 - 2021-06-04
+
+* Tester::Fakesendgrid is provided to help writing post conditions
+  about emails captured using the `ghashange/sendgrid-mock` docker
+  image.
+
 ## 0.20.10 - 2021-05-05
 
 * Adding gem release to Jennkins pipeline.
