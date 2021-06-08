@@ -18,7 +18,7 @@ module Webspicy
         }
 
         it 'returns all files' do
-          expect(subject.size).to eql(restful_folder.glob('**/*.yml').size)
+          expect(subject.size).to eql(restful_folder.glob('**/*.{yml, yaml}').size)
         end
       end
 
@@ -59,7 +59,7 @@ module Webspicy
         }
 
         it 'returns all files' do
-          expect(subject.size).to eql(restful_folder.glob('**/*.yml').size)
+          expect(subject.size).to eql(restful_folder.glob('**/*.{yml, yaml}').size)
         end
       end
 

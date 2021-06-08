@@ -1,3 +1,7 @@
+## 0.20.12 - 2021-06-09
+
+* Support YAML files with `.yaml` extension.
+
 ## 0.20.11 - 2021-06-04
 
 * Tester::Fakesendgrid is provided to help writing post conditions
