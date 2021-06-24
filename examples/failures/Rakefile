@@ -47,8 +47,6 @@ task :test do
       abort("FAILURE: Unexpected #{kind} output")
     end
   end
-
-  puts "GOOD"
 end
 
 task :default => :test
