@@ -9,7 +9,9 @@ module Webspicy
         attr_reader :data
 
         def from
-          @from ||= data["from"]["email"]
+          @from ||= data['from']['name'] ?
+            "#{data['from']['name']} <#{data['from']['email']}>" :
+            data['from']['email']
         end
 
         def to

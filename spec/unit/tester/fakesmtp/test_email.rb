@@ -15,7 +15,7 @@ module Webspicy
             },
             {
               "key": "from",
-              "line": "From: info@mydomain.be"
+              "line": "From: Webspicy <noreply@webspicy.io>"
             },
             {
               "key": "reply-to",
@@ -82,7 +82,7 @@ module Webspicy
         }
 
         it 'works as expected' do
-          expect(subject.from).to eql("info@mydomain.be")
+          expect(subject.from).to eql("Webspicy <noreply@webspicy.io>")
           expect(subject.to).to eql(["support@mydomain.fr"])
           expect(subject.subject).to eql("Hello World")
         end

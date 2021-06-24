@@ -9,7 +9,10 @@ module Webspicy
         attr_reader :data
 
         def from
-          data["body"]["Source"]
+          rx = /^From:\s*(.*)$/
+          raw_data
+            .each_line
+            .find{|l| l =~ rx }[rx, 1].strip
         end
 
         def to
@@ -18,14 +21,14 @@ module Webspicy
             .select{|(k,v)|
               k =~ /Destinations.member/
             }
-            .map{|(k,v)| v }
+            .map{|(k,v)| v.strip }
         end
 
         def subject
           rx = /^Subject:\s*(.*)$/
           raw_data
             .each_line
-            .find{|l| l =~ rx }[rx, 1]
+            .find{|l| l =~ rx }[rx, 1].strip
         end
 
         def raw_data

@@ -40,7 +40,7 @@ module Webspicy
         }
 
         it 'works as expected' do
-          expect(subject.from).to eql("info@mydomain.be")
+          expect(subject.from).to eql("Foo Bar <info@mydomain.be>")
           expect(subject.to).to eql(["support@mydomain.fr"])
           expect(subject.subject).to eql("Hello World")
         end
