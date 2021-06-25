@@ -50,7 +50,7 @@ module Webspicy
         }
 
         it 'works as expected' do
-          expect(subject.from).to eql(["noreply@webspicy.io"])
+          expect(subject.from).to eql("noreply@webspicy.io")
           expect(subject.to).to eql(["someone@world.com", "someoneelse@world.com"])
           expect(subject.cc).to eql(["a-cc-recipient@world.com"])
           expect(subject.bcc).to eql(["a-bcc-recipient@world.com"])

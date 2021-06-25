@@ -11,7 +11,7 @@ module Webspicy
         attr_reader :data
 
         def from
-          email.from
+          email.from[0]
         end
 
         def recipients
