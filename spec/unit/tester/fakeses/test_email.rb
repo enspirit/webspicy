@@ -9,7 +9,8 @@ module Webspicy
         Content-Type: multipart/alternative;
         boundary="--_NmP-d246fd025a6652c9-Part_1"
         From: Webspicy <noreply@webspicy.io>
-        To: david.parloir@gmail.com
+        To: someone@world.com, someoneelse@world.com
+        CC: a-cc-recipient@world.com
         Subject: Hey world, hello!
         Message-ID: <2421bae3-9c42-7988-23b4-b1f6168130c9@webspicy.io>
         Date: Thu, 24 Jun 2021 13:45:16 +0000
@@ -34,6 +35,9 @@ module Webspicy
           "body": {
             "Source": "noreply@webspicy.io",
             "Destinations.member.1": "someone@world.com",
+            "Destinations.member.2": "someoneelse@world.com",
+            "Destinations.member.3": "a-cc-recipient@world.com",
+            "Destinations.member.4": "a-bcc-recipient@world.com",
             "RawMessage.Data": "#{DATA.gsub /\n/, ''}",
             "Action": "SendRawEmail",
             "Version": "2010-12-01"
@@ -46,8 +50,10 @@ module Webspicy
         }
 
         it 'works as expected' do
-          expect(subject.from).to eql("Webspicy <noreply@webspicy.io>")
-          expect(subject.to).to eql(["someone@world.com"])
+          expect(subject.from).to eql(["noreply@webspicy.io"])
+          expect(subject.to).to eql(["someone@world.com", "someoneelse@world.com"])
+          expect(subject.cc).to eql(["a-cc-recipient@world.com"])
+          expect(subject.bcc).to eql(["a-bcc-recipient@world.com"])
           expect(subject.subject).to eql("Hey world, hello!")
         end
 

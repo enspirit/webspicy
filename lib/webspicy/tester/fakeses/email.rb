@@ -1,3 +1,5 @@
+require 'mail'
+
 module Webspicy
   class Tester
     class Fakeses
@@ -9,13 +11,10 @@ module Webspicy
         attr_reader :data
 
         def from
-          rx = /^From:\s*(.*)$/
-          raw_data
-            .each_line
-            .find{|l| l =~ rx }[rx, 1].strip
+          email.from
         end
 
-        def to
+        def recipients
           data["body"]
             .each_pair
             .select{|(k,v)|
@@ -24,11 +23,24 @@ module Webspicy
             .map{|(k,v)| v.strip }
         end
 
+        def to
+          email.to
+        end
+
         def subject
-          rx = /^Subject:\s*(.*)$/
-          raw_data
-            .each_line
-            .find{|l| l =~ rx }[rx, 1].strip
+          email.subject
+        end
+
+        def cc
+          email.cc
+        end
+
+        def bcc
+          recipients - cc - to
+        end
+
+        def email
+          @email ||= Mail.read_from_string(raw_data)
         end
 
         def raw_data

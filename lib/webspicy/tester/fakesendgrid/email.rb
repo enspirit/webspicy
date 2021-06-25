@@ -18,6 +18,23 @@ module Webspicy
           @to ||= data["personalizations"]
             .select{|h| h.key? "to" }
             .map{|(h)| h["to"] }
+            .flatten
+            .map{|(h)| h["email"] }
+        end
+
+        def cc
+          @cc ||= data["personalizations"]
+            .select{|h| h.key? "cc" }
+            .map{|(h)| h["cc"] }
+            .flatten
+            .map{|(h)| h["email"] }
+        end
+
+        def bcc
+          @bcc ||= data["personalizations"]
+            .select{|h| h.key? "bcc" }
+            .map{|(h)| h["bcc"] }
+            .flatten
             .map{|(h)| h["email"] }
         end
 

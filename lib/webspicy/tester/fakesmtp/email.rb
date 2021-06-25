@@ -16,9 +16,13 @@ module Webspicy
         end
 
         def to
-          @to ||= data["headerLines"]
-            .select{|h| h["key"] == "to" }
-            .map{|h| h["line"][/To:\s*(.*)$/, 1] }
+          @to ||= data["to"]["value"]
+            .map{|h| h["address"] }
+        end
+
+        def cc
+          @cc ||= data["cc"]["value"]
+            .map{|h| h["address"] }
         end
 
         def reply_to

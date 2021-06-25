@@ -1,9 +1,10 @@
 PATH
   remote: .
   specs:
-    webspicy (0.20.12)
+    webspicy (0.20.13)
       finitio (~> 0.10.0)
       http (~> 4.4.1)
+      mail (~> 2.7)
       mustache (~> 1.0)
       mustermann (~> 1.0)
       mustermann-contrib
@@ -19,13 +20,11 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     citrus (3.0.2)
-    commonmarker (0.21.2)
-      ruby-enum (~> 0.5)
-    concurrent-ruby (1.1.9)
+    commonmarker (0.22.0)
     diff-lcs (1.4.4)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    ffi (1.15.1)
+    ffi (1.15.3)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
@@ -42,8 +41,9 @@ GEM
     http-form_data (2.3.0)
     http-parser (1.2.3)
       ffi-compiler (>= 1.0, < 2.0)
-    i18n (1.8.10)
-      concurrent-ruby (~> 1.0)
+    mail (2.7.1)
+      mini_mime (>= 0.1.1)
+    mini_mime (1.1.0)
     mustache (1.1.1)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
@@ -79,8 +79,6 @@ GEM
     rspec-support (3.10.2)
     rspec_junit_formatter (0.4.1)
       rspec-core (>= 2, < 4, != 2.12.0)
-    ruby-enum (0.9.0)
-      i18n
     ruby2_keywords (0.0.4)
     sinatra (2.1.0)
       mustermann (~> 1.0)
@@ -95,6 +93,7 @@ GEM
 PLATFORMS
   ruby
   x86_64-darwin-15
+  x86_64-darwin-18
 
 DEPENDENCIES
   rake (~> 13)

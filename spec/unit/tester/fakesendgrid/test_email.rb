@@ -9,15 +9,28 @@ module Webspicy
         {
           "datetime": "2021-06-02T15:29:27.161Z",
           "from": {
-            "email": "info@mydomain.be",
-            "name": "Foo Bar"
+            "email": "noreply@webspicy.io",
+            "name": "Webspicy"
           },
           "subject": "Hello World",
           "personalizations": [
             {
               "to": [
                 {
-                  "email": "support@mydomain.fr"
+                  "email": "someone@world.com"
+                },
+                {
+                  "email": "someoneelse@world.com"
+                }
+              ],
+              "cc": [
+                {
+                  "email": "a-cc-recipient@world.com"
+                }
+              ],
+              "bcc": [
+                {
+                  "email": "a-bcc-recipient@world.com"
                 }
               ]
             }
@@ -40,8 +53,10 @@ module Webspicy
         }
 
         it 'works as expected' do
-          expect(subject.from).to eql("Foo Bar <info@mydomain.be>")
-          expect(subject.to).to eql(["support@mydomain.fr"])
+          expect(subject.from).to eql("Webspicy <noreply@webspicy.io>")
+          expect(subject.to).to eql(["someone@world.com", "someoneelse@world.com"])
+          expect(subject.cc).to eql(["a-cc-recipient@world.com"])
+          expect(subject.bcc).to eql(["a-bcc-recipient@world.com"])
           expect(subject.subject).to eql("Hello World")
         end
 

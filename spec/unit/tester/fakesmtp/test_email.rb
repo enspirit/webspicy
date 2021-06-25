@@ -19,11 +19,15 @@ module Webspicy
             },
             {
               "key": "reply-to",
-              "line": "Reply-To: test@email.be"
+              "line": "Reply-To: noreply@webspicy.io"
             },
             {
               "key": "to",
-              "line": "To: support@mydomain.fr"
+              "line": "To: someone@world.com, someoneelse@world.com"
+            },
+            {
+              "key": "cc",
+              "line": "Cc: a-cc-recipient@world.com"
             },
             {
               "key": "message-id",
@@ -46,12 +50,14 @@ module Webspicy
           "to": {
             "value": [
               {
-                "address": "support@mydomain.fr",
+                "address": "someone@world.com",
+                "name": ""
+              },
+              {
+                "address": "someoneelse@world.com",
                 "name": ""
               }
-            ],
-            "html": "<span class=\\"mp_address_group\\"><a href=\\"mailto:support@mydomain.fr\\" class=\\"mp_address_email\\">support@mydomain.fr</a></span>",
-            "text": "support@mydomain.fr"
+            ]
           },
           "from": {
             "value": [
@@ -59,20 +65,24 @@ module Webspicy
                 "address": "info@mydomain.be",
                 "name": ""
               }
-            ],
-            "html": "<span class=\\"mp_address_group\\"><a href=\\"mailto:info@mydomain.be\\" class=\\"mp_address_email\\">info@mydomain.be</a></span>",
-            "text": "info@mydomain.be"
+            ]
           },
           "messageId": "<607edfd56836e_1b0492af@1d3356d02030.mail>",
           "replyTo": {
             "value": [
               {
-                "address": "test@email.be",
+                "address": "noreply@webspicy.io",
                 "name": ""
               }
-            ],
-            "html": "<span class=\\"mp_address_group\\"><a href=\\"mailto:test@email.be\\" class=\\"mp_address_email\\">test@email.be</a></span>",
-            "text": "test@email.be"
+            ]
+          },
+          "cc": {
+            "value": [
+              {
+                "address": "a-cc-recipient@world.com",
+                "name": ""
+              }
+            ]
           }
         }
         J
@@ -83,7 +93,8 @@ module Webspicy
 
         it 'works as expected' do
           expect(subject.from).to eql("Webspicy <noreply@webspicy.io>")
-          expect(subject.to).to eql(["support@mydomain.fr"])
+          expect(subject.to).to eql(["someone@world.com", "someoneelse@world.com"])
+          expect(subject.cc).to eql(["a-cc-recipient@world.com"])
           expect(subject.subject).to eql("Hello World")
         end
 
