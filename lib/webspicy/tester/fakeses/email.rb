@@ -24,7 +24,7 @@ module Webspicy
         end
 
         def to
-          email.to
+          email.to || []
         end
 
         def subject
@@ -32,7 +32,7 @@ module Webspicy
         end
 
         def cc
-          email.cc
+          email.cc || []
         end
 
         def bcc

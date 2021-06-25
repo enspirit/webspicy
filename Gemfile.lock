@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    webspicy (0.20.14)
+    webspicy (0.20.15)
       finitio (~> 0.10.0)
       http (~> 4.4.1)
       mail (~> 2.7)
