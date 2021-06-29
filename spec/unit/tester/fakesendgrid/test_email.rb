@@ -44,7 +44,10 @@ module Webspicy
               "value": "test <b>test</b> test",
               "type": "text/html"
             }
-          ]
+          ],
+          "headers": {
+            "x-header-key": "personalised-header-value"
+          }
         }
         J
 
@@ -58,6 +61,7 @@ module Webspicy
           expect(subject.cc).to eql(["a-cc-recipient@world.com"])
           expect(subject.bcc).to eql(["a-bcc-recipient@world.com"])
           expect(subject.subject).to eql("Hello World")
+          expect(subject.headers['x-header-key']).to eql('personalised-header-value')
         end
 
       end

@@ -39,6 +39,13 @@ module Webspicy
           recipients - cc - to
         end
 
+        def headers
+          @headers ||= email.header.reduce(OpenStruct.new){|acc, h|
+            acc[h.name.downcase] = h.unparsed_value
+            acc
+          }
+        end
+
         def email
           @email ||= Mail.read_from_string(raw_data)
         end

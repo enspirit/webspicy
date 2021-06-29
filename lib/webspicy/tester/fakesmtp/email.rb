@@ -38,6 +38,14 @@ module Webspicy
             .first
         end
 
+        def headers
+          @headers ||= data["headerLines"]
+            .reduce(OpenStruct.new){|acc, h|
+              acc[h["key"].downcase] = h["line"].split(': ')[1..].join(': ')
+              acc
+            }
+        end
+
       end # class Email
     end # class Fakesmtp
   end # class Tester

@@ -42,6 +42,13 @@ module Webspicy
           @subject ||= data["subject"]
         end
 
+        def headers
+          @headers ||= data["headers"].reduce(OpenStruct.new){|acc, (key, value)|
+            acc[key.downcase] = value
+            acc
+          }
+        end
+
       end # class Email
     end # class Fakesendgrid
   end # class Tester

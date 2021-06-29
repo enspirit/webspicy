@@ -96,6 +96,10 @@ module Webspicy
           expect(subject.to).to eql(["someone@world.com", "someoneelse@world.com"])
           expect(subject.cc).to eql(["a-cc-recipient@world.com"])
           expect(subject.subject).to eql("Hello World")
+          expect(subject.headers[:cc]).to eql("a-cc-recipient@world.com")
+          expect(subject.headers[:date]).to eql("Tue, 20 Apr 2021 14:06:13 +0000")
+          expect(subject.headers['message-id']).to eql("<607edfd56836e_1b0492af@1d3356d02030.mail>")
+          expect(subject.headers['mime-version']).to eql("1.0")
         end
 
       end

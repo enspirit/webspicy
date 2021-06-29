@@ -12,6 +12,7 @@ module Webspicy
         To: someone@world.com, someoneelse@world.com
         CC: a-cc-recipient@world.com
         Subject: Hey world, hello!
+        X-Ses-Configuration-Set: SesConfigurationSet
         Message-ID: <2421bae3-9c42-7988-23b4-b1f6168130c9@webspicy.io>
         Date: Thu, 24 Jun 2021 13:45:16 +0000
         MIME-Version: 1.0
@@ -55,6 +56,11 @@ module Webspicy
           expect(subject.cc).to eql(["a-cc-recipient@world.com"])
           expect(subject.bcc).to eql(["a-bcc-recipient@world.com"])
           expect(subject.subject).to eql("Hey world, hello!")
+          expect(subject.headers[:from]).to eql("Webspicy <noreply@webspicy.io>")
+          expect(subject.headers[:cc]).to eql("a-cc-recipient@world.com")
+          expect(subject.headers["message-id"]).to eql("<2421bae3-9c42-7988-23b4-b1f6168130c9@webspicy.io>")
+          expect(subject.headers["mime-version"]).to eql("1.0")
+          expect(subject.headers["x-ses-configuration-set"]).to eql("SesConfigurationSet")
         end
 
       end
