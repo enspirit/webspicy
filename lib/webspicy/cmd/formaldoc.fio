@@ -1,0 +1,37 @@
+@import finitio/data
+@import webspicy/shared
+
+Specification = .Webspicy::Cmd::Specification <singleservice> {
+  command         :  String
+  name            :? String
+  description     :? String
+  preconditions   :? [String]|String
+  postconditions  :? [String]|String
+  errconditions   :? [String]|String
+  input_schema    :? Schema
+  output_schema   :? Schema
+  error_schema    :? Schema
+  default_example :? TestCase
+  examples        :? [TestCase]
+  counterexamples :? [TestCase]
+}
+
+Service = .Webspicy::Cmd::Specification::Service <info> {
+  description     :? String
+  preconditions   :? [String]|String
+  postconditions  :? [String]|String
+  errconditions   :? [String]|String
+  input_schema    :? Schema
+  output_schema   :? Schema
+  error_schema    :? Schema
+  default_example :? TestCase
+  examples        :? [TestCase]
+  counterexamples :? [TestCase]
+}
+
+TestCase = .Webspicy::Cmd::Specification::TestCase <info> {
+  description      :? String
+  metadata         :? { ...: .Object }
+  args             :? [String]
+  assert           :? { ...: .Object }
+}
