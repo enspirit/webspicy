@@ -14,3 +14,4 @@ Dockerfile.*.pushed
 examples/**/Gemfile.lock
 test-results
 .bash_history
+examples/restful/webspicy/inferer/dump

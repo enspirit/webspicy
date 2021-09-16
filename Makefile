@@ -94,9 +94,24 @@ Dockerfile.mocker.pushed: Dockerfile.mocker.built
 	docker push $(DOCKER_REGISTRY)/enspirit/webspicy:$(MINOR)-mocker | tee -a Dockerfile.mocker.log;\
 	touch Dockerfile.mocker.pushed
 
+# inferer
+
+Dockerfile.inferer.built: Dockerfile.built
+	docker build -t enspirit/webspicy:inferer --file Dockerfile.inferer . | tee Dockerfile.inferer.log
+	touch Dockerfile.inferer.built
+
+Dockerfile.inferer.pushed: Dockerfile.inferer.built
+	docker tag enspirit/webspicy:inferer $(DOCKER_REGISTRY)/enspirit/webspicy:$(TINY)-inferer;\
+	docker push $(DOCKER_REGISTRY)/enspirit/webspicy:$(TINY)-inferer | tee -a Dockerfile.inferer.log;\
+	docker tag enspirit/webspicy:inferer $(DOCKER_REGISTRY)/enspirit/webspicy:$(MINOR)-inferer;\
+	docker push $(DOCKER_REGISTRY)/enspirit/webspicy:$(MINOR)-inferer | tee -a Dockerfile.inferer.log;\
+	touch Dockerfile.inferer.pushed
+
+###
+
 jenkins-test: Dockerfile.builder.built
 	docker run -v ${PWD}/test-results/:/gem/test-results/ enspirit/webspicy:builder
 
-images: Dockerfile.built Dockerfile.tester.built Dockerfile.mocker.built
+images: Dockerfile.built Dockerfile.tester.built Dockerfile.mocker.built Dockerfile.inferer.built
 
 push-images: Dockerfile.pushed Dockerfile.tester.pushed Dockerfile.mocker.pushed
