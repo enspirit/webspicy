@@ -1,3 +1,11 @@
+## 0.20.18
+
+* Add basic support for parameters in openapi generation
+
+## 0.20.13 -> 0.20.17
+
+* Improve support for fake mailers
+
 ## 0.20.12 - 2021-06-09
 
 * Support YAML files with `.yaml` extension.

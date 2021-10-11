@@ -36,10 +36,15 @@ module Webspicy
 
         def path_for(specification)
           {
-            specification.url => {
+            standardize(specification.url) => {
               summary: specification.name
             }.merge(verbs_for(specification))
           }
+        end
+
+        def standardize(url)
+          url = url.gsub(/\/$/, '') if url =~ /\/$/
+          url
         end
 
         def verbs_for(specification)
@@ -47,8 +52,9 @@ module Webspicy
             verb = service.method.downcase
             verb_defn = {
               description: service.description,
+              parameters: parameters_for(service),
               responses: responses_for(service)
-            }
+            }.compact
             unless ["get", "options", "delete", "head"].include?(verb)
               verb_defn[:requestBody] = request_body_for(service)
             end
@@ -58,15 +64,29 @@ module Webspicy
 
         def request_body_for(service)
           schema = actual_input_schema(service)
+          example = nil # catch(:unfound) { generator.call(schema, {}) }
           {
             required: true,
             content: {
               "application/json" => {
                 schema: schema.to_json_schema,
-                example: generator.call(schema, {})
-              }
+                example: example
+              }.compact
             }
           }
+        end
+
+        def parameters_for(service)
+          schema = actual_input_schema(service)
+          params = service.specification.url_placeholders.map{|p|
+            {
+              in: 'path',
+              name: p,
+              schema: { type: "string" },
+              required: true
+            }
+          }
+          params.empty? ? nil : params
         end
 
         def responses_for(service)
