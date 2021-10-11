@@ -1,6 +1,8 @@
 pipeline {
 
-  agent any
+  agent {
+    label 'buildkit'
+  }
 
   triggers {
     issueCommentTrigger('.*build this please.*')
@@ -52,7 +54,7 @@ pipeline {
       }
       steps {
         container('builder') {
-          script { 
+          script {
             sh 'make release'
           }
         }
