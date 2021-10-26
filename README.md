@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/enspirit/webspicy.svg?branch=master)](https://travis-ci.com/enspirit/webspicy)
+[![Test](https://github.com/enspirit/webspicy/actions/workflows/integration.yml/badge.svg?branch=master)](https://github.com/enspirit/webspicy/actions/workflows/integration.yml)
 # Webspicy
 
 A specification and test framework for web services seen as black-box software
