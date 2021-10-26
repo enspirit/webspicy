@@ -94,6 +94,7 @@ GEM
     unf_ext (0.0.7.7)
 
 PLATFORMS
+  ruby
   x86_64-linux
 
 DEPENDENCIES

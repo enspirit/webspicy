@@ -1,0 +1,31 @@
+name: Integration
+
+on:
+  pull_request:
+    branches:
+      - master
+  workflow_call:
+
+jobs:
+  Tests:
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+
+      - uses: act10ns/slack@v1
+        with:
+          status: starting
+          channel: '#opensource-cicd'
+
+      - uses: actions/checkout@v2
+
+      - run: make jenkins-test
+        id: tests
+
+      - uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+          channel: '#opensource-cicd'
+        if: always()
