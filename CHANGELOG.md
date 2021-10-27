@@ -1,5 +1,7 @@
 ## 0.20.18
 
+* Fix failures being not properly reported with FAILFAST=1
+* Fix commandline exit code when FAILFAST=1 is used and the test suite fails
 * Add basic support for parameters in openapi generation
 
 ## 0.20.13 -> 0.20.17

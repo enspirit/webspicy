@@ -118,13 +118,12 @@ module Webspicy
     def run_service
       scope.each_testcase(service) do |test_case|
         @test_case = test_case
-        reporter.before_test_case
         run_test_case
-        reporter.test_case_done
       end
     end
 
     def run_test_case
+      reporter.before_test_case
       hooks.fire_around(self) do
         reporter.before_each
         hooks.fire_before_each(self)
@@ -143,9 +142,9 @@ module Webspicy
         reporter.after_each
         hooks.fire_after_each(self)
         reporter.after_each_done
-
-        raise FailFast if !result.success? and failfast?
       end
+      reporter.test_case_done
+      raise FailFast if !result.success? && failfast?
     end
 
     def call_test_case_target
