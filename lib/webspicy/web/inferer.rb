@@ -58,22 +58,36 @@ module Webspicy
       end
 
       def perform_request(env)
+        webspicy_dump_request(env)
         super.tap{|triplet|
-          webspicy_dump(env, triplet)
+          webspicy_dump_response(env, triplet)
         }
       end
 
-      def webspicy_dump(env, triplet)
-        path, method = env['PATH_INFO'], env['REQUEST_METHOD'].downcase
-        target_folder = (webspicy_config.folder/'inferer'/'dump')/path[1..-1]
-        target_folder.mkdir_p
-        base_file = target_folder/"#{method}.#{Time.now.to_i}"
+      def webspicy_dump_request(env)
+        base_file = webspicy_dump_basefile(env)
+        env['rack.input'].rewind
+        input = ''
+        env['rack.input'].each { |s| input << s }
+        base_file.add_ext('.body').write(input)
+        env['rack.input'].rewind
+      end
+
+      def webspicy_dump_response(env, triplet)
+        base_file = webspicy_dump_basefile(env)
         base_file.add_ext('.env.json').write(
           JSON.pretty_generate(env)
         )
         base_file.add_ext('.triplet.json').write(
           JSON.pretty_generate(triplet)
         )
+      end
+
+      def webspicy_dump_basefile(env)
+        path, method = env['PATH_INFO'], env['REQUEST_METHOD'].downcase
+        target_folder = (webspicy_config.folder/'inferer'/'dump')/path[1..-1]
+        target_folder.mkdir_p
+        target_folder/"#{method}.#{Time.now.to_i}"
       end
 
     end # class Inferer
