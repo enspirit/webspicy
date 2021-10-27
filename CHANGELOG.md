@@ -1,4 +1,4 @@
-## 0.20.18
+## 0.20.18 - 2021-10-27
 
 * Fix failures being not properly reported with FAILFAST=1
 * Fix commandline exit code when FAILFAST=1 is used and the test suite fails
