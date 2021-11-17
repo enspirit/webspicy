@@ -86,8 +86,10 @@ module Webspicy
         end
 
         def service_done
-          io.puts
-          io.flush
+          unless @spec_file_line_printed
+            io.puts
+            io.flush
+          end
         end
 
       end # class Documentation

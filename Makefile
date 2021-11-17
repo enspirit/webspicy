@@ -115,7 +115,7 @@ Dockerfile.inferer.pushed: Dockerfile.inferer.built
 ###
 
 jenkins-test: Dockerfile.builder.built
-	docker run -v ${PWD}/test-results/:/gem/test-results/ enspirit/webspicy:builder
+	docker run --rm -v ${PWD}/test-results/:/gem/test-results/ enspirit/webspicy:builder
 
 images: Dockerfile.built Dockerfile.tester.built Dockerfile.mocker.built Dockerfile.inferer.built
 
