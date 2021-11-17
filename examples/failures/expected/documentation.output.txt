@@ -28,7 +28,6 @@ GET /, when an size is wrong
   v  Its output meets the expected data schema
   F  Expected ["programming","quality","... to have a size of 4, actual size is: 3
 
-
 >> formaldef/wrong-checkbox.yml
 
 GET /, when the response is as expected
@@ -46,7 +45,6 @@ GET /, when the response is as expected
   v  ( ) Succeeding errcondition
   F  <!> Unimplemented errcondition (not instrumented)
   F  <x> Succeeding errcondition (is instrumented)
-
 
 >> formaldef/wrong-condition.yml
 
@@ -68,7 +66,6 @@ GET /, when the response is as expected
   F  It is not met
   F  Is is not met (deprecated protocol)
 
-
 >> formaldef/wrong-file.yml
 
   X  Invalid Specification `{"name"=>"Not a valid spec...`
@@ -78,7 +75,6 @@ GET /, when the response is as expected
 
 GET http://failing-host.local/, when called
   E  Unable to access host
-
 
 >> formaldef/wrong-output.yml
 
@@ -101,7 +97,6 @@ GET /{service}, when a attribute has the wrong type
   v  It has a 200 response status
   v  It has a `Content-Type: application/json` response header
   F  Invalid output: Invalid Boolean `12`
-
 
 >> formaldef/wrong-response.yml
 
@@ -129,5 +124,4 @@ GET /, when a header is missing
   v  It has a 200 response status
   v  It has a `Content-Type: application/json` response header
   F  Expected response header `X-NotSet` to be set
-
 
