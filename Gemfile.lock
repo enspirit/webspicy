@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    webspicy (0.20.17)
+    webspicy (0.20.19)
       finitio (~> 0.10.0)
       http (~> 4.4.1)
       mail (~> 2.7)
@@ -21,11 +21,11 @@ GEM
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     citrus (3.0.2)
-    commonmarker (0.23.0)
+    commonmarker (0.23.2)
     diff-lcs (1.4.4)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    ffi (1.15.3)
+    ffi (1.15.4)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
@@ -44,7 +44,7 @@ GEM
       ffi-compiler (>= 1.0, < 2.0)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
-    mini_mime (1.1.1)
+    mini_mime (1.1.2)
     mustache (1.1.1)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
@@ -91,7 +91,7 @@ GEM
     tilt (2.0.10)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.7)
+    unf_ext (0.0.8)
 
 PLATFORMS
   ruby
