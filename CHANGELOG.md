@@ -1,3 +1,7 @@
+## 0.20.19 - 2021-11-23
+
+* Fix removes extra empty lines on output when multiple filter used
+
 ## 0.20.18 - 2021-10-27
 
 * Fix failures being not properly reported with FAILFAST=1
