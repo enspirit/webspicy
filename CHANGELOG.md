@@ -1,3 +1,7 @@
+## 0.20.20 - 2021-11-25
+
+* Fix email subject handling (Fakesmtp)
+
 ## 0.20.19 - 2021-11-23
 
 * Fix removes extra empty lines on output when multiple filter used
