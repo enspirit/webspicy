@@ -32,10 +32,10 @@ module Webspicy
         end
 
         def subject
-          @subject ||= data["headerLines"]
-            .select{|h| h["key"] == "subject" }
-            .map{|h| h["line"][/Subject:\s*(.*)$/, 1] }
-            .first
+          @subject ||= data["subject"] || data["headerLines"]
+              .select{|h| h["key"] == "subject" }
+              .map{|h| h["line"][/Subject:\s*(.*)$/, 1] }
+              .first
         end
 
         def headers
