@@ -47,7 +47,10 @@ pkg:
 
 gem: pkg
 
-gem.push:
+ci.gem:
+	docker run --rm -v $(PWD):/webspicy -w /webspicy -t ruby:2.7 bundle install && bundle exec rake gem
+
+gem.push: gem
 	gem push `ls -Art pkg/*.gem | tail -n 1`
 
 ################################################################################

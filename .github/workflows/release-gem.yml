@@ -23,16 +23,12 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1.87.0
         with:
           ruby-version: 2.7
-          bundler-cache: true
-
-      - name: Build Gem
-        run: make gem
 
       - name: Release Gem
-        uses: cadwallion/publish-rubygems-action@master
+        uses: ciremoussadia/publish-rubygems-action@master
         id: gem-push
         env:
           RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
