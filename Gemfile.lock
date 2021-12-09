@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    webspicy (0.20.19)
-      finitio (~> 0.10.0)
+    webspicy (0.20.20)
+      finitio (>= 0.10.0, < 0.12.0)
       http (~> 4.4.1)
       mail (~> 2.7)
       mustache (~> 1.0)
@@ -29,7 +29,7 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
-    finitio (0.10.0)
+    finitio (0.11.1)
       citrus (>= 3.0, < 4.0)
     hansi (0.2.0)
     http (4.4.1)

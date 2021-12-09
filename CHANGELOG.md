@@ -1,3 +1,8 @@
+## 0.20.21
+
+* Let's upgrade finitio to 0.11 so that dashes are allowed as
+  attribute names in schema.
+
 ## 0.20.20 - 2021-11-25
 
 * Fix email subject handling (Fakesmtp)
