@@ -1,4 +1,4 @@
-## 0.20.21
+## 0.20.21 - 2021-12-09
 
 * Let's upgrade finitio to 0.11 so that dashes are allowed as
   attribute names in schema.
