@@ -28,7 +28,7 @@ jobs:
           ruby-version: 2.7
 
       - name: Release Gem
-        uses: ciremoussadia/publish-rubygems-action@master
+        uses: enspirit/publish-rubygems-action@master
         id: gem-push
         env:
           RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
