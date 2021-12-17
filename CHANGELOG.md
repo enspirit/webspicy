@@ -1,3 +1,8 @@
+## 0.20.22
+
+* RackTestClient no longer overrides Content-Type with application/json
+  on POST requests.
+
 ## 0.20.21 - 2021-12-09
 
 * Let's upgrade finitio to 0.11 so that dashes are allowed as

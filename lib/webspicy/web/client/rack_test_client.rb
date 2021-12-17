@@ -96,14 +96,16 @@ module Webspicy
         end
 
         def post(url, params = {}, headers = nil, body = nil)
-          handler = get_handler(headers)
-
           url = url + "?" + Rack::Utils.build_query(params) if body && !params.empty?
+          headers = {
+            "Content-Type" => "application/json"
+          }.merge(headers || {}) if body.nil?
+          handler = get_handler(headers)
 
           case body
           when NilClass
             info_request("POST", url, params, headers, body)
-            handler.post(url, params.to_json, {"CONTENT_TYPE" => "application/json"})
+            handler.post(url, params.to_json, headers)
           when FileUpload
             file = Rack::Test::UploadedFile.new(body.path, body.content_type)
             info_request("POST", url, params, headers, body)
