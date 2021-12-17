@@ -1,4 +1,4 @@
-## 0.20.22
+## 0.20.22 - 2021-12-17
 
 * RackTestClient no longer overrides Content-Type with application/json
   on POST requests.
