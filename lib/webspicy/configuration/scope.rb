@@ -136,20 +136,13 @@ module Webspicy
 
         def expand_example(service, example)
           return example unless service.default_example
-          h1 = service.default_example.to_info
-          h2 = example.to_info
-          ex = config.factory.test_case(merge_maps(h1, h2), self)
-          ex.bind(service, example.counterexample?)
-        end
 
-        def merge_maps(h1, h2)
-          h1.merge(h2) do |k,v1,v2|
-            case v1
-            when Hash  then merge_maps(v1, v2)
-            when Array then v1 + v2
-            else v2
-            end
-          end
+          merged = Support::DeepMerge.deep_merge(
+            service.default_example.to_info,
+            example.to_info
+          )
+          ex = config.factory.test_case(merged, self)
+          ex.bind(service, example.counterexample?)
         end
 
         # Returns a proc that implements file_filter strategy according to the

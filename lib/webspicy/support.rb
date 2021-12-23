@@ -28,6 +28,7 @@ module Webspicy
   end # module Support
 end # module Webspicy
 require_relative 'support/data_object'
+require_relative 'support/deep_merge'
 require_relative 'support/status_range'
 require_relative 'support/colorize'
 require_relative 'support/world'

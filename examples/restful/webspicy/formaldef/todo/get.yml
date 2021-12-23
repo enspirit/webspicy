@@ -32,5 +32,3 @@ services:
         status: 200
       assert:
         - notEmpty
-
-  counterexamples: []

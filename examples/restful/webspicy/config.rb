@@ -19,6 +19,7 @@ def webspicy_config(&bl)
     c.instrument do |tester|
       tc = tester.test_case
       role = tc.metadata[:role]
+      puts tc.headers.object_id
       tc.headers['Authorization'] = "Bearer #{role}" if role
     end
 

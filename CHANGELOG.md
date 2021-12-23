@@ -1,3 +1,8 @@
+## 0.20.22
+
+* Fix mutability of the default example, yielding false posititve
+  test failures.
+
 ## 0.20.22 - 2021-12-17
 
 * RackTestClient no longer overrides Content-Type with application/json
