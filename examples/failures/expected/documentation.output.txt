@@ -9,6 +9,8 @@ GET /, when the assertions are ok
   v  Assert notEmpty('hobbies')
   v  Assert size('hobbies', 3)
 
+>> formaldef/wrong-assertion.yml
+
 GET /, when an empty is wrong
   v  It has a 200 response status
   v  It has a `Content-Type: application/json` response header
@@ -16,17 +18,22 @@ GET /, when an empty is wrong
   F  Expected {"ok":true,"hobbies":["pro... to be empty
   F  Expected ["programming","quality","... to be empty
 
+>> formaldef/wrong-assertion.yml
+
 GET /, when a pathFD is wrong
   v  It has a 200 response status
   v  It has a `Content-Type: application/json` response header
   v  Its output meets the expected data schema
   F  Expected {"ok":true,"hobbies":["pro... to contain the key(s) and value(s) {:ok=>false}
 
+>> formaldef/wrong-assertion.yml
+
 GET /, when an size is wrong
   v  It has a 200 response status
   v  It has a `Content-Type: application/json` response header
   v  Its output meets the expected data schema
   F  Expected ["programming","quality","... to have a size of 4, actual size is: 3
+
 
 >> formaldef/wrong-checkbox.yml
 
@@ -38,6 +45,8 @@ GET /, when the response is as expected
   F  <!> Unimplemented postcondition (not instrumented)
   F  <x> Succeeding postcondition (is instrumented)
 
+>> formaldef/wrong-checkbox.yml
+
 GET /, when the response is as expected
   v  It has a 200 response status
   v  It has a `Content-Type: application/json` response header
@@ -45,6 +54,7 @@ GET /, when the response is as expected
   v  ( ) Succeeding errcondition
   F  <!> Unimplemented errcondition (not instrumented)
   F  <x> Succeeding errcondition (is instrumented)
+
 
 >> formaldef/wrong-condition.yml
 
@@ -57,6 +67,8 @@ GET /, when the response is as expected
   F  It is not met
   F  Is is not met (deprecated protocol)
 
+>> formaldef/wrong-condition.yml
+
 GET /, when the response is as expected
   v  It has a 200 response status
   v  It has a `Content-Type: application/json` response header
@@ -65,6 +77,7 @@ GET /, when the response is as expected
   v  (x) Succeeding errcondition (deprecated) (backward compatibility bridge)
   F  It is not met
   F  Is is not met (deprecated protocol)
+
 
 >> formaldef/wrong-file.yml
 
@@ -76,6 +89,7 @@ GET /, when the response is as expected
 GET http://failing-host.local/, when called
   E  Unable to access host
 
+
 >> formaldef/wrong-output.yml
 
 GET /{service}, when the output is as expected
@@ -83,20 +97,27 @@ GET /{service}, when the output is as expected
   v  It has a `Content-Type: application/json` response header
   v  Its output meets the expected data schema
 
+>> formaldef/wrong-output.yml
+
 GET /{service}, when an attribute is missing
   v  It has a 200 response status
   v  It has a `Content-Type: application/json` response header
   F  Invalid output: Missing attribute `hobbies`
+
+>> formaldef/wrong-output.yml
 
 GET /{service}, when an extra attribute is unexpected
   v  It has a 200 response status
   v  It has a `Content-Type: application/json` response header
   F  Invalid output: Unrecognized attribute `foo`
 
+>> formaldef/wrong-output.yml
+
 GET /{service}, when a attribute has the wrong type
   v  It has a 200 response status
   v  It has a `Content-Type: application/json` response header
   F  Invalid output: Invalid Boolean `12`
+
 
 >> formaldef/wrong-response.yml
 
@@ -107,21 +128,30 @@ GET /, when the response is as expected
   v  Its output meets the expected data schema
   v  Assert pathFD('', ok: true)
 
+>> formaldef/wrong-response.yml
+
 GET /, when the content type is not as expected
   v  It has a 200 response status
   F  Expected response header `Content-Type` to be `text/csv`, got `application/json`
 
+>> formaldef/wrong-response.yml
+
 GET /, when the status is not as expected
   F  Expected response status to be 400, got 200
   v  It has a `Content-Type: application/json` response header
+
+>> formaldef/wrong-response.yml
 
 GET /, when a header is not as expected
   v  It has a 200 response status
   v  It has a `Content-Type: application/json` response header
   F  Expected response header `X-Hello` to be `Dude`, got `World`
 
+>> formaldef/wrong-response.yml
+
 GET /, when a header is missing
   v  It has a 200 response status
   v  It has a `Content-Type: application/json` response header
   F  Expected response header `X-NotSet` to be set
+
 

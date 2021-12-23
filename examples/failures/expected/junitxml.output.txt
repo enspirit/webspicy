@@ -4,21 +4,21 @@
   errors="1"
   failures="19"
   tests="18"
-  time="0.027512836s"
+  time="0.03847639s"
 >
     <testsuite
       name="formaldef/wrong-assertion.yml"
       tests="4"
       errors="0"
       failures="4"
-      time="0.009060317s"
+      time="0.013339546s"
     >
         <testcase
           name="when the assertions are ok"
           assertions="4"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.007568698s"
+          time="0.010595916s"
         >
         </testcase>
         <testcase
@@ -26,7 +26,7 @@
           assertions="2"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.000468074s"
+          time="0.000724157s"
         >
             <failure
               message="Expected {&quot;ok&quot;:true,&quot;hobbies&quot;:[&quot;pro... to be empty"
@@ -42,7 +42,7 @@
           assertions="1"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.000357107s"
+          time="0.00055046s"
         >
             <failure
               message="Expected {&quot;ok&quot;:true,&quot;hobbies&quot;:[&quot;pro... to contain the key(s) and value(s) {:ok=&gt;false}"
@@ -54,7 +54,7 @@
           assertions="1"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.000354207s"
+          time="0.000528973s"
         >
             <failure
               message="Expected [&quot;programming&quot;,&quot;quality&quot;,&quot;... to have a size of 4, actual size is: 3"
@@ -67,14 +67,14 @@
       tests="2"
       errors="0"
       failures="4"
-      time="0.001032798s"
+      time="0.001670395s"
     >
         <testcase
           name="when the response is as expected"
           assertions="0"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.000430295s"
+          time="0.0006356s"
         >
             <failure
               message="&lt;!&gt; Unimplemented postcondition (not instrumented)"
@@ -90,7 +90,7 @@
           assertions="0"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.000350877s"
+          time="0.000530107s"
         >
             <failure
               message="&lt;!&gt; Unimplemented errcondition (not instrumented)"
@@ -107,14 +107,14 @@
       tests="2"
       errors="0"
       failures="4"
-      time="0.000985182s"
+      time="0.001732271s"
     >
         <testcase
           name="when the response is as expected"
           assertions="0"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.000432168s"
+          time="0.000690199s"
         >
             <failure
               message="It is not met"
@@ -130,7 +130,7 @@
           assertions="0"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.000356972s"
+          time="0.000531609s"
         >
             <failure
               message="It is not met"
@@ -146,7 +146,7 @@
           assertions="1"
           classname="Webspicy.Specification"
           status=""
-          time="0.000985182s"
+          time="0.001732271s"
         >
             <error
               message="Invalid Specification `{&quot;name&quot;=&gt;&quot;Not a valid spec...`"
@@ -159,14 +159,14 @@
       tests="1"
       errors="1"
       failures="0"
-      time="0.000246992s"
+      time="0.000517744s"
     >
         <testcase
           name="when called"
           assertions="0"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="7.4856e-05s"
+          time="0.000192661s"
         >
             <error
               message="Unable to access host"
@@ -179,14 +179,14 @@
       tests="4"
       errors="0"
       failures="3"
-      time="0.001966735s"
+      time="0.005198105s"
     >
         <testcase
           name="when the output is as expected"
           assertions="0"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.000467988s"
+          time="0.000645343s"
         >
         </testcase>
         <testcase
@@ -194,7 +194,7 @@
           assertions="0"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.000330365s"
+          time="0.002589232s"
         >
             <failure
               message="Invalid output: Missing attribute `hobbies`"
@@ -206,7 +206,7 @@
           assertions="0"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.000329048s"
+          time="0.000535935s"
         >
             <failure
               message="Invalid output: Unrecognized attribute `foo`"
@@ -218,7 +218,7 @@
           assertions="0"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.000342235s"
+          time="0.00052324s"
         >
             <failure
               message="Invalid output: Invalid Boolean `12`"
@@ -231,14 +231,14 @@
       tests="5"
       errors="0"
       failures="4"
-      time="0.001942749s"
+      time="0.0034324s"
     >
         <testcase
           name="when the response is as expected"
           assertions="1"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.000429903s"
+          time="0.000622217s"
         >
         </testcase>
         <testcase
@@ -246,7 +246,7 @@
           assertions="0"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.00030378s"
+          time="0.000431735s"
         >
             <failure
               message="Expected response header `Content-Type` to be `text/csv`, got `application/json`"
@@ -258,7 +258,7 @@
           assertions="0"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.00029888s"
+          time="0.000454338s"
         >
             <failure
               message="Expected response status to be 400, got 200"
@@ -270,7 +270,7 @@
           assertions="0"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.000296365s"
+          time="0.000460942s"
         >
             <failure
               message="Expected response header `X-Hello` to be `Dude`, got `World`"
@@ -282,7 +282,7 @@
           assertions="0"
           classname="Webspicy.Web.Specification.TestCase"
           status=""
-          time="0.000289582s"
+          time="0.000457431s"
         >
             <failure
               message="Expected response header `X-NotSet` to be set"

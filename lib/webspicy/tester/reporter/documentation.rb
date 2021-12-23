@@ -51,16 +51,14 @@ module Webspicy
         end
 
         def before_service
-          @spec_file_line_printed = false
+          @test_case_seen = false
         end
 
         def before_test_case
-          unless @spec_file_line_printed
-            io.puts spec_file_line(spec_file)
-            io.puts
-            io.flush
-            @spec_file_line_printed = true
-          end
+          @test_case_seen = true
+          io.puts spec_file_line(spec_file)
+          io.puts
+          io.flush
           io.puts service_line(service, test_case)
           io.flush
         end
@@ -86,10 +84,8 @@ module Webspicy
         end
 
         def service_done
-          unless @spec_file_line_printed
-            io.puts
-            io.flush
-          end
+          io.puts if @test_case_seen
+          io.flush
         end
 
       end # class Documentation

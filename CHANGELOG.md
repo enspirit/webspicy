@@ -1,3 +1,7 @@
+## 0.20.23
+
+* Remove annoying empty lines when a service has no test ran.
+
 ## 0.20.22 - 2021-12-23
 
 * Fix mutability of the default example, yielding false posititve
