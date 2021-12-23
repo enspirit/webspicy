@@ -1,4 +1,4 @@
-## 0.20.22
+## 0.20.22 - 2021-12-23
 
 * Fix mutability of the default example, yielding false posititve
   test failures.
