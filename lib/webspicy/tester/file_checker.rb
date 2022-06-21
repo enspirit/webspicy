@@ -10,7 +10,7 @@ module Webspicy
         @reporter << Reporter::SuccessOrNot.new
       end
 
-      def run_scope
+      def run_scope(all = true)
         scope.each_specification_file do |spec_file|
           @specification = load_specification(spec_file)
           reporter.spec_file_done

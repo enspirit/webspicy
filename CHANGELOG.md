@@ -4,9 +4,7 @@
   rerunning selected tests automatically when those files
   change.
 
-  before_all handlers will be executed only once when 0.21.0
-  will be officially released(they are executed everytime for
-  now).
+  before_all and after_all handlers are only executed once.
 
   The -w / --watch option is equivalent to WATCH=.
 

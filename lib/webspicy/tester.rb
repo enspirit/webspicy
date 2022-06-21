@@ -32,12 +32,12 @@ module Webspicy
     end
 
     def call
-      res = call_once
+      res = call_once(true)
       if folders = config.watch_list
         require 'listen'
         listener = Listen.to(*folders) do
           reporter.clear
-          res = call_once
+          res = call_once(false)
         end
         listener.start
         sleep
@@ -45,10 +45,10 @@ module Webspicy
       res
     end
 
-    def call_once
+    def call_once(all = true)
       reporter.init(self)
       begin
-        run_config
+        run_config(all)
       rescue FailFast
       end
       reporter.report
@@ -78,19 +78,21 @@ module Webspicy
 
   protected
 
-    def run_config
+    def run_config(all = true)
       config.each_scope do |scope|
         @scope = scope
         @hooks = Support::Hooks.for(scope.config)
         @client = scope.get_client
-        run_scope
+        run_scope(all)
       end
     end
 
-    def run_scope
-      reporter.before_all
-      hooks.fire_before_all(self)
-      reporter.before_all_done
+    def run_scope(all = true)
+      if all
+        reporter.before_all
+        hooks.fire_before_all(self)
+        reporter.before_all_done
+      end
       reporter.before_scope
       scope.each_specification_file do |spec_file|
         @specification = load_specification(spec_file)
@@ -104,9 +106,11 @@ module Webspicy
         end
       end
       reporter.scope_done
-      reporter.after_all
-      hooks.fire_after_all(self)
-      reporter.after_all_done
+      if all
+        reporter.after_all
+        hooks.fire_after_all(self)
+        reporter.after_all_done
+      end
     end
 
     def load_specification(spec_file)
