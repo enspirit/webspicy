@@ -1,4 +1,4 @@
-[![Test](https://github.com/enspirit/webspicy/actions/workflows/integration.yml/badge.svg?branch=master)](https://github.com/enspirit/webspicy/actions/workflows/integration.yml)
+[![Test](https://github.com/enspirit/webspicy/actions/workflows/integration.yml/badge.svg)](https://github.com/enspirit/webspicy/actions/workflows/integration.yml/badge.svg)
 # Webspicy
 
 A specification and test framework for web services seen as black-box software
