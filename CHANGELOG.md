@@ -1,4 +1,4 @@
-## 0.21.0
+## 0.21.0 - 2022-06-21
 
 * Add WATCH=folder1,folder2 option that allows watching files
   rerunning selected tests automatically when those files
@@ -8,7 +8,7 @@
 
   The -w / --watch option is equivalent to WATCH=.
 
-## 0.20.24
+## 0.20.24 - 2021-12-23
 
 * Remove annoying empty lines when a service has no test ran.
 
