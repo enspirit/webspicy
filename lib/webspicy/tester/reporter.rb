@@ -58,7 +58,8 @@ module Webspicy
         :after_each_done,
         :after_all,
         :after_all_done,
-        :report
+        :report,
+        :clear
       ]
 
       HOOKS.each do |meth|

@@ -32,6 +32,20 @@ module Webspicy
     end
 
     def call
+      res = call_once
+      if folders = config.watch_list
+        require 'listen'
+        listener = Listen.to(*folders) do
+          reporter.clear
+          res = call_once
+        end
+        listener.start
+        sleep
+      end
+      res
+    end
+
+    def call_once
       reporter.init(self)
       begin
         run_config

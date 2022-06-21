@@ -43,6 +43,7 @@ module Webspicy
       @scope_factory = ->(config){ Scope.new(config) }
       @client = Web::HttpClient
       @reporter = default_reporter
+      @watch_list = default_watchlist
       Path.require_tree(@folder/'support') if (@folder/'support').exists?
       @world = Support::World.new(folder/'world', self)
       yield(self) if block_given?
@@ -450,6 +451,13 @@ module Webspicy
       @reporter << Tester::Reporter::SuccessOrNot.new
     end
     attr_accessor :reporter
+
+    def default_watchlist
+      return nil unless list = ENV['WATCH']
+
+      list.split(',').map{|x| Path.pwd/x }
+    end
+    attr_accessor :watch_list
 
     # Returns the Data system to use for parsing schemas
     #

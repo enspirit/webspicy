@@ -6,8 +6,7 @@ module Webspicy
 
         def initialize(*args, &bl)
           super
-          @spec_file_errors = []
-          @failed_results = []
+          clear
         end
         attr_reader :failed_results, :spec_file_errors
 
@@ -22,6 +21,11 @@ module Webspicy
         def report
           report_spec_file_errors
           report_failed_results
+        end
+
+        def clear
+          @spec_file_errors = []
+          @failed_results = []
         end
 
       private

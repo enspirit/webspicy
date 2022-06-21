@@ -184,6 +184,35 @@ module Webspicy
       end
     end
 
+    describe 'watch_list' do
+
+      it 'is nil by default' do
+        config = Configuration.new
+        expect(config.watch_list).to be_nil
+      end
+
+      it 'supports a single relative folder on WATCH env variable' do
+        ENV['WATCH'] = 'a_folder'
+        config = Configuration.new
+        expect(config.watch_list).to eql([Path.pwd/"a_folder"])
+        ENV.delete('WATCH')
+      end
+
+      it 'supports a commalist on WATCH env variable' do
+        ENV['WATCH'] = 'a_folder,another'
+        config = Configuration.new
+        expect(config.watch_list).to eql([Path.pwd/"a_folder", Path.pwd/'another'])
+        ENV.delete('WATCH')
+      end
+
+      it 'supports absolute folders too' do
+        ENV['WATCH'] = 'a_folder,/tmp'
+        config = Configuration.new
+        expect(config.watch_list).to eql([Path.pwd/"a_folder", Path('/tmp')])
+        ENV.delete('WATCH')
+      end
+    end
+
     describe 'insecure' do
 
       it 'is false by default' do

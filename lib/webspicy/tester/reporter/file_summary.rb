@@ -5,8 +5,7 @@ module Webspicy
 
         def initialize(*args, &bl)
           super
-          @spec_files_count = 0
-          @errors_count = 0
+          clear
         end
         attr_reader :spec_files_count, :errors_count
 
@@ -29,6 +28,11 @@ module Webspicy
           io.puts(msg)
           io.puts
           io.flush
+        end
+
+        def clear
+          @spec_files_count = 0
+          @errors_count = 0
         end
 
       private

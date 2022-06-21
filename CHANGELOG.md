@@ -1,3 +1,15 @@
+## 0.21.0
+
+* Add WATCH=folder1,folder2 option that allows watching files
+  rerunning selected tests automatically when those files
+  change.
+
+  before_all handlers will be executed only once when 0.21.0
+  will be officially released(they are executed everytime for
+  now).
+
+  The -w / --watch option is equivalent to WATCH=.
+
 ## 0.20.24
 
 * Remove annoying empty lines when a service has no test ran.
