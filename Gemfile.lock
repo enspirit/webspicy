@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    webspicy (0.21.0)
+    webspicy (0.21.1)
       finitio (>= 0.10.0, < 0.12.0)
       http (~> 4.4.1)
       listen (~> 3.7)
@@ -58,7 +58,7 @@ GEM
     openapi3_parser (0.8.2)
       commonmarker (~> 0.17)
       psych (~> 3.1)
-    paint (2.2.1)
+    paint (2.3.0)
     path (2.0.1)
     psych (3.3.2)
     public_suffix (4.0.7)
@@ -102,6 +102,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin-18
   x86_64-linux
 
 DEPENDENCIES

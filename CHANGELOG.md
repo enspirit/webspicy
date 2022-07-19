@@ -1,3 +1,7 @@
+## 0.21.1 - 2022-07-19
+
+* Fix missing custom param_name when using file_upload
+
 ## 0.21.0 - 2022-06-21
 
 * Add WATCH=folder1,folder2 option that allows watching files
