@@ -18,7 +18,8 @@ module Webspicy
         def locate(specification)
           FileUpload.new({
             path: specification.locate(path),
-            content_type: content_type
+            content_type: content_type,
+            param_name: param_name
           })
         end
 
