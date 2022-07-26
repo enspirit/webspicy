@@ -55,8 +55,8 @@ module Webspicy
         def options(url, params = {}, headers = nil, body = nil)
           info_request("OPTIONS", url, params, headers, body)
 
-          params = querystring_params(params)
-          http_opts = http_options(params: params)
+          url = url + "?" + Rack::Utils.build_query(params) if !params.empty?
+          http_opts = http_options
           @last_response = HTTP[headers || {}].options(url, http_opts)
 
           debug_response(@last_response)
@@ -67,8 +67,8 @@ module Webspicy
         def get(url, params = {}, headers = nil, body = nil)
           info_request("GET", url, params, headers, body)
 
-          params = querystring_params(params)
-          http_opts = http_options(params: params)
+          url = url + "?" + Rack::Utils.build_query(params) if !params.empty?
+          http_opts = http_options
           @last_response = HTTP[headers || {}].get(url, http_opts)
 
           debug_response(@last_response)
@@ -111,6 +111,7 @@ module Webspicy
         def patch(url, params = {}, headers = nil, body = nil)
           info_request("PATCH", url, params, headers, body)
 
+          url = url + "?" + Rack::Utils.build_query(params) if body && !params.empty?
           headers ||= {}
           headers['Content-Type'] ||= 'application/json'
           http_opts = http_options(body: params.to_json)
@@ -124,6 +125,7 @@ module Webspicy
         def put(url, params = {}, headers = nil, body = nil)
           info_request("PUT", url, params, headers, body)
 
+          url = url + "?" + Rack::Utils.build_query(params) if body && !params.empty?
           headers ||= {}
           headers['Content-Type'] ||= 'application/json'
           http_opts = http_options(body: params.to_json)
@@ -137,6 +139,7 @@ module Webspicy
         def post_form(url, params = {}, headers = nil, body = nil)
           info_request("POST", url, params, headers, body)
 
+          url = url + "?" + Rack::Utils.build_query(params) if body && !params.empty?
           http_opts = http_options(form: params)
           @last_response = HTTP[headers || {}].post(url, http_opts)
 
@@ -148,6 +151,7 @@ module Webspicy
         def delete(url, params = {}, headers = nil, body = nil)
           info_request("DELETE", url, params, headers, body)
 
+          url = url + "?" + Rack::Utils.build_query(params) if body && !params.empty?
           http_opts = http_options(body: params.to_json)
           @last_response = HTTP[headers || {}].delete(url, http_opts)
 
@@ -156,7 +160,7 @@ module Webspicy
           @last_response
         end
 
-        def http_options(extra)
+        def http_options(extra = {})
           if config.insecure
             ctx = OpenSSL::SSL::SSLContext.new
             ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
