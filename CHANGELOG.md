@@ -1,6 +1,10 @@
-## 0.22.0
+## 0.21.3 - 2022-08-03
 
 * Fix a few openapi errors
+
+## 0.21.2 - 2022-07-26
+
+* Fix query params encoding with http_client.
 
 ## 0.21.1 - 2022-07-19
 
