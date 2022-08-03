@@ -1,3 +1,7 @@
+## 0.22.0
+
+* Fix a few openapi errors
+
 ## 0.21.1 - 2022-07-19
 
 * Fix missing custom param_name when using file_upload

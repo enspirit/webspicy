@@ -7,7 +7,9 @@ module Webspicy
 
         def initialize(config)
           @config = Configuration.dress(config)
-          @generator = config.generator || Finitio::Generation.new
+          @generator = config.generator || Finitio::Generation.new(
+            collection_size: 1..1
+          )
         end
         attr_reader :config, :generator
 
@@ -37,7 +39,7 @@ module Webspicy
         def path_for(specification)
           {
             standardize(specification.url) => {
-              summary: specification.name
+              summary: specification.name.to_s || 'API Specification'
             }.merge(verbs_for(specification))
           }
         end
@@ -49,7 +51,7 @@ module Webspicy
 
         def verbs_for(specification)
           specification.services.inject({}) do |verbs,service|
-            verb = service.method.downcase
+            verb = service.method.downcase.gsub(/_form$/, '')
             verb_defn = {
               description: service.description,
               parameters: parameters_for(service),
