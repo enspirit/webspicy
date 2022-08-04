@@ -1,0 +1,25 @@
+---
+command:
+  webspicy {options} {args}
+
+examples:
+
+- description: |-
+    when called on a passing path
+  args:
+    - examples/website/get-http.yml
+  assert:
+    exit_code:
+      0
+    stdout: |-
+      >> specification/get-http.yml
+
+      GET http://yourbackendisbroken.dev, it works
+        v  It has a 300 response status
+        v  It has a `Content-Type: text/html` response header
+        v  It has a `Location: https://yourbackendisbroken.dev/?id=1` response header
+        v  Its output meets the expected data schema
+
+
+      1 spec file, 1 example, 0 counterexample
+      4 assertions, 0 error, 0 failure

@@ -86,10 +86,6 @@ module Webspicy
         input_schema.dress(params)
       end
 
-      def to_s
-        "#{method} #{specification.url}"
-      end
-
     private
 
       def compile_preconditions
