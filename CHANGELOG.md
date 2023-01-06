@@ -1,3 +1,14 @@
+## 0.21.5
+
+* OpenAPI Generator now supports a `openapi.base.yml` file next
+  to the config.rb file. It is then taken as base information
+  for the openapi specification. A deep merge is done, so the
+  mechanism allows overriding generated paths.
+
+* OpenAPI Generator now organizes the different paths using
+  openapi's tags mechanism. The resource names are taken as
+  tags for now.
+
 ## 0.21.4 - 2023-01-06
 
 * OpenAPI Generator now supports custom info at call time

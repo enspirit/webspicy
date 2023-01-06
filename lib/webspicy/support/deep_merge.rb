@@ -3,6 +3,19 @@ module Webspicy
     class DeepMerge
       class << self
 
+        def symbolize_keys(arg)
+          case arg
+          when Hash
+            arg.each_pair.each_with_object({}){|(k,v),memo|
+              memo[k.to_sym] = symbolize_keys(v)
+            }
+          when Array
+            arg.map{|item| symbolize_keys(item) }
+          else
+            arg
+          end
+        end
+
         def deep_merge(h1, h2)
           merge_maps(deep_dup(h1), deep_dup(h2))
         end

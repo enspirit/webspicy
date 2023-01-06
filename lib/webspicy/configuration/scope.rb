@@ -22,7 +22,9 @@ module Webspicy
       def _each_specification_file(config, apply_filter = true)
         folder = config.folder
         world  = config.folder/"world"
-        fs = folder.glob("**/*.{yml, yaml}").reject{|f| f.to_s.start_with?(world.to_s) }
+        fs = folder.glob("**/*.{yml, yaml}").reject{|f|
+          f.to_s.start_with?(world.to_s) || f.to_s =~ /openapi.base.yml/
+        }
         fs = fs.sort
         fs = fs.select(&to_filter_proc(config.file_filter)) if apply_filter
         fs.each do |file|

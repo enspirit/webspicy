@@ -18,7 +18,8 @@ module Webspicy
         }
 
         it 'returns all files' do
-          expect(subject.size).to eql(restful_folder.glob('**/*.{yml, yaml}').size)
+          # -1 because of openapi.base.yml
+          expect(subject.size).to eql(restful_folder.glob('**/*.{yml, yaml}').size - 1)
         end
       end
 
@@ -59,7 +60,8 @@ module Webspicy
         }
 
         it 'returns all files' do
-          expect(subject.size).to eql(restful_folder.glob('**/*.{yml, yaml}').size)
+          # -1 because of openapi.base.yml
+          expect(subject.size).to eql(restful_folder.glob('**/*.{yml, yaml}').size - 1)
         end
       end
 

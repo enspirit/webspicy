@@ -5,6 +5,14 @@ module Webspicy
     module Openapi
       class Generator
 
+        DEFAULT_OPENAPI = {
+          openapi: '3.0.2',
+          info: {
+            version: '1.0.0',
+            title: 'Webspicy Specification'
+          }
+        }
+
         def initialize(config)
           @config = Configuration.dress(config)
           @generator = config.generator || Finitio::Generation.new(
@@ -14,18 +22,30 @@ module Webspicy
         attr_reader :config, :generator
 
         def call(info = {})
-          {
-            openapi: '3.0.2',
-            info: {
-              version: '1.0.0',
-              title: 'Webspicy Specification'
-            }.merge(info),
-            tags: tags,
-            paths: paths,
-          }
+          base = Support::DeepMerge.deep_merge(
+            DEFAULT_OPENAPI,
+            base_openapi
+          )
+          Support::DeepMerge.deep_merge(
+            base,
+            {
+              info: info,
+              tags: tags,
+              paths: paths
+            }
+          )
         end
 
       private
+
+        def base_openapi
+          file = config.folder/'openapi.base.yml'
+          if file.exists?
+            Support::DeepMerge.symbolize_keys(file.load)
+          else
+            {}
+          end
+        end
 
         def tags
           config.each_scope.inject([]) do |tags,scope|
