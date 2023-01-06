@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    webspicy (0.21.3)
+    webspicy (0.21.4)
       finitio (>= 0.10.0, < 0.12.0)
       http (~> 4.4.1)
       listen (~> 3.7)
@@ -31,7 +31,7 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
-    finitio (0.11.1)
+    finitio (0.11.3)
       citrus (>= 3.0, < 4.0)
     hansi (0.2.1)
     http (4.4.1)
@@ -115,7 +115,7 @@ GEM
     unf_ext (0.0.8.2)
 
 PLATFORMS
-  ruby
+  x86_64-linux
 
 DEPENDENCIES
   rake (~> 13)
@@ -125,4 +125,4 @@ DEPENDENCIES
   webspicy!
 
 BUNDLED WITH
-   2.1.0.pre.1
+   2.2.16

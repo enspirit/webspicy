@@ -20,6 +20,7 @@ module Webspicy
         end
 
         def openapi_document
+          puts JSON.pretty_generate(subject)
           document = Openapi3Parser.load(subject)
           document.errors.each do |err|
             puts err.inspect
@@ -41,9 +42,9 @@ module Webspicy
           }
 
           it 'takes it into account' do
-          expect(openapi_document.errors).to be_empty
-          expect(openapi_document.info.title).to eql('Webspicy API')
-          expect(openapi_document.info.version).to eql('1.1.1')
+            expect(openapi_document.errors).to be_empty
+            expect(openapi_document.info.title).to eql('Webspicy API')
+            expect(openapi_document.info.version).to eql('1.1.1')
           end
         end
 

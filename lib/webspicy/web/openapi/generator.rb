@@ -1,5 +1,5 @@
-require "finitio/generation"
-require "finitio/json_schema"
+require 'finitio/generation'
+require 'finitio/json_schema'
 module Webspicy
   module Web
     module Openapi
@@ -15,16 +15,34 @@ module Webspicy
 
         def call(info = {})
           {
-            openapi: "3.0.2",
+            openapi: '3.0.2',
             info: {
-              version: "1.0.0",
-              title: "Webspicy Specification"
+              version: '1.0.0',
+              title: 'Webspicy Specification'
             }.merge(info),
-            paths: paths
+            tags: tags,
+            paths: paths,
           }
         end
 
       private
+
+        def tags
+          config.each_scope.inject([]) do |tags,scope|
+            scope.each_specification.inject(tags) do |tags,specification|
+              tags + tags_for(specification)
+            end
+          end.uniq
+        end
+
+        def tags_for(specification)
+          return [] unless specification.name.is_a?(String)
+          return [] if specification.name.empty?
+
+          [{
+            name: specification.name.gsub(/\n/, ' ').strip
+          }]
+        end
 
         def paths
           config.each_scope.inject({}) do |paths,scope|
@@ -54,10 +72,11 @@ module Webspicy
             verb = service.method.downcase.gsub(/_form$/, '')
             verb_defn = {
               description: service.description,
+              tags: tags_for(specification).map{|s| s[:name] },
               parameters: parameters_for(service),
               responses: responses_for(service)
             }.compact
-            unless ["get", "options", "delete", "head"].include?(verb)
+            unless ['get', 'options', 'delete', 'head'].include?(verb)
               verb_defn[:requestBody] = request_body_for(service)
             end
             verbs.merge({ verb => verb_defn })
@@ -70,7 +89,7 @@ module Webspicy
           {
             required: true,
             content: {
-              "application/json" => {
+              'application/json' => {
                 schema: schema.to_json_schema,
                 example: example
               }.compact
@@ -84,7 +103,7 @@ module Webspicy
             {
               in: 'path',
               name: p,
-              schema: { type: "string" },
+              schema: { type: 'string' },
               required: true
             }
           }
