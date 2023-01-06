@@ -22,6 +22,7 @@ module Webspicy
         attr_reader :config, :generator
 
         def call(info = {})
+          @schemas = {}
           base = Support::DeepMerge.deep_merge(
             DEFAULT_OPENAPI,
             base_openapi
@@ -30,6 +31,9 @@ module Webspicy
             base,
             {
               info: info,
+              components: {
+                schemas: @schemas,
+              },
               tags: tags,
               paths: paths
             }
@@ -112,13 +116,12 @@ module Webspicy
         end
 
         def request_body_for(service)
-          schema = actual_input_schema(service)
           example = nil # catch(:unfound) { generator.call(schema, {}) }
           {
             required: true,
             content: {
               'application/json' => {
-                schema: schema.to_json_schema,
+                schema: schema_ref(actual_input_schema(service)),
                 example: example
               }.compact
             }
@@ -156,7 +159,7 @@ module Webspicy
           status = (test_case.expected_status && test_case.expected_status.to_int) || 200
           if test_case.expected_content_type && status != 204
             content = {
-              schema: schema_for(test_case, counterexample)
+              schema: schema_ref(actual_output_schema(test_case, counterexample))
             }
             unless counterexample
               content[:example] = example_for(test_case, counterexample)
@@ -170,9 +173,10 @@ module Webspicy
           }
         end
 
-        def schema_for(test_case, counterexample)
-          schema = actual_output_schema(test_case, counterexample)
-          schema.to_json_schema
+        def schema_ref(schema)
+          schema = schema.target if schema.respond_to?(:target)
+          @schemas[schema.name] ||= schema.to_json_schema
+          { "$ref": "#/components/schemas/#{schema.name}" }
         end
 
         def example_for(test_case, counterexample)
