@@ -52,7 +52,7 @@ module Webspicy
             scope.each_specification.inject(tags) do |tags,specification|
               tags + tags_for(specification)
             end
-          end.uniq
+          end.uniq.sort_by{|t| t[:name] }
         end
 
         def tags_for(specification)
@@ -91,6 +91,7 @@ module Webspicy
           specification.services.inject({}) do |verbs,service|
             verb = service.method.downcase.gsub(/_form$/, '')
             verb_defn = {
+              summary: service.name,
               description: service.description,
               tags: tags_for(specification).map{|s| s[:name] },
               parameters: parameters_for(service),

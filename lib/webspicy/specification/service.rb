@@ -21,6 +21,10 @@ module Webspicy
         specification.config
       end
 
+      def name
+        @raw[:name]
+      end
+
       def description
         @raw[:description]
       end

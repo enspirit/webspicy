@@ -36,6 +36,7 @@ Specification = .Webspicy::Web::Specification
 
 Service =
     .Webspicy::Web::Specification::Service <info> {
+        name            :? String
         method          :  Method
         description     :  String
         preconditions   :? [String]|String

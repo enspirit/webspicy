@@ -1,5 +1,9 @@
 ## 0.21.5
 
+* A Service now supports an optional name, that is different
+  than the description. It is used to distinguish summary
+  from description in openapi export.
+
 * OpenAPI Generator now supports a `openapi.base.yml` file next
   to the config.rb file. It is then taken as base information
   for the openapi specification. A deep merge is done, so the
