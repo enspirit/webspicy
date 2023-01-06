@@ -13,6 +13,7 @@ module Webspicy
         @invocation = tester.invocation
         @assertions = []
         @failures = []
+        @warnings = []
         @errors = []
         if @invocation
           check!

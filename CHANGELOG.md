@@ -1,3 +1,7 @@
+## 0.21.4 - 2023-01-06
+
+* OpenAPI Generator now supports custom info at call time
+
 ## 0.21.3 - 2022-08-03
 
 * Fix a few openapi errors

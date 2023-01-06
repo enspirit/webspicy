@@ -13,13 +13,13 @@ module Webspicy
         end
         attr_reader :config, :generator
 
-        def call
+        def call(info = {})
           {
             openapi: "3.0.2",
             info: {
               version: "1.0.0",
-              title: "Hello API"
-            },
+              title: "Webspicy Specification"
+            }.merge(info),
             paths: paths
           }
         end

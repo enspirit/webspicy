@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    webspicy (0.21.1)
+    webspicy (0.21.3)
       finitio (>= 0.10.0, < 0.12.0)
       http (~> 4.4.1)
       listen (~> 3.7)
@@ -19,10 +19,11 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.8.0)
-      public_suffix (>= 2.0.2, < 5.0)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     citrus (3.0.2)
-    commonmarker (0.23.5)
+    commonmarker (0.23.6)
+    date (3.3.3)
     diff-lcs (1.5.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -46,64 +47,75 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    mail (2.7.1)
+    mail (2.8.0)
       mini_mime (>= 0.1.1)
+      net-imap
+      net-pop
+      net-smtp
     mini_mime (1.1.2)
     mustache (1.1.1)
-    mustermann (1.1.1)
+    mustermann (1.1.2)
       ruby2_keywords (~> 0.0.1)
-    mustermann-contrib (1.1.1)
+    mustermann-contrib (1.1.2)
       hansi (~> 0.2.0)
-      mustermann (= 1.1.1)
+      mustermann (= 1.1.2)
+    net-imap (0.3.4)
+      date
+      net-protocol
+    net-pop (0.1.2)
+      net-protocol
+    net-protocol (0.2.1)
+      timeout
+    net-smtp (0.3.3)
+      net-protocol
     openapi3_parser (0.8.2)
       commonmarker (~> 0.17)
       psych (~> 3.1)
     paint (2.3.0)
     path (2.0.1)
-    psych (3.3.2)
-    public_suffix (4.0.7)
-    rack (2.2.3.1)
-    rack-protection (2.2.0)
+    psych (3.3.4)
+    public_suffix (5.0.1)
+    rack (2.2.5)
+    rack-protection (2.2.1)
       rack
-    rack-proxy (0.7.2)
+    rack-proxy (0.7.4)
       rack
     rack-robustness (1.1.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rake (13.0.6)
-    rb-fsevent (0.11.1)
+    rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rspec (3.11.0)
-      rspec-core (~> 3.11.0)
-      rspec-expectations (~> 3.11.0)
-      rspec-mocks (~> 3.11.0)
-    rspec-core (3.11.0)
-      rspec-support (~> 3.11.0)
-    rspec-expectations (3.11.0)
+    rspec (3.12.0)
+      rspec-core (~> 3.12.0)
+      rspec-expectations (~> 3.12.0)
+      rspec-mocks (~> 3.12.0)
+    rspec-core (3.12.0)
+      rspec-support (~> 3.12.0)
+    rspec-expectations (3.12.1)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.11.0)
-    rspec-mocks (3.11.1)
+      rspec-support (~> 3.12.0)
+    rspec-mocks (3.12.1)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.11.0)
-    rspec-support (3.11.0)
+      rspec-support (~> 3.12.0)
+    rspec-support (3.12.0)
     rspec_junit_formatter (0.4.1)
       rspec-core (>= 2, < 4, != 2.12.0)
     ruby2_keywords (0.0.5)
-    sinatra (2.2.0)
+    sinatra (2.2.1)
       mustermann (~> 1.0)
       rack (~> 2.2)
-      rack-protection (= 2.2.0)
+      rack-protection (= 2.2.1)
       tilt (~> 2.0)
-    tilt (2.0.10)
+    tilt (2.0.11)
+    timeout (0.3.1)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
 
 PLATFORMS
   ruby
-  x86_64-darwin-18
-  x86_64-linux
 
 DEPENDENCIES
   rake (~> 13)
@@ -113,4 +125,4 @@ DEPENDENCIES
   webspicy!
 
 BUNDLED WITH
-   2.2.16
+   2.1.0.pre.1
