@@ -29,6 +29,10 @@ module Webspicy
         @raw[:description]
       end
 
+      def conditions
+        preconditions + postconditions
+      end
+
       def preconditions
         @preconditions ||= compile_preconditions
       end

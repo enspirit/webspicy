@@ -1,3 +1,8 @@
+## 0.21.6
+
+* Add support for pre and post conditions to contribute to
+  openapi's verb definitions.
+
 ## 0.21.5 - 2023-01-06
 
 * A Service now supports an optional name, that is different

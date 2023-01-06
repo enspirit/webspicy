@@ -100,6 +100,13 @@ module Webspicy
             unless ['get', 'options', 'delete', 'head'].include?(verb)
               verb_defn[:requestBody] = request_body_for(service)
             end
+            verb_defn = service.conditions.inject(verb_defn) do |memo, p|
+              if p.respond_to?(:contribute_to_openapi_verb)
+                p.contribute_to_openapi_verb(memo)
+              else
+                memo
+              end
+            end
             verbs.merge({ verb => verb_defn })
           end
         end
