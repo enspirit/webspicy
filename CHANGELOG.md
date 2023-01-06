@@ -1,4 +1,4 @@
-## 0.21.6
+## 0.21.6 - 2023-01-06
 
 * Add support for pre and post conditions to contribute to
   openapi's verb definitions.
