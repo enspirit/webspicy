@@ -1,4 +1,4 @@
-## 0.21.7
+## 0.21.7 - 2023-02-08
 
 * Correctly use x-www-form-encoded when documenting POST_FORM
   in openapi generation.
