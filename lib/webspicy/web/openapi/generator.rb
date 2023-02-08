@@ -114,10 +114,15 @@ module Webspicy
         def request_body_for(service)
           schema = actual_input_schema(service)
           example = nil # catch(:unfound) { generator.call(schema, {}) }
+          content_type = if service.method.downcase == 'post_form'
+            'application/x-www-form-urlencoded'
+          else
+            'application/json'
+          end
           {
             required: true,
             content: {
-              'application/json' => {
+              content_type => {
                 schema: schema.to_json_schema,
                 example: example
               }.compact
