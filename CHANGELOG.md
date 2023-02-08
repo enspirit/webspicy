@@ -1,3 +1,8 @@
+## 0.21.7
+
+* Correctly use x-www-form-encoded when documenting POST_FORM
+  in openapi generation.
+
 ## 0.21.6 - 2023-01-06
 
 * Add support for pre and post conditions to contribute to
