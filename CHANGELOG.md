@@ -1,3 +1,8 @@
+## 0.22.0
+
+* Upgrade sinatra and musterman to enable latest security patches
+  for sinatra 2.x
+
 ## 0.21.7 - 2023-02-08
 
 * Correctly use x-www-form-encoded when documenting POST_FORM

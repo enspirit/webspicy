@@ -20,7 +20,7 @@ MINOR = $(shell echo '${TINY}' | cut -f'1-2' -d'.')
 # Release helpers
 #
 clean:
-	rm -rf Dockerfile.*.log Dockerfile.*.built Dockerfile.*.pushed
+	rm -rf Dockerfile.*.log Dockerfile.*.built Dockerfile.*.pushed Gemfile.lock **/*/Gemfile.lock
 
 bundle-update:
 	bundle update
