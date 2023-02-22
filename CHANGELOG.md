@@ -1,3 +1,7 @@
+## 0.23.0 - 2023-02-22
+
+* Upgrade sinatra and musterman to 3.x
+
 ## 0.22.0 - 2023-02-11
 
 * Upgrade sinatra and musterman to enable latest security patches
