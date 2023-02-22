@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.executables = (Dir["bin/*"]).collect{|f| File.basename(f)}
 
   s.add_development_dependency "rake", "~> 13"
-  s.add_development_dependency 'sinatra', '>= 2.2.4', '< 3.0'
+  s.add_development_dependency 'sinatra', '>= 2.2.4', '< 4.0'
   s.add_development_dependency "rspec", "~> 3.10"
   s.add_development_dependency 'rspec_junit_formatter', '~> 0.4.1'
 
@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "http", "~> 4.4.1"
   s.add_runtime_dependency "path", "~> 2.0"
   s.add_runtime_dependency 'rack-robustness', '~> 1.1', '>= 1.1.0'
-  s.add_runtime_dependency "mustermann", "~> 2.0"
+  s.add_runtime_dependency "mustermann", "~> 3.0"
   s.add_runtime_dependency "mustermann-contrib"
   s.add_runtime_dependency "paint", "~> 2.2"
   s.add_runtime_dependency "openapi3_parser", "~> 0.8.2"

@@ -7,7 +7,7 @@ PATH
       listen (~> 3.7)
       mail (~> 2.7)
       mustache (~> 1.0)
-      mustermann (~> 2.0)
+      mustermann (~> 3.0)
       mustermann-contrib
       openapi3_parser (~> 0.8.2)
       paint (~> 2.2)
@@ -54,11 +54,11 @@ GEM
       net-smtp
     mini_mime (1.1.2)
     mustache (1.1.1)
-    mustermann (2.0.2)
+    mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
-    mustermann-contrib (2.0.2)
+    mustermann-contrib (3.0.0)
       hansi (~> 0.2.0)
-      mustermann (= 2.0.2)
+      mustermann (= 3.0.0)
     net-imap (0.3.4)
       date
       net-protocol
@@ -76,7 +76,7 @@ GEM
     psych (3.3.4)
     public_suffix (5.0.1)
     rack (2.2.6.2)
-    rack-protection (2.2.4)
+    rack-protection (3.0.5)
       rack
     rack-proxy (0.7.6)
       rack
@@ -103,25 +103,26 @@ GEM
     rspec_junit_formatter (0.4.1)
       rspec-core (>= 2, < 4, != 2.12.0)
     ruby2_keywords (0.0.5)
-    sinatra (2.2.4)
-      mustermann (~> 2.0)
-      rack (~> 2.2)
-      rack-protection (= 2.2.4)
+    sinatra (3.0.5)
+      mustermann (~> 3.0)
+      rack (~> 2.2, >= 2.2.4)
+      rack-protection (= 3.0.5)
       tilt (~> 2.0)
-    tilt (2.0.11)
-    timeout (0.3.1)
+    tilt (2.1.0)
+    timeout (0.3.2)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
 
 PLATFORMS
+  ruby
   x86_64-linux
 
 DEPENDENCIES
   rake (~> 13)
   rspec (~> 3.10)
   rspec_junit_formatter (~> 0.4.1)
-  sinatra (>= 2.2.4, < 3.0)
+  sinatra (>= 2.2.4, < 4.0)
   webspicy!
 
 BUNDLED WITH
