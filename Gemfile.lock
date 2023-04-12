@@ -22,7 +22,7 @@ GEM
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
     citrus (3.0.2)
-    commonmarker (0.23.8)
+    commonmarker (0.23.9)
     date (3.3.3)
     diff-lcs (1.5.0)
     domain_name (0.5.20190701)
