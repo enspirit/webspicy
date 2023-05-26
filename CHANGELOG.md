@@ -1,3 +1,8 @@
+## 0.24.0 - 2023-05-26
+
+* BREAKING: drop support for ruby < 2.7
+* Upgrade finitio to 0.12.x
+
 ## 0.23.0 - 2023-02-22
 
 * Upgrade sinatra and musterman to 3.x
