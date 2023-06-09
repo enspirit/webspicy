@@ -15,5 +15,3 @@ module Webspicy
     end # module Pre
   end # class Specification
 end # module Webspicy
-require_relative 'pre/global_request_headers'
-require_relative 'pre/robust_to_invalid_input'

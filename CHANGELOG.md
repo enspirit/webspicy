@@ -1,3 +1,25 @@
+## 0.25.0
+
+* BREAKING: GlobalRequestHeaders and RobustToInvalidInput are moved to
+  the Webspicy::Web::Specification::Pre module and must be required
+  explicitely.
+
+  ```
+  require 'webspicy/web/specification/pre/global_request_headers'
+  c.postcondition Webspicy::Web::Specification::Pre::GlobalRequestHeaders
+  ```
+
+* Added three reusable postconditions in Webspicy::Web::Specification::Post
+  (that must be explicitely required too):
+
+  - LastModifiedCachingProtocol and ETagCachingProtocol that help testing
+    that a GET endpoint properly sets the Last-Modified and ETag headers
+    and take them into account if the If-Modified-Since and If-None-Match
+    request headers are used.
+
+  - SemanticsPreservedByRefactoring that can be used to test that
+    refactorings preserve the web semantics.
+
 ## 0.24.0 - 2023-05-26
 
 * BREAKING: drop support for ruby < 2.7

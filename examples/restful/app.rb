@@ -5,6 +5,7 @@ require 'path'
 require 'finitio'
 require 'rack/robustness'
 require 'csv'
+require 'digest'
 
 SCHEMA = Finitio::DEFAULT_SYSTEM.parse (Path.dir/('webspicy/schema.fio')).read
 
@@ -105,7 +106,10 @@ get '/todo/:id' do |id|
     status 404
     {error: "No such todo"}.to_json
   else
-    todo.to_json
+    body = todo.to_json
+    last_modified Date.parse('2023-06-09T08:56:00')
+    etag "W/#{Digest::MD5.hexdigest body}"
+    body
   end
 end
 

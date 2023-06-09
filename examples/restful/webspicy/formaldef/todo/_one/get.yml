@@ -23,6 +23,10 @@ services:
   error_schema: |-
     ErrorSchema
 
+  postconditions:
+    - (x) It supports the Last-Modified/If-Modified-Since caching protocol
+    - (x) It supports the ETag/If-None-Match caching protocol
+
   examples:
 
     - description: |-

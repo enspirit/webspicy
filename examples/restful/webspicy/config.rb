@@ -1,3 +1,8 @@
+require 'webspicy/web/specification/pre/global_request_headers'
+require 'webspicy/web/specification/pre/robust_to_invalid_input'
+require 'webspicy/web/specification/post/last_modified_caching_protocol'
+require 'webspicy/web/specification/post/etag_caching_protocol'
+
 def webspicy_config(&bl)
   Webspicy::Configuration.new(Path.dir) do |c|
     root_folder = Path.backfind('.[webspicy.gemspec]')
@@ -7,11 +12,14 @@ def webspicy_config(&bl)
     c.precondition MustBeAuthenticated
     c.precondition MustBeAnAdmin
 
-    c.precondition Webspicy::Specification::Pre::GlobalRequestHeaders.new({
+    c.precondition Webspicy::Web::Specification::Pre::GlobalRequestHeaders.new({
       'Accept' => 'application/json'
     }){|service| service.method == "GET" }
 
-    c.precondition Webspicy::Specification::Pre::RobustToInvalidInput.new
+    c.precondition Webspicy::Web::Specification::Pre::RobustToInvalidInput.new
+
+    c.postcondition Webspicy::Web::Specification::Post::LastModifiedCachingProtocol
+    c.postcondition Webspicy::Web::Specification::Post::ETagCachingProtocol
 
     c.postcondition TodoRemoved
     c.errcondition  TodoNotRemoved

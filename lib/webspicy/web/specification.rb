@@ -63,6 +63,8 @@ module Webspicy
     end # class Specification
   end # module Web
 end # module Webspicy
+require_relative 'specification/pre'
+require_relative 'specification/post'
 require_relative 'specification/service'
 require_relative 'specification/test_case'
 require_relative 'specification/file_upload'
