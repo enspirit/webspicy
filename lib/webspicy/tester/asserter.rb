@@ -108,6 +108,18 @@ module Webspicy
         end
       end
 
+      def eq(path, expected = NO_ARG)
+        path, expected = '', path if expected == NO_ARG
+        target = @assertions.extract_path(@target, path)
+        Predicate.eq(target, expected).assert!
+      end
+
+      def eql(path, expected = NO_ARG)
+        path, expected = '', path if expected == NO_ARG
+        target = @assertions.extract_path(@target, path)
+        Predicate.eq(target, expected).assert!
+      end
+
     private
 
       def DateTime(str)

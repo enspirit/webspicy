@@ -35,4 +35,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "mail", "~> 2.7"
   s.add_runtime_dependency "rack-proxy", "~> 0.7.0"
   s.add_runtime_dependency "listen", "~> 3.7"
+  s.add_runtime_dependency "predicate", ">= 2.7.1", "< 3.0"
 end

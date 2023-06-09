@@ -90,6 +90,16 @@ module Webspicy
         !match(target, path, rx)
       end
 
+      def eq(target, path, expected)
+        target = extract_path(target, path)
+        target == expected
+      end
+
+      def eql(target, path, expected)
+        target = extract_path(target, path)
+        value_equal(target, expected)
+      end
+
     public
 
       def extract_path(target, path = NO_ARG)

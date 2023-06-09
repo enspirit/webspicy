@@ -10,6 +10,7 @@ require 'mustermann'
 require 'paint'
 require 'securerandom'
 require 'forwardable'
+require 'predicate'
 module Webspicy
 
   ###

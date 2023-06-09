@@ -12,6 +12,7 @@ PATH
       openapi3_parser (~> 0.8.2)
       paint (~> 2.2)
       path (~> 2.0)
+      predicate (>= 2.7.1, < 3.0)
       rack-proxy (~> 0.7.0)
       rack-robustness (~> 1.1, >= 1.1.0)
       rack-test (~> 0.6.3)
@@ -73,6 +74,8 @@ GEM
       psych (~> 3.1)
     paint (2.3.0)
     path (2.1.0)
+    predicate (2.7.1)
+      sexpr (~> 1.0)
     psych (3.3.4)
     public_suffix (5.0.1)
     rack (2.2.7)
@@ -103,6 +106,7 @@ GEM
     rspec_junit_formatter (0.4.1)
       rspec-core (>= 2, < 4, != 2.12.0)
     ruby2_keywords (0.0.5)
+    sexpr (1.0.0)
     sinatra (3.0.6)
       mustermann (~> 3.0)
       rack (~> 2.2, >= 2.2.4)
@@ -126,4 +130,4 @@ DEPENDENCIES
   webspicy!
 
 BUNDLED WITH
-   2.3.26
+   2.4.6
