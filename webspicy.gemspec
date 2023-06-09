@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'finitio', '>= 0.12.0', '< 0.13.0'
   s.add_runtime_dependency "http", "~> 4.4.1"
   s.add_runtime_dependency "path", "~> 2.0"
-  s.add_runtime_dependency 'rack-robustness', '~> 1.1', '>= 1.1.0'
+  s.add_runtime_dependency 'rack-robustness', '>= 1.2', '< 2.0'
   s.add_runtime_dependency "mustermann", "~> 3.0"
   s.add_runtime_dependency "mustermann-contrib"
   s.add_runtime_dependency "paint", "~> 2.2"
@@ -35,5 +35,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "mail", "~> 2.7"
   s.add_runtime_dependency "rack-proxy", "~> 0.7.0"
   s.add_runtime_dependency "listen", "~> 3.7"
-  s.add_runtime_dependency "predicate", ">= 2.7.1", "< 3.0"
+  s.add_runtime_dependency "predicate", ">= 2.8", "< 3.0"
 end

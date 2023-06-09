@@ -9,6 +9,12 @@
   c.postcondition Webspicy::Web::Specification::Pre::GlobalRequestHeaders
   ```
 
+* Possibly BREAKING: upgraded dependencies to properly work with ruby 3.2:
+
+  - predicate to 2.8
+    - sexpr to 1.1
+  - rack-robustness to 1.2
+
 * Added three reusable postconditions in Webspicy::Web::Specification::Post
   (that must be explicitely required too):
 
@@ -19,6 +25,8 @@
 
   - SemanticsPreservedByRefactoring that can be used to test that
     refactorings preserve the web semantics.
+
+* Added `eq` and `eql` assertions, that use the Predicate gem.
 
 ## 0.24.0 - 2023-05-26
 
