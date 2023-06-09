@@ -1,4 +1,4 @@
-## 0.25.0
+## 0.25.0 - 2023-06-09
 
 * BREAKING: GlobalRequestHeaders and RobustToInvalidInput are moved to
   the Webspicy::Web::Specification::Pre module and must be required
