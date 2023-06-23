@@ -1,4 +1,4 @@
-## 0.26.0
+## 0.26.0 - 2023-06-23
 
 * Upgrade runtime and devel dependencies, notably http (5.x) and
   sinatra (3.x). This may force client projects to upgrade them as
