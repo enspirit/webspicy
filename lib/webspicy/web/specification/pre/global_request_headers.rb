@@ -27,7 +27,6 @@ module Webspicy
             extra = headers.reject{|k|
               test_case.headers.has_key?(k)
             }
-            puts "Instrumenting #{test_case.object_id}"
             test_case.headers.merge!(extra)
           end
 
