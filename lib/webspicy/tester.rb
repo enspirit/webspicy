@@ -65,7 +65,11 @@ module Webspicy
         raise Error, "No such service `#{method} #{url}`"
       end
       mutated = tc.mutate(mutation)
-      fork_tester(test_case: mutated) do |t|
+      call_one(mutated)
+    end
+
+    def call_one(test_case)
+      fork_tester(test_case: test_case) do |t|
         instrumented = t.instrument_test_case
         t.client.call(instrumented)
       end
