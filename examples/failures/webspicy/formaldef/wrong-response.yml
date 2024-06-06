@@ -21,7 +21,7 @@ error_schema: |-
   .
 
 default_example:
-  params: {}
+  input: {}
   expected:
     content_type: application/json
     status: 200

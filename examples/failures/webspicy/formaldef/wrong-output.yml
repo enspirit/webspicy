@@ -31,22 +31,22 @@ examples:
 
 - description: |-
     when the output is as expected
-  params:
+  input:
     service: ''
 
 ##
 
 - description: |-
     when an attribute is missing
-  params:
+  input:
     service: missing-attribute
 
 - description: |-
     when an extra attribute is unexpected
-  params:
+  input:
     service: extra-attribute
 
 - description: |-
     when a attribute has the wrong type
-  params:
+  input:
     service: wrong-attribute-type

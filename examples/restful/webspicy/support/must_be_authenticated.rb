@@ -31,9 +31,9 @@ class MustBeAuthenticated
     YAML.load <<~YML.gsub(/^\s+[#][ ]/, "")
       description: |-
         #{description} (#{self.class.name} PRE)
-      params:
+      input:
         id: 1
-      dress_params:
+      validate_input:
         false
       metadata:
         role: #{role}

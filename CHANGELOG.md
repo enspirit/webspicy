@@ -6,6 +6,13 @@
   condition per description. The bug fix allows using many global
   pre/post conditions matching all tests programatically.
 
+* Introduce some v2 vocabulary: `params` becomes `input`,
+  `dress_params` becomes `validate_input`, `for` is available for
+  human-readable link with preconditions, `when` and `it` can be
+  used as an alternative to `description`. All syntactic changes are
+  implemented in a backward compatible way: seen as syntactic sugar
+  for now, translated to the former mechanisms for now.
+
 ## 0.26.0 - 2023-06-23
 
 * Upgrade runtime and devel dependencies, notably http (5.x) and

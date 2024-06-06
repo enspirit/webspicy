@@ -51,8 +51,30 @@ Service =
         counterexamples :? [TestCase]
     }
 
-TestCase =
-    .Webspicy::Web::Specification::TestCase <info> {
+TestCase = .Webspicy::Web::Specification::TestCase
+    <v2> {
+        for              :? String
+        when             :? String
+        it               :? String
+        description      :? String
+        validate_input   :? Boolean
+        input            :? Params
+        headers          :? .Hash
+        body             :? String
+        file_upload      :? FileUpload
+        seeds            :? String
+        requester        :? String
+        metadata         :? { ...: .Object }
+        expected         :? {
+            status       :? StatusRange
+            content_type :? String|Nil
+            error        :? String
+            headers      :? .Hash
+        }
+        assert           :? [String]
+        tags             :? [Tag]
+    }
+    <info> {
         description      :? String
         dress_params     :? Boolean
         params           :? Params

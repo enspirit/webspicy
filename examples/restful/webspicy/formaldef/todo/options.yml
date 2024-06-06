@@ -26,7 +26,7 @@ services:
 
     - description: |-
         when requested on an existing TODO
-      params: {}
+      input: {}
       expected:
         content_type: ~
         status: 204

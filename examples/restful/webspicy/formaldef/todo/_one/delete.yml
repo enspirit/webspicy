@@ -36,7 +36,7 @@ services:
 
     - description: |-
         when requested on an existing TODO
-      params:
+      input:
         id: 1
       expected:
         content_type: ~
@@ -46,7 +46,7 @@ services:
 
     - description: |-
         when requested on an unexisting TODO
-      params:
+      input:
         id: 999254654
       expected:
         content_type: application/json
