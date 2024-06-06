@@ -2,6 +2,7 @@ module Webspicy
   class Specification
     module Postcondition
       class UnexpectedConditionImpl
+        include Pre
         include Post
 
         def check!

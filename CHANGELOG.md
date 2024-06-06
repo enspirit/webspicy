@@ -1,3 +1,7 @@
+## 0.27.0
+
+* Allow using (x) on preconditions.
+
 ## 0.26.0 - 2023-06-23
 
 * Upgrade runtime and devel dependencies, notably http (5.x) and
