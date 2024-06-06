@@ -17,6 +17,11 @@
   conditions who want to execute a test case they have. Alternative to
   find_and_call.
 
+* Bug fix: validate output schema against the raw output when output
+  is not "structured" (e.g. application/json) but pure text
+  (e.g. `text/plain`, `text/csv`). Otherwise using String(s | ... ) has
+  no effect.
+
 ## 0.26.0 - 2023-06-23
 
 * Upgrade runtime and devel dependencies, notably http (5.x) and

@@ -12,8 +12,11 @@ module Webspicy
         end
 
         def call
-          return unless invocation.is_structured_output?
-          output = invocation.loaded_body
+          output = if invocation.is_structured_output?
+            invocation.loaded_body
+          else
+            invocation.raw_output
+          end
           service.output_schema.dress(output)
         rescue Finitio::TypeError => ex
           _! "Invalid output: #{ex.message}"
