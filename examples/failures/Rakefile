@@ -42,6 +42,8 @@ task :test do
     got = config.world.send(:"#{kind}_output").string
     doc.write(got) unless doc.file?
     unless got.gsub(/time="[^"]+"/,"") == (exp = doc.read.gsub(/time="[^"]+"/,""))
+      got_file = doc.sub_ext('.got.txt')
+      got_file.write(got)
       Differ.format = :color
       puts Differ.diff(got, exp)
       abort("FAILURE: Unexpected #{kind} output")

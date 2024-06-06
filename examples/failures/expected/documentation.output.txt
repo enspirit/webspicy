@@ -63,9 +63,9 @@ GET /, when the response is as expected
   v  It has a `Content-Type: application/json` response header
   v  Its output meets the expected data schema
   v  (x) Succeeding postcondition
-  v  (x) Succeeding postcondition (deprecated) (backward compatibility bridge)
   F  It is not met
   F  Is is not met (deprecated protocol)
+  v  (x) Succeeding postcondition (deprecated) (backward compatibility bridge)
 
 >> formaldef/wrong-condition.yml
 
@@ -74,9 +74,9 @@ GET /, when the response is as expected
   v  It has a `Content-Type: application/json` response header
   v  Error data meets the expected error schema
   v  (x) Succeeding errcondition
-  v  (x) Succeeding errcondition (deprecated) (backward compatibility bridge)
   F  It is not met
   F  Is is not met (deprecated protocol)
+  v  (x) Succeeding errcondition (deprecated) (backward compatibility bridge)
 
 
 >> formaldef/wrong-file.yml

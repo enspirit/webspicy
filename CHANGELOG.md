@@ -2,6 +2,10 @@
 
 * Allow using (x) on preconditions.
 
+* Bug fix: keep all instantiable conditions, not only one matching
+  condition per description. The bug fix allows using many global
+  pre/post conditions matching all tests programatically.
+
 ## 0.26.0 - 2023-06-23
 
 * Upgrade runtime and devel dependencies, notably http (5.x) and

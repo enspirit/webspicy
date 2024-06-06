@@ -149,7 +149,7 @@ module Webspicy
               mc.matching_description = d
             }
           }
-        mapped + unmapped + unexpected
+        instances + unmapped + unexpected
       end
 
       def bind_examples
