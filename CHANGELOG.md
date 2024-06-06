@@ -13,6 +13,10 @@
   implemented in a backward compatible way: seen as syntactic sugar
   for now, translated to the former mechanisms for now.
 
+* Added Tester#call_one(TestCase) helper, that can be used by pre/post
+  conditions who want to execute a test case they have. Alternative to
+  find_and_call.
+
 ## 0.26.0 - 2023-06-23
 
 * Upgrade runtime and devel dependencies, notably http (5.x) and
