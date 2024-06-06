@@ -33,7 +33,7 @@ services:
 
     - description: |-
         when requested on an existing TODO
-      params:
+      input:
         id: 1
         description: 'hello world'
       assert:
@@ -43,7 +43,7 @@ services:
 
     - description: |-
         when requested on an unexisting TODO
-      params:
+      input:
         id: 999254654
         description: 'hello world'
       expected:
@@ -54,11 +54,11 @@ services:
 
     - description: |-
         when violating the Put data type
-      params:
+      input:
         id: 1
         description: 'hello world'
         nosuchone: 'foobar'
-      dress_params:
+      validate_input:
         false
       expected:
         content_type: application/json

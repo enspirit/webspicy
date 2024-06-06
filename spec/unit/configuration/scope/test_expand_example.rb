@@ -52,7 +52,7 @@ module Webspicy
         let(:example) {
           Webspicy::Web.test_case({
             description: "Hello world",
-            expected: { content_type: "application/json" }
+            expected: { content_type: "application/json" },
           })
         }
 

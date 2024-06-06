@@ -21,7 +21,7 @@ examples:
 
   - description: |-
       it works
-    params:
+    input:
       id: 1
     expected:
       content_type: text/html

@@ -28,7 +28,7 @@ services:
 
     - description: |-
         when requested with a valid CSV
-      params: {}
+      input: {}
       headers:
         Content-Type: text/csv
       body: |-
