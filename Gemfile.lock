@@ -25,7 +25,7 @@ GEM
     base64 (0.2.0)
     citrus (3.0.2)
     commonmarker (0.23.10)
-    date (3.3.4)
+    date (3.4.1)
     diff-lcs (1.5.1)
     domain_name (0.6.20240107)
     ffi (1.17.0)
@@ -63,7 +63,7 @@ GEM
     mustermann-contrib (3.0.0)
       hansi (~> 0.2.0)
       mustermann (= 3.0.0)
-    net-imap (0.4.12)
+    net-imap (0.4.19)
       date
       net-protocol
     net-pop (0.1.2)
@@ -116,7 +116,7 @@ GEM
       rack-protection (= 3.2.0)
       tilt (~> 2.0)
     tilt (2.3.0)
-    timeout (0.4.1)
+    timeout (0.4.3)
 
 PLATFORMS
   arm64-darwin-22
