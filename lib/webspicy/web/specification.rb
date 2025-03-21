@@ -19,6 +19,10 @@ module Webspicy
         end
       end
 
+      def openapi
+        @raw[:openapi]
+      end
+
       def url
         @raw[:url]
       end

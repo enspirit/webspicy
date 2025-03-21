@@ -22,6 +22,20 @@
   (e.g. `text/plain`, `text/csv`). Otherwise using String(s | ... ) has
   no effect.
 
+* [Experimental] Add an alternative to openapi Generator to generate openapi
+  schema via a reporter when running tests. This allows having great examples
+  data, since they are real examples taken from live tests instead of
+  being randomly generated from Finitio schemas.
+
+  You can use the reporter like this:
+
+      folder = Path(...)
+      config = Webspicy::Configuration.dress(folder)
+      config.reporter << Webspicy::Web::Openapi::Reporter.new(
+        (folder/'openapi.base.yml').load,
+        (folder/'openapi.json'),
+      )
+
 ## 0.26.0 - 2023-06-23
 
 * Upgrade runtime and devel dependencies, notably http (5.x) and

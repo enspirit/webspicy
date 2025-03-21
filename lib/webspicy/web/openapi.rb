@@ -1,2 +1,5 @@
+require_relative 'openapi/utils'
+require_relative 'openapi/data_struct'
+require_relative 'openapi/reporter'
 require_relative 'openapi/generator'
 require_relative 'openapi/ext'

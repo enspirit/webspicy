@@ -299,7 +299,7 @@ module Webspicy
     # truthy value is returned will be considered by the scope.
     # - ===: any instance responding to `===` can be used as a matcher, following
     #   Ruby conventions. The match is done on a Service instance.
-    def test_case_filter=(tag_filter)
+    def test_case_filter=(test_case_filter)
       @test_case_filter = test_case_filter
     end
     attr_reader :test_case_filter

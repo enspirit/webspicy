@@ -11,10 +11,16 @@ FileUpload =
         param_name   :? String
     }
 
+OpenApi = {
+    tag     :? String
+    summary :? String
+}
+
 Specification = .Webspicy::Web::Specification
   <info> {
     name: String
     url: String
+    openapi :? OpenApi
     services: [Service]
   }
   <singleservice> {
@@ -22,6 +28,7 @@ Specification = .Webspicy::Web::Specification
     url             :  String
     method          :  Method
     description     :  String
+    openapi         :? OpenApi
     preconditions   :? [String]|String
     postconditions  :? [String]|String
     errconditions   :? [String]|String
@@ -39,6 +46,7 @@ Service =
         name            :? String
         method          :  Method
         description     :  String
+        openapi         :? OpenApi
         preconditions   :? [String]|String
         postconditions  :? [String]|String
         errconditions   :? [String]|String

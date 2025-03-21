@@ -20,15 +20,15 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.8.6)
-      public_suffix (>= 2.0.2, < 6.0)
+    addressable (2.8.7)
+      public_suffix (>= 2.0.2, < 7.0)
     base64 (0.2.0)
     citrus (3.0.2)
-    commonmarker (0.23.10)
-    date (3.3.4)
+    commonmarker (0.23.11)
+    date (3.4.1)
     diff-lcs (1.5.1)
     domain_name (0.6.20240107)
-    ffi (1.17.0)
+    ffi (1.17.1-arm64-darwin)
     ffi-compiler (1.3.2)
       ffi (>= 1.15.5)
       rake
@@ -41,7 +41,7 @@ GEM
       http-cookie (~> 1.0)
       http-form_data (~> 2.2)
       llhttp-ffi (~> 0.5.0)
-    http-cookie (1.0.6)
+    http-cookie (1.0.8)
       domain_name (~> 0.5)
     http-form_data (2.3.0)
     listen (3.9.0)
@@ -56,21 +56,21 @@ GEM
       net-pop
       net-smtp
     mini_mime (1.1.5)
-    minitest (5.23.1)
+    minitest (5.25.5)
     mustache (1.1.1)
-    mustermann (3.0.0)
+    mustermann (3.0.3)
       ruby2_keywords (~> 0.0.1)
-    mustermann-contrib (3.0.0)
+    mustermann-contrib (3.0.3)
       hansi (~> 0.2.0)
-      mustermann (= 3.0.0)
-    net-imap (0.4.12)
+      mustermann (= 3.0.3)
+    net-imap (0.5.6)
       date
       net-protocol
     net-pop (0.1.2)
       net-protocol
     net-protocol (0.2.2)
       timeout
-    net-smtp (0.5.0)
+    net-smtp (0.5.1)
       net-protocol
     openapi3_parser (0.9.2)
       commonmarker (~> 0.17)
@@ -79,15 +79,15 @@ GEM
     predicate (2.8.0)
       minitest (>= 5.0)
       sexpr (~> 1.1)
-    public_suffix (5.0.5)
-    rack (2.2.9)
+    public_suffix (6.0.1)
+    rack (2.2.10)
     rack-protection (3.2.0)
       base64 (>= 0.1.0)
       rack (~> 2.2, >= 2.2.4)
     rack-proxy (0.7.7)
       rack
     rack-robustness (1.2.0)
-    rack-test (2.1.0)
+    rack-test (2.2.0)
       rack (>= 1.3)
     rake (13.2.1)
     rb-fsevent (0.11.2)
@@ -97,15 +97,15 @@ GEM
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
       rspec-mocks (~> 3.13.0)
-    rspec-core (3.13.0)
+    rspec-core (3.13.3)
       rspec-support (~> 3.13.0)
-    rspec-expectations (3.13.0)
+    rspec-expectations (3.13.3)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-mocks (3.13.1)
+    rspec-mocks (3.13.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-support (3.13.1)
+    rspec-support (3.13.2)
     rspec_junit_formatter (0.6.0)
       rspec-core (>= 2, < 4, != 2.12.0)
     ruby2_keywords (0.0.5)
@@ -115,14 +115,11 @@ GEM
       rack (~> 2.2, >= 2.2.4)
       rack-protection (= 3.2.0)
       tilt (~> 2.0)
-    tilt (2.3.0)
-    timeout (0.4.1)
+    tilt (2.6.0)
+    timeout (0.4.3)
 
 PLATFORMS
-  arm64-darwin-22
-  ruby
-  x86_64-darwin-22
-  x86_64-linux
+  arm64-darwin
 
 DEPENDENCIES
   rake (~> 13)
@@ -132,4 +129,4 @@ DEPENDENCIES
   webspicy!
 
 BUNDLED WITH
-   2.4.6
+   2.5.11
