@@ -15,3 +15,4 @@ examples/**/Gemfile.lock
 test-results
 .bash_history
 examples/restful/webspicy/inferer/dump
+Gemfile.lock
