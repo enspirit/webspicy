@@ -3,7 +3,7 @@ FROM enspirit/webspicy:builder as builder
 RUN gem build -o /tmp/webspicy.gem webspicy.gemspec && \
   gem install /tmp/webspicy.gem
 
-FROM ruby:2.7-alpine
+FROM ruby:3.2-alpine
 
 RUN addgroup --gid 1000 --system app \
   && adduser --uid 1000 --system -G app app \

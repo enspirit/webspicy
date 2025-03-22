@@ -1,4 +1,10 @@
+## 0.27.1 - 2025-03-22
+
+* Same as 0.27.0 but docker images fixed.
+
 ## 0.27.0 - 2025-03-22
+
+* Possibly BREAKING: docker images are now based on ruby-3.2-alpine.
 
 * Allow using (x) on preconditions.
 
