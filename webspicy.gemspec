@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec_junit_formatter', '>= 0.6', '< 0.7'
 
   s.add_runtime_dependency "rack-test", ">= 2.0", "< 3.0"
-  s.add_runtime_dependency 'finitio', '>= 0.12.0', '< 0.13.0'
+  s.add_runtime_dependency 'finitio', '>= 0.12.2', '< 0.13.0'
   s.add_runtime_dependency "http", ">= 5.0", "< 6.0"
   s.add_runtime_dependency "path", "~> 2.0"
   s.add_runtime_dependency 'rack-robustness', '>= 1.2', '< 2.0'

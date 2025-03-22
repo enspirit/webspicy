@@ -1,4 +1,4 @@
-## 0.27.0
+## 0.27.0 - 2025-03-22
 
 * Allow using (x) on preconditions.
 
