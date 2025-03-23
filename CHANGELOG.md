@@ -1,3 +1,7 @@
+## 0.27.2
+
+* Improve openapi parameters object, dump attribute descriptions if any
+
 ## 0.27.1 - 2025-03-22
 
 * Same as 0.27.0 but docker images fixed.

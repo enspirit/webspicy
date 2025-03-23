@@ -61,7 +61,6 @@ module Webspicy
 
           schema = actual_body_schema(service)
           return nil if empty_schema?(schema)
-          puts schema.inspect
 
           content_type = content_type_for(service)
 
@@ -120,7 +119,12 @@ module Webspicy
             content = {
               content_type => {
                 schema: schema&.to_json_schema,
-                example: example,
+                examples: {
+                  test_case.description => {
+                    description: test_case.description,
+                    value: example,
+                  },
+                },
               }.compact
             }
           end
@@ -145,16 +149,28 @@ module Webspicy
         end
 
         def parameters_for(service)
-          schema = actual_input_schema(service)
-          params = service.specification.url_placeholders.map{|p|
-            {
-              in: 'path',
-              name: p,
-              schema: { type: 'string' },
-              required: true
+          schema = actual_parameters_schema(service)
+          if schema.is_a?(Finitio::HashBasedType)
+            schema.heading.map do |attr|
+              {
+                in: 'path',
+                name: attr.name,
+                description: attr.metadata[:description],
+                schema: attr.to_json_schema,
+                required: true,
+              }.compact
+            end
+          else
+            params = service.specification.url_placeholders.map{|p|
+              {
+                in: 'path',
+                name: p,
+                schema: { type: 'string' },
+                required: true
+              }
             }
-          }
-          params.empty? ? nil : params
+            params.empty? ? nil : params
+          end
         end
 
         def actual_output_schema(test_case, counterexample)
@@ -167,6 +183,19 @@ module Webspicy
 
         def actual_input_schema(service)
           service.input_schema['Main']
+        end
+
+        def actual_parameters_schema(service)
+          schema = actual_input_schema(service)
+
+          a_schema = schema
+          a_schema = schema.target if schema.is_a?(Finitio::AliasType)
+          return schema unless a_schema.is_a?(Finitio::HashBasedType)
+
+          in_url = service.specification.url_placeholders.map(&:to_sym)
+          return schema if in_url.empty?
+
+          a_schema.project(in_url)
         end
 
         def actual_body_schema(service)
