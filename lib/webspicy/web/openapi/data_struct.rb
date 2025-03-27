@@ -15,7 +15,7 @@ module Webspicy
         attr_reader :info, :tags, :paths
 
         def ensure_tags(tags)
-          @tags = (@tags + tags).uniq.sort_by{|t| t[:name] }
+          @tags = (@tags + tags).uniq
         end
 
         def ensure_path(path)

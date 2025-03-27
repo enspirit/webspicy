@@ -16,17 +16,28 @@ module Webspicy
         def after_each
           @datastruct.ensure_tags(tags_for(specification))
           @datastruct.ensure_path(base_path_for(specification))
-          @datastruct.ensure_path(base_verb_for(service))
+          @datastruct.ensure_path(base_verb_for(test_case))
           @datastruct.ensure_path(base_request_body_for(service))
           @datastruct.ensure_path(base_request_example_for(test_case))
           @datastruct.ensure_path(base_request_response_for(invocation))
         end
 
         def report
-          json = Support::DeepMerge.deep_merge(
+          json = DataStruct::MERGER.deep_merge(
             @base,
             @datastruct.to_openapi_data,
           )
+          order = ["get", "post", "patch", "delete"]
+          json["paths"].keys.each do |path|
+            sorted = {}
+            json["paths"][path]
+              .keys
+              .sort_by{|k| order.index(k) || -1 }
+              .each do |k|
+                sorted[k] = json["paths"][path][k]
+              end
+            json["paths"][path] = sorted
+          end
           @output_file.write(JSON.pretty_generate(json))
         end
 

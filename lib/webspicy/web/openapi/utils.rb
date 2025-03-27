@@ -36,12 +36,13 @@ module Webspicy
           })
         end
 
-        def base_verb_for(service)
+        def base_verb_for(test_case)
+          service = test_case.service
           verb_defn = {
             summary: service.name,
             description: service.description,
             tags: tags_for(service.specification).map{|s| s[:name] },
-            parameters: parameters_for(service),
+            parameters: parameters_for(service, test_case),
           }
 
           verb_defn = service.conditions.inject(verb_defn) do |memo, p|
@@ -148,7 +149,7 @@ module Webspicy
           }]
         end
 
-        def parameters_for(service)
+        def parameters_for(service, test_case)
           schema = actual_parameters_schema(service)
           if schema.is_a?(Finitio::HashBasedType)
             schema.heading.map do |attr|
@@ -158,6 +159,7 @@ module Webspicy
                 description: attr.metadata[:description],
                 schema: attr.to_json_schema,
                 required: true,
+                example: test_case.params[attr.name.to_s]
               }.compact
             end
           else
@@ -166,7 +168,8 @@ module Webspicy
                 in: 'path',
                 name: p,
                 schema: { type: 'string' },
-                required: true
+                required: true,
+                example: test_case.params[attr.name.to_s]
               }
             }
             params.empty? ? nil : params
