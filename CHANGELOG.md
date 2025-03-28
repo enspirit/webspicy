@@ -1,4 +1,4 @@
-## 0.27.2
+## 0.27.2 - 2025-03-28
 
 * Improve openapi parameters object, dump attribute descriptions if any
 
