@@ -83,6 +83,7 @@ TestCase = .Webspicy::Web::Specification::TestCase
         tags             :? [Tag]
     }
     <info> {
+        for              :? String
         description      :? String
         dress_params     :? Boolean
         params           :? Params
