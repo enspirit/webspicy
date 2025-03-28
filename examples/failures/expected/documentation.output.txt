@@ -79,6 +79,26 @@ GET /, when the response is as expected
   v  (x) Succeeding errcondition (deprecated) (backward compatibility bridge)
 
 
+>> formaldef/wrong-error-output.yml
+
+GET /{service}, when the output is as expected
+  v  It has a 400 response status
+  v  It has a `Content-Type: application/json` response header
+  v  Error data meets the expected error schema
+
+>> formaldef/wrong-error-output.yml
+
+GET /{service}, when the output is not as expected
+  v  It has a 400 response status
+  v  It has a `Content-Type: application/json` response header
+  F  Invalid error: Missing attribute `message`
+
+>> formaldef/wrong-error-output.yml
+
+GET /{service}, when empty with a redirect response
+  v  It has a 302 response status
+
+
 >> formaldef/wrong-file.yml
 
   X  Invalid Specification `{"name"=>"Not a valid spec...`

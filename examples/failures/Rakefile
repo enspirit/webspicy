@@ -29,12 +29,12 @@ task :test do
     abort("FAILURE: Expected 1 errors, got #{x}")
   end
 
-  unless (x = summary.failures_count) == 19
-    abort("FAILURE: Expected 19 failures, got #{x}")
+  unless (x = summary.failures_count) == 20
+    abort("FAILURE: Expected 20 failures, got #{x}")
   end
 
-  unless (x = success_or_not.report) == 21
-    abort("FAILURE: Expected success or not report to be 21, got #{x}")
+  unless (x = success_or_not.report) == 22
+    abort("FAILURE: Expected success or not report to be 22, got #{x}")
   end
 
   [:documentation, :progress, :summary, :junitxml].each do |kind|

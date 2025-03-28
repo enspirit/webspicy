@@ -16,3 +16,4 @@ test-results
 .bash_history
 examples/restful/webspicy/inferer/dump
 Gemfile.lock
+.ruby-version

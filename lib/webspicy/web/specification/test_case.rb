@@ -62,6 +62,11 @@ module Webspicy
           not expected[:status].nil?
         end
 
+        def is_redirect_expected_status?
+          start = expected_status.to_int
+          start >= 300 && start < 400
+        end
+
         def expected_headers
           expected[:headers] || {}
         end

@@ -1,0 +1,51 @@
+---
+description: |-
+  Wrong error output tests
+
+url: |-
+  /{service}
+
+method: |-
+  GET
+
+input_schema: |-
+  {
+    service: String
+  }
+
+output_schema: |-
+  .
+
+error_schema: |-
+  {
+    message: String
+  }
+
+examples: []
+
+counterexamples:
+
+- description: |-
+    when the output is as expected
+  input:
+    service: 'wrong-error-output/ok'
+  expected:
+    content_type: application/json
+    status: 400
+
+##
+
+- description: |-
+    when the output is not as expected
+  input:
+    service: 'wrong-error-output/ko'
+  expected:
+    content_type: application/json
+    status: 400
+
+- description: |-
+    when empty with a redirect response
+  input:
+    service: 'wrong-error-output/redirect'
+  expected:
+    status: 302

@@ -8,7 +8,9 @@ module Webspicy
         end
 
         def must?
-          !test_case.is_expected_status?(204)
+          test_case.has_expected_status? && \
+            !test_case.is_expected_status?(204) && \
+            !test_case.is_redirect_expected_status?
         end
 
         def call

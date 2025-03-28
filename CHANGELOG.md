@@ -5,6 +5,11 @@
 * Instantiate example URLs, via the first test_case filling the service
   parameters.
 
+* The Error schema of counterexamples is not longer checked on redirect
+  statuses, since the body is usually empty. This allows no longer moving
+  an actual counterexample to the examples section just to prevent Webspicy
+  from complaining.
+
 ## 0.27.1 - 2025-03-22
 
 * Same as 0.27.0 but docker images fixed.
