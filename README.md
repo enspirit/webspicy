@@ -49,6 +49,7 @@ Then execute webspicy help to see the options.
 ```
 webspicy --help
 ```
+Alternatively, you can see the available options [here](./bin/webspicy).
 
 ## Using the docker image(s)
 
