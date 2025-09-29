@@ -108,6 +108,10 @@ module Webspicy
     else
       DEFAULT_SYSTEM.system(fio)
     end
+  rescue => ex
+    puts ex.message
+    puts ex.backtrace.join("\n")
+    raise
   end
   module_function :schema
 
