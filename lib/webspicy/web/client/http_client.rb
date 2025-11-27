@@ -151,8 +151,8 @@ module Webspicy
         def delete(url, params = {}, headers = nil, body = nil)
           info_request("DELETE", url, params, headers, body)
 
-          url = url + "?" + Rack::Utils.build_query(params) if body && !params.empty?
-          http_opts = http_options(body: params.to_json)
+          url = url + "?" + Rack::Utils.build_query(params) if !params.empty?
+          http_opts = http_options
           @last_response = HTTP[headers || {}].delete(url, http_opts)
 
           debug_response(@last_response)
