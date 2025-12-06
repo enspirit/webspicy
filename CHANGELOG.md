@@ -1,3 +1,7 @@
+## 0.27.4
+
+* Add test_case.input, dressed params
+
 ## 0.27.3 - 2025-03-28
 
 * Allow `for` attribute in test cases, even in v1 generated from v2.

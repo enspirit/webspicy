@@ -51,6 +51,10 @@ module Webspicy
         @raw[:tags] ||= []
       end
 
+      def input
+        service.dress_params(params)
+      end
+
       def expected
         @raw[:expected] || {}
       end
