@@ -1,4 +1,4 @@
-## 0.27.4
+## 0.27.4 - 2025-12-06
 
 * Add test_case.input, dressed params
 
