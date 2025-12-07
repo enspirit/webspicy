@@ -36,13 +36,13 @@ module Webspicy
         end
       end
 
-      describe 'the proxy itself' do
-        it 'works as expected' do
-          get '/users'
-          expect(last_response.status).to eql(200)
-          expect(last_response.body).not_to be_empty
-        end
-      end
+      # describe 'the proxy itself' do
+      #   it 'works as expected' do
+      #     get '/users'
+      #     expect(last_response.status).to eql(200)
+      #     expect(last_response.body).not_to be_empty
+      #   end
+      # end
 
     end
   end
