@@ -69,6 +69,15 @@ module Webspicy
         @raw[:counterexamples] || []
       end
 
+      def generated_examples
+        preconditions.map{|pre|
+          pre.examples(self).map{|tc|
+            tc = config.factory.test_case(tc, Webspicy.current_scope)
+            tc.bind(self, false)
+          }
+        }.flatten
+      end
+
       def generated_counterexamples
         preconditions.map{|pre|
           pre.counterexamples(self).map{|tc|

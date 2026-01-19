@@ -7,6 +7,11 @@ module Webspicy
       def instrument
       end
 
+      # Provide examples of this precondition for a given service.
+      def examples(service)
+        []
+      end
+
       # Provide counterexamples of this precondition for a given service.
       def counterexamples(service)
         []
