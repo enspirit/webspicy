@@ -32,7 +32,7 @@ module Webspicy
       end
 
       def url_placeholders
-        url.scan(/\{([a-zA-Z]+(\.[a-zA-Z]+)*)\}/).map{|x| x.first }
+        url.scan(/\{([^\}]+)\}/).map{|x| x.first }
       end
 
       def instantiate_url(params)

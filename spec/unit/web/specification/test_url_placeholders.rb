@@ -18,6 +18,11 @@ module Webspicy
         expect(r.url_placeholders).to eq(["foo.id", "bar"])
       end
 
+      it 'supports placeholders in the query params' do
+        r = Specification.new(url: "/test?id=eq.{client_id}&name=eq.{name}")
+        expect(r.url_placeholders).to eq(["client_id", "name"])
+      end
+
     end
   end
 end
