@@ -28,6 +28,7 @@ module Webspicy
       @failfast = default_failfast
       @run_examples = default_run_examples
       @run_counterexamples = default_run_counterexamples
+      @run_generated_examples = default_run_generated_examples
       @run_generated_counterexamples = default_run_generated_counterexamples
       @file_filter = default_file_filter
       @service_filter = default_service_filter
@@ -198,6 +199,23 @@ module Webspicy
       ENV['ROBUST'].nil? || (ENV['ROBUST'] != 'no' && ENV['ROBUST'] != 'generated')
     end
     private :default_run_counterexamples
+
+    # Sets whether generated examples have to be ran or not.
+    def run_generated_examples=(run_generated_examples)
+      @run_generated_examples = run_generated_examples
+    end
+    attr_reader :run_generated_examples
+
+    # Whether generated examples must be ran or not.
+    def run_generated_examples?
+      @run_generated_examples
+    end
+
+    # Returns the defaut value for run_generated_examples
+    def default_run_generated_examples
+      ENV['ROBUST'].nil? || (ENV['ROBUST'] != 'only' && ENV['ROBUST'] != 'generated')
+    end
+    private :default_run_generated_examples
 
     # Sets whether generated counter examples have to be ran or not.
     def run_generated_counterexamples=(run_generated_counterexamples)

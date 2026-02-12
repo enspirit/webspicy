@@ -52,6 +52,15 @@ module Webspicy
           .each(&bl) if config.run_examples?
       end
 
+      def each_generated_examples(service, &bl)
+        Webspicy.with_scope(self) do
+          service.generated_examples
+            .map{|e| expand_example(service, e) }
+            .select(&to_filter_proc(config.test_case_filter))
+            .each(&bl) if config.run_generated_examples?
+        end if config.run_generated_examples?
+      end
+
       def each_counterexamples(service, &bl)
         service.counterexamples
           .map{|e| expand_example(service, e) }
@@ -70,6 +79,7 @@ module Webspicy
 
       def each_testcase(service, &bl)
         each_example(service, &bl)
+        each_generated_examples(service, &bl)
         each_counterexamples(service, &bl)
         each_generated_counterexamples(service, &bl)
       end
