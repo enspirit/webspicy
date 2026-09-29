@@ -1,3 +1,9 @@
+# Sinatra 4 restricts the Host header to localhost-like values in the
+# `development` environment, the one used when RACK_ENV is unset. Webspicy's
+# RackTestClient issues requests against `example.org`, hence being explicit
+# about running in test mode here.
+ENV['RACK_ENV'] ||= 'test'
+
 $LOAD_PATH.unshift File.expand_path("..", __FILE__)
 require 'webspicy'
 require 'webspicy/web'

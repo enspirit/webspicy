@@ -1,6 +1,9 @@
 source "https://rubygems.org"
 
 gem "rake", "~> 13"
-gem 'sinatra', '>= 3.0', '< 4.0'
+gem 'sinatra', '>= 4.0', '< 5.0'
 gem "webspicy", path: "../.."
-gem 'rspec_junit_formatter', '~> 0.4.1'
+gem 'rspec_junit_formatter', '>= 0.6', '< 0.7'
+
+# Left the default gems in Ruby 3.4, and the example app uses it.
+gem 'csv', '~> 3.3'
