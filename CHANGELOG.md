@@ -1,3 +1,77 @@
+## 1.0.0 - 2026-09-29
+
+Webspicy has been used in production for years, and the 0.x prefix was
+saying otherwise. This release declares the public API stable and starts
+following semantic versioning strictly; it is not the completion of the
+feature list that used to sit under "1.0" in `ROADMAP.md`, which has moved
+to 1.x and will land in minor releases.
+
+### The point of this release: Webspicy stops holding its users back
+
+Webspicy sits between an application and its dependencies, so anything it
+over-constrains, it holds back for everyone testing with it. Three major
+versions were out of reach for that reason alone, and the ranges are now
+widened rather than moved -- which major an application runs on is its
+call, not the test tool's:
+
+* `finitio`, `>= 0.12.2, < 0.13.0` becomes `>= 0.12.2, < 2.0`, allowing
+  finitio 1.0. Mind its two removals when you take it: the `Fixnum` and
+  `Bignum` aliases are gone from `finitio/data` (use `Integer`), and the
+  `FalseClass` alias is fixed -- it used to be an alias of `.TrueClass`, so
+  it accepted `true` and rejected `false`. A schema written around that bug
+  now means the opposite of what it did.
+
+* `http`, `>= 5.0, < 6.0` becomes `>= 5.0, < 7.0`, allowing http 6.
+
+* `rack-robustness`, `>= 1.2, < 2.0` becomes `>= 1.2, < 3.0`, allowing
+  rack-robustness 2.0. That one requires Rack 3.
+
+* `rack-proxy`, `~> 0.7.0` becomes `>= 0.7, < 3.0`.
+
+`mustermann` (`>= 3.0, < 5.0`) and `openapi3_parser` (`>= 0.9, < 0.11`) are
+widened too, though sinatra 4 keeps mustermann on 3.x for the time being.
+
+### BREAKING: Ruby >= 3.2, and Sinatra 4 in the examples
+
+Declared through `required_ruby_version`, that being what finitio 1.0,
+http 6 and Rack 3 all require. Ruby 2.7 and 3.1 have both reached end of
+life; the test matrix is now 3.2, 3.3 and 3.4, and the docker images are
+built on `ruby:3.4-alpine`.
+
+The development dependency on sinatra moves to 4, since rack-robustness 2.0
+requires Rack 3 and sinatra 3 caps it at Rack 2. **This is worth knowing
+even though it is only a development dependency here**, because it is what
+your own suite will hit: Sinatra 4 enables
+`Rack::Protection::HostAuthorization`, which in the `development`
+environment -- the one used when neither `RACK_ENV` nor `APP_ENV` is set --
+only accepts localhost-like `Host` headers. `RackTestClient` issues its
+requests against `example.org`, so every test gets a `403 Host not
+permitted` before reaching a route. Set `RACK_ENV` in your suite, as the
+examples now do, or configure `permitted_hosts` on the application.
+
+### Other changes
+
+* `base64`, `json`, `logger` and `ostruct` are now explicit dependencies.
+  All four are required by the library and none is a default gem anymore.
+
+* Fixed three specs that had been failing on Ruby 3.4 since it changed
+  `Hash#inspect`, `{:c=>"c2"}` becoming `{c: "c2"}`. The expected messages
+  are now built from the same hash the assertion is given, rather than
+  spelling one Ruby's output out.
+
+* The golden output comparison in the `failures` example canonicalizes the
+  fragments that come from Ruby rather than from Webspicy, so the expected
+  files are no longer tied to a single Ruby version.
+
+* `.dockerignore` excluded `Gemfile.lock` and `examples/restful/Gemfile.lock`
+  but not `examples/failures/Gemfile.lock`, so a stale lock from the build
+  context landed on top of the bundle installed in the image. Harmless while
+  the lock matched, fatal once it drifted. The patterns are now general.
+
+* `tasks/gem.rake` eval'd the gemspec without a filename, leaving `__FILE__`
+  as `(eval)` and the `$LOAD_PATH` entry it computes pointing nowhere. It
+  only worked because Bundler already put `lib/` on the load path.
+
 ## 0.27.5 - 2026-01-30
 
 * Weaken expectations on url placeholders format.

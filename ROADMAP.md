@@ -2,7 +2,14 @@
 
 A few ideas listed here, from the vision exposed in `doc/`.
 
-## 1.0
+1.0 is out. It does not mark the completion of the feature list that used to
+be gathered under that heading below, but the point where the public API is
+declared stable and semantic versioning starts being followed strictly. The
+gem had been in production use for years by then, and the 0.x prefix was
+saying the opposite. Those features are now 1.x material, and will land in
+minor releases.
+
+## 1.x
 
 * YAML schemas must have a better mapping with vocabulary, in a backward compatible way. It must be easy to migrate an existing specification & test suite.
 
@@ -18,7 +25,7 @@ A few ideas listed here, from the vision exposed in `doc/`.
 
 * Improve commandline with more options and curl mimics.
 
-## Beyond 1.0
+## Beyond 1.x
 
 * Introduce formal layer where predicates can be used in all conditions and reused accross specifications
 
