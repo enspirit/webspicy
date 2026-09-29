@@ -37,15 +37,32 @@ task :test do
     abort("FAILURE: Expected success or not report to be 22, got #{x}")
   end
 
+  # Parts of the expected output are not stable across the supported Ruby
+  # versions, so they are canonicalized on both sides rather than pinning the
+  # expected files to one of them:
+  #
+  # - timings, obviously;
+  # - Hash#inspect, which Ruby 3.4 changed from `{:k=>v}` to `{k: v}`;
+  # - the value quoted in an `Invalid Specification` line, which comes from
+  #   finitio and is truncated to a fixed width *after* being inspected, so
+  #   the extra spaces Ruby 3.4 adds move the cut point.
+  # The `=&gt;` variants are the same things, XML-escaped in the junit report.
+  normalize = ->(str) {
+    str
+      .gsub(/time="[^"]+"/, "")
+      .gsub(/:([a-zA-Z_]\w*)=(?:>|&gt;)/) { "#{$1}: " }
+      .gsub(/Invalid Specification `[^`]*`/, "Invalid Specification `...`")
+  }
+
   [:documentation, :progress, :summary, :junitxml].each do |kind|
     doc = (Path.dir/"expected/#{kind}.output.txt")
     got = config.world.send(:"#{kind}_output").string
     doc.write(got) unless doc.file?
-    unless got.gsub(/time="[^"]+"/,"") == (exp = doc.read.gsub(/time="[^"]+"/,""))
+    unless normalize.(got) == normalize.(exp = doc.read)
       got_file = doc.sub_ext('.got.txt')
       got_file.write(got)
       Differ.format = :color
-      puts Differ.diff(got, exp)
+      puts Differ.diff(normalize.(got), normalize.(exp))
       abort("FAILURE: Unexpected #{kind} output")
     end
   end
