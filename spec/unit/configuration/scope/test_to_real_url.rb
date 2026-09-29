@@ -25,9 +25,9 @@ module Webspicy
         end
 
         it 'fails on relative URLs and no block is given' do
-          expect(->(){
+          expect{
             scope.to_real_url("/todo")
-          }).to raise_error(/Unable to resolve `\/todo`/)
+          }.to raise_error(/Unable to resolve `\/todo`/)
         end
       end
 

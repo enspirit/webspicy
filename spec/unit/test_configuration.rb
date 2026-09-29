@@ -63,9 +63,9 @@ module Webspicy
       end
 
       it 'raises if the folder has no config.rb file' do
-        expect(->{
+        expect{
           Configuration.dress(Path.dir)
-        }).to raise_error(/Missing config.rb file/)
+        }.to raise_error(/Missing config.rb file/)
       end
 
     end
