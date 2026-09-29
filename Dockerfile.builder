@@ -1,4 +1,4 @@
-FROM ruby:3.2-alpine as builder
+FROM ruby:3.4-alpine AS builder
 
 RUN apk add alpine-sdk
 
@@ -16,4 +16,4 @@ RUN cd examples/failures && bundle install
 
 COPY . ./
 
-CMD bundle exec rake
+CMD ["bundle", "exec", "rake"]

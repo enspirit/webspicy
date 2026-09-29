@@ -21,7 +21,7 @@ jobs:
           status: starting
           channel: '#opensource-cicd'
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Release Gem
         uses: enspirit/publish-rubygems-action@master

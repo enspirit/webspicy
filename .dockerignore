@@ -1,5 +1,6 @@
 .git
 Gemfile.lock
+**/Gemfile.lock
 .bundle
 vendor
 README.md
@@ -8,7 +9,6 @@ pkg
 rspec.xml
 Jenkinsfile
 LICENCE
-examples/restful/vendor
-examples/restful/.bundle
-examples/restful/Gemfile.lock
+**/vendor
+**/.bundle
 .bash_history
