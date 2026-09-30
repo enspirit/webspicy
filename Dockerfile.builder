@@ -1,4 +1,4 @@
-FROM ruby:3.4-alpine AS builder
+FROM ruby:4.0-alpine AS builder
 
 RUN apk add alpine-sdk
 

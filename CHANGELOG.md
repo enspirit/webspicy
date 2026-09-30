@@ -1,3 +1,37 @@
+## 1.1.0 - unreleased
+
+### Ruby 4.0 is supported and tested
+
+The test matrix is now 3.2, 3.3, 3.4 and 4.0, and the docker images are
+built on `ruby:4.0-alpine`. Ruby 4.0.7 runs the unit suite and both example
+integration suites green with no source change; `required_ruby_version`
+stays at `>= 3.2`, so nothing is dropped to gain 4.0.
+
+Note that Ruby 3.2 reached end of life on 2026-04-01. It is kept in the
+matrix because the gemspec still claims it, and narrowing that claim is a
+breaking change -- not one for a minor release.
+
+### Fixed: the mocker and inferer images could no longer boot
+
+Both images run `rackup`, which Rack 3 moved out of `rack` into a gem of
+its own; webrick stopped being a default gem on the same path. Since 1.0.0
+widened `rack-robustness` to 2.0 -- and with it resolved Rack to 3.x -- the
+images had been shipping without either, and `rackup` was simply not found.
+They are now installed in the image rather than declared in the gemspec, on
+purpose: `rackup` requires `rack >= 3`, and Webspicy deliberately leaves the
+Rack major up to the application under test.
+
+### Dependencies and CI actions
+
+No gemspec range needed to move -- the ranges 1.0.0 widened already admit
+the newest release of every dependency. What a fresh resolution now picks
+up: rack 3.2, sinatra 4.2, openapi3_parser 0.10 (on commonmarker 2.x),
+rack-proxy 2.0, json 3.0 and predicate 2.11.
+
+The workflow actions are upgraded off their end-of-life runtimes:
+`actions/checkout` v4 to v7, `act10ns/slack` v1 to v2 and
+`docker/login-action` v1 to v4. The gem is released on Ruby 4.0.
+
 ## 1.0.0 - 2026-09-29
 
 Webspicy has been used in production for years, and the 0.x prefix was

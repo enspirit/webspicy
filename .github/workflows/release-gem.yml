@@ -16,19 +16,19 @@ jobs:
     needs: CI
     runs-on: ubuntu-latest
     steps:
-      - uses: act10ns/slack@v1
+      - uses: act10ns/slack@v2
         with:
           status: starting
           channel: '#opensource-cicd'
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # Runs on the runner rather than inside publish-rubygems-action, whose
       # image ships a Ruby the gemspec no longer accepts. It also avoids the
       # `dubious ownership` git failures that came with that container.
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.4'
+          ruby-version: '4.0'
           bundler-cache: true
 
       - name: Release Gem
@@ -37,7 +37,7 @@ jobs:
         env:
           GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
 
-      - uses: act10ns/slack@v1
+      - uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
