@@ -6,6 +6,14 @@ on:
       - master
     tags:
       - '*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: >-
+          Tag the images under this version instead of `latest`. Use it to
+          publish the images for a release whose tag push already happened.
+        required: false
+        type: string
 
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -36,9 +44,17 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      # `github.ref_name` is the tag name itself. The previous
+      # `git describe --contains` was only ever right for lightweight tags:
+      # for an annotated one it answers `1.1.0^0`, and `docker tag` rejects
+      # that as an invalid reference.
       - name: Get tag if exist
-        run: echo "VERSION=$(git describe --contains || true)" >> $GITHUB_ENV
+        run: echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
         if: startsWith(github.ref, 'refs/tags/')
+
+      - name: Use the requested version
+        run: echo "VERSION=${{ inputs.version }}" >> $GITHUB_ENV
+        if: inputs.version != ''
 
       - name: Pushing images
         id: images-push
