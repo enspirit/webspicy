@@ -1,4 +1,4 @@
-## 1.1.0 - unreleased
+## 1.1.0 - 2026-09-30
 
 ### Ruby 4.0 is supported and tested
 
